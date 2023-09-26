@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+
 import 'package:app/app/data/models/menu_item.dart';
 import 'package:app/app/modules/home/controllers/home_controller.dart';
 import 'package:app/app/views/views/brand_view.dart';
@@ -12,9 +14,6 @@ class NavigationMenuMobileView extends GetView<HomeController> {
 
   final DeviceScreenType deviceType;
 
-  // FIXME : change to app state
-  // HomeController controller = Get.put(HomeController());
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,8 +25,10 @@ class NavigationMenuMobileView extends GetView<HomeController> {
               child: NavigationRail(
                 extended:
                     (deviceType == DeviceScreenType.tablet) ? false : true,
-                onDestinationSelected: (value) =>
-                    controller.navIndex.value = value,
+                onDestinationSelected: (value) {
+                  controller.navIndex.value = value;
+                  Get.back();
+                },
                 destinations: menuItems
                     .map((item) => NavigationRailDestination(
                         icon: Icon(item.icon), label: Text(item.title)))

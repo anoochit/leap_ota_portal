@@ -8,8 +8,14 @@ class BrandView extends GetView {
   @override
   Widget build(BuildContext context) {
     final deviceType = getDeviceType(MediaQuery.of(context).size);
-    return FlutterLogo(
-      size: (deviceType == DeviceScreenType.mobile) ? 120.0 : 64.0,
-    );
+    return (deviceType == DeviceScreenType.mobile)
+        ? const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: FlutterLogo(size: 120.0),
+          )
+        : const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: FlutterLogo(),
+          );
   }
 }

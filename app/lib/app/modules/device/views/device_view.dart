@@ -8,9 +8,8 @@ class DeviceView extends GetView<DeviceController> {
   const DeviceView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'DeviceView is working',
-      style: TextStyle(fontSize: 20),
+    return const SingleChildScrollView(
+      child: Text('d'),
     );
   }
 }

@@ -29,19 +29,16 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       body: (deviceType == DeviceScreenType.mobile)
-          ? Container(
-              child: const BodyView(),
-            )
-          : Container(
-              child: Row(
-                children: [
-                  // nav
-                  NavigationMenuView(deviceType: deviceType),
+          ? const BodyView()
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // nav
+                NavigationMenuView(deviceType: deviceType),
 
-                  // body
-                  const BodyView(),
-                ],
-              ),
+                // body
+                const BodyView(),
+              ],
             ),
       drawer: (deviceType == DeviceScreenType.mobile)
           ? NavigationMenuMobileView(deviceType: deviceType)
