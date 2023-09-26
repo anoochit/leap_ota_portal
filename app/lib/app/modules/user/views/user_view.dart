@@ -8,7 +8,7 @@ class UserView extends GetView<UserController> {
   const UserView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
       'UserView is working',
       style: TextStyle(fontSize: 20),
     );

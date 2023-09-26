@@ -7,9 +7,9 @@ class ProfileButtonView extends GetView<HomeController> {
   const ProfileButtonView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => controller.navIndex.value = 3,
-      child: CircleAvatar(
+      child: const CircleAvatar(
         child: Text('D'),
       ),
     );

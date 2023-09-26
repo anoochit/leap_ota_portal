@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:app/app/modules/home/views/body_view.dart';
 import 'package:app/app/modules/home/views/navigation_menu_mobile.dart';
 import 'package:app/app/modules/home/views/navigation_menu_view.dart';
+import 'package:app/app/views/views/brand_view.dart';
 import 'package:app/app/views/views/profile_button_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,15 +18,19 @@ class HomeView extends GetView<HomeController> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: ((deviceType == DeviceScreenType.desktop) ||
+                (deviceType == DeviceScreenType.tablet))
+            ? const BrandView()
+            : null,
         title: const Text('Firmware Portal'),
-        actions: [
+        actions: const [
           // profile button
           ProfileButtonView(),
         ],
       ),
       body: (deviceType == DeviceScreenType.mobile)
           ? Container(
-              child: BodyView(),
+              child: const BodyView(),
             )
           : Container(
               child: Row(
@@ -36,7 +39,7 @@ class HomeView extends GetView<HomeController> {
                   NavigationMenuView(deviceType: deviceType),
 
                   // body
-                  BodyView(),
+                  const BodyView(),
                 ],
               ),
             ),

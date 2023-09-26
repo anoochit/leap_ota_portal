@@ -14,7 +14,7 @@ class BodyView extends GetView<HomeController> {
     return Obx(
       () => IndexedStack(
         index: controller.navIndex.value,
-        children: [
+        children: const [
           // device
           DeviceView(),
 

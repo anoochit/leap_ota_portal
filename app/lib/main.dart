@@ -10,6 +10,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       title: "Application",
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
       initialRoute: AppPages.INITIAL,

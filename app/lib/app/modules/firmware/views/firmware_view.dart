@@ -8,7 +8,7 @@ class FirmwareView extends GetView<FirmwareController> {
   const FirmwareView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
       'FirmwareView is working',
       style: TextStyle(fontSize: 20),
     );
