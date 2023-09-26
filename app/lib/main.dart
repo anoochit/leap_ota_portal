@@ -13,7 +13,7 @@ void main() {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      initialRoute: AppPages.INITIAL,
+      initialRoute: Routes.SIGNIN,
       getPages: AppPages.routes,
     ),
   );
