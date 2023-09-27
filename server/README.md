@@ -1,14 +1,14 @@
 # API Server
 
-Edit data model [schema.prisma](/prisma/schema.prisma) as you need then edit database configue in [.env](.env) and migrate database using command `npx prisma migrate dev`
+Edit data model [schema.prisma](/server/prisma/schema.prisma) as you need then edit database configue in [.env](/server/.env) and migrate database using command `npx prisma migrate dev`
 
 ## Schema
 
-See data model in [schema.prisma](/prisma/schema.prisma) and [DBML](/prisma/dbml/schema.dbml).
+See data model in [schema.prisma](/server/prisma/schema.prisma) and [DBML](/server/prisma/dbml/schema.dbml).
 
 ## Routes
 
-You can use a [client.rest](/client.rest) to test API.
+You can use a [client.rest](/server/client.rest) to test API.
 
 - `/auth` - signin
 - `/signup` - signup new account
