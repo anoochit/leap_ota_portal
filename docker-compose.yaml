@@ -23,5 +23,19 @@ services:
   adminer:
     image: adminer
     restart: always
+    depends_on:
+      - "db"
     ports:
       - 9900:8080
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./storage:/data
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniopassword
+    command: server --console-address ":9001" /data
