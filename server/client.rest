@@ -26,8 +26,15 @@ Content-Type: application/json
 ### show profile
 
 GET http://localhost:8080/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2IiLCJpYXQiOjE2OTIxNTE5NTUsImV4cCI6MTY5Mjc1Njc1NX0.dZqYiAf6W1qEq9Z6-5xG3qU-I6HE-Cg5Khg13mBofFw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JAZXhhbXBsZS5jb20iLCJpYXQiOjE2OTU4Mjc3NTIsImV4cCI6MTY5NjQzMjU1Mn0.pfc0k-3hRaQGZ4sR4Rm0NkUqArrdYI18j6biYVBsjV0
 
-### get devices
+### get user devices
 
 GET http://localhost:8080/devices
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JAZXhhbXBsZS5jb20iLCJpYXQiOjE2OTU4Mjc3NTIsImV4cCI6MTY5NjQzMjU1Mn0.pfc0k-3hRaQGZ4sR4Rm0NkUqArrdYI18j6biYVBsjV0
+
+### get user firmware
+
+GET http://localhost:8080/firmwares
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JAZXhhbXBsZS5jb20iLCJpYXQiOjE2OTU4Mjc3NTIsImV4cCI6MTY5NjQzMjU1Mn0.pfc0k-3hRaQGZ4sR4Rm0NkUqArrdYI18j6biYVBsjV0
+ 

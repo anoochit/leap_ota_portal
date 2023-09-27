@@ -20,6 +20,7 @@ Table user {
   password String [not null]
   createdAt DateTime [default: `now()`, not null]
   devices device [not null]
+  firmwares firmware [not null]
   role Role [not null, default: 'USER']
 }
 
@@ -37,6 +38,8 @@ Table firmware {
   version String [unique, not null]
   createdAt DateTime [default: `now()`, not null]
   devices device_firmware [not null]
+  User user
+  userId Int
 }
 
 Table device_tag {
@@ -61,6 +64,8 @@ Enum Role {
 }
 
 Ref: device.userId > user.id
+
+Ref: firmware.userId > user.id
 
 Ref: device_tag.taxonomyId > taxonomy.id
 

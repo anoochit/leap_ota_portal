@@ -6,7 +6,7 @@ CREATE TABLE "device" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER,
 
     CONSTRAINT "device_pkey" PRIMARY KEY ("id")
@@ -18,7 +18,7 @@ CREATE TABLE "user" (
     "name" VARCHAR(45) NOT NULL,
     "username" VARCHAR(45) NOT NULL,
     "password" VARCHAR(64) NOT NULL,
-    "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "role" "Role" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
@@ -39,7 +39,8 @@ CREATE TABLE "firmware" (
     "description" TEXT NOT NULL,
     "object" TEXT NOT NULL,
     "version" VARCHAR(45) NOT NULL,
-    "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER,
 
     CONSTRAINT "firmware_pkey" PRIMARY KEY ("id")
 );
@@ -85,6 +86,9 @@ CREATE UNIQUE INDEX "firmware_version_key" ON "firmware"("version");
 
 -- AddForeignKey
 ALTER TABLE "device" ADD CONSTRAINT "device_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "firmware" ADD CONSTRAINT "firmware_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "device_tag" ADD CONSTRAINT "device_tag_taxonomyId_fkey" FOREIGN KEY ("taxonomyId") REFERENCES "taxonomy"("id") ON DELETE SET NULL ON UPDATE CASCADE;

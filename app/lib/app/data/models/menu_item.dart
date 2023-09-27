@@ -12,6 +12,6 @@ class MenuItem {
 final menuItems = [
   MenuItem(title: 'Device', icon: Icons.devices),
   MenuItem(title: 'Firmware', icon: Icons.description),
-  MenuItem(title: 'User', icon: Icons.account_circle),
+  MenuItem(title: 'User', icon: Icons.account_box),
   MenuItem(title: 'Profile', icon: Icons.settings),
 ];

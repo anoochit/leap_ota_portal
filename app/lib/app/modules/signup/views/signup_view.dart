@@ -20,7 +20,7 @@ class SignupView extends GetView<SignupController> {
         child: Form(
           child: Card(
             child: SizedBox(
-              width: 300,
+              width: 340,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -82,6 +82,7 @@ class SignupView extends GetView<SignupController> {
                       child: TextFormField(
                         controller: textPasswordController,
                         decoration: InputDecoration(
+                          filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),

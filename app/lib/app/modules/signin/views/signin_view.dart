@@ -19,7 +19,7 @@ class SigninView extends GetView<SigninController> {
         child: Form(
           child: Card(
             child: SizedBox(
-              width: 300,
+              width: 340,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -28,7 +28,7 @@ class SigninView extends GetView<SigninController> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Sign in',
+                        'Sign In',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -59,6 +59,7 @@ class SigninView extends GetView<SigninController> {
                       child: TextFormField(
                         controller: textPasswordController,
                         decoration: InputDecoration(
+                          filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
@@ -84,7 +85,7 @@ class SigninView extends GetView<SigninController> {
                             // TODO : implement signin
                             Get.offAllNamed(Routes.HOME);
                           },
-                          child: const Text('Sign in'),
+                          child: const Text('Sign In'),
                         ),
                       ),
                     ),

@@ -26,13 +26,14 @@ model Device {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique @db.VarChar(45)
-  username  String   @unique @db.VarChar(45)
-  password  String   @db.VarChar(64)
-  createdAt DateTime @default(now()) @db.Timestamptz()
+  id        Int        @id @default(autoincrement())
+  name      String     @unique @db.VarChar(45)
+  username  String     @unique @db.VarChar(45)
+  password  String     @db.VarChar(64)
+  createdAt DateTime   @default(now()) @db.Timestamptz()
   devices   Device[]
-  role      Role     @default(USER)
+  firmwares Firmware[]
+  role      Role       @default(USER)
 
   @@map("user")
 }
@@ -53,6 +54,8 @@ model Firmware {
   version     String           @unique @db.VarChar(45)
   createdAt   DateTime         @default(now()) @db.Timestamptz()
   devices     DeviceFirmware[]
+  User        User?            @relation(fields: [userId], references: [id])
+  userId      Int?
 
   @@map("firmware")
 }

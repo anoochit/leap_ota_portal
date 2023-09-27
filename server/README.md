@@ -13,3 +13,6 @@ You can use a [client.rest](/server/client.rest) to test API.
 - `/auth` - signin
 - `/signup` - signup new account
 - `/profile` - user profile
+- `/devices` - device data
+- `/firmware` - firmware data
+- `/user` - user data

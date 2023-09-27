@@ -271,6 +271,10 @@ UserWhereInput _$UserWhereInputFromJson(Map<String, dynamic> json) =>
           ? null
           : DeviceListRelationFilter.fromJson(
               json['devices'] as Map<String, dynamic>),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareListRelationFilter.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserWhereInputToJson(UserWhereInput instance) {
@@ -292,6 +296,7 @@ Map<String, dynamic> _$UserWhereInputToJson(UserWhereInput instance) {
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('role', instance.role?.toJson());
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -308,6 +313,10 @@ UserOrderByWithRelationInput _$UserOrderByWithRelationInputFromJson(
           ? null
           : DeviceOrderByRelationAggregateInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareOrderByRelationAggregateInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserOrderByWithRelationInputToJson(
@@ -327,6 +336,7 @@ Map<String, dynamic> _$UserOrderByWithRelationInputToJson(
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
   writeNotNull('role', _$SortOrderEnumMap[instance.role]);
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -670,10 +680,16 @@ FirmwareWhereInput _$FirmwareWhereInputFromJson(Map<String, dynamic> json) =>
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFilter.fromJson(json['createdAt'] as Map<String, dynamic>),
+      userId: json['userId'] == null
+          ? null
+          : IntNullableFilter.fromJson(json['userId'] as Map<String, dynamic>),
       devices: json['devices'] == null
           ? null
           : DeviceFirmwareListRelationFilter.fromJson(
               json['devices'] as Map<String, dynamic>),
+      user: json['User'] == null
+          ? null
+          : UserRelationFilter.fromJson(json['User'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareWhereInputToJson(FirmwareWhereInput instance) {
@@ -694,7 +710,9 @@ Map<String, dynamic> _$FirmwareWhereInputToJson(FirmwareWhereInput instance) {
   writeNotNull('object', instance.object?.toJson());
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('userId', instance.userId?.toJson());
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('User', instance.user?.toJson());
   return val;
 }
 
@@ -707,10 +725,15 @@ FirmwareOrderByWithRelationInput _$FirmwareOrderByWithRelationInputFromJson(
       object: $enumDecodeNullable(_$SortOrderEnumMap, json['object']),
       version: $enumDecodeNullable(_$SortOrderEnumMap, json['version']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
+      userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
       devices: json['devices'] == null
           ? null
           : DeviceFirmwareOrderByRelationAggregateInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      user: json['User'] == null
+          ? null
+          : UserOrderByWithRelationInput.fromJson(
+              json['User'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareOrderByWithRelationInputToJson(
@@ -729,7 +752,9 @@ Map<String, dynamic> _$FirmwareOrderByWithRelationInputToJson(
   writeNotNull('object', _$SortOrderEnumMap[instance.object]);
   writeNotNull('version', _$SortOrderEnumMap[instance.version]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('User', instance.user?.toJson());
   return val;
 }
 
@@ -771,6 +796,7 @@ FirmwareOrderByWithAggregationInput
           object: $enumDecodeNullable(_$SortOrderEnumMap, json['object']),
           version: $enumDecodeNullable(_$SortOrderEnumMap, json['version']),
           createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
+          userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
           $count: json['_count'] == null
               ? null
               : FirmwareCountOrderByAggregateInput.fromJson(
@@ -809,6 +835,7 @@ Map<String, dynamic> _$FirmwareOrderByWithAggregationInputToJson(
   writeNotNull('object', _$SortOrderEnumMap[instance.object]);
   writeNotNull('version', _$SortOrderEnumMap[instance.version]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   writeNotNull('_count', instance.$count?.toJson());
   writeNotNull('_avg', instance.$avg?.toJson());
   writeNotNull('_max', instance.$max?.toJson());
@@ -854,6 +881,10 @@ FirmwareScalarWhereWithAggregatesInput
               ? null
               : DateTimeWithAggregatesFilter.fromJson(
                   json['createdAt'] as Map<String, dynamic>),
+          userId: json['userId'] == null
+              ? null
+              : IntNullableWithAggregatesFilter.fromJson(
+                  json['userId'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$FirmwareScalarWhereWithAggregatesInputToJson(
@@ -875,6 +906,7 @@ Map<String, dynamic> _$FirmwareScalarWhereWithAggregatesInputToJson(
   writeNotNull('object', instance.object?.toJson());
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('userId', instance.userId?.toJson());
   return val;
 }
 
@@ -1596,6 +1628,10 @@ UserCreateInput _$UserCreateInputFromJson(Map<String, dynamic> json) =>
           ? null
           : DeviceCreateNestedManyWithoutUserInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareCreateNestedManyWithoutUserInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserCreateInputToJson(UserCreateInput instance) {
@@ -1617,6 +1653,7 @@ Map<String, dynamic> _$UserCreateInputToJson(UserCreateInput instance) {
           instance.createdAt, const DateTimeJsonConverter().toJson));
   writeNotNull('role', _$RoleEnumMap[instance.role]);
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -1639,6 +1676,10 @@ UserUncheckedCreateInput _$UserUncheckedCreateInputFromJson(
           ? null
           : DeviceUncheckedCreateNestedManyWithoutUserInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareUncheckedCreateNestedManyWithoutUserInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserUncheckedCreateInputToJson(
@@ -1661,6 +1702,7 @@ Map<String, dynamic> _$UserUncheckedCreateInputToJson(
           instance.createdAt, const DateTimeJsonConverter().toJson));
   writeNotNull('role', _$RoleEnumMap[instance.role]);
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -1687,6 +1729,10 @@ UserUpdateInput _$UserUpdateInputFromJson(Map<String, dynamic> json) =>
           ? null
           : DeviceUpdateManyWithoutUserNestedInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareUpdateManyWithoutUserNestedInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserUpdateInputToJson(UserUpdateInput instance) {
@@ -1704,6 +1750,7 @@ Map<String, dynamic> _$UserUpdateInputToJson(UserUpdateInput instance) {
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('role', _$RoleEnumMap[instance.role]);
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -1735,6 +1782,10 @@ UserUncheckedUpdateInput _$UserUncheckedUpdateInputFromJson(
           ? null
           : DeviceUncheckedUpdateManyWithoutUserNestedInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareUncheckedUpdateManyWithoutUserNestedInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserUncheckedUpdateInputToJson(
@@ -1754,6 +1805,7 @@ Map<String, dynamic> _$UserUncheckedUpdateInputToJson(
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('role', _$RoleEnumMap[instance.role]);
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -2069,6 +2121,10 @@ FirmwareCreateInput _$FirmwareCreateInputFromJson(Map<String, dynamic> json) =>
           ? null
           : DeviceFirmwareCreateNestedManyWithoutFirmwareInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      user: json['User'] == null
+          ? null
+          : UserCreateNestedOneWithoutFirmwaresInput.fromJson(
+              json['User'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareCreateInputToJson(FirmwareCreateInput instance) {
@@ -2090,6 +2146,7 @@ Map<String, dynamic> _$FirmwareCreateInputToJson(FirmwareCreateInput instance) {
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('User', instance.user?.toJson());
   return val;
 }
 
@@ -2103,6 +2160,7 @@ FirmwareUncheckedCreateInput _$FirmwareUncheckedCreateInputFromJson(
       version: json['version'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
+      userId: json['userId'] as int?,
       devices: json['devices'] == null
           ? null
           : DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput
@@ -2128,6 +2186,7 @@ Map<String, dynamic> _$FirmwareUncheckedCreateInputToJson(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('userId', instance.userId);
   writeNotNull('devices', instance.devices?.toJson());
   return val;
 }
@@ -2158,6 +2217,10 @@ FirmwareUpdateInput _$FirmwareUpdateInputFromJson(Map<String, dynamic> json) =>
           ? null
           : DeviceFirmwareUpdateManyWithoutFirmwareNestedInput.fromJson(
               json['devices'] as Map<String, dynamic>),
+      user: json['User'] == null
+          ? null
+          : UserUpdateOneWithoutFirmwaresNestedInput.fromJson(
+              json['User'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareUpdateInputToJson(FirmwareUpdateInput instance) {
@@ -2175,6 +2238,7 @@ Map<String, dynamic> _$FirmwareUpdateInputToJson(FirmwareUpdateInput instance) {
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('devices', instance.devices?.toJson());
+  writeNotNull('User', instance.user?.toJson());
   return val;
 }
 
@@ -2205,6 +2269,10 @@ FirmwareUncheckedUpdateInput _$FirmwareUncheckedUpdateInputFromJson(
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
               json['createdAt'] as Map<String, dynamic>),
+      userId: json['userId'] == null
+          ? null
+          : NullableIntFieldUpdateOperationsInput.fromJson(
+              json['userId'] as Map<String, dynamic>),
       devices: json['devices'] == null
           ? null
           : DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput
@@ -2227,6 +2295,7 @@ Map<String, dynamic> _$FirmwareUncheckedUpdateInputToJson(
   writeNotNull('object', instance.object?.toJson());
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('userId', instance.userId?.toJson());
   writeNotNull('devices', instance.devices?.toJson());
   return val;
 }
@@ -2241,6 +2310,7 @@ FirmwareCreateManyInput _$FirmwareCreateManyInputFromJson(
       version: json['version'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
+      userId: json['userId'] as int?,
     );
 
 Map<String, dynamic> _$FirmwareCreateManyInputToJson(
@@ -2262,6 +2332,7 @@ Map<String, dynamic> _$FirmwareCreateManyInputToJson(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('userId', instance.userId);
   return val;
 }
 
@@ -2335,6 +2406,10 @@ FirmwareUncheckedUpdateManyInput _$FirmwareUncheckedUpdateManyInputFromJson(
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
               json['createdAt'] as Map<String, dynamic>),
+      userId: json['userId'] == null
+          ? null
+          : NullableIntFieldUpdateOperationsInput.fromJson(
+              json['userId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareUncheckedUpdateManyInputToJson(
@@ -2353,6 +2428,7 @@ Map<String, dynamic> _$FirmwareUncheckedUpdateManyInputToJson(
   writeNotNull('object', instance.object?.toJson());
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('userId', instance.userId?.toJson());
   return val;
 }
 
@@ -3474,6 +3550,36 @@ Map<String, dynamic> _$DeviceListRelationFilterToJson(
   return val;
 }
 
+FirmwareListRelationFilter _$FirmwareListRelationFilterFromJson(
+        Map<String, dynamic> json) =>
+    FirmwareListRelationFilter(
+      every: json['every'] == null
+          ? null
+          : FirmwareWhereInput.fromJson(json['every'] as Map<String, dynamic>),
+      some: json['some'] == null
+          ? null
+          : FirmwareWhereInput.fromJson(json['some'] as Map<String, dynamic>),
+      none: json['none'] == null
+          ? null
+          : FirmwareWhereInput.fromJson(json['none'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FirmwareListRelationFilterToJson(
+    FirmwareListRelationFilter instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('every', instance.every?.toJson());
+  writeNotNull('some', instance.some?.toJson());
+  writeNotNull('none', instance.none?.toJson());
+  return val;
+}
+
 DeviceOrderByRelationAggregateInput
     _$DeviceOrderByRelationAggregateInputFromJson(Map<String, dynamic> json) =>
         DeviceOrderByRelationAggregateInput(
@@ -3482,6 +3588,27 @@ DeviceOrderByRelationAggregateInput
 
 Map<String, dynamic> _$DeviceOrderByRelationAggregateInputToJson(
     DeviceOrderByRelationAggregateInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('_count', _$SortOrderEnumMap[instance.$count]);
+  return val;
+}
+
+FirmwareOrderByRelationAggregateInput
+    _$FirmwareOrderByRelationAggregateInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareOrderByRelationAggregateInput(
+          $count: $enumDecodeNullable(_$SortOrderEnumMap, json['_count']),
+        );
+
+Map<String, dynamic> _$FirmwareOrderByRelationAggregateInputToJson(
+    FirmwareOrderByRelationAggregateInput instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -3779,6 +3906,7 @@ FirmwareCountOrderByAggregateInput _$FirmwareCountOrderByAggregateInputFromJson(
       object: $enumDecodeNullable(_$SortOrderEnumMap, json['object']),
       version: $enumDecodeNullable(_$SortOrderEnumMap, json['version']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
+      userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
 
 Map<String, dynamic> _$FirmwareCountOrderByAggregateInputToJson(
@@ -3797,6 +3925,7 @@ Map<String, dynamic> _$FirmwareCountOrderByAggregateInputToJson(
   writeNotNull('object', _$SortOrderEnumMap[instance.object]);
   writeNotNull('version', _$SortOrderEnumMap[instance.version]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
 }
 
@@ -3804,6 +3933,7 @@ FirmwareAvgOrderByAggregateInput _$FirmwareAvgOrderByAggregateInputFromJson(
         Map<String, dynamic> json) =>
     FirmwareAvgOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
 
 Map<String, dynamic> _$FirmwareAvgOrderByAggregateInputToJson(
@@ -3817,6 +3947,7 @@ Map<String, dynamic> _$FirmwareAvgOrderByAggregateInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
 }
 
@@ -3829,6 +3960,7 @@ FirmwareMaxOrderByAggregateInput _$FirmwareMaxOrderByAggregateInputFromJson(
       object: $enumDecodeNullable(_$SortOrderEnumMap, json['object']),
       version: $enumDecodeNullable(_$SortOrderEnumMap, json['version']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
+      userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
 
 Map<String, dynamic> _$FirmwareMaxOrderByAggregateInputToJson(
@@ -3847,6 +3979,7 @@ Map<String, dynamic> _$FirmwareMaxOrderByAggregateInputToJson(
   writeNotNull('object', _$SortOrderEnumMap[instance.object]);
   writeNotNull('version', _$SortOrderEnumMap[instance.version]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
 }
 
@@ -3859,6 +3992,7 @@ FirmwareMinOrderByAggregateInput _$FirmwareMinOrderByAggregateInputFromJson(
       object: $enumDecodeNullable(_$SortOrderEnumMap, json['object']),
       version: $enumDecodeNullable(_$SortOrderEnumMap, json['version']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
+      userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
 
 Map<String, dynamic> _$FirmwareMinOrderByAggregateInputToJson(
@@ -3877,6 +4011,7 @@ Map<String, dynamic> _$FirmwareMinOrderByAggregateInputToJson(
   writeNotNull('object', _$SortOrderEnumMap[instance.object]);
   writeNotNull('version', _$SortOrderEnumMap[instance.version]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
 }
 
@@ -3884,6 +4019,7 @@ FirmwareSumOrderByAggregateInput _$FirmwareSumOrderByAggregateInputFromJson(
         Map<String, dynamic> json) =>
     FirmwareSumOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
 
 Map<String, dynamic> _$FirmwareSumOrderByAggregateInputToJson(
@@ -3897,6 +4033,7 @@ Map<String, dynamic> _$FirmwareSumOrderByAggregateInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
 }
 
@@ -4859,6 +4996,42 @@ Map<String, dynamic> _$DeviceCreateNestedManyWithoutUserInputToJson(
   return val;
 }
 
+FirmwareCreateNestedManyWithoutUserInput
+    _$FirmwareCreateNestedManyWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareCreateNestedManyWithoutUserInput(
+          create: (json['create'] as List<dynamic>?)?.map((e) =>
+              FirmwareCreateWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          connectOrCreate: (json['connectOrCreate'] as List<dynamic>?)?.map(
+              (e) => FirmwareCreateOrConnectWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          createMany: json['createMany'] == null
+              ? null
+              : FirmwareCreateManyUserInputEnvelope.fromJson(
+                  json['createMany'] as Map<String, dynamic>),
+          connect: (json['connect'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+        );
+
+Map<String, dynamic> _$FirmwareCreateNestedManyWithoutUserInputToJson(
+    FirmwareCreateNestedManyWithoutUserInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('create', instance.create?.map((e) => e.toJson()).toList());
+  writeNotNull('connectOrCreate',
+      instance.connectOrCreate?.map((e) => e.toJson()).toList());
+  writeNotNull('createMany', instance.createMany?.toJson());
+  writeNotNull('connect', instance.connect?.map((e) => e.toJson()).toList());
+  return val;
+}
+
 DeviceUncheckedCreateNestedManyWithoutUserInput
     _$DeviceUncheckedCreateNestedManyWithoutUserInputFromJson(
             Map<String, dynamic> json) =>
@@ -4878,6 +5051,42 @@ DeviceUncheckedCreateNestedManyWithoutUserInput
 
 Map<String, dynamic> _$DeviceUncheckedCreateNestedManyWithoutUserInputToJson(
     DeviceUncheckedCreateNestedManyWithoutUserInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('create', instance.create?.map((e) => e.toJson()).toList());
+  writeNotNull('connectOrCreate',
+      instance.connectOrCreate?.map((e) => e.toJson()).toList());
+  writeNotNull('createMany', instance.createMany?.toJson());
+  writeNotNull('connect', instance.connect?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FirmwareUncheckedCreateNestedManyWithoutUserInput
+    _$FirmwareUncheckedCreateNestedManyWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUncheckedCreateNestedManyWithoutUserInput(
+          create: (json['create'] as List<dynamic>?)?.map((e) =>
+              FirmwareCreateWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          connectOrCreate: (json['connectOrCreate'] as List<dynamic>?)?.map(
+              (e) => FirmwareCreateOrConnectWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          createMany: json['createMany'] == null
+              ? null
+              : FirmwareCreateManyUserInputEnvelope.fromJson(
+                  json['createMany'] as Map<String, dynamic>),
+          connect: (json['connect'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+        );
+
+Map<String, dynamic> _$FirmwareUncheckedCreateNestedManyWithoutUserInputToJson(
+    FirmwareUncheckedCreateNestedManyWithoutUserInput instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -4976,6 +5185,69 @@ Map<String, dynamic> _$DeviceUpdateManyWithoutUserNestedInputToJson(
   return val;
 }
 
+FirmwareUpdateManyWithoutUserNestedInput
+    _$FirmwareUpdateManyWithoutUserNestedInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUpdateManyWithoutUserNestedInput(
+          create: (json['create'] as List<dynamic>?)?.map((e) =>
+              FirmwareCreateWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          connectOrCreate: (json['connectOrCreate'] as List<dynamic>?)?.map(
+              (e) => FirmwareCreateOrConnectWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          upsert: (json['upsert'] as List<dynamic>?)?.map((e) =>
+              FirmwareUpsertWithWhereUniqueWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          createMany: json['createMany'] == null
+              ? null
+              : FirmwareCreateManyUserInputEnvelope.fromJson(
+                  json['createMany'] as Map<String, dynamic>),
+          set: (json['set'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          disconnect: (json['disconnect'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          delete: (json['delete'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          connect: (json['connect'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          update: (json['update'] as List<dynamic>?)?.map((e) =>
+              FirmwareUpdateWithWhereUniqueWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          updateMany: (json['updateMany'] as List<dynamic>?)?.map((e) =>
+              FirmwareUpdateManyWithWhereWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          deleteMany: (json['deleteMany'] as List<dynamic>?)?.map((e) =>
+              FirmwareScalarWhereInput.fromJson(e as Map<String, dynamic>)),
+        );
+
+Map<String, dynamic> _$FirmwareUpdateManyWithoutUserNestedInputToJson(
+    FirmwareUpdateManyWithoutUserNestedInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('create', instance.create?.map((e) => e.toJson()).toList());
+  writeNotNull('connectOrCreate',
+      instance.connectOrCreate?.map((e) => e.toJson()).toList());
+  writeNotNull('upsert', instance.upsert?.map((e) => e.toJson()).toList());
+  writeNotNull('createMany', instance.createMany?.toJson());
+  writeNotNull('set', instance.set?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'disconnect', instance.disconnect?.map((e) => e.toJson()).toList());
+  writeNotNull('delete', instance.delete?.map((e) => e.toJson()).toList());
+  writeNotNull('connect', instance.connect?.map((e) => e.toJson()).toList());
+  writeNotNull('update', instance.update?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'updateMany', instance.updateMany?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'deleteMany', instance.deleteMany?.map((e) => e.toJson()).toList());
+  return val;
+}
+
 DeviceUncheckedUpdateManyWithoutUserNestedInput
     _$DeviceUncheckedUpdateManyWithoutUserNestedInputFromJson(
             Map<String, dynamic> json) =>
@@ -5012,6 +5284,69 @@ DeviceUncheckedUpdateManyWithoutUserNestedInput
 
 Map<String, dynamic> _$DeviceUncheckedUpdateManyWithoutUserNestedInputToJson(
     DeviceUncheckedUpdateManyWithoutUserNestedInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('create', instance.create?.map((e) => e.toJson()).toList());
+  writeNotNull('connectOrCreate',
+      instance.connectOrCreate?.map((e) => e.toJson()).toList());
+  writeNotNull('upsert', instance.upsert?.map((e) => e.toJson()).toList());
+  writeNotNull('createMany', instance.createMany?.toJson());
+  writeNotNull('set', instance.set?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'disconnect', instance.disconnect?.map((e) => e.toJson()).toList());
+  writeNotNull('delete', instance.delete?.map((e) => e.toJson()).toList());
+  writeNotNull('connect', instance.connect?.map((e) => e.toJson()).toList());
+  writeNotNull('update', instance.update?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'updateMany', instance.updateMany?.map((e) => e.toJson()).toList());
+  writeNotNull(
+      'deleteMany', instance.deleteMany?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+FirmwareUncheckedUpdateManyWithoutUserNestedInput
+    _$FirmwareUncheckedUpdateManyWithoutUserNestedInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUncheckedUpdateManyWithoutUserNestedInput(
+          create: (json['create'] as List<dynamic>?)?.map((e) =>
+              FirmwareCreateWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          connectOrCreate: (json['connectOrCreate'] as List<dynamic>?)?.map(
+              (e) => FirmwareCreateOrConnectWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          upsert: (json['upsert'] as List<dynamic>?)?.map((e) =>
+              FirmwareUpsertWithWhereUniqueWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          createMany: json['createMany'] == null
+              ? null
+              : FirmwareCreateManyUserInputEnvelope.fromJson(
+                  json['createMany'] as Map<String, dynamic>),
+          set: (json['set'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          disconnect: (json['disconnect'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          delete: (json['delete'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          connect: (json['connect'] as List<dynamic>?)?.map((e) =>
+              FirmwareWhereUniqueInput.fromJson(e as Map<String, dynamic>)),
+          update: (json['update'] as List<dynamic>?)?.map((e) =>
+              FirmwareUpdateWithWhereUniqueWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          updateMany: (json['updateMany'] as List<dynamic>?)?.map((e) =>
+              FirmwareUpdateManyWithWhereWithoutUserInput.fromJson(
+                  e as Map<String, dynamic>)),
+          deleteMany: (json['deleteMany'] as List<dynamic>?)?.map((e) =>
+              FirmwareScalarWhereInput.fromJson(e as Map<String, dynamic>)),
+        );
+
+Map<String, dynamic> _$FirmwareUncheckedUpdateManyWithoutUserNestedInputToJson(
+    FirmwareUncheckedUpdateManyWithoutUserNestedInput instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -5275,6 +5610,40 @@ Map<String, dynamic> _$DeviceFirmwareCreateNestedManyWithoutFirmwareInputToJson(
   return val;
 }
 
+UserCreateNestedOneWithoutFirmwaresInput
+    _$UserCreateNestedOneWithoutFirmwaresInputFromJson(
+            Map<String, dynamic> json) =>
+        UserCreateNestedOneWithoutFirmwaresInput(
+          create: json['create'] == null
+              ? null
+              : UserCreateWithoutFirmwaresInput.fromJson(
+                  json['create'] as Map<String, dynamic>),
+          connectOrCreate: json['connectOrCreate'] == null
+              ? null
+              : UserCreateOrConnectWithoutFirmwaresInput.fromJson(
+                  json['connectOrCreate'] as Map<String, dynamic>),
+          connect: json['connect'] == null
+              ? null
+              : UserWhereUniqueInput.fromJson(
+                  json['connect'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$UserCreateNestedOneWithoutFirmwaresInputToJson(
+    UserCreateNestedOneWithoutFirmwaresInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('create', instance.create?.toJson());
+  writeNotNull('connectOrCreate', instance.connectOrCreate?.toJson());
+  writeNotNull('connect', instance.connect?.toJson());
+  return val;
+}
+
 DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput
     _$DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInputFromJson(
             Map<String, dynamic> json) =>
@@ -5378,6 +5747,54 @@ Map<String, dynamic> _$DeviceFirmwareUpdateManyWithoutFirmwareNestedInputToJson(
       'updateMany', instance.updateMany?.map((e) => e.toJson()).toList());
   writeNotNull(
       'deleteMany', instance.deleteMany?.map((e) => e.toJson()).toList());
+  return val;
+}
+
+UserUpdateOneWithoutFirmwaresNestedInput
+    _$UserUpdateOneWithoutFirmwaresNestedInputFromJson(
+            Map<String, dynamic> json) =>
+        UserUpdateOneWithoutFirmwaresNestedInput(
+          create: json['create'] == null
+              ? null
+              : UserCreateWithoutFirmwaresInput.fromJson(
+                  json['create'] as Map<String, dynamic>),
+          connectOrCreate: json['connectOrCreate'] == null
+              ? null
+              : UserCreateOrConnectWithoutFirmwaresInput.fromJson(
+                  json['connectOrCreate'] as Map<String, dynamic>),
+          upsert: json['upsert'] == null
+              ? null
+              : UserUpsertWithoutFirmwaresInput.fromJson(
+                  json['upsert'] as Map<String, dynamic>),
+          disconnect: json['disconnect'] as bool?,
+          delete: json['delete'] as bool?,
+          connect: json['connect'] == null
+              ? null
+              : UserWhereUniqueInput.fromJson(
+                  json['connect'] as Map<String, dynamic>),
+          update: json['update'] == null
+              ? null
+              : UserUpdateWithoutFirmwaresInput.fromJson(
+                  json['update'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$UserUpdateOneWithoutFirmwaresNestedInputToJson(
+    UserUpdateOneWithoutFirmwaresNestedInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('create', instance.create?.toJson());
+  writeNotNull('connectOrCreate', instance.connectOrCreate?.toJson());
+  writeNotNull('upsert', instance.upsert?.toJson());
+  writeNotNull('disconnect', instance.disconnect);
+  writeNotNull('delete', instance.delete);
+  writeNotNull('connect', instance.connect?.toJson());
+  writeNotNull('update', instance.update?.toJson());
   return val;
 }
 
@@ -6526,6 +6943,10 @@ UserCreateWithoutDevicesInput _$UserCreateWithoutDevicesInputFromJson(
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareCreateNestedManyWithoutUserInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserCreateWithoutDevicesInputToJson(
@@ -6547,6 +6968,7 @@ Map<String, dynamic> _$UserCreateWithoutDevicesInputToJson(
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
   writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -6561,6 +6983,10 @@ UserUncheckedCreateWithoutDevicesInput
           createdAt: _$JsonConverterFromJson<String, DateTime>(
               json['createdAt'], const DateTimeJsonConverter().fromJson),
           role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+          firmwares: json['firmwares'] == null
+              ? null
+              : FirmwareUncheckedCreateNestedManyWithoutUserInput.fromJson(
+                  json['firmwares'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$UserUncheckedCreateWithoutDevicesInputToJson(
@@ -6582,6 +7008,7 @@ Map<String, dynamic> _$UserUncheckedCreateWithoutDevicesInputToJson(
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
   writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -6831,6 +7258,10 @@ UserUpdateWithoutDevicesInput _$UserUpdateWithoutDevicesInputFromJson(
           : DateTimeFieldUpdateOperationsInput.fromJson(
               json['createdAt'] as Map<String, dynamic>),
       role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+      firmwares: json['firmwares'] == null
+          ? null
+          : FirmwareUpdateManyWithoutUserNestedInput.fromJson(
+              json['firmwares'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserUpdateWithoutDevicesInputToJson(
@@ -6848,6 +7279,7 @@ Map<String, dynamic> _$UserUpdateWithoutDevicesInputToJson(
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -6876,6 +7308,10 @@ UserUncheckedUpdateWithoutDevicesInput
               : DateTimeFieldUpdateOperationsInput.fromJson(
                   json['createdAt'] as Map<String, dynamic>),
           role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+          firmwares: json['firmwares'] == null
+              ? null
+              : FirmwareUncheckedUpdateManyWithoutUserNestedInput.fromJson(
+                  json['firmwares'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$UserUncheckedUpdateWithoutDevicesInputToJson(
@@ -6894,6 +7330,7 @@ Map<String, dynamic> _$UserUncheckedUpdateWithoutDevicesInputToJson(
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('firmwares', instance.firmwares?.toJson());
   return val;
 }
 
@@ -7018,6 +7455,125 @@ Map<String, dynamic> _$DeviceCreateManyUserInputEnvelopeToJson(
   return val;
 }
 
+FirmwareCreateWithoutUserInput _$FirmwareCreateWithoutUserInputFromJson(
+        Map<String, dynamic> json) =>
+    FirmwareCreateWithoutUserInput(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      object: json['object'] as String,
+      version: json['version'] as String,
+      createdAt: _$JsonConverterFromJson<String, DateTime>(
+          json['createdAt'], const DateTimeJsonConverter().fromJson),
+      devices: json['devices'] == null
+          ? null
+          : DeviceFirmwareCreateNestedManyWithoutFirmwareInput.fromJson(
+              json['devices'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FirmwareCreateWithoutUserInputToJson(
+    FirmwareCreateWithoutUserInput instance) {
+  final val = <String, dynamic>{
+    'title': instance.title,
+    'description': instance.description,
+    'object': instance.object,
+    'version': instance.version,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'createdAt',
+      _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+FirmwareUncheckedCreateWithoutUserInput
+    _$FirmwareUncheckedCreateWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUncheckedCreateWithoutUserInput(
+          id: json['id'] as int?,
+          title: json['title'] as String,
+          description: json['description'] as String,
+          object: json['object'] as String,
+          version: json['version'] as String,
+          createdAt: _$JsonConverterFromJson<String, DateTime>(
+              json['createdAt'], const DateTimeJsonConverter().fromJson),
+          devices: json['devices'] == null
+              ? null
+              : DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput
+                  .fromJson(json['devices'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareUncheckedCreateWithoutUserInputToJson(
+    FirmwareUncheckedCreateWithoutUserInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['title'] = instance.title;
+  val['description'] = instance.description;
+  val['object'] = instance.object;
+  val['version'] = instance.version;
+  writeNotNull(
+      'createdAt',
+      _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+FirmwareCreateOrConnectWithoutUserInput
+    _$FirmwareCreateOrConnectWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareCreateOrConnectWithoutUserInput(
+          where: FirmwareWhereUniqueInput.fromJson(
+              json['where'] as Map<String, dynamic>),
+          create: FirmwareCreateWithoutUserInput.fromJson(
+              json['create'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareCreateOrConnectWithoutUserInputToJson(
+        FirmwareCreateOrConnectWithoutUserInput instance) =>
+    <String, dynamic>{
+      'where': instance.where.toJson(),
+      'create': instance.create.toJson(),
+    };
+
+FirmwareCreateManyUserInputEnvelope
+    _$FirmwareCreateManyUserInputEnvelopeFromJson(Map<String, dynamic> json) =>
+        FirmwareCreateManyUserInputEnvelope(
+          data: (json['data'] as List<dynamic>).map((e) =>
+              FirmwareCreateManyUserInput.fromJson(e as Map<String, dynamic>)),
+          skipDuplicates: json['skipDuplicates'] as bool?,
+        );
+
+Map<String, dynamic> _$FirmwareCreateManyUserInputEnvelopeToJson(
+    FirmwareCreateManyUserInputEnvelope instance) {
+  final val = <String, dynamic>{
+    'data': instance.data.map((e) => e.toJson()).toList(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('skipDuplicates', instance.skipDuplicates);
+  return val;
+}
+
 DeviceUpsertWithWhereUniqueWithoutUserInput
     _$DeviceUpsertWithWhereUniqueWithoutUserInputFromJson(
             Map<String, dynamic> json) =>
@@ -7114,6 +7670,115 @@ Map<String, dynamic> _$DeviceScalarWhereInputToJson(
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
   writeNotNull('description', instance.description?.toJson());
+  writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('userId', instance.userId?.toJson());
+  return val;
+}
+
+FirmwareUpsertWithWhereUniqueWithoutUserInput
+    _$FirmwareUpsertWithWhereUniqueWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUpsertWithWhereUniqueWithoutUserInput(
+          where: FirmwareWhereUniqueInput.fromJson(
+              json['where'] as Map<String, dynamic>),
+          update: FirmwareUpdateWithoutUserInput.fromJson(
+              json['update'] as Map<String, dynamic>),
+          create: FirmwareCreateWithoutUserInput.fromJson(
+              json['create'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareUpsertWithWhereUniqueWithoutUserInputToJson(
+        FirmwareUpsertWithWhereUniqueWithoutUserInput instance) =>
+    <String, dynamic>{
+      'where': instance.where.toJson(),
+      'update': instance.update.toJson(),
+      'create': instance.create.toJson(),
+    };
+
+FirmwareUpdateWithWhereUniqueWithoutUserInput
+    _$FirmwareUpdateWithWhereUniqueWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUpdateWithWhereUniqueWithoutUserInput(
+          where: FirmwareWhereUniqueInput.fromJson(
+              json['where'] as Map<String, dynamic>),
+          data: FirmwareUpdateWithoutUserInput.fromJson(
+              json['data'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareUpdateWithWhereUniqueWithoutUserInputToJson(
+        FirmwareUpdateWithWhereUniqueWithoutUserInput instance) =>
+    <String, dynamic>{
+      'where': instance.where.toJson(),
+      'data': instance.data.toJson(),
+    };
+
+FirmwareUpdateManyWithWhereWithoutUserInput
+    _$FirmwareUpdateManyWithWhereWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUpdateManyWithWhereWithoutUserInput(
+          where: FirmwareScalarWhereInput.fromJson(
+              json['where'] as Map<String, dynamic>),
+          data: FirmwareUpdateManyMutationInput.fromJson(
+              json['data'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareUpdateManyWithWhereWithoutUserInputToJson(
+        FirmwareUpdateManyWithWhereWithoutUserInput instance) =>
+    <String, dynamic>{
+      'where': instance.where.toJson(),
+      'data': instance.data.toJson(),
+    };
+
+FirmwareScalarWhereInput _$FirmwareScalarWhereInputFromJson(
+        Map<String, dynamic> json) =>
+    FirmwareScalarWhereInput(
+      AND: (json['AND'] as List<dynamic>?)?.map(
+          (e) => FirmwareScalarWhereInput.fromJson(e as Map<String, dynamic>)),
+      OR: (json['OR'] as List<dynamic>?)?.map(
+          (e) => FirmwareScalarWhereInput.fromJson(e as Map<String, dynamic>)),
+      NOT: (json['NOT'] as List<dynamic>?)?.map(
+          (e) => FirmwareScalarWhereInput.fromJson(e as Map<String, dynamic>)),
+      id: json['id'] == null
+          ? null
+          : IntFilter.fromJson(json['id'] as Map<String, dynamic>),
+      title: json['title'] == null
+          ? null
+          : StringFilter.fromJson(json['title'] as Map<String, dynamic>),
+      description: json['description'] == null
+          ? null
+          : StringFilter.fromJson(json['description'] as Map<String, dynamic>),
+      object: json['object'] == null
+          ? null
+          : StringFilter.fromJson(json['object'] as Map<String, dynamic>),
+      version: json['version'] == null
+          ? null
+          : StringFilter.fromJson(json['version'] as Map<String, dynamic>),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTimeFilter.fromJson(json['createdAt'] as Map<String, dynamic>),
+      userId: json['userId'] == null
+          ? null
+          : IntNullableFilter.fromJson(json['userId'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FirmwareScalarWhereInputToJson(
+    FirmwareScalarWhereInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('AND', instance.AND?.map((e) => e.toJson()).toList());
+  writeNotNull('OR', instance.OR?.map((e) => e.toJson()).toList());
+  writeNotNull('NOT', instance.NOT?.map((e) => e.toJson()).toList());
+  writeNotNull('id', instance.id?.toJson());
+  writeNotNull('title', instance.title?.toJson());
+  writeNotNull('description', instance.description?.toJson());
+  writeNotNull('object', instance.object?.toJson());
+  writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   return val;
@@ -7352,6 +8017,101 @@ Map<String, dynamic> _$DeviceFirmwareCreateManyFirmwareInputEnvelopeToJson(
   return val;
 }
 
+UserCreateWithoutFirmwaresInput _$UserCreateWithoutFirmwaresInputFromJson(
+        Map<String, dynamic> json) =>
+    UserCreateWithoutFirmwaresInput(
+      name: json['name'] as String,
+      username: json['username'] as String,
+      password: json['password'] as String,
+      createdAt: _$JsonConverterFromJson<String, DateTime>(
+          json['createdAt'], const DateTimeJsonConverter().fromJson),
+      role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+      devices: json['devices'] == null
+          ? null
+          : DeviceCreateNestedManyWithoutUserInput.fromJson(
+              json['devices'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserCreateWithoutFirmwaresInputToJson(
+    UserCreateWithoutFirmwaresInput instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'username': instance.username,
+    'password': instance.password,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'createdAt',
+      _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+UserUncheckedCreateWithoutFirmwaresInput
+    _$UserUncheckedCreateWithoutFirmwaresInputFromJson(
+            Map<String, dynamic> json) =>
+        UserUncheckedCreateWithoutFirmwaresInput(
+          id: json['id'] as int?,
+          name: json['name'] as String,
+          username: json['username'] as String,
+          password: json['password'] as String,
+          createdAt: _$JsonConverterFromJson<String, DateTime>(
+              json['createdAt'], const DateTimeJsonConverter().fromJson),
+          role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+          devices: json['devices'] == null
+              ? null
+              : DeviceUncheckedCreateNestedManyWithoutUserInput.fromJson(
+                  json['devices'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$UserUncheckedCreateWithoutFirmwaresInputToJson(
+    UserUncheckedCreateWithoutFirmwaresInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['name'] = instance.name;
+  val['username'] = instance.username;
+  val['password'] = instance.password;
+  writeNotNull(
+      'createdAt',
+      _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+UserCreateOrConnectWithoutFirmwaresInput
+    _$UserCreateOrConnectWithoutFirmwaresInputFromJson(
+            Map<String, dynamic> json) =>
+        UserCreateOrConnectWithoutFirmwaresInput(
+          where: UserWhereUniqueInput.fromJson(
+              json['where'] as Map<String, dynamic>),
+          create: UserCreateWithoutFirmwaresInput.fromJson(
+              json['create'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$UserCreateOrConnectWithoutFirmwaresInputToJson(
+        UserCreateOrConnectWithoutFirmwaresInput instance) =>
+    <String, dynamic>{
+      'where': instance.where.toJson(),
+      'create': instance.create.toJson(),
+    };
+
 DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInput
     _$DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInputFromJson(
             Map<String, dynamic> json) =>
@@ -7408,6 +8168,118 @@ Map<String, dynamic>
           'where': instance.where.toJson(),
           'data': instance.data.toJson(),
         };
+
+UserUpsertWithoutFirmwaresInput _$UserUpsertWithoutFirmwaresInputFromJson(
+        Map<String, dynamic> json) =>
+    UserUpsertWithoutFirmwaresInput(
+      update: UserUpdateWithoutFirmwaresInput.fromJson(
+          json['update'] as Map<String, dynamic>),
+      create: UserCreateWithoutFirmwaresInput.fromJson(
+          json['create'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserUpsertWithoutFirmwaresInputToJson(
+        UserUpsertWithoutFirmwaresInput instance) =>
+    <String, dynamic>{
+      'update': instance.update.toJson(),
+      'create': instance.create.toJson(),
+    };
+
+UserUpdateWithoutFirmwaresInput _$UserUpdateWithoutFirmwaresInputFromJson(
+        Map<String, dynamic> json) =>
+    UserUpdateWithoutFirmwaresInput(
+      name: json['name'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['name'] as Map<String, dynamic>),
+      username: json['username'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['username'] as Map<String, dynamic>),
+      password: json['password'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['password'] as Map<String, dynamic>),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTimeFieldUpdateOperationsInput.fromJson(
+              json['createdAt'] as Map<String, dynamic>),
+      role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+      devices: json['devices'] == null
+          ? null
+          : DeviceUpdateManyWithoutUserNestedInput.fromJson(
+              json['devices'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserUpdateWithoutFirmwaresInputToJson(
+    UserUpdateWithoutFirmwaresInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name?.toJson());
+  writeNotNull('username', instance.username?.toJson());
+  writeNotNull('password', instance.password?.toJson());
+  writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+UserUncheckedUpdateWithoutFirmwaresInput
+    _$UserUncheckedUpdateWithoutFirmwaresInputFromJson(
+            Map<String, dynamic> json) =>
+        UserUncheckedUpdateWithoutFirmwaresInput(
+          id: json['id'] == null
+              ? null
+              : IntFieldUpdateOperationsInput.fromJson(
+                  json['id'] as Map<String, dynamic>),
+          name: json['name'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['name'] as Map<String, dynamic>),
+          username: json['username'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['username'] as Map<String, dynamic>),
+          password: json['password'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['password'] as Map<String, dynamic>),
+          createdAt: json['createdAt'] == null
+              ? null
+              : DateTimeFieldUpdateOperationsInput.fromJson(
+                  json['createdAt'] as Map<String, dynamic>),
+          role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+          devices: json['devices'] == null
+              ? null
+              : DeviceUncheckedUpdateManyWithoutUserNestedInput.fromJson(
+                  json['devices'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$UserUncheckedUpdateWithoutFirmwaresInputToJson(
+    UserUncheckedUpdateWithoutFirmwaresInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id?.toJson());
+  writeNotNull('name', instance.name?.toJson());
+  writeNotNull('username', instance.username?.toJson());
+  writeNotNull('password', instance.password?.toJson());
+  writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('role', _$RoleEnumMap[instance.role]);
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
 
 TaxonomyCreateWithoutDevicesInput _$TaxonomyCreateWithoutDevicesInputFromJson(
         Map<String, dynamic> json) =>
@@ -7834,6 +8706,10 @@ FirmwareCreateWithoutDevicesInput _$FirmwareCreateWithoutDevicesInputFromJson(
       version: json['version'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
+      user: json['User'] == null
+          ? null
+          : UserCreateNestedOneWithoutFirmwaresInput.fromJson(
+              json['User'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareCreateWithoutDevicesInputToJson(
@@ -7855,6 +8731,7 @@ Map<String, dynamic> _$FirmwareCreateWithoutDevicesInputToJson(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('User', instance.user?.toJson());
   return val;
 }
 
@@ -7869,6 +8746,7 @@ FirmwareUncheckedCreateWithoutDevicesInput
           version: json['version'] as String,
           createdAt: _$JsonConverterFromJson<String, DateTime>(
               json['createdAt'], const DateTimeJsonConverter().fromJson),
+          userId: json['userId'] as int?,
         );
 
 Map<String, dynamic> _$FirmwareUncheckedCreateWithoutDevicesInputToJson(
@@ -7890,6 +8768,7 @@ Map<String, dynamic> _$FirmwareUncheckedCreateWithoutDevicesInputToJson(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('userId', instance.userId);
   return val;
 }
 
@@ -8057,6 +8936,10 @@ FirmwareUpdateWithoutDevicesInput _$FirmwareUpdateWithoutDevicesInputFromJson(
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
               json['createdAt'] as Map<String, dynamic>),
+      user: json['User'] == null
+          ? null
+          : UserUpdateOneWithoutFirmwaresNestedInput.fromJson(
+              json['User'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FirmwareUpdateWithoutDevicesInputToJson(
@@ -8074,6 +8957,7 @@ Map<String, dynamic> _$FirmwareUpdateWithoutDevicesInputToJson(
   writeNotNull('object', instance.object?.toJson());
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('User', instance.user?.toJson());
   return val;
 }
 
@@ -8105,6 +8989,10 @@ FirmwareUncheckedUpdateWithoutDevicesInput
               ? null
               : DateTimeFieldUpdateOperationsInput.fromJson(
                   json['createdAt'] as Map<String, dynamic>),
+          userId: json['userId'] == null
+              ? null
+              : NullableIntFieldUpdateOperationsInput.fromJson(
+                  json['userId'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$FirmwareUncheckedUpdateWithoutDevicesInputToJson(
@@ -8123,6 +9011,7 @@ Map<String, dynamic> _$FirmwareUncheckedUpdateWithoutDevicesInputToJson(
   writeNotNull('object', instance.object?.toJson());
   writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('userId', instance.userId?.toJson());
   return val;
 }
 
@@ -8364,6 +9253,40 @@ Map<String, dynamic> _$DeviceCreateManyUserInputToJson(
   return val;
 }
 
+FirmwareCreateManyUserInput _$FirmwareCreateManyUserInputFromJson(
+        Map<String, dynamic> json) =>
+    FirmwareCreateManyUserInput(
+      id: json['id'] as int?,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      object: json['object'] as String,
+      version: json['version'] as String,
+      createdAt: _$JsonConverterFromJson<String, DateTime>(
+          json['createdAt'], const DateTimeJsonConverter().fromJson),
+    );
+
+Map<String, dynamic> _$FirmwareCreateManyUserInputToJson(
+    FirmwareCreateManyUserInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['title'] = instance.title;
+  val['description'] = instance.description;
+  val['object'] = instance.object;
+  val['version'] = instance.version;
+  writeNotNull(
+      'createdAt',
+      _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const DateTimeJsonConverter().toJson));
+  return val;
+}
+
 DeviceUpdateWithoutUserInput _$DeviceUpdateWithoutUserInputFromJson(
         Map<String, dynamic> json) =>
     DeviceUpdateWithoutUserInput(
@@ -8491,6 +9414,157 @@ Map<String, dynamic> _$DeviceUncheckedUpdateManyWithoutDevicesInputToJson(
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
   writeNotNull('description', instance.description?.toJson());
+  writeNotNull('createdAt', instance.createdAt?.toJson());
+  return val;
+}
+
+FirmwareUpdateWithoutUserInput _$FirmwareUpdateWithoutUserInputFromJson(
+        Map<String, dynamic> json) =>
+    FirmwareUpdateWithoutUserInput(
+      title: json['title'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['title'] as Map<String, dynamic>),
+      description: json['description'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['description'] as Map<String, dynamic>),
+      object: json['object'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['object'] as Map<String, dynamic>),
+      version: json['version'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['version'] as Map<String, dynamic>),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTimeFieldUpdateOperationsInput.fromJson(
+              json['createdAt'] as Map<String, dynamic>),
+      devices: json['devices'] == null
+          ? null
+          : DeviceFirmwareUpdateManyWithoutFirmwareNestedInput.fromJson(
+              json['devices'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FirmwareUpdateWithoutUserInputToJson(
+    FirmwareUpdateWithoutUserInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('title', instance.title?.toJson());
+  writeNotNull('description', instance.description?.toJson());
+  writeNotNull('object', instance.object?.toJson());
+  writeNotNull('version', instance.version?.toJson());
+  writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+FirmwareUncheckedUpdateWithoutUserInput
+    _$FirmwareUncheckedUpdateWithoutUserInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUncheckedUpdateWithoutUserInput(
+          id: json['id'] == null
+              ? null
+              : IntFieldUpdateOperationsInput.fromJson(
+                  json['id'] as Map<String, dynamic>),
+          title: json['title'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['title'] as Map<String, dynamic>),
+          description: json['description'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['description'] as Map<String, dynamic>),
+          object: json['object'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['object'] as Map<String, dynamic>),
+          version: json['version'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['version'] as Map<String, dynamic>),
+          createdAt: json['createdAt'] == null
+              ? null
+              : DateTimeFieldUpdateOperationsInput.fromJson(
+                  json['createdAt'] as Map<String, dynamic>),
+          devices: json['devices'] == null
+              ? null
+              : DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput
+                  .fromJson(json['devices'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareUncheckedUpdateWithoutUserInputToJson(
+    FirmwareUncheckedUpdateWithoutUserInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id?.toJson());
+  writeNotNull('title', instance.title?.toJson());
+  writeNotNull('description', instance.description?.toJson());
+  writeNotNull('object', instance.object?.toJson());
+  writeNotNull('version', instance.version?.toJson());
+  writeNotNull('createdAt', instance.createdAt?.toJson());
+  writeNotNull('devices', instance.devices?.toJson());
+  return val;
+}
+
+FirmwareUncheckedUpdateManyWithoutFirmwaresInput
+    _$FirmwareUncheckedUpdateManyWithoutFirmwaresInputFromJson(
+            Map<String, dynamic> json) =>
+        FirmwareUncheckedUpdateManyWithoutFirmwaresInput(
+          id: json['id'] == null
+              ? null
+              : IntFieldUpdateOperationsInput.fromJson(
+                  json['id'] as Map<String, dynamic>),
+          title: json['title'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['title'] as Map<String, dynamic>),
+          description: json['description'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['description'] as Map<String, dynamic>),
+          object: json['object'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['object'] as Map<String, dynamic>),
+          version: json['version'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['version'] as Map<String, dynamic>),
+          createdAt: json['createdAt'] == null
+              ? null
+              : DateTimeFieldUpdateOperationsInput.fromJson(
+                  json['createdAt'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$FirmwareUncheckedUpdateManyWithoutFirmwaresInputToJson(
+    FirmwareUncheckedUpdateManyWithoutFirmwaresInput instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id?.toJson());
+  writeNotNull('title', instance.title?.toJson());
+  writeNotNull('description', instance.description?.toJson());
+  writeNotNull('object', instance.object?.toJson());
+  writeNotNull('version', instance.version?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   return val;
 }
@@ -8768,16 +9842,28 @@ Firmware _$FirmwareFromJson(Map<String, dynamic> json) => Firmware(
       version: json['version'] as String,
       createdAt:
           const DateTimeJsonConverter().fromJson(json['createdAt'] as String),
+      userId: json['userId'] as int?,
     );
 
-Map<String, dynamic> _$FirmwareToJson(Firmware instance) => <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'description': instance.description,
-      'object': instance.object,
-      'version': instance.version,
-      'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
-    };
+Map<String, dynamic> _$FirmwareToJson(Firmware instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'title': instance.title,
+    'description': instance.description,
+    'object': instance.object,
+    'version': instance.version,
+    'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('userId', instance.userId);
+  return val;
+}
 
 DeviceTag _$DeviceTagFromJson(Map<String, dynamic> json) => DeviceTag(
       id: json['id'] as int,
@@ -8922,6 +10008,7 @@ FirmwareGroupByOutputType _$FirmwareGroupByOutputTypeFromJson(
       version: json['version'] as String?,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
+      userId: json['userId'] as int?,
     );
 
 Map<String, dynamic> _$FirmwareGroupByOutputTypeToJson(
@@ -8943,6 +10030,7 @@ Map<String, dynamic> _$FirmwareGroupByOutputTypeToJson(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
           instance.createdAt, const DateTimeJsonConverter().toJson));
+  writeNotNull('userId', instance.userId);
   return val;
 }
 

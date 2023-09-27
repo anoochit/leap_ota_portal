@@ -1,15 +1,15 @@
 import 'package:api/api.dart';
 import 'package:api/src/generated/prisma/prisma_client.dart';
 
-class DeviceRepository {
-  /// get device
-  Future<Iterable<Device>> getDevices({required User user}) async {
+class FirmwareRepository {
+  /// get firmware
+  Future<Iterable<Firmware>> getFirmwares({required User user}) async {
     if (user.role == Role.admin) {
-      final items = await prisma.device.findMany();
+      final items = await prisma.firmware.findMany();
       return items;
     } else {
-      final items = await prisma.device.findMany(
-        where: DeviceWhereInput(
+      final items = await prisma.firmware.findMany(
+        where: FirmwareWhereInput(
           userId: IntNullableFilter(equals: user.id),
         ),
       );
