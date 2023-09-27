@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations, avoid_dynamic_calls
+
 import 'dart:io';
 import 'package:api/repository/user.dart';
 import 'package:dart_frog/dart_frog.dart';
