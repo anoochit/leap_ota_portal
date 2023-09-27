@@ -9,7 +9,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'ProfileView is working',
+      'profile',
       style: TextStyle(fontSize: 20),
     );
   }

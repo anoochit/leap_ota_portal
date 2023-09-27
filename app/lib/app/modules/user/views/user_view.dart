@@ -9,7 +9,7 @@ class UserView extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'UserView is working',
+      'user',
       style: TextStyle(fontSize: 20),
     );
   }

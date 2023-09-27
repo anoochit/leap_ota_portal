@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/signin_controller.dart';
+import '../controllers/signup_controller.dart';
 
-class SigninView extends GetView<SigninController> {
-  SigninView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  SignupView({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
+  final textDisplayNameController = TextEditingController();
   final textUsernameController = TextEditingController();
   final textPasswordController = TextEditingController();
 
@@ -32,6 +33,28 @@ class SigninView extends GetView<SigninController> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
+
+                    // display name
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: textDisplayNameController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          label: const Text('Name'),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+
                     // username
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -81,19 +104,19 @@ class SigninView extends GetView<SigninController> {
                         width: double.infinity,
                         child: FilledButton(
                           onPressed: () {
-                            // TODO : implement signin
-                            Get.offAllNamed(Routes.HOME);
+                            // TODO : implement signup
+                            //Get.offAllNamed(Routes.HOME);
                           },
-                          child: const Text('Sign in'),
+                          child: const Text('Sign Up'),
                         ),
                       ),
                     ),
 
                     TextButton(
                       onPressed: () {
-                        Get.offAllNamed(Routes.SIGNUP);
+                        Get.offAllNamed(Routes.SIGNIN);
                       },
-                      child: const Text("Don't have an account ? SignUp"),
+                      child: const Text("Already have account ? SignIn"),
                     ),
                   ],
                 ),

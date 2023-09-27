@@ -2,7 +2,7 @@ import 'package:app/app/modules/home/views/body_view.dart';
 import 'package:app/app/modules/home/views/navigation_menu_mobile.dart';
 import 'package:app/app/modules/home/views/navigation_menu_view.dart';
 import 'package:app/app/views/views/brand_view.dart';
-import 'package:app/app/views/views/profile_button_view.dart';
+import 'package:app/app/modules/home/views/profile_button_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

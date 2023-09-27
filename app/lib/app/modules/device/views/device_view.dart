@@ -9,7 +9,10 @@ class DeviceView extends GetView<DeviceController> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      child: Text('d'),
+      child: Text(
+        'device',
+        style: TextStyle(fontSize: 20),
+      ),
     );
   }
 }
