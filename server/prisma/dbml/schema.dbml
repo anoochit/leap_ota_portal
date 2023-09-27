@@ -5,7 +5,7 @@
 Table device {
   id Int [pk, increment]
   title String [not null]
-  content String [not null]
+  description String [not null]
   createdAt DateTime [default: `now()`, not null]
   firmwares device_firmware [not null]
   tags device_tag [not null]
@@ -15,6 +15,7 @@ Table device {
 
 Table user {
   id Int [pk, increment]
+  name String [unique, not null]
   username String [unique, not null]
   password String [not null]
   createdAt DateTime [default: `now()`, not null]

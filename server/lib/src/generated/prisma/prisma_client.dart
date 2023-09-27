@@ -12,7 +12,7 @@ part 'prisma_client.g.dart';
 enum DeviceScalarFieldEnum implements _i1.PrismaEnum {
   id,
   title,
-  content,
+  description,
   createdAt,
   userId;
 
@@ -22,6 +22,7 @@ enum DeviceScalarFieldEnum implements _i1.PrismaEnum {
 
 enum UserScalarFieldEnum implements _i1.PrismaEnum {
   id,
+  name,
   username,
   password,
   createdAt,
@@ -116,7 +117,7 @@ class DeviceWhereInput implements _i1.JsonSerializable {
     this.NOT,
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
     this.firmwares,
@@ -137,7 +138,7 @@ class DeviceWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? title;
 
-  final StringFilter? content;
+  final StringFilter? description;
 
   final DateTimeFilter? createdAt;
 
@@ -159,7 +160,7 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
   const DeviceOrderByWithRelationInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
     this.firmwares,
@@ -174,7 +175,7 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
 
   final SortOrder? title;
 
-  final SortOrder? content;
+  final SortOrder? description;
 
   final SortOrder? createdAt;
 
@@ -209,7 +210,7 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
   const DeviceOrderByWithAggregationInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
     this.$count,
@@ -227,7 +228,7 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? title;
 
-  final SortOrder? content;
+  final SortOrder? description;
 
   final SortOrder? createdAt;
 
@@ -261,7 +262,7 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.NOT,
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -280,7 +281,7 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final StringWithAggregatesFilter? title;
 
-  final StringWithAggregatesFilter? content;
+  final StringWithAggregatesFilter? description;
 
   final DateTimeWithAggregatesFilter? createdAt;
 
@@ -298,6 +299,7 @@ class UserWhereInput implements _i1.JsonSerializable {
     this.OR,
     this.NOT,
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -315,6 +317,8 @@ class UserWhereInput implements _i1.JsonSerializable {
   final Iterable<UserWhereInput>? NOT;
 
   final IntFilter? id;
+
+  final StringFilter? name;
 
   final StringFilter? username;
 
@@ -334,6 +338,7 @@ class UserWhereInput implements _i1.JsonSerializable {
 class UserOrderByWithRelationInput implements _i1.JsonSerializable {
   const UserOrderByWithRelationInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -345,6 +350,8 @@ class UserOrderByWithRelationInput implements _i1.JsonSerializable {
       _$UserOrderByWithRelationInputFromJson(json);
 
   final SortOrder? id;
+
+  final SortOrder? name;
 
   final SortOrder? username;
 
@@ -364,6 +371,7 @@ class UserOrderByWithRelationInput implements _i1.JsonSerializable {
 class UserWhereUniqueInput implements _i1.JsonSerializable {
   const UserWhereUniqueInput({
     this.id,
+    this.name,
     this.username,
   });
 
@@ -371,6 +379,8 @@ class UserWhereUniqueInput implements _i1.JsonSerializable {
       _$UserWhereUniqueInputFromJson(json);
 
   final int? id;
+
+  final String? name;
 
   final String? username;
 
@@ -382,6 +392,7 @@ class UserWhereUniqueInput implements _i1.JsonSerializable {
 class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
   const UserOrderByWithAggregationInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -397,6 +408,8 @@ class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
       _$UserOrderByWithAggregationInputFromJson(json);
 
   final SortOrder? id;
+
+  final SortOrder? name;
 
   final SortOrder? username;
 
@@ -433,6 +446,7 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.OR,
     this.NOT,
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -450,6 +464,8 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
   final Iterable<UserScalarWhereWithAggregatesInput>? NOT;
 
   final IntWithAggregatesFilter? id;
+
+  final StringWithAggregatesFilter? name;
 
   final StringWithAggregatesFilter? username;
 
@@ -1121,7 +1137,7 @@ class DeviceFirmwareScalarWhereWithAggregatesInput
 class DeviceCreateInput implements _i1.JsonSerializable {
   const DeviceCreateInput({
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.firmwares,
     this.tags,
@@ -1133,7 +1149,7 @@ class DeviceCreateInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -1153,7 +1169,7 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
   const DeviceUncheckedCreateInput({
     this.id,
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.userId,
     this.firmwares,
@@ -1167,7 +1183,7 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -1185,7 +1201,7 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
 class DeviceUpdateInput implements _i1.JsonSerializable {
   const DeviceUpdateInput({
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.firmwares,
     this.tags,
@@ -1197,7 +1213,7 @@ class DeviceUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -1217,7 +1233,7 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
   const DeviceUncheckedUpdateInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
     this.firmwares,
@@ -1231,7 +1247,7 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -1250,7 +1266,7 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
   const DeviceCreateManyInput({
     this.id,
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.userId,
   });
@@ -1262,7 +1278,7 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -1276,7 +1292,7 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
 class DeviceUpdateManyMutationInput implements _i1.JsonSerializable {
   const DeviceUpdateManyMutationInput({
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
   });
 
@@ -1285,7 +1301,7 @@ class DeviceUpdateManyMutationInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -1298,7 +1314,7 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
   const DeviceUncheckedUpdateManyInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -1310,7 +1326,7 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -1323,6 +1339,7 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserCreateInput implements _i1.JsonSerializable {
   const UserCreateInput({
+    required this.name,
     required this.username,
     required this.password,
     this.createdAt,
@@ -1332,6 +1349,8 @@ class UserCreateInput implements _i1.JsonSerializable {
 
   factory UserCreateInput.fromJson(Map<String, dynamic> json) =>
       _$UserCreateInputFromJson(json);
+
+  final String name;
 
   final String username;
 
@@ -1351,6 +1370,7 @@ class UserCreateInput implements _i1.JsonSerializable {
 class UserUncheckedCreateInput implements _i1.JsonSerializable {
   const UserUncheckedCreateInput({
     this.id,
+    required this.name,
     required this.username,
     required this.password,
     this.createdAt,
@@ -1362,6 +1382,8 @@ class UserUncheckedCreateInput implements _i1.JsonSerializable {
       _$UserUncheckedCreateInputFromJson(json);
 
   final int? id;
+
+  final String name;
 
   final String username;
 
@@ -1380,6 +1402,7 @@ class UserUncheckedCreateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserUpdateInput implements _i1.JsonSerializable {
   const UserUpdateInput({
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -1389,6 +1412,8 @@ class UserUpdateInput implements _i1.JsonSerializable {
 
   factory UserUpdateInput.fromJson(Map<String, dynamic> json) =>
       _$UserUpdateInputFromJson(json);
+
+  final StringFieldUpdateOperationsInput? name;
 
   final StringFieldUpdateOperationsInput? username;
 
@@ -1408,6 +1433,7 @@ class UserUpdateInput implements _i1.JsonSerializable {
 class UserUncheckedUpdateInput implements _i1.JsonSerializable {
   const UserUncheckedUpdateInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -1419,6 +1445,8 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
       _$UserUncheckedUpdateInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
+
+  final StringFieldUpdateOperationsInput? name;
 
   final StringFieldUpdateOperationsInput? username;
 
@@ -1438,6 +1466,7 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
 class UserCreateManyInput implements _i1.JsonSerializable {
   const UserCreateManyInput({
     this.id,
+    required this.name,
     required this.username,
     required this.password,
     this.createdAt,
@@ -1448,6 +1477,8 @@ class UserCreateManyInput implements _i1.JsonSerializable {
       _$UserCreateManyInputFromJson(json);
 
   final int? id;
+
+  final String name;
 
   final String username;
 
@@ -1464,6 +1495,7 @@ class UserCreateManyInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserUpdateManyMutationInput implements _i1.JsonSerializable {
   const UserUpdateManyMutationInput({
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -1472,6 +1504,8 @@ class UserUpdateManyMutationInput implements _i1.JsonSerializable {
 
   factory UserUpdateManyMutationInput.fromJson(Map<String, dynamic> json) =>
       _$UserUpdateManyMutationInputFromJson(json);
+
+  final StringFieldUpdateOperationsInput? name;
 
   final StringFieldUpdateOperationsInput? username;
 
@@ -1489,6 +1523,7 @@ class UserUpdateManyMutationInput implements _i1.JsonSerializable {
 class UserUncheckedUpdateManyInput implements _i1.JsonSerializable {
   const UserUncheckedUpdateManyInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -1499,6 +1534,8 @@ class UserUncheckedUpdateManyInput implements _i1.JsonSerializable {
       _$UserUncheckedUpdateManyInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
+
+  final StringFieldUpdateOperationsInput? name;
 
   final StringFieldUpdateOperationsInput? username;
 
@@ -2419,7 +2456,7 @@ class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
   const DeviceCountOrderByAggregateInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -2432,7 +2469,7 @@ class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? title;
 
-  final SortOrder? content;
+  final SortOrder? description;
 
   final SortOrder? createdAt;
 
@@ -2466,7 +2503,7 @@ class DeviceMaxOrderByAggregateInput implements _i1.JsonSerializable {
   const DeviceMaxOrderByAggregateInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -2478,7 +2515,7 @@ class DeviceMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? title;
 
-  final SortOrder? content;
+  final SortOrder? description;
 
   final SortOrder? createdAt;
 
@@ -2493,7 +2530,7 @@ class DeviceMinOrderByAggregateInput implements _i1.JsonSerializable {
   const DeviceMinOrderByAggregateInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -2505,7 +2542,7 @@ class DeviceMinOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? title;
 
-  final SortOrder? content;
+  final SortOrder? description;
 
   final SortOrder? createdAt;
 
@@ -2824,6 +2861,7 @@ class DeviceOrderByRelationAggregateInput implements _i1.JsonSerializable {
 class UserCountOrderByAggregateInput implements _i1.JsonSerializable {
   const UserCountOrderByAggregateInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -2834,6 +2872,8 @@ class UserCountOrderByAggregateInput implements _i1.JsonSerializable {
       _$UserCountOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
+
+  final SortOrder? name;
 
   final SortOrder? username;
 
@@ -2864,6 +2904,7 @@ class UserAvgOrderByAggregateInput implements _i1.JsonSerializable {
 class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
   const UserMaxOrderByAggregateInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -2874,6 +2915,8 @@ class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
       _$UserMaxOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
+
+  final SortOrder? name;
 
   final SortOrder? username;
 
@@ -2891,6 +2934,7 @@ class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
 class UserMinOrderByAggregateInput implements _i1.JsonSerializable {
   const UserMinOrderByAggregateInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -2901,6 +2945,8 @@ class UserMinOrderByAggregateInput implements _i1.JsonSerializable {
       _$UserMinOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
+
+  final SortOrder? name;
 
   final SortOrder? username;
 
@@ -5312,6 +5358,7 @@ class DeviceTagCreateManyDeviceInputEnvelope implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
   const UserCreateWithoutDevicesInput({
+    required this.name,
     required this.username,
     required this.password,
     this.createdAt,
@@ -5320,6 +5367,8 @@ class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
 
   factory UserCreateWithoutDevicesInput.fromJson(Map<String, dynamic> json) =>
       _$UserCreateWithoutDevicesInputFromJson(json);
+
+  final String name;
 
   final String username;
 
@@ -5337,6 +5386,7 @@ class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
 class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
   const UserUncheckedCreateWithoutDevicesInput({
     this.id,
+    required this.name,
     required this.username,
     required this.password,
     this.createdAt,
@@ -5348,6 +5398,8 @@ class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
       _$UserUncheckedCreateWithoutDevicesInputFromJson(json);
 
   final int? id;
+
+  final String name;
 
   final String username;
 
@@ -5595,6 +5647,7 @@ class UserUpsertWithoutDevicesInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
   const UserUpdateWithoutDevicesInput({
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -5603,6 +5656,8 @@ class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 
   factory UserUpdateWithoutDevicesInput.fromJson(Map<String, dynamic> json) =>
       _$UserUpdateWithoutDevicesInputFromJson(json);
+
+  final StringFieldUpdateOperationsInput? name;
 
   final StringFieldUpdateOperationsInput? username;
 
@@ -5620,6 +5675,7 @@ class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
   const UserUncheckedUpdateWithoutDevicesInput({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -5631,6 +5687,8 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
       _$UserUncheckedUpdateWithoutDevicesInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
+
+  final StringFieldUpdateOperationsInput? name;
 
   final StringFieldUpdateOperationsInput? username;
 
@@ -5649,7 +5707,7 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceCreateWithoutUserInput({
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.firmwares,
     this.tags,
@@ -5660,7 +5718,7 @@ class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -5677,7 +5735,7 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceUncheckedCreateWithoutUserInput({
     this.id,
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.firmwares,
     this.tags,
@@ -5691,7 +5749,7 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -5818,7 +5876,7 @@ class DeviceScalarWhereInput implements _i1.JsonSerializable {
     this.NOT,
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -5836,7 +5894,7 @@ class DeviceScalarWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? title;
 
-  final StringFilter? content;
+  final StringFilter? description;
 
   final DateTimeFilter? createdAt;
 
@@ -6196,7 +6254,7 @@ class TaxonomyCreateOrConnectWithoutDevicesInput
 class DeviceCreateWithoutTagsInput implements _i1.JsonSerializable {
   const DeviceCreateWithoutTagsInput({
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.firmwares,
     this.user,
@@ -6207,7 +6265,7 @@ class DeviceCreateWithoutTagsInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -6225,7 +6283,7 @@ class DeviceUncheckedCreateWithoutTagsInput implements _i1.JsonSerializable {
   const DeviceUncheckedCreateWithoutTagsInput({
     this.id,
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.userId,
     this.firmwares,
@@ -6239,7 +6297,7 @@ class DeviceUncheckedCreateWithoutTagsInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -6350,7 +6408,7 @@ class DeviceUpsertWithoutTagsInput implements _i1.JsonSerializable {
 class DeviceUpdateWithoutTagsInput implements _i1.JsonSerializable {
   const DeviceUpdateWithoutTagsInput({
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.firmwares,
     this.user,
@@ -6361,7 +6419,7 @@ class DeviceUpdateWithoutTagsInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -6379,7 +6437,7 @@ class DeviceUncheckedUpdateWithoutTagsInput implements _i1.JsonSerializable {
   const DeviceUncheckedUpdateWithoutTagsInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
     this.firmwares,
@@ -6393,7 +6451,7 @@ class DeviceUncheckedUpdateWithoutTagsInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -6410,7 +6468,7 @@ class DeviceUncheckedUpdateWithoutTagsInput implements _i1.JsonSerializable {
 class DeviceCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
   const DeviceCreateWithoutFirmwaresInput({
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.tags,
     this.user,
@@ -6422,7 +6480,7 @@ class DeviceCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -6442,7 +6500,7 @@ class DeviceUncheckedCreateWithoutFirmwaresInput
   const DeviceUncheckedCreateWithoutFirmwaresInput({
     this.id,
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
     this.userId,
     this.tags,
@@ -6456,7 +6514,7 @@ class DeviceUncheckedCreateWithoutFirmwaresInput
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -6597,7 +6655,7 @@ class DeviceUpsertWithoutFirmwaresInput implements _i1.JsonSerializable {
 class DeviceUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
   const DeviceUpdateWithoutFirmwaresInput({
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.tags,
     this.user,
@@ -6609,7 +6667,7 @@ class DeviceUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -6629,7 +6687,7 @@ class DeviceUncheckedUpdateWithoutFirmwaresInput
   const DeviceUncheckedUpdateWithoutFirmwaresInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
     this.tags,
@@ -6643,7 +6701,7 @@ class DeviceUncheckedUpdateWithoutFirmwaresInput
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -6897,7 +6955,7 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
   const DeviceCreateManyUserInput({
     this.id,
     required this.title,
-    required this.content,
+    required this.description,
     this.createdAt,
   });
 
@@ -6908,7 +6966,7 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime? createdAt;
 
@@ -6920,7 +6978,7 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
 class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceUpdateWithoutUserInput({
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.firmwares,
     this.tags,
@@ -6931,7 +6989,7 @@ class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -6948,7 +7006,7 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceUncheckedUpdateWithoutUserInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.firmwares,
     this.tags,
@@ -6962,7 +7020,7 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -6981,7 +7039,7 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
   const DeviceUncheckedUpdateManyWithoutDevicesInput({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
   });
 
@@ -6993,7 +7051,7 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
 
   final StringFieldUpdateOperationsInput? title;
 
-  final StringFieldUpdateOperationsInput? content;
+  final StringFieldUpdateOperationsInput? description;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -7163,7 +7221,7 @@ class Device implements _i1.JsonSerializable {
   const Device({
     required this.id,
     required this.title,
-    required this.content,
+    required this.description,
     required this.createdAt,
     this.userId,
   });
@@ -7174,7 +7232,7 @@ class Device implements _i1.JsonSerializable {
 
   final String title;
 
-  final String content;
+  final String description;
 
   final DateTime createdAt;
 
@@ -7188,6 +7246,7 @@ class Device implements _i1.JsonSerializable {
 class User implements _i1.JsonSerializable {
   const User({
     required this.id,
+    required this.name,
     required this.username,
     required this.password,
     required this.createdAt,
@@ -7197,6 +7256,8 @@ class User implements _i1.JsonSerializable {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   final int id;
+
+  final String name;
 
   final String username;
 
@@ -10943,7 +11004,7 @@ class DeviceGroupByOutputType implements _i1.JsonSerializable {
   const DeviceGroupByOutputType({
     this.id,
     this.title,
-    this.content,
+    this.description,
     this.createdAt,
     this.userId,
   });
@@ -10955,7 +11016,7 @@ class DeviceGroupByOutputType implements _i1.JsonSerializable {
 
   final String? title;
 
-  final String? content;
+  final String? description;
 
   final DateTime? createdAt;
 
@@ -10969,6 +11030,7 @@ class DeviceGroupByOutputType implements _i1.JsonSerializable {
 class UserGroupByOutputType implements _i1.JsonSerializable {
   const UserGroupByOutputType({
     this.id,
+    this.name,
     this.username,
     this.password,
     this.createdAt,
@@ -10979,6 +11041,8 @@ class UserGroupByOutputType implements _i1.JsonSerializable {
       _$UserGroupByOutputTypeFromJson(json);
 
   final int? id;
+
+  final String? name;
 
   final String? username;
 
@@ -11599,15 +11663,15 @@ class DeviceCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
-  Future<int> content() {
+  Future<int> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'content',
+          r'description',
           fields: fields,
         )
       ]),
-      key: r'content',
+      key: r'description',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -11747,15 +11811,15 @@ class DeviceMinAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<String?> content() {
+  Future<String?> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'content',
+          r'description',
           fields: fields,
         )
       ]),
-      key: r'content',
+      key: r'description',
     );
     return query(const []).then((value) => (value as String?));
   }
@@ -11819,15 +11883,15 @@ class DeviceMaxAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<String?> content() {
+  Future<String?> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'content',
+          r'description',
           fields: fields,
         )
       ]),
-      key: r'content',
+      key: r'description',
     );
     return query(const []).then((value) => (value as String?));
   }
@@ -11900,6 +11964,19 @@ class UserCountAggregateOutputType {
         )
       ]),
       key: r'id',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> name() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'name',
+          fields: fields,
+        )
+      ]),
+      key: r'name',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -12026,6 +12103,19 @@ class UserMinAggregateOutputType {
     return query(const []).then((value) => (value as int?));
   }
 
+  Future<String?> name() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'name',
+          fields: fields,
+        )
+      ]),
+      key: r'name',
+    );
+    return query(const []).then((value) => (value as String?));
+  }
+
   Future<String?> username() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -12099,6 +12189,19 @@ class UserMaxAggregateOutputType {
       key: r'id',
     );
     return query(const []).then((value) => (value as int?));
+  }
+
+  Future<String?> name() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'name',
+          fields: fields,
+        )
+      ]),
+      key: r'name',
+    );
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> username() {
@@ -13178,7 +13281,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
     final engine = _i5.BinaryEngine(
       logger: logger,
       schema:
-          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgSW50ICAgICAgICAgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICB0aXRsZSAgICAgU3RyaW5nDQogIGNvbnRlbnQgICBTdHJpbmcNCiAgY3JlYXRlZEF0IERhdGVUaW1lICAgICAgICAgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eig2KQ0KICBmaXJtd2FyZXMgRGV2aWNlRmlybXdhcmVbXQ0KICB0YWdzICAgICAgRGV2aWNlVGFnW10NCiAgVXNlciAgICAgIFVzZXI/ICAgICAgICAgICAgQHJlbGF0aW9uKGZpZWxkczogW3VzZXJJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIHVzZXJJZCAgICBJbnQ/DQoNCiAgQEBtYXAoImRldmljZSIpDQp9DQoNCm1vZGVsIFVzZXIgew0KICBpZCAgICAgICAgSW50ICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdXNlcm5hbWUgIFN0cmluZyAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIHBhc3N3b3JkICBTdHJpbmcgICBAZGIuVmFyQ2hhcig2NCkNCiAgY3JlYXRlZEF0IERhdGVUaW1lIEBkZWZhdWx0KG5vdygpKSBAZGIuVGltZXN0YW1wdHooNikNCiAgZGV2aWNlcyAgIERldmljZVtdDQogIHJvbGUgICAgICBSb2xlICAgICBAZGVmYXVsdChVU0VSKQ0KDQogIEBAbWFwKCJ1c2VyIikNCn0NCg0KbW9kZWwgVGF4b25vbXkgew0KICBpZCAgICAgIEludCAgICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIHRpdGxlICAgU3RyaW5nICAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcigyNTUpDQogIGRldmljZXMgRGV2aWNlVGFnW10NCg0KICBAQG1hcCgidGF4b25vbXkiKQ0KfQ0KDQptb2RlbCBGaXJtd2FyZSB7DQogIGlkICAgICAgICAgIEludCAgICAgICAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgICAgICAgICBAdW5pcXVlIEBkYi5WYXJDaGFyKDI1NSkNCiAgZGVzY3JpcHRpb24gU3RyaW5nICAgICAgICAgICBAdW5pcXVlDQogIG9iamVjdCAgICAgIFN0cmluZyAgICAgICAgICAgQHVuaXF1ZQ0KICB2ZXJzaW9uICAgICBTdHJpbmcgICAgICAgICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGNyZWF0ZWRBdCAgIERhdGVUaW1lICAgICAgICAgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eig2KQ0KICBkZXZpY2VzICAgICBEZXZpY2VGaXJtd2FyZVtdDQoNCiAgQEBtYXAoImZpcm13YXJlIikNCn0NCg0KbW9kZWwgRGV2aWNlVGFnIHsNCiAgaWQgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgVGF4b25vbXkgICBUYXhvbm9teT8gQHJlbGF0aW9uKGZpZWxkczogW3RheG9ub215SWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB0YXhvbm9teUlkIEludD8NCiAgRGV2aWNlICAgICBEZXZpY2U/ICAgQHJlbGF0aW9uKGZpZWxkczogW2RldmljZUlkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgZGV2aWNlSWQgICBJbnQ/DQoNCiAgQEBtYXAoImRldmljZV90YWciKQ0KfQ0KDQptb2RlbCBEZXZpY2VGaXJtd2FyZSB7DQogIGlkICAgICAgICAgSW50ICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIERldmljZSAgICAgRGV2aWNlPyAgIEByZWxhdGlvbihmaWVsZHM6IFtkZXZpY2VJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGRldmljZUlkICAgSW50Pw0KICBGaXJtd2FyZSAgIEZpcm13YXJlPyBAcmVsYXRpb24oZmllbGRzOiBbZmlybXdhcmVJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGZpcm13YXJlSWQgSW50Pw0KDQogIEBAbWFwKCJkZXZpY2VfZmlybXdhcmUiKQ0KfQ0KDQplbnVtIFJvbGUgew0KICBBRE1JTiAvLy8gYWxsb3dlZCB0byBkbyBldmVyeXRoaW5nDQogIFVTRVINCn0NCg==',
+          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIHRpdGxlICAgICAgIFN0cmluZw0KICBkZXNjcmlwdGlvbiBTdHJpbmcNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgICAgICAgICBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KDYpDQogIGZpcm13YXJlcyAgIERldmljZUZpcm13YXJlW10NCiAgdGFncyAgICAgICAgRGV2aWNlVGFnW10NCiAgVXNlciAgICAgICAgVXNlcj8gICAgICAgICAgICBAcmVsYXRpb24oZmllbGRzOiBbdXNlcklkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgdXNlcklkICAgICAgSW50Pw0KDQogIEBAbWFwKCJkZXZpY2UiKQ0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgIEludCAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIG5hbWUgICAgICBTdHJpbmcgICBAdW5pcXVlIEBkYi5WYXJDaGFyKDQ1KQ0KICB1c2VybmFtZSAgU3RyaW5nICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgcGFzc3dvcmQgIFN0cmluZyAgIEBkYi5WYXJDaGFyKDY0KQ0KICBjcmVhdGVkQXQgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eig2KQ0KICBkZXZpY2VzICAgRGV2aWNlW10NCiAgcm9sZSAgICAgIFJvbGUgICAgIEBkZWZhdWx0KFVTRVIpDQoNCiAgQEBtYXAoInVzZXIiKQ0KfQ0KDQptb2RlbCBUYXhvbm9teSB7DQogIGlkICAgICAgSW50ICAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICBTdHJpbmcgICAgICBAdW5pcXVlIEBkYi5WYXJDaGFyKDI1NSkNCiAgZGV2aWNlcyBEZXZpY2VUYWdbXQ0KDQogIEBAbWFwKCJ0YXhvbm9teSIpDQp9DQoNCm1vZGVsIEZpcm13YXJlIHsNCiAgaWQgICAgICAgICAgSW50ICAgICAgICAgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICB0aXRsZSAgICAgICBTdHJpbmcgICAgICAgICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoMjU1KQ0KICBkZXNjcmlwdGlvbiBTdHJpbmcgICAgICAgICAgIEB1bmlxdWUNCiAgb2JqZWN0ICAgICAgU3RyaW5nICAgICAgICAgICBAdW5pcXVlDQogIHZlcnNpb24gICAgIFN0cmluZyAgICAgICAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgICAgICAgICBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KDYpDQogIGRldmljZXMgICAgIERldmljZUZpcm13YXJlW10NCg0KICBAQG1hcCgiZmlybXdhcmUiKQ0KfQ0KDQptb2RlbCBEZXZpY2VUYWcgew0KICBpZCAgICAgICAgIEludCAgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICBUYXhvbm9teSAgIFRheG9ub215PyBAcmVsYXRpb24oZmllbGRzOiBbdGF4b25vbXlJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIHRheG9ub215SWQgSW50Pw0KICBEZXZpY2UgICAgIERldmljZT8gICBAcmVsYXRpb24oZmllbGRzOiBbZGV2aWNlSWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICBkZXZpY2VJZCAgIEludD8NCg0KICBAQG1hcCgiZGV2aWNlX3RhZyIpDQp9DQoNCm1vZGVsIERldmljZUZpcm13YXJlIHsNCiAgaWQgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgRGV2aWNlICAgICBEZXZpY2U/ICAgQHJlbGF0aW9uKGZpZWxkczogW2RldmljZUlkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgZGV2aWNlSWQgICBJbnQ/DQogIEZpcm13YXJlICAgRmlybXdhcmU/IEByZWxhdGlvbihmaWVsZHM6IFtmaXJtd2FyZUlkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgZmlybXdhcmVJZCBJbnQ/DQoNCiAgQEBtYXAoImRldmljZV9maXJtd2FyZSIpDQp9DQoNCmVudW0gUm9sZSB7DQogIEFETUlOIC8vLyBhbGxvd2VkIHRvIGRvIGV2ZXJ5dGhpbmcNCiAgVVNFUg0KfQ0K',
       datasources: datasources?.toJson().cast() ?? const {},
       executable:
           r'D:\Projects\IoTProject\leap_oss\server\node_modules\prisma\query-engine-windows.exe',

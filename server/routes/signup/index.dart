@@ -12,6 +12,7 @@ Future<Response> onRequest(RequestContext context) async {
       final payload = await context.request.json();
 
       final (token, user) = await userRepository.signUp(
+        name: '${payload["name"]}',
         username: '${payload["username"]}',
         password: '${payload["password"]}',
       );

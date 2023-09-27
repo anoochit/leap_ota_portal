@@ -5,7 +5,7 @@ CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 CREATE TABLE "device" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER,
 
@@ -15,6 +15,7 @@ CREATE TABLE "device" (
 -- CreateTable
 CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
+    "name" VARCHAR(45) NOT NULL,
     "username" VARCHAR(45) NOT NULL,
     "password" VARCHAR(64) NOT NULL,
     "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -60,6 +61,9 @@ CREATE TABLE "device_firmware" (
 
     CONSTRAINT "device_firmware_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "user_name_key" ON "user"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_username_key" ON "user"("username");

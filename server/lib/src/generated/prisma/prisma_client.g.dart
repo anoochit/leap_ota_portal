@@ -20,9 +20,9 @@ DeviceWhereInput _$DeviceWhereInputFromJson(Map<String, dynamic> json) =>
       title: json['title'] == null
           ? null
           : StringFilter.fromJson(json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
-          : StringFilter.fromJson(json['content'] as Map<String, dynamic>),
+          : StringFilter.fromJson(json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFilter.fromJson(json['createdAt'] as Map<String, dynamic>),
@@ -56,7 +56,7 @@ Map<String, dynamic> _$DeviceWhereInputToJson(DeviceWhereInput instance) {
   writeNotNull('NOT', instance.NOT?.map((e) => e.toJson()).toList());
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
@@ -70,7 +70,7 @@ DeviceOrderByWithRelationInput _$DeviceOrderByWithRelationInputFromJson(
     DeviceOrderByWithRelationInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
       title: $enumDecodeNullable(_$SortOrderEnumMap, json['title']),
-      content: $enumDecodeNullable(_$SortOrderEnumMap, json['content']),
+      description: $enumDecodeNullable(_$SortOrderEnumMap, json['description']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
       userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
       firmwares: json['firmwares'] == null
@@ -99,7 +99,7 @@ Map<String, dynamic> _$DeviceOrderByWithRelationInputToJson(
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
   writeNotNull('title', _$SortOrderEnumMap[instance.title]);
-  writeNotNull('content', _$SortOrderEnumMap[instance.content]);
+  writeNotNull('description', _$SortOrderEnumMap[instance.description]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
   writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   writeNotNull('firmwares', instance.firmwares?.toJson());
@@ -138,7 +138,7 @@ DeviceOrderByWithAggregationInput _$DeviceOrderByWithAggregationInputFromJson(
     DeviceOrderByWithAggregationInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
       title: $enumDecodeNullable(_$SortOrderEnumMap, json['title']),
-      content: $enumDecodeNullable(_$SortOrderEnumMap, json['content']),
+      description: $enumDecodeNullable(_$SortOrderEnumMap, json['description']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
       userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
       $count: json['_count'] == null
@@ -175,7 +175,7 @@ Map<String, dynamic> _$DeviceOrderByWithAggregationInputToJson(
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
   writeNotNull('title', _$SortOrderEnumMap[instance.title]);
-  writeNotNull('content', _$SortOrderEnumMap[instance.content]);
+  writeNotNull('description', _$SortOrderEnumMap[instance.description]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
   writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   writeNotNull('_count', instance.$count?.toJson());
@@ -206,10 +206,10 @@ DeviceScalarWhereWithAggregatesInput
               ? null
               : StringWithAggregatesFilter.fromJson(
                   json['title'] as Map<String, dynamic>),
-          content: json['content'] == null
+          description: json['description'] == null
               ? null
               : StringWithAggregatesFilter.fromJson(
-                  json['content'] as Map<String, dynamic>),
+                  json['description'] as Map<String, dynamic>),
           createdAt: json['createdAt'] == null
               ? null
               : DateTimeWithAggregatesFilter.fromJson(
@@ -235,7 +235,7 @@ Map<String, dynamic> _$DeviceScalarWhereWithAggregatesInputToJson(
   writeNotNull('NOT', instance.NOT?.map((e) => e.toJson()).toList());
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   return val;
@@ -252,6 +252,9 @@ UserWhereInput _$UserWhereInputFromJson(Map<String, dynamic> json) =>
       id: json['id'] == null
           ? null
           : IntFilter.fromJson(json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringFilter.fromJson(json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringFilter.fromJson(json['username'] as Map<String, dynamic>),
@@ -283,6 +286,7 @@ Map<String, dynamic> _$UserWhereInputToJson(UserWhereInput instance) {
   writeNotNull('OR', instance.OR?.map((e) => e.toJson()).toList());
   writeNotNull('NOT', instance.NOT?.map((e) => e.toJson()).toList());
   writeNotNull('id', instance.id?.toJson());
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -295,6 +299,7 @@ UserOrderByWithRelationInput _$UserOrderByWithRelationInputFromJson(
         Map<String, dynamic> json) =>
     UserOrderByWithRelationInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      name: $enumDecodeNullable(_$SortOrderEnumMap, json['name']),
       username: $enumDecodeNullable(_$SortOrderEnumMap, json['username']),
       password: $enumDecodeNullable(_$SortOrderEnumMap, json['password']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
@@ -316,6 +321,7 @@ Map<String, dynamic> _$UserOrderByWithRelationInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('name', _$SortOrderEnumMap[instance.name]);
   writeNotNull('username', _$SortOrderEnumMap[instance.username]);
   writeNotNull('password', _$SortOrderEnumMap[instance.password]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
@@ -328,6 +334,7 @@ UserWhereUniqueInput _$UserWhereUniqueInputFromJson(
         Map<String, dynamic> json) =>
     UserWhereUniqueInput(
       id: json['id'] as int?,
+      name: json['name'] as String?,
       username: json['username'] as String?,
     );
 
@@ -342,6 +349,7 @@ Map<String, dynamic> _$UserWhereUniqueInputToJson(
   }
 
   writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
   writeNotNull('username', instance.username);
   return val;
 }
@@ -350,6 +358,7 @@ UserOrderByWithAggregationInput _$UserOrderByWithAggregationInputFromJson(
         Map<String, dynamic> json) =>
     UserOrderByWithAggregationInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      name: $enumDecodeNullable(_$SortOrderEnumMap, json['name']),
       username: $enumDecodeNullable(_$SortOrderEnumMap, json['username']),
       password: $enumDecodeNullable(_$SortOrderEnumMap, json['password']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
@@ -387,6 +396,7 @@ Map<String, dynamic> _$UserOrderByWithAggregationInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('name', _$SortOrderEnumMap[instance.name]);
   writeNotNull('username', _$SortOrderEnumMap[instance.username]);
   writeNotNull('password', _$SortOrderEnumMap[instance.password]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
@@ -415,6 +425,10 @@ UserScalarWhereWithAggregatesInput _$UserScalarWhereWithAggregatesInputFromJson(
           ? null
           : IntWithAggregatesFilter.fromJson(
               json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringWithAggregatesFilter.fromJson(
+              json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringWithAggregatesFilter.fromJson(
@@ -447,6 +461,7 @@ Map<String, dynamic> _$UserScalarWhereWithAggregatesInputToJson(
   writeNotNull('OR', instance.OR?.map((e) => e.toJson()).toList());
   writeNotNull('NOT', instance.NOT?.map((e) => e.toJson()).toList());
   writeNotNull('id', instance.id?.toJson());
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -1269,7 +1284,7 @@ Map<String, dynamic> _$DeviceFirmwareScalarWhereWithAggregatesInputToJson(
 DeviceCreateInput _$DeviceCreateInputFromJson(Map<String, dynamic> json) =>
     DeviceCreateInput(
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       firmwares: json['firmwares'] == null
@@ -1289,7 +1304,7 @@ DeviceCreateInput _$DeviceCreateInputFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$DeviceCreateInputToJson(DeviceCreateInput instance) {
   final val = <String, dynamic>{
     'title': instance.title,
-    'content': instance.content,
+    'description': instance.description,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -1325,7 +1340,7 @@ DeviceUncheckedCreateInput _$DeviceUncheckedCreateInputFromJson(
     DeviceUncheckedCreateInput(
       id: json['id'] as int?,
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       userId: json['userId'] as int?,
@@ -1351,7 +1366,7 @@ Map<String, dynamic> _$DeviceUncheckedCreateInputToJson(
 
   writeNotNull('id', instance.id);
   val['title'] = instance.title;
-  val['content'] = instance.content;
+  val['description'] = instance.description;
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -1368,10 +1383,10 @@ DeviceUpdateInput _$DeviceUpdateInputFromJson(Map<String, dynamic> json) =>
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -1400,7 +1415,7 @@ Map<String, dynamic> _$DeviceUpdateInputToJson(DeviceUpdateInput instance) {
   }
 
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
   writeNotNull('tags', instance.tags?.toJson());
@@ -1419,10 +1434,10 @@ DeviceUncheckedUpdateInput _$DeviceUncheckedUpdateInputFromJson(
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -1453,7 +1468,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateInputToJson(
 
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
@@ -1466,7 +1481,7 @@ DeviceCreateManyInput _$DeviceCreateManyInputFromJson(
     DeviceCreateManyInput(
       id: json['id'] as int?,
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       userId: json['userId'] as int?,
@@ -1484,7 +1499,7 @@ Map<String, dynamic> _$DeviceCreateManyInputToJson(
 
   writeNotNull('id', instance.id);
   val['title'] = instance.title;
-  val['content'] = instance.content;
+  val['description'] = instance.description;
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -1500,10 +1515,10 @@ DeviceUpdateManyMutationInput _$DeviceUpdateManyMutationInputFromJson(
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -1521,7 +1536,7 @@ Map<String, dynamic> _$DeviceUpdateManyMutationInputToJson(
   }
 
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   return val;
 }
@@ -1537,10 +1552,10 @@ DeviceUncheckedUpdateManyInput _$DeviceUncheckedUpdateManyInputFromJson(
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -1563,7 +1578,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateManyInputToJson(
 
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   return val;
@@ -1571,6 +1586,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateManyInputToJson(
 
 UserCreateInput _$UserCreateInputFromJson(Map<String, dynamic> json) =>
     UserCreateInput(
+      name: json['name'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -1584,6 +1600,7 @@ UserCreateInput _$UserCreateInputFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$UserCreateInputToJson(UserCreateInput instance) {
   final val = <String, dynamic>{
+    'name': instance.name,
     'username': instance.username,
     'password': instance.password,
   };
@@ -1612,6 +1629,7 @@ UserUncheckedCreateInput _$UserUncheckedCreateInputFromJson(
         Map<String, dynamic> json) =>
     UserUncheckedCreateInput(
       id: json['id'] as int?,
+      name: json['name'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -1634,6 +1652,7 @@ Map<String, dynamic> _$UserUncheckedCreateInputToJson(
   }
 
   writeNotNull('id', instance.id);
+  val['name'] = instance.name;
   val['username'] = instance.username;
   val['password'] = instance.password;
   writeNotNull(
@@ -1647,6 +1666,10 @@ Map<String, dynamic> _$UserUncheckedCreateInputToJson(
 
 UserUpdateInput _$UserUpdateInputFromJson(Map<String, dynamic> json) =>
     UserUpdateInput(
+      name: json['name'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
@@ -1675,6 +1698,7 @@ Map<String, dynamic> _$UserUpdateInputToJson(UserUpdateInput instance) {
     }
   }
 
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -1690,6 +1714,10 @@ UserUncheckedUpdateInput _$UserUncheckedUpdateInputFromJson(
           ? null
           : IntFieldUpdateOperationsInput.fromJson(
               json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
@@ -1720,6 +1748,7 @@ Map<String, dynamic> _$UserUncheckedUpdateInputToJson(
   }
 
   writeNotNull('id', instance.id?.toJson());
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -1731,6 +1760,7 @@ Map<String, dynamic> _$UserUncheckedUpdateInputToJson(
 UserCreateManyInput _$UserCreateManyInputFromJson(Map<String, dynamic> json) =>
     UserCreateManyInput(
       id: json['id'] as int?,
+      name: json['name'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -1748,6 +1778,7 @@ Map<String, dynamic> _$UserCreateManyInputToJson(UserCreateManyInput instance) {
   }
 
   writeNotNull('id', instance.id);
+  val['name'] = instance.name;
   val['username'] = instance.username;
   val['password'] = instance.password;
   writeNotNull(
@@ -1761,6 +1792,10 @@ Map<String, dynamic> _$UserCreateManyInputToJson(UserCreateManyInput instance) {
 UserUpdateManyMutationInput _$UserUpdateManyMutationInputFromJson(
         Map<String, dynamic> json) =>
     UserUpdateManyMutationInput(
+      name: json['name'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
@@ -1786,6 +1821,7 @@ Map<String, dynamic> _$UserUpdateManyMutationInputToJson(
     }
   }
 
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -1800,6 +1836,10 @@ UserUncheckedUpdateManyInput _$UserUncheckedUpdateManyInputFromJson(
           ? null
           : IntFieldUpdateOperationsInput.fromJson(
               json['id'] as Map<String, dynamic>),
+      name: json['name'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
@@ -1826,6 +1866,7 @@ Map<String, dynamic> _$UserUncheckedUpdateManyInputToJson(
   }
 
   writeNotNull('id', instance.id?.toJson());
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -3005,7 +3046,7 @@ DeviceCountOrderByAggregateInput _$DeviceCountOrderByAggregateInputFromJson(
     DeviceCountOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
       title: $enumDecodeNullable(_$SortOrderEnumMap, json['title']),
-      content: $enumDecodeNullable(_$SortOrderEnumMap, json['content']),
+      description: $enumDecodeNullable(_$SortOrderEnumMap, json['description']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
       userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
@@ -3022,7 +3063,7 @@ Map<String, dynamic> _$DeviceCountOrderByAggregateInputToJson(
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
   writeNotNull('title', _$SortOrderEnumMap[instance.title]);
-  writeNotNull('content', _$SortOrderEnumMap[instance.content]);
+  writeNotNull('description', _$SortOrderEnumMap[instance.description]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
   writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
@@ -3055,7 +3096,7 @@ DeviceMaxOrderByAggregateInput _$DeviceMaxOrderByAggregateInputFromJson(
     DeviceMaxOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
       title: $enumDecodeNullable(_$SortOrderEnumMap, json['title']),
-      content: $enumDecodeNullable(_$SortOrderEnumMap, json['content']),
+      description: $enumDecodeNullable(_$SortOrderEnumMap, json['description']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
       userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
@@ -3072,7 +3113,7 @@ Map<String, dynamic> _$DeviceMaxOrderByAggregateInputToJson(
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
   writeNotNull('title', _$SortOrderEnumMap[instance.title]);
-  writeNotNull('content', _$SortOrderEnumMap[instance.content]);
+  writeNotNull('description', _$SortOrderEnumMap[instance.description]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
   writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
@@ -3083,7 +3124,7 @@ DeviceMinOrderByAggregateInput _$DeviceMinOrderByAggregateInputFromJson(
     DeviceMinOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
       title: $enumDecodeNullable(_$SortOrderEnumMap, json['title']),
-      content: $enumDecodeNullable(_$SortOrderEnumMap, json['content']),
+      description: $enumDecodeNullable(_$SortOrderEnumMap, json['description']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
       userId: $enumDecodeNullable(_$SortOrderEnumMap, json['userId']),
     );
@@ -3100,7 +3141,7 @@ Map<String, dynamic> _$DeviceMinOrderByAggregateInputToJson(
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
   writeNotNull('title', _$SortOrderEnumMap[instance.title]);
-  writeNotNull('content', _$SortOrderEnumMap[instance.content]);
+  writeNotNull('description', _$SortOrderEnumMap[instance.description]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
   writeNotNull('userId', _$SortOrderEnumMap[instance.userId]);
   return val;
@@ -3457,6 +3498,7 @@ UserCountOrderByAggregateInput _$UserCountOrderByAggregateInputFromJson(
         Map<String, dynamic> json) =>
     UserCountOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      name: $enumDecodeNullable(_$SortOrderEnumMap, json['name']),
       username: $enumDecodeNullable(_$SortOrderEnumMap, json['username']),
       password: $enumDecodeNullable(_$SortOrderEnumMap, json['password']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
@@ -3474,6 +3516,7 @@ Map<String, dynamic> _$UserCountOrderByAggregateInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('name', _$SortOrderEnumMap[instance.name]);
   writeNotNull('username', _$SortOrderEnumMap[instance.username]);
   writeNotNull('password', _$SortOrderEnumMap[instance.password]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
@@ -3505,6 +3548,7 @@ UserMaxOrderByAggregateInput _$UserMaxOrderByAggregateInputFromJson(
         Map<String, dynamic> json) =>
     UserMaxOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      name: $enumDecodeNullable(_$SortOrderEnumMap, json['name']),
       username: $enumDecodeNullable(_$SortOrderEnumMap, json['username']),
       password: $enumDecodeNullable(_$SortOrderEnumMap, json['password']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
@@ -3522,6 +3566,7 @@ Map<String, dynamic> _$UserMaxOrderByAggregateInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('name', _$SortOrderEnumMap[instance.name]);
   writeNotNull('username', _$SortOrderEnumMap[instance.username]);
   writeNotNull('password', _$SortOrderEnumMap[instance.password]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
@@ -3533,6 +3578,7 @@ UserMinOrderByAggregateInput _$UserMinOrderByAggregateInputFromJson(
         Map<String, dynamic> json) =>
     UserMinOrderByAggregateInput(
       id: $enumDecodeNullable(_$SortOrderEnumMap, json['id']),
+      name: $enumDecodeNullable(_$SortOrderEnumMap, json['name']),
       username: $enumDecodeNullable(_$SortOrderEnumMap, json['username']),
       password: $enumDecodeNullable(_$SortOrderEnumMap, json['password']),
       createdAt: $enumDecodeNullable(_$SortOrderEnumMap, json['createdAt']),
@@ -3550,6 +3596,7 @@ Map<String, dynamic> _$UserMinOrderByAggregateInputToJson(
   }
 
   writeNotNull('id', _$SortOrderEnumMap[instance.id]);
+  writeNotNull('name', _$SortOrderEnumMap[instance.name]);
   writeNotNull('username', _$SortOrderEnumMap[instance.username]);
   writeNotNull('password', _$SortOrderEnumMap[instance.password]);
   writeNotNull('createdAt', _$SortOrderEnumMap[instance.createdAt]);
@@ -6473,6 +6520,7 @@ Map<String, dynamic> _$DeviceTagCreateManyDeviceInputEnvelopeToJson(
 UserCreateWithoutDevicesInput _$UserCreateWithoutDevicesInputFromJson(
         Map<String, dynamic> json) =>
     UserCreateWithoutDevicesInput(
+      name: json['name'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -6483,6 +6531,7 @@ UserCreateWithoutDevicesInput _$UserCreateWithoutDevicesInputFromJson(
 Map<String, dynamic> _$UserCreateWithoutDevicesInputToJson(
     UserCreateWithoutDevicesInput instance) {
   final val = <String, dynamic>{
+    'name': instance.name,
     'username': instance.username,
     'password': instance.password,
   };
@@ -6506,6 +6555,7 @@ UserUncheckedCreateWithoutDevicesInput
             Map<String, dynamic> json) =>
         UserUncheckedCreateWithoutDevicesInput(
           id: json['id'] as int?,
+          name: json['name'] as String,
           username: json['username'] as String,
           password: json['password'] as String,
           createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -6524,6 +6574,7 @@ Map<String, dynamic> _$UserUncheckedCreateWithoutDevicesInputToJson(
   }
 
   writeNotNull('id', instance.id);
+  val['name'] = instance.name;
   val['username'] = instance.username;
   val['password'] = instance.password;
   writeNotNull(
@@ -6763,6 +6814,10 @@ Map<String, dynamic> _$UserUpsertWithoutDevicesInputToJson(
 UserUpdateWithoutDevicesInput _$UserUpdateWithoutDevicesInputFromJson(
         Map<String, dynamic> json) =>
     UserUpdateWithoutDevicesInput(
+      name: json['name'] == null
+          ? null
+          : StringFieldUpdateOperationsInput.fromJson(
+              json['name'] as Map<String, dynamic>),
       username: json['username'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
@@ -6788,6 +6843,7 @@ Map<String, dynamic> _$UserUpdateWithoutDevicesInputToJson(
     }
   }
 
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -6803,6 +6859,10 @@ UserUncheckedUpdateWithoutDevicesInput
               ? null
               : IntFieldUpdateOperationsInput.fromJson(
                   json['id'] as Map<String, dynamic>),
+          name: json['name'] == null
+              ? null
+              : StringFieldUpdateOperationsInput.fromJson(
+                  json['name'] as Map<String, dynamic>),
           username: json['username'] == null
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
@@ -6829,6 +6889,7 @@ Map<String, dynamic> _$UserUncheckedUpdateWithoutDevicesInputToJson(
   }
 
   writeNotNull('id', instance.id?.toJson());
+  writeNotNull('name', instance.name?.toJson());
   writeNotNull('username', instance.username?.toJson());
   writeNotNull('password', instance.password?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
@@ -6840,7 +6901,7 @@ DeviceCreateWithoutUserInput _$DeviceCreateWithoutUserInputFromJson(
         Map<String, dynamic> json) =>
     DeviceCreateWithoutUserInput(
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       firmwares: json['firmwares'] == null
@@ -6857,7 +6918,7 @@ Map<String, dynamic> _$DeviceCreateWithoutUserInputToJson(
     DeviceCreateWithoutUserInput instance) {
   final val = <String, dynamic>{
     'title': instance.title,
-    'content': instance.content,
+    'description': instance.description,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -6881,7 +6942,7 @@ DeviceUncheckedCreateWithoutUserInput
         DeviceUncheckedCreateWithoutUserInput(
           id: json['id'] as int?,
           title: json['title'] as String,
-          content: json['content'] as String,
+          description: json['description'] as String,
           createdAt: _$JsonConverterFromJson<String, DateTime>(
               json['createdAt'], const DateTimeJsonConverter().fromJson),
           firmwares: json['firmwares'] == null
@@ -6906,7 +6967,7 @@ Map<String, dynamic> _$DeviceUncheckedCreateWithoutUserInputToJson(
 
   writeNotNull('id', instance.id);
   val['title'] = instance.title;
-  val['content'] = instance.content;
+  val['description'] = instance.description;
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -7026,9 +7087,9 @@ DeviceScalarWhereInput _$DeviceScalarWhereInputFromJson(
       title: json['title'] == null
           ? null
           : StringFilter.fromJson(json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
-          : StringFilter.fromJson(json['content'] as Map<String, dynamic>),
+          : StringFilter.fromJson(json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFilter.fromJson(json['createdAt'] as Map<String, dynamic>),
@@ -7052,7 +7113,7 @@ Map<String, dynamic> _$DeviceScalarWhereInputToJson(
   writeNotNull('NOT', instance.NOT?.map((e) => e.toJson()).toList());
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   return val;
@@ -7404,7 +7465,7 @@ DeviceCreateWithoutTagsInput _$DeviceCreateWithoutTagsInputFromJson(
         Map<String, dynamic> json) =>
     DeviceCreateWithoutTagsInput(
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       firmwares: json['firmwares'] == null
@@ -7421,7 +7482,7 @@ Map<String, dynamic> _$DeviceCreateWithoutTagsInputToJson(
     DeviceCreateWithoutTagsInput instance) {
   final val = <String, dynamic>{
     'title': instance.title,
-    'content': instance.content,
+    'description': instance.description,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -7445,7 +7506,7 @@ DeviceUncheckedCreateWithoutTagsInput
         DeviceUncheckedCreateWithoutTagsInput(
           id: json['id'] as int?,
           title: json['title'] as String,
-          content: json['content'] as String,
+          description: json['description'] as String,
           createdAt: _$JsonConverterFromJson<String, DateTime>(
               json['createdAt'], const DateTimeJsonConverter().fromJson),
           userId: json['userId'] as int?,
@@ -7467,7 +7528,7 @@ Map<String, dynamic> _$DeviceUncheckedCreateWithoutTagsInputToJson(
 
   writeNotNull('id', instance.id);
   val['title'] = instance.title;
-  val['content'] = instance.content;
+  val['description'] = instance.description;
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -7585,10 +7646,10 @@ DeviceUpdateWithoutTagsInput _$DeviceUpdateWithoutTagsInputFromJson(
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -7614,7 +7675,7 @@ Map<String, dynamic> _$DeviceUpdateWithoutTagsInputToJson(
   }
 
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
   writeNotNull('User', instance.user?.toJson());
@@ -7633,10 +7694,10 @@ DeviceUncheckedUpdateWithoutTagsInput
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
                   json['title'] as Map<String, dynamic>),
-          content: json['content'] == null
+          description: json['description'] == null
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
-                  json['content'] as Map<String, dynamic>),
+                  json['description'] as Map<String, dynamic>),
           createdAt: json['createdAt'] == null
               ? null
               : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -7663,7 +7724,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateWithoutTagsInputToJson(
 
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
@@ -7674,7 +7735,7 @@ DeviceCreateWithoutFirmwaresInput _$DeviceCreateWithoutFirmwaresInputFromJson(
         Map<String, dynamic> json) =>
     DeviceCreateWithoutFirmwaresInput(
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       tags: json['tags'] == null
@@ -7691,7 +7752,7 @@ Map<String, dynamic> _$DeviceCreateWithoutFirmwaresInputToJson(
     DeviceCreateWithoutFirmwaresInput instance) {
   final val = <String, dynamic>{
     'title': instance.title,
-    'content': instance.content,
+    'description': instance.description,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -7715,7 +7776,7 @@ DeviceUncheckedCreateWithoutFirmwaresInput
         DeviceUncheckedCreateWithoutFirmwaresInput(
           id: json['id'] as int?,
           title: json['title'] as String,
-          content: json['content'] as String,
+          description: json['description'] as String,
           createdAt: _$JsonConverterFromJson<String, DateTime>(
               json['createdAt'], const DateTimeJsonConverter().fromJson),
           userId: json['userId'] as int?,
@@ -7737,7 +7798,7 @@ Map<String, dynamic> _$DeviceUncheckedCreateWithoutFirmwaresInputToJson(
 
   writeNotNull('id', instance.id);
   val['title'] = instance.title;
-  val['content'] = instance.content;
+  val['description'] = instance.description;
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -7872,10 +7933,10 @@ DeviceUpdateWithoutFirmwaresInput _$DeviceUpdateWithoutFirmwaresInputFromJson(
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -7901,7 +7962,7 @@ Map<String, dynamic> _$DeviceUpdateWithoutFirmwaresInputToJson(
   }
 
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('tags', instance.tags?.toJson());
   writeNotNull('User', instance.user?.toJson());
@@ -7920,10 +7981,10 @@ DeviceUncheckedUpdateWithoutFirmwaresInput
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
                   json['title'] as Map<String, dynamic>),
-          content: json['content'] == null
+          description: json['description'] == null
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
-                  json['content'] as Map<String, dynamic>),
+                  json['description'] as Map<String, dynamic>),
           createdAt: json['createdAt'] == null
               ? null
               : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -7950,7 +8011,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateWithoutFirmwaresInputToJson(
 
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('userId', instance.userId?.toJson());
   writeNotNull('tags', instance.tags?.toJson());
@@ -8278,7 +8339,7 @@ DeviceCreateManyUserInput _$DeviceCreateManyUserInputFromJson(
     DeviceCreateManyUserInput(
       id: json['id'] as int?,
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
     );
@@ -8295,7 +8356,7 @@ Map<String, dynamic> _$DeviceCreateManyUserInputToJson(
 
   writeNotNull('id', instance.id);
   val['title'] = instance.title;
-  val['content'] = instance.content;
+  val['description'] = instance.description;
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -8310,10 +8371,10 @@ DeviceUpdateWithoutUserInput _$DeviceUpdateWithoutUserInputFromJson(
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
               json['title'] as Map<String, dynamic>),
-      content: json['content'] == null
+      description: json['description'] == null
           ? null
           : StringFieldUpdateOperationsInput.fromJson(
-              json['content'] as Map<String, dynamic>),
+              json['description'] as Map<String, dynamic>),
       createdAt: json['createdAt'] == null
           ? null
           : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -8339,7 +8400,7 @@ Map<String, dynamic> _$DeviceUpdateWithoutUserInputToJson(
   }
 
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
   writeNotNull('tags', instance.tags?.toJson());
@@ -8358,10 +8419,10 @@ DeviceUncheckedUpdateWithoutUserInput
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
                   json['title'] as Map<String, dynamic>),
-          content: json['content'] == null
+          description: json['description'] == null
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
-                  json['content'] as Map<String, dynamic>),
+                  json['description'] as Map<String, dynamic>),
           createdAt: json['createdAt'] == null
               ? null
               : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -8388,7 +8449,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateWithoutUserInputToJson(
 
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   writeNotNull('firmwares', instance.firmwares?.toJson());
   writeNotNull('tags', instance.tags?.toJson());
@@ -8407,10 +8468,10 @@ DeviceUncheckedUpdateManyWithoutDevicesInput
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
                   json['title'] as Map<String, dynamic>),
-          content: json['content'] == null
+          description: json['description'] == null
               ? null
               : StringFieldUpdateOperationsInput.fromJson(
-                  json['content'] as Map<String, dynamic>),
+                  json['description'] as Map<String, dynamic>),
           createdAt: json['createdAt'] == null
               ? null
               : DateTimeFieldUpdateOperationsInput.fromJson(
@@ -8429,7 +8490,7 @@ Map<String, dynamic> _$DeviceUncheckedUpdateManyWithoutDevicesInputToJson(
 
   writeNotNull('id', instance.id?.toJson());
   writeNotNull('title', instance.title?.toJson());
-  writeNotNull('content', instance.content?.toJson());
+  writeNotNull('description', instance.description?.toJson());
   writeNotNull('createdAt', instance.createdAt?.toJson());
   return val;
 }
@@ -8646,7 +8707,7 @@ Map<String, dynamic>
 Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
       id: json['id'] as int,
       title: json['title'] as String,
-      content: json['content'] as String,
+      description: json['description'] as String,
       createdAt:
           const DateTimeJsonConverter().fromJson(json['createdAt'] as String),
       userId: json['userId'] as int?,
@@ -8656,7 +8717,7 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
   final val = <String, dynamic>{
     'id': instance.id,
     'title': instance.title,
-    'content': instance.content,
+    'description': instance.description,
     'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
   };
 
@@ -8672,6 +8733,7 @@ Map<String, dynamic> _$DeviceToJson(Device instance) {
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
       id: json['id'] as int,
+      name: json['name'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
       createdAt:
@@ -8681,6 +8743,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'username': instance.username,
       'password': instance.password,
       'createdAt': const DateTimeJsonConverter().toJson(instance.createdAt),
@@ -8766,7 +8829,7 @@ DeviceGroupByOutputType _$DeviceGroupByOutputTypeFromJson(
     DeviceGroupByOutputType(
       id: json['id'] as int?,
       title: json['title'] as String?,
-      content: json['content'] as String?,
+      description: json['description'] as String?,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
           json['createdAt'], const DateTimeJsonConverter().fromJson),
       userId: json['userId'] as int?,
@@ -8784,7 +8847,7 @@ Map<String, dynamic> _$DeviceGroupByOutputTypeToJson(
 
   writeNotNull('id', instance.id);
   writeNotNull('title', instance.title);
-  writeNotNull('content', instance.content);
+  writeNotNull('description', instance.description);
   writeNotNull(
       'createdAt',
       _$JsonConverterToJson<String, DateTime>(
@@ -8797,6 +8860,7 @@ UserGroupByOutputType _$UserGroupByOutputTypeFromJson(
         Map<String, dynamic> json) =>
     UserGroupByOutputType(
       id: json['id'] as int?,
+      name: json['name'] as String?,
       username: json['username'] as String?,
       password: json['password'] as String?,
       createdAt: _$JsonConverterFromJson<String, DateTime>(
@@ -8815,6 +8879,7 @@ Map<String, dynamic> _$UserGroupByOutputTypeToJson(
   }
 
   writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
   writeNotNull('username', instance.username);
   writeNotNull('password', instance.password);
   writeNotNull(

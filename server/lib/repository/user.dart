@@ -9,12 +9,15 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 class UserRepository {
   /// signup
   Future<(String?, User?)> signUp(
-      {required String username, required String password}) async {
+      {required String name,
+      required String username,
+      required String password}) async {
     final hashPassword = textEncode(plain: password);
 
     // add to mack user list
     final user = await prisma.user.create(
       data: UserCreateInput(
+        name: name,
         username: username,
         password: hashPassword,
         createdAt: DateTime.now(),

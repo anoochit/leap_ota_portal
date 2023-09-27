@@ -8,7 +8,7 @@ POST http://localhost:8080/auth
 Content-Type: application/json
 
 {
-    "username":"bob",
+    "username":"bob@example.com",
     "password":"password"
 }
 
@@ -18,7 +18,8 @@ POST http://localhost:8080/signup
 Content-Type: application/json
 
 {
-    "username":"bob",
+    "name" : "bob",
+    "username":"bob@example.com",
     "password":"password" 
 }
 
@@ -26,3 +27,7 @@ Content-Type: application/json
 
 GET http://localhost:8080/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2IiLCJpYXQiOjE2OTIxNTE5NTUsImV4cCI6MTY5Mjc1Njc1NX0.dZqYiAf6W1qEq9Z6-5xG3qU-I6HE-Cg5Khg13mBofFw
+
+### get devices
+
+GET http://localhost:8080/devices
