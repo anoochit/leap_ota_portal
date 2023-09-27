@@ -29,7 +29,7 @@ class SignupView extends GetView<SignupController> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Sign in',
+                        'Sign Up',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
