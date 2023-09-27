@@ -1,0 +1,70 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table device {
+  id Int [pk, increment]
+  title String [not null]
+  content String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  firmwares device_firmware [not null]
+  tags device_tag [not null]
+  User user
+  userId Int
+}
+
+Table user {
+  id Int [pk, increment]
+  username String [unique, not null]
+  password String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  devices device [not null]
+  role Role [not null, default: 'USER']
+}
+
+Table taxonomy {
+  id Int [pk, increment]
+  title String [unique, not null]
+  devices device_tag [not null]
+}
+
+Table firmware {
+  id Int [pk, increment]
+  title String [unique, not null]
+  description String [unique, not null]
+  object String [unique, not null]
+  version String [unique, not null]
+  createdAt DateTime [default: `now()`, not null]
+  devices device_firmware [not null]
+}
+
+Table device_tag {
+  id Int [pk, increment]
+  Taxonomy taxonomy
+  taxonomyId Int
+  Device device
+  deviceId Int
+}
+
+Table device_firmware {
+  id Int [pk, increment]
+  Device device
+  deviceId Int
+  Firmware firmware
+  firmwareId Int
+}
+
+Enum Role {
+  ADMIN
+  USER
+}
+
+Ref: device.userId > user.id
+
+Ref: device_tag.taxonomyId > taxonomy.id
+
+Ref: device_tag.deviceId > device.id
+
+Ref: device_firmware.deviceId > device.id
+
+Ref: device_firmware.firmwareId > firmware.id
