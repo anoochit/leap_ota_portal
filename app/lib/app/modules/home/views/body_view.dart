@@ -2,7 +2,6 @@ import 'package:app/app/modules/device/views/device_view.dart';
 import 'package:app/app/modules/firmware/views/firmware_view.dart';
 import 'package:app/app/modules/home/controllers/home_controller.dart';
 import 'package:app/app/modules/profile/views/profile_view.dart';
-import 'package:app/app/modules/user/views/user_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -22,7 +21,7 @@ class BodyView extends GetView<HomeController> {
           FirmwareView(),
 
           // user
-          UserView(),
+          // UserView(),
 
           // profile
           ProfileView(),

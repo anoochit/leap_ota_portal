@@ -8,14 +8,12 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FilledButton(
-        onPressed: () {
-          final appController = Get.find<AppController>();
-          appController.signOut();
-        },
-        child: Text('Sign Out'),
-      ),
+    return FilledButton(
+      onPressed: () {
+        final appController = Get.find<AppController>();
+        appController.signOut();
+      },
+      child: Text('Sign Out'),
     );
   }
 }

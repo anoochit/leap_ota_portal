@@ -18,7 +18,9 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         leading: buildBrandIcon(deviceType),
-        title: const Text('Firmware Portal'),
+        title: Text('Firmware Portal'),
+        centerTitle: (deviceType == DeviceScreenType.mobile) ? true : false,
+        elevation: 5.0,
         actions: const [
           // profile button
           ProfileButtonView(),
@@ -50,6 +52,9 @@ class HomeView extends GetView<HomeController> {
             children: [
               // nav
               NavigationMenuView(deviceType: deviceType),
+              VerticalDivider(
+                width: 2,
+              ),
               // body
               const Expanded(child: BodyView()),
             ],

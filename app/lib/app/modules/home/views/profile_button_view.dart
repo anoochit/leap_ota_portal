@@ -10,7 +10,7 @@ class ProfileButtonView extends GetView<HomeController> {
     final appController = Get.find<AppController>();
 
     return IconButton(
-      onPressed: () => controller.navIndex.value = 3,
+      onPressed: () => controller.navIndex.value = 2,
       icon: CircleAvatar(
           child: FutureBuilder(
         future: appController.getUsername(),
