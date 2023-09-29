@@ -38,7 +38,7 @@ class HomeView extends GetView<HomeController> {
                 NavigationMenuView(deviceType: deviceType),
 
                 // body
-                const BodyView(),
+                Expanded(child: const BodyView()),
               ],
             ),
       drawer: (deviceType == DeviceScreenType.mobile)

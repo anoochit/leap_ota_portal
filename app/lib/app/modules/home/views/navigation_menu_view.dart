@@ -15,6 +15,9 @@ class NavigationMenuView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => NavigationRail(
+        labelType: (deviceType == DeviceScreenType.tablet)
+            ? NavigationRailLabelType.selected
+            : null,
         extended: (deviceType == DeviceScreenType.tablet) ? false : true,
         onDestinationSelected: (value) => controller.navIndex.value = value,
         destinations: menuItems

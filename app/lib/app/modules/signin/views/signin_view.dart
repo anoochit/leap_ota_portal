@@ -1,11 +1,10 @@
+import 'package:app/app/controllers/app_controller.dart';
 import 'package:app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/signin_controller.dart';
-
-class SigninView extends GetView<SigninController> {
+class SigninView extends GetView<AppController> {
   SigninView({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
@@ -14,6 +13,9 @@ class SigninView extends GetView<SigninController> {
 
   @override
   Widget build(BuildContext context) {
+    // mock
+    textUsernameController.text = "bob@example.com";
+    textPasswordController.text = "password";
     return Scaffold(
       body: Center(
         child: Form(
@@ -81,10 +83,10 @@ class SigninView extends GetView<SigninController> {
                       child: SizedBox(
                         width: double.infinity,
                         child: FilledButton(
-                          onPressed: () {
-                            // TODO : implement signin
-                            Get.offAllNamed(Routes.HOME);
-                          },
+                          onPressed: () async => await controller.signIn(
+                            username: textUsernameController.text,
+                            password: textPasswordController.text,
+                          ),
                           child: const Text('Sign In'),
                         ),
                       ),

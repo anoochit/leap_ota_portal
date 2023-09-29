@@ -1,3 +1,4 @@
+import 'package:app/app/middlewares/route_guard.dart';
 import 'package:get/get.dart';
 
 import '../modules/device/bindings/device_binding.dart';
@@ -22,6 +23,9 @@ class AppPages {
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),
+      middlewares: [
+        RouteGuard(),
+      ],
       bindings: [
         HomeBinding(),
         UserBinding(),
@@ -29,16 +33,19 @@ class AppPages {
         FirmwareBinding(),
         ProfileBinding(),
       ],
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: _Paths.SIGNIN,
       page: () => SigninView(),
       binding: SigninBinding(),
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: _Paths.SIGNUP,
       page: () => SignupView(),
       binding: SignupBinding(),
+      transition: Transition.noTransition,
     ),
   ];
 }
