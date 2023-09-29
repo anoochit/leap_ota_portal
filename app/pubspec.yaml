@@ -7,10 +7,11 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  data_table_2: ^2.5.8
   encrypt_shared_preferences: ^0.3.8
   flutter:
     sdk: flutter
-  get: 4.6.6 
+  get: 4.6.6
   responsive_builder: 0.7.0
 
 dev_dependencies:

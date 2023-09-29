@@ -1,4 +1,4 @@
-import 'package:app/app/data/models/menu_item.dart';
+import 'package:app/app/data/models/menu_item_model.dart';
 import 'package:app/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 

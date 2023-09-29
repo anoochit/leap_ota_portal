@@ -14,7 +14,7 @@ class ProfileView extends GetView<ProfileController> {
           final appController = Get.find<AppController>();
           appController.signOut();
         },
-        child: Text('SignOut'),
+        child: Text('Sign Out'),
       ),
     );
   }

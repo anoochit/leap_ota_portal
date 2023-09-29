@@ -15,35 +15,44 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final deviceType = getDeviceType(MediaQuery.of(context).size);
-
     return Scaffold(
       appBar: AppBar(
-        leading: ((deviceType == DeviceScreenType.desktop) ||
-                (deviceType == DeviceScreenType.tablet))
-            ? const BrandView()
-            : null,
+        leading: buildBrandIcon(deviceType),
         title: const Text('Firmware Portal'),
         actions: const [
           // profile button
           ProfileButtonView(),
         ],
       ),
-      // FIXME : make a view for each device type
-      body: (deviceType == DeviceScreenType.mobile)
-          ? const BodyView()
-          : Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // nav
-                NavigationMenuView(deviceType: deviceType),
-
-                // body
-                Expanded(child: const BodyView()),
-              ],
-            ),
-      drawer: (deviceType == DeviceScreenType.mobile)
-          ? NavigationMenuMobileView(deviceType: deviceType)
-          : null,
+      body: buildBody(deviceType),
+      drawer: buildDrawer(deviceType),
     );
+  }
+
+  BrandView? buildBrandIcon(DeviceScreenType deviceType) {
+    return ((deviceType == DeviceScreenType.desktop) ||
+            (deviceType == DeviceScreenType.tablet))
+        ? const BrandView()
+        : null;
+  }
+
+  NavigationMenuMobileView? buildDrawer(DeviceScreenType deviceType) {
+    return (deviceType == DeviceScreenType.mobile)
+        ? NavigationMenuMobileView(deviceType: deviceType)
+        : null;
+  }
+
+  Widget buildBody(DeviceScreenType deviceType) {
+    return (deviceType == DeviceScreenType.mobile)
+        ? const BodyView()
+        : Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // nav
+              NavigationMenuView(deviceType: deviceType),
+              // body
+              const Expanded(child: BodyView()),
+            ],
+          );
   }
 }
