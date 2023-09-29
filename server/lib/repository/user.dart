@@ -68,8 +68,6 @@ class UserRepository {
     required String password,
   }) async {
     try {
-      // TODO : implement signin
-
       final user = await prisma.user.findFirst(
         where: UserWhereInput(
           username: StringFilter(equals: username),
@@ -93,5 +91,13 @@ class UserRepository {
     final bytes = utf8.encode(plain);
     final result = sha256.convert(bytes);
     return result.toString();
+  }
+
+  // get user info by id
+  Future<User?> getUserById({required int id}) async {
+    final user =
+        await prisma.user.findUnique(where: UserWhereUniqueInput(id: id));
+
+    return user;
   }
 }

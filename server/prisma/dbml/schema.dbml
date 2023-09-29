@@ -4,13 +4,15 @@
 
 Table device {
   id Int [pk, increment]
-  title String [not null]
+  title String [unique, not null]
   description String [not null]
-  createdAt DateTime [default: `now()`, not null]
-  firmwares device_firmware [not null]
-  tags device_tag [not null]
+  sn String [unique, not null]
   User user
   userId Int
+  Firmware firmware
+  firmwareId Int
+  publish Publish [not null, default: 'ENABLE']
+  createdAt DateTime [default: `now()`, not null]
 }
 
 Table user {
@@ -18,44 +20,23 @@ Table user {
   name String [unique, not null]
   username String [unique, not null]
   password String [not null]
-  createdAt DateTime [default: `now()`, not null]
   devices device [not null]
   firmwares firmware [not null]
   role Role [not null, default: 'USER']
-}
-
-Table taxonomy {
-  id Int [pk, increment]
-  title String [unique, not null]
-  devices device_tag [not null]
+  createdAt DateTime [default: `now()`, not null]
 }
 
 Table firmware {
   id Int [pk, increment]
-  title String [unique, not null]
-  description String [unique, not null]
-  object String [unique, not null]
-  version String [unique, not null]
-  createdAt DateTime [default: `now()`, not null]
-  devices device_firmware [not null]
+  title String [not null]
+  description String [not null]
+  objectUrl String [not null]
+  version String [not null]
   User user
   userId Int
-}
-
-Table device_tag {
-  id Int [pk, increment]
-  Taxonomy taxonomy
-  taxonomyId Int
-  Device device
-  deviceId Int
-}
-
-Table device_firmware {
-  id Int [pk, increment]
-  Device device
-  deviceId Int
-  Firmware firmware
-  firmwareId Int
+  devices device [not null]
+  publish Publish [not null, default: 'ENABLE']
+  createdAt DateTime [default: `now()`, not null]
 }
 
 Enum Role {
@@ -63,14 +44,13 @@ Enum Role {
   USER
 }
 
+Enum Publish {
+  ENABLE
+  DISABLE
+}
+
 Ref: device.userId > user.id
 
+Ref: device.firmwareId > firmware.id
+
 Ref: firmware.userId > user.id
-
-Ref: device_tag.taxonomyId > taxonomy.id
-
-Ref: device_tag.deviceId > device.id
-
-Ref: device_firmware.deviceId > device.id
-
-Ref: device_firmware.firmwareId > firmware.id

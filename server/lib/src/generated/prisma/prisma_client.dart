@@ -13,8 +13,11 @@ enum DeviceScalarFieldEnum implements _i1.PrismaEnum {
   id,
   title,
   description,
-  createdAt,
-  userId;
+  sn,
+  userId,
+  firmwareId,
+  publish,
+  createdAt;
 
   @override
   String? get originalName => null;
@@ -25,16 +28,8 @@ enum UserScalarFieldEnum implements _i1.PrismaEnum {
   name,
   username,
   password,
-  createdAt,
-  role;
-
-  @override
-  String? get originalName => null;
-}
-
-enum TaxonomyScalarFieldEnum implements _i1.PrismaEnum {
-  id,
-  title;
+  role,
+  createdAt;
 
   @override
   String? get originalName => null;
@@ -44,28 +39,11 @@ enum FirmwareScalarFieldEnum implements _i1.PrismaEnum {
   id,
   title,
   description,
-  object,
+  objectUrl,
   version,
-  createdAt,
-  userId;
-
-  @override
-  String? get originalName => null;
-}
-
-enum DeviceTagScalarFieldEnum implements _i1.PrismaEnum {
-  id,
-  taxonomyId,
-  deviceId;
-
-  @override
-  String? get originalName => null;
-}
-
-enum DeviceFirmwareScalarFieldEnum implements _i1.PrismaEnum {
-  id,
-  deviceId,
-  firmwareId;
+  userId,
+  publish,
+  createdAt;
 
   @override
   String? get originalName => null;
@@ -98,6 +76,18 @@ enum NullsOrder implements _i1.PrismaEnum {
   String? get originalName => null;
 }
 
+enum Publish implements _i1.PrismaEnum {
+  @JsonValue('ENABLE')
+  enable(r'ENABLE'),
+  @JsonValue('DISABLE')
+  disable(r'DISABLE');
+
+  const Publish([this.originalName]);
+
+  @override
+  final String? originalName;
+}
+
 enum Role implements _i1.PrismaEnum {
   @JsonValue('ADMIN')
   admin(r'ADMIN'),
@@ -119,11 +109,13 @@ class DeviceWhereInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
-    this.firmwares,
-    this.tags,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
     this.user,
+    this.firmware,
   });
 
   factory DeviceWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -141,16 +133,21 @@ class DeviceWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? description;
 
-  final DateTimeFilter? createdAt;
+  final StringFilter? sn;
 
   final IntNullableFilter? userId;
 
-  final DeviceFirmwareListRelationFilter? firmwares;
+  final IntNullableFilter? firmwareId;
 
-  final DeviceTagListRelationFilter? tags;
+  final EnumPublishFilter? publish;
+
+  final DateTimeFilter? createdAt;
 
   @JsonKey(name: r'User')
   final UserRelationFilter? user;
+
+  @JsonKey(name: r'Firmware')
+  final FirmwareRelationFilter? firmware;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceWhereInputToJson(this);
@@ -162,11 +159,13 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
-    this.firmwares,
-    this.tags,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
     this.user,
+    this.firmware,
   });
 
   factory DeviceOrderByWithRelationInput.fromJson(Map<String, dynamic> json) =>
@@ -178,16 +177,21 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? createdAt;
+  final SortOrder? sn;
 
   final SortOrder? userId;
 
-  final DeviceFirmwareOrderByRelationAggregateInput? firmwares;
+  final SortOrder? firmwareId;
 
-  final DeviceTagOrderByRelationAggregateInput? tags;
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @JsonKey(name: r'User')
   final UserOrderByWithRelationInput? user;
+
+  @JsonKey(name: r'Firmware')
+  final FirmwareOrderByWithRelationInput? firmware;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceOrderByWithRelationInputToJson(this);
@@ -195,12 +199,20 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
 
 @_i1.jsonSerializable
 class DeviceWhereUniqueInput implements _i1.JsonSerializable {
-  const DeviceWhereUniqueInput({this.id});
+  const DeviceWhereUniqueInput({
+    this.id,
+    this.title,
+    this.sn,
+  });
 
   factory DeviceWhereUniqueInput.fromJson(Map<String, dynamic> json) =>
       _$DeviceWhereUniqueInputFromJson(json);
 
   final int? id;
+
+  final String? title;
+
+  final String? sn;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceWhereUniqueInputToJson(this);
@@ -212,8 +224,11 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
     this.$count,
     this.$avg,
     this.$max,
@@ -231,9 +246,15 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? createdAt;
+  final SortOrder? sn;
 
   final SortOrder? userId;
+
+  final SortOrder? firmwareId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @JsonKey(name: r'_count')
   final DeviceCountOrderByAggregateInput? $count;
@@ -264,8 +285,11 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceScalarWhereWithAggregatesInput.fromJson(
@@ -284,9 +308,15 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final StringWithAggregatesFilter? description;
 
-  final DateTimeWithAggregatesFilter? createdAt;
+  final StringWithAggregatesFilter? sn;
 
   final IntNullableWithAggregatesFilter? userId;
+
+  final IntNullableWithAggregatesFilter? firmwareId;
+
+  final EnumPublishWithAggregatesFilter? publish;
+
+  final DateTimeWithAggregatesFilter? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -303,8 +333,8 @@ class UserWhereInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
     this.firmwares,
   });
@@ -326,9 +356,9 @@ class UserWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? password;
 
-  final DateTimeFilter? createdAt;
-
   final EnumRoleFilter? role;
+
+  final DateTimeFilter? createdAt;
 
   final DeviceListRelationFilter? devices;
 
@@ -345,8 +375,8 @@ class UserOrderByWithRelationInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
     this.firmwares,
   });
@@ -362,9 +392,9 @@ class UserOrderByWithRelationInput implements _i1.JsonSerializable {
 
   final SortOrder? password;
 
-  final SortOrder? createdAt;
-
   final SortOrder? role;
+
+  final SortOrder? createdAt;
 
   final DeviceOrderByRelationAggregateInput? devices;
 
@@ -402,8 +432,8 @@ class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.$count,
     this.$avg,
     this.$max,
@@ -422,9 +452,9 @@ class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? password;
 
-  final SortOrder? createdAt;
-
   final SortOrder? role;
+
+  final SortOrder? createdAt;
 
   @JsonKey(name: r'_count')
   final UserCountOrderByAggregateInput? $count;
@@ -456,8 +486,8 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserScalarWhereWithAggregatesInput.fromJson(
@@ -478,153 +508,13 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final StringWithAggregatesFilter? password;
 
-  final DateTimeWithAggregatesFilter? createdAt;
-
   final EnumRoleWithAggregatesFilter? role;
+
+  final DateTimeWithAggregatesFilter? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
       _$UserScalarWhereWithAggregatesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyWhereInput implements _i1.JsonSerializable {
-  const TaxonomyWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.title,
-    this.devices,
-  });
-
-  factory TaxonomyWhereInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyWhereInputFromJson(json);
-
-  final Iterable<TaxonomyWhereInput>? AND;
-
-  final Iterable<TaxonomyWhereInput>? OR;
-
-  final Iterable<TaxonomyWhereInput>? NOT;
-
-  final IntFilter? id;
-
-  final StringFilter? title;
-
-  final DeviceTagListRelationFilter? devices;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyWhereInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyOrderByWithRelationInput implements _i1.JsonSerializable {
-  const TaxonomyOrderByWithRelationInput({
-    this.id,
-    this.title,
-    this.devices,
-  });
-
-  factory TaxonomyOrderByWithRelationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyOrderByWithRelationInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? title;
-
-  final DeviceTagOrderByRelationAggregateInput? devices;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyOrderByWithRelationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyWhereUniqueInput implements _i1.JsonSerializable {
-  const TaxonomyWhereUniqueInput({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyWhereUniqueInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyWhereUniqueInputFromJson(json);
-
-  final int? id;
-
-  final String? title;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyWhereUniqueInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyOrderByWithAggregationInput implements _i1.JsonSerializable {
-  const TaxonomyOrderByWithAggregationInput({
-    this.id,
-    this.title,
-    this.$count,
-    this.$avg,
-    this.$max,
-    this.$min,
-    this.$sum,
-  });
-
-  factory TaxonomyOrderByWithAggregationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyOrderByWithAggregationInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? title;
-
-  @JsonKey(name: r'_count')
-  final TaxonomyCountOrderByAggregateInput? $count;
-
-  @JsonKey(name: r'_avg')
-  final TaxonomyAvgOrderByAggregateInput? $avg;
-
-  @JsonKey(name: r'_max')
-  final TaxonomyMaxOrderByAggregateInput? $max;
-
-  @JsonKey(name: r'_min')
-  final TaxonomyMinOrderByAggregateInput? $min;
-
-  @JsonKey(name: r'_sum')
-  final TaxonomySumOrderByAggregateInput? $sum;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyOrderByWithAggregationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
-  const TaxonomyScalarWhereWithAggregatesInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyScalarWhereWithAggregatesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyScalarWhereWithAggregatesInputFromJson(json);
-
-  final Iterable<TaxonomyScalarWhereWithAggregatesInput>? AND;
-
-  final Iterable<TaxonomyScalarWhereWithAggregatesInput>? OR;
-
-  final Iterable<TaxonomyScalarWhereWithAggregatesInput>? NOT;
-
-  final IntWithAggregatesFilter? id;
-
-  final StringWithAggregatesFilter? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyScalarWhereWithAggregatesInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -636,12 +526,13 @@ class FirmwareWhereInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
-    this.devices,
+    this.publish,
+    this.createdAt,
     this.user,
+    this.devices,
   });
 
   factory FirmwareWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -659,18 +550,20 @@ class FirmwareWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? description;
 
-  final StringFilter? object;
+  final StringFilter? objectUrl;
 
   final StringFilter? version;
 
-  final DateTimeFilter? createdAt;
-
   final IntNullableFilter? userId;
 
-  final DeviceFirmwareListRelationFilter? devices;
+  final EnumPublishFilter? publish;
+
+  final DateTimeFilter? createdAt;
 
   @JsonKey(name: r'User')
   final UserRelationFilter? user;
+
+  final DeviceListRelationFilter? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareWhereInputToJson(this);
@@ -682,12 +575,13 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
-    this.devices,
+    this.publish,
+    this.createdAt,
     this.user,
+    this.devices,
   });
 
   factory FirmwareOrderByWithRelationInput.fromJson(
@@ -700,18 +594,20 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? object;
+  final SortOrder? objectUrl;
 
   final SortOrder? version;
 
-  final SortOrder? createdAt;
-
   final SortOrder? userId;
 
-  final DeviceFirmwareOrderByRelationAggregateInput? devices;
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @JsonKey(name: r'User')
   final UserOrderByWithRelationInput? user;
+
+  final DeviceOrderByRelationAggregateInput? devices;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -720,26 +616,12 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
 
 @_i1.jsonSerializable
 class FirmwareWhereUniqueInput implements _i1.JsonSerializable {
-  const FirmwareWhereUniqueInput({
-    this.id,
-    this.title,
-    this.description,
-    this.object,
-    this.version,
-  });
+  const FirmwareWhereUniqueInput({this.id});
 
   factory FirmwareWhereUniqueInput.fromJson(Map<String, dynamic> json) =>
       _$FirmwareWhereUniqueInputFromJson(json);
 
   final int? id;
-
-  final String? title;
-
-  final String? description;
-
-  final String? object;
-
-  final String? version;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareWhereUniqueInputToJson(this);
@@ -751,10 +633,11 @@ class FirmwareOrderByWithAggregationInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
     this.$count,
     this.$avg,
     this.$max,
@@ -772,13 +655,15 @@ class FirmwareOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? object;
+  final SortOrder? objectUrl;
 
   final SortOrder? version;
 
-  final SortOrder? createdAt;
-
   final SortOrder? userId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @JsonKey(name: r'_count')
   final FirmwareCountOrderByAggregateInput? $count;
@@ -809,10 +694,11 @@ class FirmwareScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareScalarWhereWithAggregatesInput.fromJson(
@@ -831,13 +717,15 @@ class FirmwareScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final StringWithAggregatesFilter? description;
 
-  final StringWithAggregatesFilter? object;
+  final StringWithAggregatesFilter? objectUrl;
 
   final StringWithAggregatesFilter? version;
 
-  final DateTimeWithAggregatesFilter? createdAt;
-
   final IntNullableWithAggregatesFilter? userId;
+
+  final EnumPublishWithAggregatesFilter? publish;
+
+  final DateTimeWithAggregatesFilter? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -845,330 +733,15 @@ class FirmwareScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceTagWhereInput implements _i1.JsonSerializable {
-  const DeviceTagWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-    this.taxonomy,
-    this.device,
-  });
-
-  factory DeviceTagWhereInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagWhereInputFromJson(json);
-
-  final Iterable<DeviceTagWhereInput>? AND;
-
-  final Iterable<DeviceTagWhereInput>? OR;
-
-  final Iterable<DeviceTagWhereInput>? NOT;
-
-  final IntFilter? id;
-
-  final IntNullableFilter? taxonomyId;
-
-  final IntNullableFilter? deviceId;
-
-  @JsonKey(name: r'Taxonomy')
-  final TaxonomyRelationFilter? taxonomy;
-
-  @JsonKey(name: r'Device')
-  final DeviceRelationFilter? device;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagWhereInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagOrderByWithRelationInput implements _i1.JsonSerializable {
-  const DeviceTagOrderByWithRelationInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-    this.taxonomy,
-    this.device,
-  });
-
-  factory DeviceTagOrderByWithRelationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagOrderByWithRelationInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @JsonKey(name: r'Taxonomy')
-  final TaxonomyOrderByWithRelationInput? taxonomy;
-
-  @JsonKey(name: r'Device')
-  final DeviceOrderByWithRelationInput? device;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagOrderByWithRelationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagWhereUniqueInput implements _i1.JsonSerializable {
-  const DeviceTagWhereUniqueInput({this.id});
-
-  factory DeviceTagWhereUniqueInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagWhereUniqueInputFromJson(json);
-
-  final int? id;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagWhereUniqueInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagOrderByWithAggregationInput implements _i1.JsonSerializable {
-  const DeviceTagOrderByWithAggregationInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-    this.$count,
-    this.$avg,
-    this.$max,
-    this.$min,
-    this.$sum,
-  });
-
-  factory DeviceTagOrderByWithAggregationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagOrderByWithAggregationInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @JsonKey(name: r'_count')
-  final DeviceTagCountOrderByAggregateInput? $count;
-
-  @JsonKey(name: r'_avg')
-  final DeviceTagAvgOrderByAggregateInput? $avg;
-
-  @JsonKey(name: r'_max')
-  final DeviceTagMaxOrderByAggregateInput? $max;
-
-  @JsonKey(name: r'_min')
-  final DeviceTagMinOrderByAggregateInput? $min;
-
-  @JsonKey(name: r'_sum')
-  final DeviceTagSumOrderByAggregateInput? $sum;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagOrderByWithAggregationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
-  const DeviceTagScalarWhereWithAggregatesInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagScalarWhereWithAggregatesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagScalarWhereWithAggregatesInputFromJson(json);
-
-  final Iterable<DeviceTagScalarWhereWithAggregatesInput>? AND;
-
-  final Iterable<DeviceTagScalarWhereWithAggregatesInput>? OR;
-
-  final Iterable<DeviceTagScalarWhereWithAggregatesInput>? NOT;
-
-  final IntWithAggregatesFilter? id;
-
-  final IntNullableWithAggregatesFilter? taxonomyId;
-
-  final IntNullableWithAggregatesFilter? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagScalarWhereWithAggregatesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareWhereInput implements _i1.JsonSerializable {
-  const DeviceFirmwareWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-    this.device,
-    this.firmware,
-  });
-
-  factory DeviceFirmwareWhereInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareWhereInputFromJson(json);
-
-  final Iterable<DeviceFirmwareWhereInput>? AND;
-
-  final Iterable<DeviceFirmwareWhereInput>? OR;
-
-  final Iterable<DeviceFirmwareWhereInput>? NOT;
-
-  final IntFilter? id;
-
-  final IntNullableFilter? deviceId;
-
-  final IntNullableFilter? firmwareId;
-
-  @JsonKey(name: r'Device')
-  final DeviceRelationFilter? device;
-
-  @JsonKey(name: r'Firmware')
-  final FirmwareRelationFilter? firmware;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareWhereInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
-  const DeviceFirmwareOrderByWithRelationInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-    this.device,
-    this.firmware,
-  });
-
-  factory DeviceFirmwareOrderByWithRelationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareOrderByWithRelationInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @JsonKey(name: r'Device')
-  final DeviceOrderByWithRelationInput? device;
-
-  @JsonKey(name: r'Firmware')
-  final FirmwareOrderByWithRelationInput? firmware;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareOrderByWithRelationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareWhereUniqueInput implements _i1.JsonSerializable {
-  const DeviceFirmwareWhereUniqueInput({this.id});
-
-  factory DeviceFirmwareWhereUniqueInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareWhereUniqueInputFromJson(json);
-
-  final int? id;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareWhereUniqueInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareOrderByWithAggregationInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareOrderByWithAggregationInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-    this.$count,
-    this.$avg,
-    this.$max,
-    this.$min,
-    this.$sum,
-  });
-
-  factory DeviceFirmwareOrderByWithAggregationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareOrderByWithAggregationInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @JsonKey(name: r'_count')
-  final DeviceFirmwareCountOrderByAggregateInput? $count;
-
-  @JsonKey(name: r'_avg')
-  final DeviceFirmwareAvgOrderByAggregateInput? $avg;
-
-  @JsonKey(name: r'_max')
-  final DeviceFirmwareMaxOrderByAggregateInput? $max;
-
-  @JsonKey(name: r'_min')
-  final DeviceFirmwareMinOrderByAggregateInput? $min;
-
-  @JsonKey(name: r'_sum')
-  final DeviceFirmwareSumOrderByAggregateInput? $sum;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareOrderByWithAggregationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareScalarWhereWithAggregatesInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareScalarWhereWithAggregatesInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareScalarWhereWithAggregatesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareScalarWhereWithAggregatesInputFromJson(json);
-
-  final Iterable<DeviceFirmwareScalarWhereWithAggregatesInput>? AND;
-
-  final Iterable<DeviceFirmwareScalarWhereWithAggregatesInput>? OR;
-
-  final Iterable<DeviceFirmwareScalarWhereWithAggregatesInput>? NOT;
-
-  final IntWithAggregatesFilter? id;
-
-  final IntNullableWithAggregatesFilter? deviceId;
-
-  final IntNullableWithAggregatesFilter? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareScalarWhereWithAggregatesInputToJson(this);
-}
-
-@_i1.jsonSerializable
 class DeviceCreateInput implements _i1.JsonSerializable {
   const DeviceCreateInput({
     required this.title,
     required this.description,
+    required this.sn,
+    this.publish,
     this.createdAt,
-    this.firmwares,
-    this.tags,
     this.user,
+    this.firmware,
   });
 
   factory DeviceCreateInput.fromJson(Map<String, dynamic> json) =>
@@ -1178,14 +751,17 @@ class DeviceCreateInput implements _i1.JsonSerializable {
 
   final String description;
 
+  final String sn;
+
+  final Publish? publish;
+
   final DateTime? createdAt;
-
-  final DeviceFirmwareCreateNestedManyWithoutDeviceInput? firmwares;
-
-  final DeviceTagCreateNestedManyWithoutDeviceInput? tags;
 
   @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutDevicesInput? user;
+
+  @JsonKey(name: r'Firmware')
+  final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceCreateInputToJson(this);
@@ -1197,10 +773,11 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
-    this.createdAt,
+    required this.sn,
     this.userId,
-    this.firmwares,
-    this.tags,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceUncheckedCreateInput.fromJson(Map<String, dynamic> json) =>
@@ -1212,13 +789,15 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final DateTime? createdAt;
+  final String sn;
 
   final int? userId;
 
-  final DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInput? firmwares;
+  final int? firmwareId;
 
-  final DeviceTagUncheckedCreateNestedManyWithoutDeviceInput? tags;
+  final Publish? publish;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceUncheckedCreateInputToJson(this);
@@ -1229,10 +808,11 @@ class DeviceUpdateInput implements _i1.JsonSerializable {
   const DeviceUpdateInput({
     this.title,
     this.description,
+    this.sn,
+    this.publish,
     this.createdAt,
-    this.firmwares,
-    this.tags,
     this.user,
+    this.firmware,
   });
 
   factory DeviceUpdateInput.fromJson(Map<String, dynamic> json) =>
@@ -1242,14 +822,17 @@ class DeviceUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
+  final StringFieldUpdateOperationsInput? sn;
+
+  final Publish? publish;
+
   final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final DeviceFirmwareUpdateManyWithoutDeviceNestedInput? firmwares;
-
-  final DeviceTagUpdateManyWithoutDeviceNestedInput? tags;
 
   @JsonKey(name: r'User')
   final UserUpdateOneWithoutDevicesNestedInput? user;
+
+  @JsonKey(name: r'Firmware')
+  final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceUpdateInputToJson(this);
@@ -1261,10 +844,11 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
-    this.firmwares,
-    this.tags,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceUncheckedUpdateInput.fromJson(Map<String, dynamic> json) =>
@@ -1276,13 +860,15 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
+  final StringFieldUpdateOperationsInput? sn;
 
   final NullableIntFieldUpdateOperationsInput? userId;
 
-  final DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInput? firmwares;
+  final NullableIntFieldUpdateOperationsInput? firmwareId;
 
-  final DeviceTagUncheckedUpdateManyWithoutDeviceNestedInput? tags;
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceUncheckedUpdateInputToJson(this);
@@ -1294,8 +880,11 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
-    this.createdAt,
+    required this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1307,9 +896,15 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final DateTime? createdAt;
+  final String sn;
 
   final int? userId;
+
+  final int? firmwareId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceCreateManyInputToJson(this);
@@ -1320,6 +915,8 @@ class DeviceUpdateManyMutationInput implements _i1.JsonSerializable {
   const DeviceUpdateManyMutationInput({
     this.title,
     this.description,
+    this.sn,
+    this.publish,
     this.createdAt,
   });
 
@@ -1329,6 +926,10 @@ class DeviceUpdateManyMutationInput implements _i1.JsonSerializable {
   final StringFieldUpdateOperationsInput? title;
 
   final StringFieldUpdateOperationsInput? description;
+
+  final StringFieldUpdateOperationsInput? sn;
+
+  final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -1342,8 +943,11 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceUncheckedUpdateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1355,9 +959,15 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
+  final StringFieldUpdateOperationsInput? sn;
 
   final NullableIntFieldUpdateOperationsInput? userId;
+
+  final NullableIntFieldUpdateOperationsInput? firmwareId;
+
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceUncheckedUpdateManyInputToJson(this);
@@ -1369,8 +979,8 @@ class UserCreateInput implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
     this.firmwares,
   });
@@ -1384,9 +994,9 @@ class UserCreateInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   final DeviceCreateNestedManyWithoutUserInput? devices;
 
@@ -1403,8 +1013,8 @@ class UserUncheckedCreateInput implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
     this.firmwares,
   });
@@ -1420,9 +1030,9 @@ class UserUncheckedCreateInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   final DeviceUncheckedCreateNestedManyWithoutUserInput? devices;
 
@@ -1438,8 +1048,8 @@ class UserUpdateInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
     this.firmwares,
   });
@@ -1453,9 +1063,9 @@ class UserUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   final DeviceUpdateManyWithoutUserNestedInput? devices;
 
@@ -1472,8 +1082,8 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
     this.firmwares,
   });
@@ -1489,9 +1099,9 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   final DeviceUncheckedUpdateManyWithoutUserNestedInput? devices;
 
@@ -1508,8 +1118,8 @@ class UserCreateManyInput implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1523,9 +1133,9 @@ class UserCreateManyInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserCreateManyInputToJson(this);
@@ -1537,8 +1147,8 @@ class UserUpdateManyMutationInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserUpdateManyMutationInput.fromJson(Map<String, dynamic> json) =>
@@ -1550,9 +1160,9 @@ class UserUpdateManyMutationInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserUpdateManyMutationInputToJson(this);
@@ -1565,8 +1175,8 @@ class UserUncheckedUpdateManyInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserUncheckedUpdateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1580,142 +1190,12 @@ class UserUncheckedUpdateManyInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserUncheckedUpdateManyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyCreateInput implements _i1.JsonSerializable {
-  const TaxonomyCreateInput({
-    required this.title,
-    this.devices,
-  });
-
-  factory TaxonomyCreateInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyCreateInputFromJson(json);
-
-  final String title;
-
-  final DeviceTagCreateNestedManyWithoutTaxonomyInput? devices;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyCreateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUncheckedCreateInput implements _i1.JsonSerializable {
-  const TaxonomyUncheckedCreateInput({
-    this.id,
-    required this.title,
-    this.devices,
-  });
-
-  factory TaxonomyUncheckedCreateInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyUncheckedCreateInputFromJson(json);
-
-  final int? id;
-
-  final String title;
-
-  final DeviceTagUncheckedCreateNestedManyWithoutTaxonomyInput? devices;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyUncheckedCreateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUpdateInput implements _i1.JsonSerializable {
-  const TaxonomyUpdateInput({
-    this.title,
-    this.devices,
-  });
-
-  factory TaxonomyUpdateInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyUpdateInputFromJson(json);
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final DeviceTagUpdateManyWithoutTaxonomyNestedInput? devices;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyUpdateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUncheckedUpdateInput implements _i1.JsonSerializable {
-  const TaxonomyUncheckedUpdateInput({
-    this.id,
-    this.title,
-    this.devices,
-  });
-
-  factory TaxonomyUncheckedUpdateInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyUncheckedUpdateInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final DeviceTagUncheckedUpdateManyWithoutTaxonomyNestedInput? devices;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyUncheckedUpdateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyCreateManyInput implements _i1.JsonSerializable {
-  const TaxonomyCreateManyInput({
-    this.id,
-    required this.title,
-  });
-
-  factory TaxonomyCreateManyInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyCreateManyInputFromJson(json);
-
-  final int? id;
-
-  final String title;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyCreateManyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUpdateManyMutationInput implements _i1.JsonSerializable {
-  const TaxonomyUpdateManyMutationInput({this.title});
-
-  factory TaxonomyUpdateManyMutationInput.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyUpdateManyMutationInputFromJson(json);
-
-  final StringFieldUpdateOperationsInput? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyUpdateManyMutationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUncheckedUpdateManyInput implements _i1.JsonSerializable {
-  const TaxonomyUncheckedUpdateManyInput({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyUncheckedUpdateManyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyUncheckedUpdateManyInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final StringFieldUpdateOperationsInput? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyUncheckedUpdateManyInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -1723,11 +1203,12 @@ class FirmwareCreateInput implements _i1.JsonSerializable {
   const FirmwareCreateInput({
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
+    this.publish,
     this.createdAt,
-    this.devices,
     this.user,
+    this.devices,
   });
 
   factory FirmwareCreateInput.fromJson(Map<String, dynamic> json) =>
@@ -1737,16 +1218,18 @@ class FirmwareCreateInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
 
-  final DateTime? createdAt;
+  final Publish? publish;
 
-  final DeviceFirmwareCreateNestedManyWithoutFirmwareInput? devices;
+  final DateTime? createdAt;
 
   @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutFirmwaresInput? user;
+
+  final DeviceCreateNestedManyWithoutFirmwareInput? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareCreateInputToJson(this);
@@ -1758,10 +1241,11 @@ class FirmwareUncheckedCreateInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
     this.devices,
   });
 
@@ -1774,15 +1258,17 @@ class FirmwareUncheckedCreateInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
 
-  final DateTime? createdAt;
-
   final int? userId;
 
-  final DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput? devices;
+  final Publish? publish;
+
+  final DateTime? createdAt;
+
+  final DeviceUncheckedCreateNestedManyWithoutFirmwareInput? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareUncheckedCreateInputToJson(this);
@@ -1793,11 +1279,12 @@ class FirmwareUpdateInput implements _i1.JsonSerializable {
   const FirmwareUpdateInput({
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
+    this.publish,
     this.createdAt,
-    this.devices,
     this.user,
+    this.devices,
   });
 
   factory FirmwareUpdateInput.fromJson(Map<String, dynamic> json) =>
@@ -1807,16 +1294,18 @@ class FirmwareUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
+  final Publish? publish;
 
-  final DeviceFirmwareUpdateManyWithoutFirmwareNestedInput? devices;
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @JsonKey(name: r'User')
   final UserUpdateOneWithoutFirmwaresNestedInput? user;
+
+  final DeviceUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareUpdateInputToJson(this);
@@ -1828,10 +1317,11 @@ class FirmwareUncheckedUpdateInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
     this.devices,
   });
 
@@ -1844,15 +1334,17 @@ class FirmwareUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final NullableIntFieldUpdateOperationsInput? userId;
 
-  final DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput? devices;
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DeviceUncheckedUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareUncheckedUpdateInputToJson(this);
@@ -1864,10 +1356,11 @@ class FirmwareCreateManyInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1879,13 +1372,15 @@ class FirmwareCreateManyInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
 
-  final DateTime? createdAt;
-
   final int? userId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareCreateManyInputToJson(this);
@@ -1896,8 +1391,9 @@ class FirmwareUpdateManyMutationInput implements _i1.JsonSerializable {
   const FirmwareUpdateManyMutationInput({
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
+    this.publish,
     this.createdAt,
   });
 
@@ -1908,9 +1404,11 @@ class FirmwareUpdateManyMutationInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
+
+  final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -1925,10 +1423,11 @@ class FirmwareUncheckedUpdateManyInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareUncheckedUpdateManyInput.fromJson(
@@ -1941,299 +1440,19 @@ class FirmwareUncheckedUpdateManyInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final NullableIntFieldUpdateOperationsInput? userId;
+
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
       _$FirmwareUncheckedUpdateManyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateInput implements _i1.JsonSerializable {
-  const DeviceTagCreateInput({
-    this.taxonomy,
-    this.device,
-  });
-
-  factory DeviceTagCreateInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagCreateInputFromJson(json);
-
-  @JsonKey(name: r'Taxonomy')
-  final TaxonomyCreateNestedOneWithoutDevicesInput? taxonomy;
-
-  @JsonKey(name: r'Device')
-  final DeviceCreateNestedOneWithoutTagsInput? device;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagCreateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedCreateInput implements _i1.JsonSerializable {
-  const DeviceTagUncheckedCreateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagUncheckedCreateInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedCreateInputFromJson(json);
-
-  final int? id;
-
-  final int? taxonomyId;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagUncheckedCreateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateInput implements _i1.JsonSerializable {
-  const DeviceTagUpdateInput({
-    this.taxonomy,
-    this.device,
-  });
-
-  factory DeviceTagUpdateInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagUpdateInputFromJson(json);
-
-  @JsonKey(name: r'Taxonomy')
-  final TaxonomyUpdateOneWithoutDevicesNestedInput? taxonomy;
-
-  @JsonKey(name: r'Device')
-  final DeviceUpdateOneWithoutTagsNestedInput? device;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagUpdateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateInput implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagUncheckedUpdateInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? taxonomyId;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagUncheckedUpdateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateManyInput implements _i1.JsonSerializable {
-  const DeviceTagCreateManyInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagCreateManyInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagCreateManyInputFromJson(json);
-
-  final int? id;
-
-  final int? taxonomyId;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagCreateManyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateManyMutationInput implements _i1.JsonSerializable {
-  const DeviceTagUpdateManyMutationInput();
-
-  factory DeviceTagUpdateManyMutationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateManyMutationInputFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateManyMutationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateManyInput implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateManyInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagUncheckedUpdateManyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateManyInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? taxonomyId;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateManyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateInput({
-    this.device,
-    this.firmware,
-  });
-
-  factory DeviceFirmwareCreateInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateInputFromJson(json);
-
-  @JsonKey(name: r'Device')
-  final DeviceCreateNestedOneWithoutFirmwaresInput? device;
-
-  @JsonKey(name: r'Firmware')
-  final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareCreateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedCreateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedCreateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareUncheckedCreateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedCreateInputFromJson(json);
-
-  final int? id;
-
-  final int? deviceId;
-
-  final int? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedCreateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateInput({
-    this.device,
-    this.firmware,
-  });
-
-  factory DeviceFirmwareUpdateInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateInputFromJson(json);
-
-  @JsonKey(name: r'Device')
-  final DeviceUpdateOneWithoutFirmwaresNestedInput? device;
-
-  @JsonKey(name: r'Firmware')
-  final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareUpdateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  final NullableIntFieldUpdateOperationsInput? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateManyInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateManyInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareCreateManyInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateManyInputFromJson(json);
-
-  final int? id;
-
-  final int? deviceId;
-
-  final int? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareCreateManyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateManyMutationInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateManyMutationInput();
-
-  factory DeviceFirmwareUpdateManyMutationInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateManyMutationInputFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateManyMutationInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateManyInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateManyInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateManyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateManyInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  final NullableIntFieldUpdateOperationsInput? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateManyInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -2323,43 +1542,6 @@ class StringFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DateTimeFilter implements _i1.JsonSerializable {
-  const DateTimeFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  factory DateTimeFilter.fromJson(Map<String, dynamic> json) =>
-      _$DateTimeFilterFromJson(json);
-
-  final DateTime? equals;
-
-  @JsonKey(name: r'in')
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final DateTime? lt;
-
-  final DateTime? lte;
-
-  final DateTime? gt;
-
-  final DateTime? gte;
-
-  final NestedDateTimeFilter? not;
-
-  @override
-  Map<String, dynamic> toJson() => _$DateTimeFilterToJson(this);
-}
-
-@_i1.jsonSerializable
 class IntNullableFilter implements _i1.JsonSerializable {
   const IntNullableFilter({
     this.equals,
@@ -2397,47 +1579,65 @@ class IntNullableFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareListRelationFilter implements _i1.JsonSerializable {
-  const DeviceFirmwareListRelationFilter({
-    this.every,
-    this.some,
-    this.none,
+class EnumPublishFilter implements _i1.JsonSerializable {
+  const EnumPublishFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.not,
   });
 
-  factory DeviceFirmwareListRelationFilter.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareListRelationFilterFromJson(json);
+  factory EnumPublishFilter.fromJson(Map<String, dynamic> json) =>
+      _$EnumPublishFilterFromJson(json);
 
-  final DeviceFirmwareWhereInput? every;
+  final Publish? equals;
 
-  final DeviceFirmwareWhereInput? some;
+  @JsonKey(name: r'in')
+  final Iterable<Publish>? $in;
 
-  final DeviceFirmwareWhereInput? none;
+  final Iterable<Publish>? notIn;
+
+  final Publish? not;
 
   @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareListRelationFilterToJson(this);
+  Map<String, dynamic> toJson() => _$EnumPublishFilterToJson(this);
 }
 
 @_i1.jsonSerializable
-class DeviceTagListRelationFilter implements _i1.JsonSerializable {
-  const DeviceTagListRelationFilter({
-    this.every,
-    this.some,
-    this.none,
+class DateTimeFilter implements _i1.JsonSerializable {
+  const DateTimeFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
   });
 
-  factory DeviceTagListRelationFilter.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagListRelationFilterFromJson(json);
+  factory DateTimeFilter.fromJson(Map<String, dynamic> json) =>
+      _$DateTimeFilterFromJson(json);
 
-  final DeviceTagWhereInput? every;
+  final DateTime? equals;
 
-  final DeviceTagWhereInput? some;
+  @JsonKey(name: r'in')
+  final Iterable<DateTime>? $in;
 
-  final DeviceTagWhereInput? none;
+  final Iterable<DateTime>? notIn;
+
+  final DateTime? lt;
+
+  final DateTime? lte;
+
+  final DateTime? gt;
+
+  final DateTime? gte;
+
+  final NestedDateTimeFilter? not;
 
   @override
-  Map<String, dynamic> toJson() => _$DeviceTagListRelationFilterToJson(this);
+  Map<String, dynamic> toJson() => _$DateTimeFilterToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -2460,6 +1660,25 @@ class UserRelationFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
+class FirmwareRelationFilter implements _i1.JsonSerializable {
+  const FirmwareRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  factory FirmwareRelationFilter.fromJson(Map<String, dynamic> json) =>
+      _$FirmwareRelationFilterFromJson(json);
+
+  @JsonKey(name: r'is')
+  final FirmwareWhereInput? $is;
+
+  final FirmwareWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => _$FirmwareRelationFilterToJson(this);
+}
+
+@_i1.jsonSerializable
 class SortOrderInput implements _i1.JsonSerializable {
   const SortOrderInput({
     required this.sort,
@@ -2478,46 +1697,16 @@ class SortOrderInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareOrderByRelationAggregateInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareOrderByRelationAggregateInput({this.$count});
-
-  factory DeviceFirmwareOrderByRelationAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareOrderByRelationAggregateInputFromJson(json);
-
-  @JsonKey(name: r'_count')
-  final SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareOrderByRelationAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagOrderByRelationAggregateInput implements _i1.JsonSerializable {
-  const DeviceTagOrderByRelationAggregateInput({this.$count});
-
-  factory DeviceTagOrderByRelationAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagOrderByRelationAggregateInputFromJson(json);
-
-  @JsonKey(name: r'_count')
-  final SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagOrderByRelationAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
 class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
   const DeviceCountOrderByAggregateInput({
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceCountOrderByAggregateInput.fromJson(
@@ -2530,9 +1719,15 @@ class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? createdAt;
+  final SortOrder? sn;
 
   final SortOrder? userId;
+
+  final SortOrder? firmwareId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -2544,6 +1739,7 @@ class DeviceAvgOrderByAggregateInput implements _i1.JsonSerializable {
   const DeviceAvgOrderByAggregateInput({
     this.id,
     this.userId,
+    this.firmwareId,
   });
 
   factory DeviceAvgOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2552,6 +1748,8 @@ class DeviceAvgOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? id;
 
   final SortOrder? userId;
+
+  final SortOrder? firmwareId;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceAvgOrderByAggregateInputToJson(this);
@@ -2563,8 +1761,11 @@ class DeviceMaxOrderByAggregateInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceMaxOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2576,9 +1777,15 @@ class DeviceMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? createdAt;
+  final SortOrder? sn;
 
   final SortOrder? userId;
+
+  final SortOrder? firmwareId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceMaxOrderByAggregateInputToJson(this);
@@ -2590,8 +1797,11 @@ class DeviceMinOrderByAggregateInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceMinOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2603,9 +1813,15 @@ class DeviceMinOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? createdAt;
+  final SortOrder? sn;
 
   final SortOrder? userId;
+
+  final SortOrder? firmwareId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceMinOrderByAggregateInputToJson(this);
@@ -2616,6 +1832,7 @@ class DeviceSumOrderByAggregateInput implements _i1.JsonSerializable {
   const DeviceSumOrderByAggregateInput({
     this.id,
     this.userId,
+    this.firmwareId,
   });
 
   factory DeviceSumOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2624,6 +1841,8 @@ class DeviceSumOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? id;
 
   final SortOrder? userId;
+
+  final SortOrder? firmwareId;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceSumOrderByAggregateInputToJson(this);
@@ -2748,55 +1967,6 @@ class StringWithAggregatesFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DateTimeWithAggregatesFilter implements _i1.JsonSerializable {
-  const DateTimeWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$min,
-    this.$max,
-  });
-
-  factory DateTimeWithAggregatesFilter.fromJson(Map<String, dynamic> json) =>
-      _$DateTimeWithAggregatesFilterFromJson(json);
-
-  final DateTime? equals;
-
-  @JsonKey(name: r'in')
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final DateTime? lt;
-
-  final DateTime? lte;
-
-  final DateTime? gt;
-
-  final DateTime? gte;
-
-  final NestedDateTimeWithAggregatesFilter? not;
-
-  @JsonKey(name: r'_count')
-  final NestedIntFilter? $count;
-
-  @JsonKey(name: r'_min')
-  final NestedDateTimeFilter? $min;
-
-  @JsonKey(name: r'_max')
-  final NestedDateTimeFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => _$DateTimeWithAggregatesFilterToJson(this);
-}
-
-@_i1.jsonSerializable
 class IntNullableWithAggregatesFilter implements _i1.JsonSerializable {
   const IntNullableWithAggregatesFilter({
     this.equals,
@@ -2852,6 +2022,93 @@ class IntNullableWithAggregatesFilter implements _i1.JsonSerializable {
   @override
   Map<String, dynamic> toJson() =>
       _$IntNullableWithAggregatesFilterToJson(this);
+}
+
+@_i1.jsonSerializable
+class EnumPublishWithAggregatesFilter implements _i1.JsonSerializable {
+  const EnumPublishWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.not,
+    this.$count,
+    this.$min,
+    this.$max,
+  });
+
+  factory EnumPublishWithAggregatesFilter.fromJson(Map<String, dynamic> json) =>
+      _$EnumPublishWithAggregatesFilterFromJson(json);
+
+  final Publish? equals;
+
+  @JsonKey(name: r'in')
+  final Iterable<Publish>? $in;
+
+  final Iterable<Publish>? notIn;
+
+  final Publish? not;
+
+  @JsonKey(name: r'_count')
+  final NestedIntFilter? $count;
+
+  @JsonKey(name: r'_min')
+  final NestedEnumPublishFilter? $min;
+
+  @JsonKey(name: r'_max')
+  final NestedEnumPublishFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EnumPublishWithAggregatesFilterToJson(this);
+}
+
+@_i1.jsonSerializable
+class DateTimeWithAggregatesFilter implements _i1.JsonSerializable {
+  const DateTimeWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$min,
+    this.$max,
+  });
+
+  factory DateTimeWithAggregatesFilter.fromJson(Map<String, dynamic> json) =>
+      _$DateTimeWithAggregatesFilterFromJson(json);
+
+  final DateTime? equals;
+
+  @JsonKey(name: r'in')
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final DateTime? lt;
+
+  final DateTime? lte;
+
+  final DateTime? gt;
+
+  final DateTime? gte;
+
+  final NestedDateTimeWithAggregatesFilter? not;
+
+  @JsonKey(name: r'_count')
+  final NestedIntFilter? $count;
+
+  @JsonKey(name: r'_min')
+  final NestedDateTimeFilter? $min;
+
+  @JsonKey(name: r'_max')
+  final NestedDateTimeFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => _$DateTimeWithAggregatesFilterToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -2960,8 +2217,8 @@ class UserCountOrderByAggregateInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserCountOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2975,9 +2232,9 @@ class UserCountOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? password;
 
-  final SortOrder? createdAt;
-
   final SortOrder? role;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserCountOrderByAggregateInputToJson(this);
@@ -3003,8 +2260,8 @@ class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserMaxOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -3018,9 +2275,9 @@ class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? password;
 
-  final SortOrder? createdAt;
-
   final SortOrder? role;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserMaxOrderByAggregateInputToJson(this);
@@ -3033,8 +2290,8 @@ class UserMinOrderByAggregateInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserMinOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -3048,9 +2305,9 @@ class UserMinOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? password;
 
-  final SortOrder? createdAt;
-
   final SortOrder? role;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserMinOrderByAggregateInputToJson(this);
@@ -3107,105 +2364,16 @@ class EnumRoleWithAggregatesFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class TaxonomyCountOrderByAggregateInput implements _i1.JsonSerializable {
-  const TaxonomyCountOrderByAggregateInput({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyCountOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyCountOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyCountOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyAvgOrderByAggregateInput implements _i1.JsonSerializable {
-  const TaxonomyAvgOrderByAggregateInput({this.id});
-
-  factory TaxonomyAvgOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyAvgOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyAvgOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyMaxOrderByAggregateInput implements _i1.JsonSerializable {
-  const TaxonomyMaxOrderByAggregateInput({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyMaxOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyMaxOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyMaxOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyMinOrderByAggregateInput implements _i1.JsonSerializable {
-  const TaxonomyMinOrderByAggregateInput({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyMinOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyMinOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyMinOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomySumOrderByAggregateInput implements _i1.JsonSerializable {
-  const TaxonomySumOrderByAggregateInput({this.id});
-
-  factory TaxonomySumOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomySumOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomySumOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
 class FirmwareCountOrderByAggregateInput implements _i1.JsonSerializable {
   const FirmwareCountOrderByAggregateInput({
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareCountOrderByAggregateInput.fromJson(
@@ -3218,13 +2386,15 @@ class FirmwareCountOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? object;
+  final SortOrder? objectUrl;
 
   final SortOrder? version;
 
-  final SortOrder? createdAt;
-
   final SortOrder? userId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -3257,10 +2427,11 @@ class FirmwareMaxOrderByAggregateInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareMaxOrderByAggregateInput.fromJson(
@@ -3273,13 +2444,15 @@ class FirmwareMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? object;
+  final SortOrder? objectUrl;
 
   final SortOrder? version;
 
-  final SortOrder? createdAt;
-
   final SortOrder? userId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -3292,10 +2465,11 @@ class FirmwareMinOrderByAggregateInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareMinOrderByAggregateInput.fromJson(
@@ -3308,13 +2482,15 @@ class FirmwareMinOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? description;
 
-  final SortOrder? object;
+  final SortOrder? objectUrl;
 
   final SortOrder? version;
 
-  final SortOrder? createdAt;
-
   final SortOrder? userId;
+
+  final SortOrder? publish;
+
+  final SortOrder? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -3342,348 +2518,6 @@ class FirmwareSumOrderByAggregateInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class TaxonomyRelationFilter implements _i1.JsonSerializable {
-  const TaxonomyRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  factory TaxonomyRelationFilter.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyRelationFilterFromJson(json);
-
-  @JsonKey(name: r'is')
-  final TaxonomyWhereInput? $is;
-
-  final TaxonomyWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyRelationFilterToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceRelationFilter implements _i1.JsonSerializable {
-  const DeviceRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  factory DeviceRelationFilter.fromJson(Map<String, dynamic> json) =>
-      _$DeviceRelationFilterFromJson(json);
-
-  @JsonKey(name: r'is')
-  final DeviceWhereInput? $is;
-
-  final DeviceWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceRelationFilterToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCountOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceTagCountOrderByAggregateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagCountOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCountOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCountOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagAvgOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceTagAvgOrderByAggregateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagAvgOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagAvgOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagAvgOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagMaxOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceTagMaxOrderByAggregateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagMaxOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagMaxOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagMaxOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagMinOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceTagMinOrderByAggregateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagMinOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagMinOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagMinOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagSumOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceTagSumOrderByAggregateInput({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagSumOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagSumOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? taxonomyId;
-
-  final SortOrder? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagSumOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareRelationFilter implements _i1.JsonSerializable {
-  const FirmwareRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  factory FirmwareRelationFilter.fromJson(Map<String, dynamic> json) =>
-      _$FirmwareRelationFilterFromJson(json);
-
-  @JsonKey(name: r'is')
-  final FirmwareWhereInput? $is;
-
-  final FirmwareWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => _$FirmwareRelationFilterToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCountOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCountOrderByAggregateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareCountOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCountOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCountOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareAvgOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareAvgOrderByAggregateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareAvgOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareAvgOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareAvgOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareMaxOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareMaxOrderByAggregateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareMaxOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareMaxOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareMaxOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareMinOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareMinOrderByAggregateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareMinOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareMinOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareMinOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareSumOrderByAggregateInput implements _i1.JsonSerializable {
-  const DeviceFirmwareSumOrderByAggregateInput({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareSumOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareSumOrderByAggregateInputFromJson(json);
-
-  final SortOrder? id;
-
-  final SortOrder? deviceId;
-
-  final SortOrder? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareSumOrderByAggregateInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateNestedManyWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateNestedManyWithoutDeviceInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  factory DeviceFirmwareCreateNestedManyWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateNestedManyWithoutDeviceInputFromJson(json);
-
-  final Iterable<DeviceFirmwareCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutDeviceInput>?
-      connectOrCreate;
-
-  final DeviceFirmwareCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateNestedManyWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateNestedManyWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagCreateNestedManyWithoutDeviceInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  factory DeviceTagCreateNestedManyWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateNestedManyWithoutDeviceInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutDeviceInput>? connectOrCreate;
-
-  final DeviceTagCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateNestedManyWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
 class UserCreateNestedOneWithoutDevicesInput implements _i1.JsonSerializable {
   const UserCreateNestedOneWithoutDevicesInput({
     this.create,
@@ -3707,58 +2541,27 @@ class UserCreateNestedOneWithoutDevicesInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInput
+class FirmwareCreateNestedOneWithoutDevicesInput
     implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInput({
+  const FirmwareCreateNestedOneWithoutDevicesInput({
     this.create,
     this.connectOrCreate,
-    this.createMany,
     this.connect,
   });
 
-  factory DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInput.fromJson(
+  factory FirmwareCreateNestedOneWithoutDevicesInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInputFromJson(json);
+      _$FirmwareCreateNestedOneWithoutDevicesInputFromJson(json);
 
-  final Iterable<DeviceFirmwareCreateWithoutDeviceInput>? create;
+  final FirmwareCreateWithoutDevicesInput? create;
 
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutDeviceInput>?
-      connectOrCreate;
+  final FirmwareCreateOrConnectWithoutDevicesInput? connectOrCreate;
 
-  final DeviceFirmwareCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
+  final FirmwareWhereUniqueInput? connect;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedCreateNestedManyWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedCreateNestedManyWithoutDeviceInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  factory DeviceTagUncheckedCreateNestedManyWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedCreateNestedManyWithoutDeviceInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutDeviceInput>? connectOrCreate;
-
-  final DeviceTagCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedCreateNestedManyWithoutDeviceInputToJson(this);
+      _$FirmwareCreateNestedOneWithoutDevicesInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -3777,6 +2580,21 @@ class StringFieldUpdateOperationsInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
+class EnumPublishFieldUpdateOperationsInput implements _i1.JsonSerializable {
+  const EnumPublishFieldUpdateOperationsInput({this.set});
+
+  factory EnumPublishFieldUpdateOperationsInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$EnumPublishFieldUpdateOperationsInputFromJson(json);
+
+  final Publish? set;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EnumPublishFieldUpdateOperationsInputToJson(this);
+}
+
+@_i1.jsonSerializable
 class DateTimeFieldUpdateOperationsInput implements _i1.JsonSerializable {
   const DateTimeFieldUpdateOperationsInput({this.set});
 
@@ -3789,104 +2607,6 @@ class DateTimeFieldUpdateOperationsInput implements _i1.JsonSerializable {
   @override
   Map<String, dynamic> toJson() =>
       _$DateTimeFieldUpdateOperationsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateManyWithoutDeviceNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateManyWithoutDeviceNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  factory DeviceFirmwareUpdateManyWithoutDeviceNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateManyWithoutDeviceNestedInputFromJson(json);
-
-  final Iterable<DeviceFirmwareCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutDeviceInput>?
-      connectOrCreate;
-
-  final Iterable<DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInput>? upsert;
-
-  final DeviceFirmwareCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? set;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? delete;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
-
-  final Iterable<DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInput>? update;
-
-  final Iterable<DeviceFirmwareUpdateManyWithWhereWithoutDeviceInput>?
-      updateMany;
-
-  final Iterable<DeviceFirmwareScalarWhereInput>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateManyWithoutDeviceNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateManyWithoutDeviceNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpdateManyWithoutDeviceNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  factory DeviceTagUpdateManyWithoutDeviceNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateManyWithoutDeviceNestedInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutDeviceInput>? connectOrCreate;
-
-  final Iterable<DeviceTagUpsertWithWhereUniqueWithoutDeviceInput>? upsert;
-
-  final DeviceTagCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? set;
-
-  final Iterable<DeviceTagWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceTagWhereUniqueInput>? delete;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  final Iterable<DeviceTagUpdateWithWhereUniqueWithoutDeviceInput>? update;
-
-  final Iterable<DeviceTagUpdateManyWithWhereWithoutDeviceInput>? updateMany;
-
-  final Iterable<DeviceTagScalarWhereInput>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateManyWithoutDeviceNestedInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -3922,6 +2642,42 @@ class UserUpdateOneWithoutDevicesNestedInput implements _i1.JsonSerializable {
   @override
   Map<String, dynamic> toJson() =>
       _$UserUpdateOneWithoutDevicesNestedInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class FirmwareUpdateOneWithoutDevicesNestedInput
+    implements _i1.JsonSerializable {
+  const FirmwareUpdateOneWithoutDevicesNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  factory FirmwareUpdateOneWithoutDevicesNestedInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$FirmwareUpdateOneWithoutDevicesNestedInputFromJson(json);
+
+  final FirmwareCreateWithoutDevicesInput? create;
+
+  final FirmwareCreateOrConnectWithoutDevicesInput? connectOrCreate;
+
+  final FirmwareUpsertWithoutDevicesInput? upsert;
+
+  final bool? disconnect;
+
+  final bool? delete;
+
+  final FirmwareWhereUniqueInput? connect;
+
+  final FirmwareUpdateWithoutDevicesInput? update;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$FirmwareUpdateOneWithoutDevicesNestedInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -3978,104 +2734,6 @@ class NullableIntFieldUpdateOperationsInput implements _i1.JsonSerializable {
   @override
   Map<String, dynamic> toJson() =>
       _$NullableIntFieldUpdateOperationsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInputFromJson(json);
-
-  final Iterable<DeviceFirmwareCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutDeviceInput>?
-      connectOrCreate;
-
-  final Iterable<DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInput>? upsert;
-
-  final DeviceFirmwareCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? set;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? delete;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
-
-  final Iterable<DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInput>? update;
-
-  final Iterable<DeviceFirmwareUpdateManyWithWhereWithoutDeviceInput>?
-      updateMany;
-
-  final Iterable<DeviceFirmwareScalarWhereInput>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateManyWithoutDeviceNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateManyWithoutDeviceNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  factory DeviceTagUncheckedUpdateManyWithoutDeviceNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateManyWithoutDeviceNestedInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutDeviceInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutDeviceInput>? connectOrCreate;
-
-  final Iterable<DeviceTagUpsertWithWhereUniqueWithoutDeviceInput>? upsert;
-
-  final DeviceTagCreateManyDeviceInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? set;
-
-  final Iterable<DeviceTagWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceTagWhereUniqueInput>? delete;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  final Iterable<DeviceTagUpdateWithWhereUniqueWithoutDeviceInput>? update;
-
-  final Iterable<DeviceTagUpdateManyWithWhereWithoutDeviceInput>? updateMany;
-
-  final Iterable<DeviceTagScalarWhereInput>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateManyWithoutDeviceNestedInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -4390,184 +3048,6 @@ class FirmwareUncheckedUpdateManyWithoutUserNestedInput
 }
 
 @_i1.jsonSerializable
-class DeviceTagCreateNestedManyWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagCreateNestedManyWithoutTaxonomyInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  factory DeviceTagCreateNestedManyWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateNestedManyWithoutTaxonomyInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutTaxonomyInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutTaxonomyInput>? connectOrCreate;
-
-  final DeviceTagCreateManyTaxonomyInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateNestedManyWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedCreateNestedManyWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedCreateNestedManyWithoutTaxonomyInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  factory DeviceTagUncheckedCreateNestedManyWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedCreateNestedManyWithoutTaxonomyInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutTaxonomyInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutTaxonomyInput>? connectOrCreate;
-
-  final DeviceTagCreateManyTaxonomyInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedCreateNestedManyWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateManyWithoutTaxonomyNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpdateManyWithoutTaxonomyNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  factory DeviceTagUpdateManyWithoutTaxonomyNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateManyWithoutTaxonomyNestedInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutTaxonomyInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutTaxonomyInput>? connectOrCreate;
-
-  final Iterable<DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInput>? upsert;
-
-  final DeviceTagCreateManyTaxonomyInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? set;
-
-  final Iterable<DeviceTagWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceTagWhereUniqueInput>? delete;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  final Iterable<DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInput>? update;
-
-  final Iterable<DeviceTagUpdateManyWithWhereWithoutTaxonomyInput>? updateMany;
-
-  final Iterable<DeviceTagScalarWhereInput>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateManyWithoutTaxonomyNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateManyWithoutTaxonomyNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateManyWithoutTaxonomyNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  factory DeviceTagUncheckedUpdateManyWithoutTaxonomyNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateManyWithoutTaxonomyNestedInputFromJson(json);
-
-  final Iterable<DeviceTagCreateWithoutTaxonomyInput>? create;
-
-  final Iterable<DeviceTagCreateOrConnectWithoutTaxonomyInput>? connectOrCreate;
-
-  final Iterable<DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInput>? upsert;
-
-  final DeviceTagCreateManyTaxonomyInputEnvelope? createMany;
-
-  final Iterable<DeviceTagWhereUniqueInput>? set;
-
-  final Iterable<DeviceTagWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceTagWhereUniqueInput>? delete;
-
-  final Iterable<DeviceTagWhereUniqueInput>? connect;
-
-  final Iterable<DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInput>? update;
-
-  final Iterable<DeviceTagUpdateManyWithWhereWithoutTaxonomyInput>? updateMany;
-
-  final Iterable<DeviceTagScalarWhereInput>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateManyWithoutTaxonomyNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateNestedManyWithoutFirmwareInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateNestedManyWithoutFirmwareInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  factory DeviceFirmwareCreateNestedManyWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateNestedManyWithoutFirmwareInputFromJson(json);
-
-  final Iterable<DeviceFirmwareCreateWithoutFirmwareInput>? create;
-
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutFirmwareInput>?
-      connectOrCreate;
-
-  final DeviceFirmwareCreateManyFirmwareInputEnvelope? createMany;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateNestedManyWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
 class UserCreateNestedOneWithoutFirmwaresInput implements _i1.JsonSerializable {
   const UserCreateNestedOneWithoutFirmwaresInput({
     this.create,
@@ -4591,84 +3071,57 @@ class UserCreateNestedOneWithoutFirmwaresInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput
+class DeviceCreateNestedManyWithoutFirmwareInput
     implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput({
+  const DeviceCreateNestedManyWithoutFirmwareInput({
     this.create,
     this.connectOrCreate,
     this.createMany,
     this.connect,
   });
 
-  factory DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput.fromJson(
+  factory DeviceCreateNestedManyWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInputFromJson(
-          json);
+      _$DeviceCreateNestedManyWithoutFirmwareInputFromJson(json);
 
-  final Iterable<DeviceFirmwareCreateWithoutFirmwareInput>? create;
+  final Iterable<DeviceCreateWithoutFirmwareInput>? create;
 
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutFirmwareInput>?
-      connectOrCreate;
+  final Iterable<DeviceCreateOrConnectWithoutFirmwareInput>? connectOrCreate;
 
-  final DeviceFirmwareCreateManyFirmwareInputEnvelope? createMany;
+  final DeviceCreateManyFirmwareInputEnvelope? createMany;
 
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
+  final Iterable<DeviceWhereUniqueInput>? connect;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInputToJson(this);
+      _$DeviceCreateNestedManyWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUpdateManyWithoutFirmwareNestedInput
+class DeviceUncheckedCreateNestedManyWithoutFirmwareInput
     implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateManyWithoutFirmwareNestedInput({
+  const DeviceUncheckedCreateNestedManyWithoutFirmwareInput({
     this.create,
     this.connectOrCreate,
-    this.upsert,
     this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
     this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
   });
 
-  factory DeviceFirmwareUpdateManyWithoutFirmwareNestedInput.fromJson(
+  factory DeviceUncheckedCreateNestedManyWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateManyWithoutFirmwareNestedInputFromJson(json);
+      _$DeviceUncheckedCreateNestedManyWithoutFirmwareInputFromJson(json);
 
-  final Iterable<DeviceFirmwareCreateWithoutFirmwareInput>? create;
+  final Iterable<DeviceCreateWithoutFirmwareInput>? create;
 
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutFirmwareInput>?
-      connectOrCreate;
+  final Iterable<DeviceCreateOrConnectWithoutFirmwareInput>? connectOrCreate;
 
-  final Iterable<DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInput>?
-      upsert;
+  final DeviceCreateManyFirmwareInputEnvelope? createMany;
 
-  final DeviceFirmwareCreateManyFirmwareInputEnvelope? createMany;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? set;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? disconnect;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? delete;
-
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
-
-  final Iterable<DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInput>?
-      update;
-
-  final Iterable<DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInput>?
-      updateMany;
-
-  final Iterable<DeviceFirmwareScalarWhereInput>? deleteMany;
+  final Iterable<DeviceWhereUniqueInput>? connect;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateManyWithoutFirmwareNestedInputToJson(this);
+      _$DeviceUncheckedCreateNestedManyWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -4707,9 +3160,9 @@ class UserUpdateOneWithoutFirmwaresNestedInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput
+class DeviceUpdateManyWithoutFirmwareNestedInput
     implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput({
+  const DeviceUpdateManyWithoutFirmwareNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
@@ -4723,278 +3176,83 @@ class DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput
     this.deleteMany,
   });
 
-  factory DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput.fromJson(
+  factory DeviceUpdateManyWithoutFirmwareNestedInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInputFromJson(
-          json);
+      _$DeviceUpdateManyWithoutFirmwareNestedInputFromJson(json);
 
-  final Iterable<DeviceFirmwareCreateWithoutFirmwareInput>? create;
+  final Iterable<DeviceCreateWithoutFirmwareInput>? create;
 
-  final Iterable<DeviceFirmwareCreateOrConnectWithoutFirmwareInput>?
-      connectOrCreate;
+  final Iterable<DeviceCreateOrConnectWithoutFirmwareInput>? connectOrCreate;
 
-  final Iterable<DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInput>?
-      upsert;
+  final Iterable<DeviceUpsertWithWhereUniqueWithoutFirmwareInput>? upsert;
 
-  final DeviceFirmwareCreateManyFirmwareInputEnvelope? createMany;
+  final DeviceCreateManyFirmwareInputEnvelope? createMany;
 
-  final Iterable<DeviceFirmwareWhereUniqueInput>? set;
+  final Iterable<DeviceWhereUniqueInput>? set;
 
-  final Iterable<DeviceFirmwareWhereUniqueInput>? disconnect;
+  final Iterable<DeviceWhereUniqueInput>? disconnect;
 
-  final Iterable<DeviceFirmwareWhereUniqueInput>? delete;
+  final Iterable<DeviceWhereUniqueInput>? delete;
 
-  final Iterable<DeviceFirmwareWhereUniqueInput>? connect;
+  final Iterable<DeviceWhereUniqueInput>? connect;
 
-  final Iterable<DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInput>?
-      update;
+  final Iterable<DeviceUpdateWithWhereUniqueWithoutFirmwareInput>? update;
 
-  final Iterable<DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInput>?
-      updateMany;
+  final Iterable<DeviceUpdateManyWithWhereWithoutFirmwareInput>? updateMany;
 
-  final Iterable<DeviceFirmwareScalarWhereInput>? deleteMany;
+  final Iterable<DeviceScalarWhereInput>? deleteMany;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInputToJson(this);
+      _$DeviceUpdateManyWithoutFirmwareNestedInputToJson(this);
 }
 
 @_i1.jsonSerializable
-class TaxonomyCreateNestedOneWithoutDevicesInput
+class DeviceUncheckedUpdateManyWithoutFirmwareNestedInput
     implements _i1.JsonSerializable {
-  const TaxonomyCreateNestedOneWithoutDevicesInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  factory TaxonomyCreateNestedOneWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyCreateNestedOneWithoutDevicesInputFromJson(json);
-
-  final TaxonomyCreateWithoutDevicesInput? create;
-
-  final TaxonomyCreateOrConnectWithoutDevicesInput? connectOrCreate;
-
-  final TaxonomyWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyCreateNestedOneWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceCreateNestedOneWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceCreateNestedOneWithoutTagsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  factory DeviceCreateNestedOneWithoutTagsInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceCreateNestedOneWithoutTagsInputFromJson(json);
-
-  final DeviceCreateWithoutTagsInput? create;
-
-  final DeviceCreateOrConnectWithoutTagsInput? connectOrCreate;
-
-  final DeviceWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceCreateNestedOneWithoutTagsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUpdateOneWithoutDevicesNestedInput
-    implements _i1.JsonSerializable {
-  const TaxonomyUpdateOneWithoutDevicesNestedInput({
+  const DeviceUncheckedUpdateManyWithoutFirmwareNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
+    this.createMany,
+    this.set,
     this.disconnect,
     this.delete,
     this.connect,
     this.update,
+    this.updateMany,
+    this.deleteMany,
   });
 
-  factory TaxonomyUpdateOneWithoutDevicesNestedInput.fromJson(
+  factory DeviceUncheckedUpdateManyWithoutFirmwareNestedInput.fromJson(
           Map<String, dynamic> json) =>
-      _$TaxonomyUpdateOneWithoutDevicesNestedInputFromJson(json);
+      _$DeviceUncheckedUpdateManyWithoutFirmwareNestedInputFromJson(json);
 
-  final TaxonomyCreateWithoutDevicesInput? create;
+  final Iterable<DeviceCreateWithoutFirmwareInput>? create;
 
-  final TaxonomyCreateOrConnectWithoutDevicesInput? connectOrCreate;
+  final Iterable<DeviceCreateOrConnectWithoutFirmwareInput>? connectOrCreate;
 
-  final TaxonomyUpsertWithoutDevicesInput? upsert;
+  final Iterable<DeviceUpsertWithWhereUniqueWithoutFirmwareInput>? upsert;
 
-  final bool? disconnect;
+  final DeviceCreateManyFirmwareInputEnvelope? createMany;
 
-  final bool? delete;
+  final Iterable<DeviceWhereUniqueInput>? set;
 
-  final TaxonomyWhereUniqueInput? connect;
+  final Iterable<DeviceWhereUniqueInput>? disconnect;
 
-  final TaxonomyUpdateWithoutDevicesInput? update;
+  final Iterable<DeviceWhereUniqueInput>? delete;
+
+  final Iterable<DeviceWhereUniqueInput>? connect;
+
+  final Iterable<DeviceUpdateWithWhereUniqueWithoutFirmwareInput>? update;
+
+  final Iterable<DeviceUpdateManyWithWhereWithoutFirmwareInput>? updateMany;
+
+  final Iterable<DeviceScalarWhereInput>? deleteMany;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$TaxonomyUpdateOneWithoutDevicesNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUpdateOneWithoutTagsNestedInput implements _i1.JsonSerializable {
-  const DeviceUpdateOneWithoutTagsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-  });
-
-  factory DeviceUpdateOneWithoutTagsNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUpdateOneWithoutTagsNestedInputFromJson(json);
-
-  final DeviceCreateWithoutTagsInput? create;
-
-  final DeviceCreateOrConnectWithoutTagsInput? connectOrCreate;
-
-  final DeviceUpsertWithoutTagsInput? upsert;
-
-  final bool? disconnect;
-
-  final bool? delete;
-
-  final DeviceWhereUniqueInput? connect;
-
-  final DeviceUpdateWithoutTagsInput? update;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUpdateOneWithoutTagsNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceCreateNestedOneWithoutFirmwaresInput
-    implements _i1.JsonSerializable {
-  const DeviceCreateNestedOneWithoutFirmwaresInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  factory DeviceCreateNestedOneWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceCreateNestedOneWithoutFirmwaresInputFromJson(json);
-
-  final DeviceCreateWithoutFirmwaresInput? create;
-
-  final DeviceCreateOrConnectWithoutFirmwaresInput? connectOrCreate;
-
-  final DeviceWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceCreateNestedOneWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareCreateNestedOneWithoutDevicesInput
-    implements _i1.JsonSerializable {
-  const FirmwareCreateNestedOneWithoutDevicesInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  factory FirmwareCreateNestedOneWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareCreateNestedOneWithoutDevicesInputFromJson(json);
-
-  final FirmwareCreateWithoutDevicesInput? create;
-
-  final FirmwareCreateOrConnectWithoutDevicesInput? connectOrCreate;
-
-  final FirmwareWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareCreateNestedOneWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUpdateOneWithoutFirmwaresNestedInput
-    implements _i1.JsonSerializable {
-  const DeviceUpdateOneWithoutFirmwaresNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-  });
-
-  factory DeviceUpdateOneWithoutFirmwaresNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUpdateOneWithoutFirmwaresNestedInputFromJson(json);
-
-  final DeviceCreateWithoutFirmwaresInput? create;
-
-  final DeviceCreateOrConnectWithoutFirmwaresInput? connectOrCreate;
-
-  final DeviceUpsertWithoutFirmwaresInput? upsert;
-
-  final bool? disconnect;
-
-  final bool? delete;
-
-  final DeviceWhereUniqueInput? connect;
-
-  final DeviceUpdateWithoutFirmwaresInput? update;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUpdateOneWithoutFirmwaresNestedInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareUpdateOneWithoutDevicesNestedInput
-    implements _i1.JsonSerializable {
-  const FirmwareUpdateOneWithoutDevicesNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-  });
-
-  factory FirmwareUpdateOneWithoutDevicesNestedInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareUpdateOneWithoutDevicesNestedInputFromJson(json);
-
-  final FirmwareCreateWithoutDevicesInput? create;
-
-  final FirmwareCreateOrConnectWithoutDevicesInput? connectOrCreate;
-
-  final FirmwareUpsertWithoutDevicesInput? upsert;
-
-  final bool? disconnect;
-
-  final bool? delete;
-
-  final FirmwareWhereUniqueInput? connect;
-
-  final FirmwareUpdateWithoutDevicesInput? update;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareUpdateOneWithoutDevicesNestedInputToJson(this);
+      _$DeviceUncheckedUpdateManyWithoutFirmwareNestedInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -5081,43 +3339,6 @@ class NestedStringFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class NestedDateTimeFilter implements _i1.JsonSerializable {
-  const NestedDateTimeFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  factory NestedDateTimeFilter.fromJson(Map<String, dynamic> json) =>
-      _$NestedDateTimeFilterFromJson(json);
-
-  final DateTime? equals;
-
-  @JsonKey(name: r'in')
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final DateTime? lt;
-
-  final DateTime? lte;
-
-  final DateTime? gt;
-
-  final DateTime? gte;
-
-  final NestedDateTimeFilter? not;
-
-  @override
-  Map<String, dynamic> toJson() => _$NestedDateTimeFilterToJson(this);
-}
-
-@_i1.jsonSerializable
 class NestedIntNullableFilter implements _i1.JsonSerializable {
   const NestedIntNullableFilter({
     this.equals,
@@ -5152,6 +3373,68 @@ class NestedIntNullableFilter implements _i1.JsonSerializable {
 
   @override
   Map<String, dynamic> toJson() => _$NestedIntNullableFilterToJson(this);
+}
+
+@_i1.jsonSerializable
+class NestedEnumPublishFilter implements _i1.JsonSerializable {
+  const NestedEnumPublishFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.not,
+  });
+
+  factory NestedEnumPublishFilter.fromJson(Map<String, dynamic> json) =>
+      _$NestedEnumPublishFilterFromJson(json);
+
+  final Publish? equals;
+
+  @JsonKey(name: r'in')
+  final Iterable<Publish>? $in;
+
+  final Iterable<Publish>? notIn;
+
+  final Publish? not;
+
+  @override
+  Map<String, dynamic> toJson() => _$NestedEnumPublishFilterToJson(this);
+}
+
+@_i1.jsonSerializable
+class NestedDateTimeFilter implements _i1.JsonSerializable {
+  const NestedDateTimeFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  factory NestedDateTimeFilter.fromJson(Map<String, dynamic> json) =>
+      _$NestedDateTimeFilterFromJson(json);
+
+  final DateTime? equals;
+
+  @JsonKey(name: r'in')
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final DateTime? lt;
+
+  final DateTime? lte;
+
+  final DateTime? gt;
+
+  final DateTime? gte;
+
+  final NestedDateTimeFilter? not;
+
+  @override
+  Map<String, dynamic> toJson() => _$NestedDateTimeFilterToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -5309,57 +3592,6 @@ class NestedStringWithAggregatesFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class NestedDateTimeWithAggregatesFilter implements _i1.JsonSerializable {
-  const NestedDateTimeWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$min,
-    this.$max,
-  });
-
-  factory NestedDateTimeWithAggregatesFilter.fromJson(
-          Map<String, dynamic> json) =>
-      _$NestedDateTimeWithAggregatesFilterFromJson(json);
-
-  final DateTime? equals;
-
-  @JsonKey(name: r'in')
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final DateTime? lt;
-
-  final DateTime? lte;
-
-  final DateTime? gt;
-
-  final DateTime? gte;
-
-  final NestedDateTimeWithAggregatesFilter? not;
-
-  @JsonKey(name: r'_count')
-  final NestedIntFilter? $count;
-
-  @JsonKey(name: r'_min')
-  final NestedDateTimeFilter? $min;
-
-  @JsonKey(name: r'_max')
-  final NestedDateTimeFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$NestedDateTimeWithAggregatesFilterToJson(this);
-}
-
-@_i1.jsonSerializable
 class NestedIntNullableWithAggregatesFilter implements _i1.JsonSerializable {
   const NestedIntNullableWithAggregatesFilter({
     this.equals,
@@ -5456,6 +3688,96 @@ class NestedFloatNullableFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
+class NestedEnumPublishWithAggregatesFilter implements _i1.JsonSerializable {
+  const NestedEnumPublishWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.not,
+    this.$count,
+    this.$min,
+    this.$max,
+  });
+
+  factory NestedEnumPublishWithAggregatesFilter.fromJson(
+          Map<String, dynamic> json) =>
+      _$NestedEnumPublishWithAggregatesFilterFromJson(json);
+
+  final Publish? equals;
+
+  @JsonKey(name: r'in')
+  final Iterable<Publish>? $in;
+
+  final Iterable<Publish>? notIn;
+
+  final Publish? not;
+
+  @JsonKey(name: r'_count')
+  final NestedIntFilter? $count;
+
+  @JsonKey(name: r'_min')
+  final NestedEnumPublishFilter? $min;
+
+  @JsonKey(name: r'_max')
+  final NestedEnumPublishFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$NestedEnumPublishWithAggregatesFilterToJson(this);
+}
+
+@_i1.jsonSerializable
+class NestedDateTimeWithAggregatesFilter implements _i1.JsonSerializable {
+  const NestedDateTimeWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$min,
+    this.$max,
+  });
+
+  factory NestedDateTimeWithAggregatesFilter.fromJson(
+          Map<String, dynamic> json) =>
+      _$NestedDateTimeWithAggregatesFilterFromJson(json);
+
+  final DateTime? equals;
+
+  @JsonKey(name: r'in')
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final DateTime? lt;
+
+  final DateTime? lte;
+
+  final DateTime? gt;
+
+  final DateTime? gte;
+
+  final NestedDateTimeWithAggregatesFilter? not;
+
+  @JsonKey(name: r'_count')
+  final NestedIntFilter? $count;
+
+  @JsonKey(name: r'_min')
+  final NestedDateTimeFilter? $min;
+
+  @JsonKey(name: r'_max')
+  final NestedDateTimeFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$NestedDateTimeWithAggregatesFilterToJson(this);
+}
+
+@_i1.jsonSerializable
 class NestedEnumRoleFilter implements _i1.JsonSerializable {
   const NestedEnumRoleFilter({
     this.equals,
@@ -5520,170 +3842,13 @@ class NestedEnumRoleWithAggregatesFilter implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareCreateWithoutDeviceInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateWithoutDeviceInput({this.firmware});
-
-  factory DeviceFirmwareCreateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateWithoutDeviceInputFromJson(json);
-
-  @JsonKey(name: r'Firmware')
-  final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedCreateWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedCreateWithoutDeviceInput({
-    this.id,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareUncheckedCreateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedCreateWithoutDeviceInputFromJson(json);
-
-  final int? id;
-
-  final int? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedCreateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateOrConnectWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateOrConnectWithoutDeviceInput({
-    required this.where,
-    required this.create,
-  });
-
-  factory DeviceFirmwareCreateOrConnectWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateOrConnectWithoutDeviceInputFromJson(json);
-
-  final DeviceFirmwareWhereUniqueInput where;
-
-  final DeviceFirmwareCreateWithoutDeviceInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateOrConnectWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateManyDeviceInputEnvelope
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateManyDeviceInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  factory DeviceFirmwareCreateManyDeviceInputEnvelope.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateManyDeviceInputEnvelopeFromJson(json);
-
-  final Iterable<DeviceFirmwareCreateManyDeviceInput> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateManyDeviceInputEnvelopeToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateWithoutDeviceInput implements _i1.JsonSerializable {
-  const DeviceTagCreateWithoutDeviceInput({this.taxonomy});
-
-  factory DeviceTagCreateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateWithoutDeviceInputFromJson(json);
-
-  @JsonKey(name: r'Taxonomy')
-  final TaxonomyCreateNestedOneWithoutDevicesInput? taxonomy;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedCreateWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedCreateWithoutDeviceInput({
-    this.id,
-    this.taxonomyId,
-  });
-
-  factory DeviceTagUncheckedCreateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedCreateWithoutDeviceInputFromJson(json);
-
-  final int? id;
-
-  final int? taxonomyId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedCreateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateOrConnectWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagCreateOrConnectWithoutDeviceInput({
-    required this.where,
-    required this.create,
-  });
-
-  factory DeviceTagCreateOrConnectWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateOrConnectWithoutDeviceInputFromJson(json);
-
-  final DeviceTagWhereUniqueInput where;
-
-  final DeviceTagCreateWithoutDeviceInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateOrConnectWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateManyDeviceInputEnvelope implements _i1.JsonSerializable {
-  const DeviceTagCreateManyDeviceInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  factory DeviceTagCreateManyDeviceInputEnvelope.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateManyDeviceInputEnvelopeFromJson(json);
-
-  final Iterable<DeviceTagCreateManyDeviceInput> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateManyDeviceInputEnvelopeToJson(this);
-}
-
-@_i1.jsonSerializable
 class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
   const UserCreateWithoutDevicesInput({
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.firmwares,
   });
 
@@ -5696,9 +3861,9 @@ class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   final FirmwareCreateNestedManyWithoutUserInput? firmwares;
 
@@ -5713,8 +3878,8 @@ class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.firmwares,
   });
 
@@ -5730,9 +3895,9 @@ class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   final FirmwareUncheckedCreateNestedManyWithoutUserInput? firmwares;
 
@@ -5762,195 +3927,99 @@ class UserCreateOrConnectWithoutDevicesInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInput
+class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
+  const FirmwareCreateWithoutDevicesInput({
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
+    this.publish,
+    this.createdAt,
+    this.user,
+  });
+
+  factory FirmwareCreateWithoutDevicesInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$FirmwareCreateWithoutDevicesInputFromJson(json);
+
+  final String title;
+
+  final String description;
+
+  final String objectUrl;
+
+  final String version;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
+
+  @JsonKey(name: r'User')
+  final UserCreateNestedOneWithoutFirmwaresInput? user;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$FirmwareCreateWithoutDevicesInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class FirmwareUncheckedCreateWithoutDevicesInput
     implements _i1.JsonSerializable {
-  const DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInput({
+  const FirmwareUncheckedCreateWithoutDevicesInput({
+    this.id,
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
+    this.userId,
+    this.publish,
+    this.createdAt,
+  });
+
+  factory FirmwareUncheckedCreateWithoutDevicesInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$FirmwareUncheckedCreateWithoutDevicesInputFromJson(json);
+
+  final int? id;
+
+  final String title;
+
+  final String description;
+
+  final String objectUrl;
+
+  final String version;
+
+  final int? userId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$FirmwareUncheckedCreateWithoutDevicesInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class FirmwareCreateOrConnectWithoutDevicesInput
+    implements _i1.JsonSerializable {
+  const FirmwareCreateOrConnectWithoutDevicesInput({
     required this.where,
-    required this.update,
     required this.create,
   });
 
-  factory DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInput.fromJson(
+  factory FirmwareCreateOrConnectWithoutDevicesInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInputFromJson(json);
+      _$FirmwareCreateOrConnectWithoutDevicesInputFromJson(json);
 
-  final DeviceFirmwareWhereUniqueInput where;
+  final FirmwareWhereUniqueInput where;
 
-  final DeviceFirmwareUpdateWithoutDeviceInput update;
-
-  final DeviceFirmwareCreateWithoutDeviceInput create;
+  final FirmwareCreateWithoutDevicesInput create;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpsertWithWhereUniqueWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInputFromJson(json);
-
-  final DeviceFirmwareWhereUniqueInput where;
-
-  final DeviceFirmwareUpdateWithoutDeviceInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateWithWhereUniqueWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateManyWithWhereWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateManyWithWhereWithoutDeviceInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceFirmwareUpdateManyWithWhereWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateManyWithWhereWithoutDeviceInputFromJson(json);
-
-  final DeviceFirmwareScalarWhereInput where;
-
-  final DeviceFirmwareUpdateManyMutationInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateManyWithWhereWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareScalarWhereInput implements _i1.JsonSerializable {
-  const DeviceFirmwareScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareScalarWhereInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareScalarWhereInputFromJson(json);
-
-  final Iterable<DeviceFirmwareScalarWhereInput>? AND;
-
-  final Iterable<DeviceFirmwareScalarWhereInput>? OR;
-
-  final Iterable<DeviceFirmwareScalarWhereInput>? NOT;
-
-  final IntFilter? id;
-
-  final IntNullableFilter? deviceId;
-
-  final IntNullableFilter? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareScalarWhereInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpsertWithWhereUniqueWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpsertWithWhereUniqueWithoutDeviceInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  factory DeviceTagUpsertWithWhereUniqueWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpsertWithWhereUniqueWithoutDeviceInputFromJson(json);
-
-  final DeviceTagWhereUniqueInput where;
-
-  final DeviceTagUpdateWithoutDeviceInput update;
-
-  final DeviceTagCreateWithoutDeviceInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpsertWithWhereUniqueWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateWithWhereUniqueWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpdateWithWhereUniqueWithoutDeviceInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceTagUpdateWithWhereUniqueWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateWithWhereUniqueWithoutDeviceInputFromJson(json);
-
-  final DeviceTagWhereUniqueInput where;
-
-  final DeviceTagUpdateWithoutDeviceInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateWithWhereUniqueWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateManyWithWhereWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpdateManyWithWhereWithoutDeviceInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceTagUpdateManyWithWhereWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateManyWithWhereWithoutDeviceInputFromJson(json);
-
-  final DeviceTagScalarWhereInput where;
-
-  final DeviceTagUpdateManyMutationInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateManyWithWhereWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagScalarWhereInput implements _i1.JsonSerializable {
-  const DeviceTagScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagScalarWhereInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagScalarWhereInputFromJson(json);
-
-  final Iterable<DeviceTagScalarWhereInput>? AND;
-
-  final Iterable<DeviceTagScalarWhereInput>? OR;
-
-  final Iterable<DeviceTagScalarWhereInput>? NOT;
-
-  final IntFilter? id;
-
-  final IntNullableFilter? taxonomyId;
-
-  final IntNullableFilter? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagScalarWhereInputToJson(this);
+      _$FirmwareCreateOrConnectWithoutDevicesInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -5977,8 +4046,8 @@ class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.firmwares,
   });
 
@@ -5991,9 +4060,9 @@ class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   final FirmwareUpdateManyWithoutUserNestedInput? firmwares;
 
@@ -6008,8 +4077,8 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.firmwares,
   });
 
@@ -6025,9 +4094,9 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   final FirmwareUncheckedUpdateManyWithoutUserNestedInput? firmwares;
 
@@ -6037,13 +4106,109 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
+class FirmwareUpsertWithoutDevicesInput implements _i1.JsonSerializable {
+  const FirmwareUpsertWithoutDevicesInput({
+    required this.update,
+    required this.create,
+  });
+
+  factory FirmwareUpsertWithoutDevicesInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$FirmwareUpsertWithoutDevicesInputFromJson(json);
+
+  final FirmwareUpdateWithoutDevicesInput update;
+
+  final FirmwareCreateWithoutDevicesInput create;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$FirmwareUpsertWithoutDevicesInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class FirmwareUpdateWithoutDevicesInput implements _i1.JsonSerializable {
+  const FirmwareUpdateWithoutDevicesInput({
+    this.title,
+    this.description,
+    this.objectUrl,
+    this.version,
+    this.publish,
+    this.createdAt,
+    this.user,
+  });
+
+  factory FirmwareUpdateWithoutDevicesInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$FirmwareUpdateWithoutDevicesInputFromJson(json);
+
+  final StringFieldUpdateOperationsInput? title;
+
+  final StringFieldUpdateOperationsInput? description;
+
+  final StringFieldUpdateOperationsInput? objectUrl;
+
+  final StringFieldUpdateOperationsInput? version;
+
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  @JsonKey(name: r'User')
+  final UserUpdateOneWithoutFirmwaresNestedInput? user;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$FirmwareUpdateWithoutDevicesInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class FirmwareUncheckedUpdateWithoutDevicesInput
+    implements _i1.JsonSerializable {
+  const FirmwareUncheckedUpdateWithoutDevicesInput({
+    this.id,
+    this.title,
+    this.description,
+    this.objectUrl,
+    this.version,
+    this.userId,
+    this.publish,
+    this.createdAt,
+  });
+
+  factory FirmwareUncheckedUpdateWithoutDevicesInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$FirmwareUncheckedUpdateWithoutDevicesInputFromJson(json);
+
+  final IntFieldUpdateOperationsInput? id;
+
+  final StringFieldUpdateOperationsInput? title;
+
+  final StringFieldUpdateOperationsInput? description;
+
+  final StringFieldUpdateOperationsInput? objectUrl;
+
+  final StringFieldUpdateOperationsInput? version;
+
+  final NullableIntFieldUpdateOperationsInput? userId;
+
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$FirmwareUncheckedUpdateWithoutDevicesInputToJson(this);
+}
+
+@_i1.jsonSerializable
 class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceCreateWithoutUserInput({
     required this.title,
     required this.description,
+    required this.sn,
+    this.publish,
     this.createdAt,
-    this.firmwares,
-    this.tags,
+    this.firmware,
   });
 
   factory DeviceCreateWithoutUserInput.fromJson(Map<String, dynamic> json) =>
@@ -6053,11 +4218,14 @@ class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final String description;
 
+  final String sn;
+
+  final Publish? publish;
+
   final DateTime? createdAt;
 
-  final DeviceFirmwareCreateNestedManyWithoutDeviceInput? firmwares;
-
-  final DeviceTagCreateNestedManyWithoutDeviceInput? tags;
+  @JsonKey(name: r'Firmware')
+  final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceCreateWithoutUserInputToJson(this);
@@ -6069,9 +4237,10 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
+    required this.sn,
+    this.firmwareId,
+    this.publish,
     this.createdAt,
-    this.firmwares,
-    this.tags,
   });
 
   factory DeviceUncheckedCreateWithoutUserInput.fromJson(
@@ -6084,11 +4253,13 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final String description;
 
+  final String sn;
+
+  final int? firmwareId;
+
+  final Publish? publish;
+
   final DateTime? createdAt;
-
-  final DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInput? firmwares;
-
-  final DeviceTagUncheckedCreateNestedManyWithoutDeviceInput? tags;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -6140,8 +4311,9 @@ class FirmwareCreateWithoutUserInput implements _i1.JsonSerializable {
   const FirmwareCreateWithoutUserInput({
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
+    this.publish,
     this.createdAt,
     this.devices,
   });
@@ -6153,13 +4325,15 @@ class FirmwareCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
 
+  final Publish? publish;
+
   final DateTime? createdAt;
 
-  final DeviceFirmwareCreateNestedManyWithoutFirmwareInput? devices;
+  final DeviceCreateNestedManyWithoutFirmwareInput? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareCreateWithoutUserInputToJson(this);
@@ -6171,8 +4345,9 @@ class FirmwareUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
+    this.publish,
     this.createdAt,
     this.devices,
   });
@@ -6187,13 +4362,15 @@ class FirmwareUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
 
+  final Publish? publish;
+
   final DateTime? createdAt;
 
-  final DeviceFirmwareUncheckedCreateNestedManyWithoutFirmwareInput? devices;
+  final DeviceUncheckedCreateNestedManyWithoutFirmwareInput? devices;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -6315,8 +4492,11 @@ class DeviceScalarWhereInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceScalarWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -6334,9 +4514,15 @@ class DeviceScalarWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? description;
 
-  final DateTimeFilter? createdAt;
+  final StringFilter? sn;
 
   final IntNullableFilter? userId;
+
+  final IntNullableFilter? firmwareId;
+
+  final EnumPublishFilter? publish;
+
+  final DateTimeFilter? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceScalarWhereInputToJson(this);
@@ -6417,10 +4603,11 @@ class FirmwareScalarWhereInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareScalarWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -6438,239 +4625,18 @@ class FirmwareScalarWhereInput implements _i1.JsonSerializable {
 
   final StringFilter? description;
 
-  final StringFilter? object;
+  final StringFilter? objectUrl;
 
   final StringFilter? version;
 
-  final DateTimeFilter? createdAt;
-
   final IntNullableFilter? userId;
+
+  final EnumPublishFilter? publish;
+
+  final DateTimeFilter? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareScalarWhereInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateWithoutTaxonomyInput implements _i1.JsonSerializable {
-  const DeviceTagCreateWithoutTaxonomyInput({this.device});
-
-  factory DeviceTagCreateWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateWithoutTaxonomyInputFromJson(json);
-
-  @JsonKey(name: r'Device')
-  final DeviceCreateNestedOneWithoutTagsInput? device;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedCreateWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedCreateWithoutTaxonomyInput({
-    this.id,
-    this.deviceId,
-  });
-
-  factory DeviceTagUncheckedCreateWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedCreateWithoutTaxonomyInputFromJson(json);
-
-  final int? id;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedCreateWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateOrConnectWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagCreateOrConnectWithoutTaxonomyInput({
-    required this.where,
-    required this.create,
-  });
-
-  factory DeviceTagCreateOrConnectWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateOrConnectWithoutTaxonomyInputFromJson(json);
-
-  final DeviceTagWhereUniqueInput where;
-
-  final DeviceTagCreateWithoutTaxonomyInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateOrConnectWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateManyTaxonomyInputEnvelope implements _i1.JsonSerializable {
-  const DeviceTagCreateManyTaxonomyInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  factory DeviceTagCreateManyTaxonomyInputEnvelope.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateManyTaxonomyInputEnvelopeFromJson(json);
-
-  final Iterable<DeviceTagCreateManyTaxonomyInput> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateManyTaxonomyInputEnvelopeToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  factory DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInputFromJson(json);
-
-  final DeviceTagWhereUniqueInput where;
-
-  final DeviceTagUpdateWithoutTaxonomyInput update;
-
-  final DeviceTagCreateWithoutTaxonomyInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpsertWithWhereUniqueWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInputFromJson(json);
-
-  final DeviceTagWhereUniqueInput where;
-
-  final DeviceTagUpdateWithoutTaxonomyInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateWithWhereUniqueWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateManyWithWhereWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUpdateManyWithWhereWithoutTaxonomyInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceTagUpdateManyWithWhereWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateManyWithWhereWithoutTaxonomyInputFromJson(json);
-
-  final DeviceTagScalarWhereInput where;
-
-  final DeviceTagUpdateManyMutationInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateManyWithWhereWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateWithoutFirmwareInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateWithoutFirmwareInput({this.device});
-
-  factory DeviceFirmwareCreateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateWithoutFirmwareInputFromJson(json);
-
-  @JsonKey(name: r'Device')
-  final DeviceCreateNestedOneWithoutFirmwaresInput? device;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedCreateWithoutFirmwareInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedCreateWithoutFirmwareInput({
-    this.id,
-    this.deviceId,
-  });
-
-  factory DeviceFirmwareUncheckedCreateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedCreateWithoutFirmwareInputFromJson(json);
-
-  final int? id;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedCreateWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateOrConnectWithoutFirmwareInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateOrConnectWithoutFirmwareInput({
-    required this.where,
-    required this.create,
-  });
-
-  factory DeviceFirmwareCreateOrConnectWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateOrConnectWithoutFirmwareInputFromJson(json);
-
-  final DeviceFirmwareWhereUniqueInput where;
-
-  final DeviceFirmwareCreateWithoutFirmwareInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateOrConnectWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateManyFirmwareInputEnvelope
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateManyFirmwareInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  factory DeviceFirmwareCreateManyFirmwareInputEnvelope.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateManyFirmwareInputEnvelopeFromJson(json);
-
-  final Iterable<DeviceFirmwareCreateManyFirmwareInput> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateManyFirmwareInputEnvelopeToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -6679,8 +4645,8 @@ class UserCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
   });
 
@@ -6693,9 +4659,9 @@ class UserCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   final DeviceCreateNestedManyWithoutUserInput? devices;
 
@@ -6711,8 +4677,8 @@ class UserUncheckedCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
   });
 
@@ -6728,9 +4694,9 @@ class UserUncheckedCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   final DeviceUncheckedCreateNestedManyWithoutUserInput? devices;
 
@@ -6760,69 +4726,113 @@ class UserCreateOrConnectWithoutFirmwaresInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInput
+class DeviceCreateWithoutFirmwareInput implements _i1.JsonSerializable {
+  const DeviceCreateWithoutFirmwareInput({
+    required this.title,
+    required this.description,
+    required this.sn,
+    this.publish,
+    this.createdAt,
+    this.user,
+  });
+
+  factory DeviceCreateWithoutFirmwareInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeviceCreateWithoutFirmwareInputFromJson(json);
+
+  final String title;
+
+  final String description;
+
+  final String sn;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
+
+  @JsonKey(name: r'User')
+  final UserCreateNestedOneWithoutDevicesInput? user;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeviceCreateWithoutFirmwareInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class DeviceUncheckedCreateWithoutFirmwareInput
     implements _i1.JsonSerializable {
-  const DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInput({
+  const DeviceUncheckedCreateWithoutFirmwareInput({
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
+    this.userId,
+    this.publish,
+    this.createdAt,
+  });
+
+  factory DeviceUncheckedCreateWithoutFirmwareInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeviceUncheckedCreateWithoutFirmwareInputFromJson(json);
+
+  final int? id;
+
+  final String title;
+
+  final String description;
+
+  final String sn;
+
+  final int? userId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeviceUncheckedCreateWithoutFirmwareInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class DeviceCreateOrConnectWithoutFirmwareInput
+    implements _i1.JsonSerializable {
+  const DeviceCreateOrConnectWithoutFirmwareInput({
     required this.where,
-    required this.update,
     required this.create,
   });
 
-  factory DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInput.fromJson(
+  factory DeviceCreateOrConnectWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInputFromJson(json);
+      _$DeviceCreateOrConnectWithoutFirmwareInputFromJson(json);
 
-  final DeviceFirmwareWhereUniqueInput where;
+  final DeviceWhereUniqueInput where;
 
-  final DeviceFirmwareUpdateWithoutFirmwareInput update;
-
-  final DeviceFirmwareCreateWithoutFirmwareInput create;
+  final DeviceCreateWithoutFirmwareInput create;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpsertWithWhereUniqueWithoutFirmwareInputToJson(this);
+      _$DeviceCreateOrConnectWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
-class DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInput({
-    required this.where,
+class DeviceCreateManyFirmwareInputEnvelope implements _i1.JsonSerializable {
+  const DeviceCreateManyFirmwareInputEnvelope({
     required this.data,
+    this.skipDuplicates,
   });
 
-  factory DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInput.fromJson(
+  factory DeviceCreateManyFirmwareInputEnvelope.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInputFromJson(json);
+      _$DeviceCreateManyFirmwareInputEnvelopeFromJson(json);
 
-  final DeviceFirmwareWhereUniqueInput where;
+  final Iterable<DeviceCreateManyFirmwareInput> data;
 
-  final DeviceFirmwareUpdateWithoutFirmwareInput data;
+  final bool? skipDuplicates;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateWithWhereUniqueWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInput({
-    required this.where,
-    required this.data,
-  });
-
-  factory DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInputFromJson(json);
-
-  final DeviceFirmwareScalarWhereInput where;
-
-  final DeviceFirmwareUpdateManyMutationInput data;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateManyWithWhereWithoutFirmwareInputToJson(this);
+      _$DeviceCreateManyFirmwareInputEnvelopeToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -6850,8 +4860,8 @@ class UserUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
   });
 
@@ -6864,9 +4874,9 @@ class UserUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   final DeviceUpdateManyWithoutUserNestedInput? devices;
 
@@ -6882,8 +4892,8 @@ class UserUncheckedUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
     this.devices,
   });
 
@@ -6899,9 +4909,9 @@ class UserUncheckedUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? password;
 
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
   final Role? role;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   final DeviceUncheckedUpdateManyWithoutUserNestedInput? devices;
 
@@ -6911,774 +4921,69 @@ class UserUncheckedUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
 }
 
 @_i1.jsonSerializable
-class TaxonomyCreateWithoutDevicesInput implements _i1.JsonSerializable {
-  const TaxonomyCreateWithoutDevicesInput({required this.title});
-
-  factory TaxonomyCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyCreateWithoutDevicesInputFromJson(json);
-
-  final String title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyCreateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUncheckedCreateWithoutDevicesInput
+class DeviceUpsertWithWhereUniqueWithoutFirmwareInput
     implements _i1.JsonSerializable {
-  const TaxonomyUncheckedCreateWithoutDevicesInput({
-    this.id,
-    required this.title,
-  });
-
-  factory TaxonomyUncheckedCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyUncheckedCreateWithoutDevicesInputFromJson(json);
-
-  final int? id;
-
-  final String title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyUncheckedCreateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyCreateOrConnectWithoutDevicesInput
-    implements _i1.JsonSerializable {
-  const TaxonomyCreateOrConnectWithoutDevicesInput({
+  const DeviceUpsertWithWhereUniqueWithoutFirmwareInput({
     required this.where,
+    required this.update,
     required this.create,
   });
 
-  factory TaxonomyCreateOrConnectWithoutDevicesInput.fromJson(
+  factory DeviceUpsertWithWhereUniqueWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$TaxonomyCreateOrConnectWithoutDevicesInputFromJson(json);
-
-  final TaxonomyWhereUniqueInput where;
-
-  final TaxonomyCreateWithoutDevicesInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyCreateOrConnectWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceCreateWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceCreateWithoutTagsInput({
-    required this.title,
-    required this.description,
-    this.createdAt,
-    this.firmwares,
-    this.user,
-  });
-
-  factory DeviceCreateWithoutTagsInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceCreateWithoutTagsInputFromJson(json);
-
-  final String title;
-
-  final String description;
-
-  final DateTime? createdAt;
-
-  final DeviceFirmwareCreateNestedManyWithoutDeviceInput? firmwares;
-
-  @JsonKey(name: r'User')
-  final UserCreateNestedOneWithoutDevicesInput? user;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceCreateWithoutTagsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUncheckedCreateWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceUncheckedCreateWithoutTagsInput({
-    this.id,
-    required this.title,
-    required this.description,
-    this.createdAt,
-    this.userId,
-    this.firmwares,
-  });
-
-  factory DeviceUncheckedCreateWithoutTagsInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUncheckedCreateWithoutTagsInputFromJson(json);
-
-  final int? id;
-
-  final String title;
-
-  final String description;
-
-  final DateTime? createdAt;
-
-  final int? userId;
-
-  final DeviceFirmwareUncheckedCreateNestedManyWithoutDeviceInput? firmwares;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUncheckedCreateWithoutTagsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceCreateOrConnectWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceCreateOrConnectWithoutTagsInput({
-    required this.where,
-    required this.create,
-  });
-
-  factory DeviceCreateOrConnectWithoutTagsInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceCreateOrConnectWithoutTagsInputFromJson(json);
+      _$DeviceUpsertWithWhereUniqueWithoutFirmwareInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
 
-  final DeviceCreateWithoutTagsInput create;
+  final DeviceUpdateWithoutFirmwareInput update;
+
+  final DeviceCreateWithoutFirmwareInput create;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceCreateOrConnectWithoutTagsInputToJson(this);
+      _$DeviceUpsertWithWhereUniqueWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
-class TaxonomyUpsertWithoutDevicesInput implements _i1.JsonSerializable {
-  const TaxonomyUpsertWithoutDevicesInput({
-    required this.update,
-    required this.create,
-  });
-
-  factory TaxonomyUpsertWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyUpsertWithoutDevicesInputFromJson(json);
-
-  final TaxonomyUpdateWithoutDevicesInput update;
-
-  final TaxonomyCreateWithoutDevicesInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyUpsertWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUpdateWithoutDevicesInput implements _i1.JsonSerializable {
-  const TaxonomyUpdateWithoutDevicesInput({this.title});
-
-  factory TaxonomyUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyUpdateWithoutDevicesInputFromJson(json);
-
-  final StringFieldUpdateOperationsInput? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyUpdateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyUncheckedUpdateWithoutDevicesInput
+class DeviceUpdateWithWhereUniqueWithoutFirmwareInput
     implements _i1.JsonSerializable {
-  const TaxonomyUncheckedUpdateWithoutDevicesInput({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyUncheckedUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$TaxonomyUncheckedUpdateWithoutDevicesInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final StringFieldUpdateOperationsInput? title;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$TaxonomyUncheckedUpdateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUpsertWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceUpsertWithoutTagsInput({
-    required this.update,
-    required this.create,
-  });
-
-  factory DeviceUpsertWithoutTagsInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceUpsertWithoutTagsInputFromJson(json);
-
-  final DeviceUpdateWithoutTagsInput update;
-
-  final DeviceCreateWithoutTagsInput create;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceUpsertWithoutTagsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUpdateWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceUpdateWithoutTagsInput({
-    this.title,
-    this.description,
-    this.createdAt,
-    this.firmwares,
-    this.user,
-  });
-
-  factory DeviceUpdateWithoutTagsInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceUpdateWithoutTagsInputFromJson(json);
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final StringFieldUpdateOperationsInput? description;
-
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final DeviceFirmwareUpdateManyWithoutDeviceNestedInput? firmwares;
-
-  @JsonKey(name: r'User')
-  final UserUpdateOneWithoutDevicesNestedInput? user;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceUpdateWithoutTagsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUncheckedUpdateWithoutTagsInput implements _i1.JsonSerializable {
-  const DeviceUncheckedUpdateWithoutTagsInput({
-    this.id,
-    this.title,
-    this.description,
-    this.createdAt,
-    this.userId,
-    this.firmwares,
-  });
-
-  factory DeviceUncheckedUpdateWithoutTagsInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUncheckedUpdateWithoutTagsInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final StringFieldUpdateOperationsInput? description;
-
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final NullableIntFieldUpdateOperationsInput? userId;
-
-  final DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInput? firmwares;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUncheckedUpdateWithoutTagsInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
-  const DeviceCreateWithoutFirmwaresInput({
-    required this.title,
-    required this.description,
-    this.createdAt,
-    this.tags,
-    this.user,
-  });
-
-  factory DeviceCreateWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceCreateWithoutFirmwaresInputFromJson(json);
-
-  final String title;
-
-  final String description;
-
-  final DateTime? createdAt;
-
-  final DeviceTagCreateNestedManyWithoutDeviceInput? tags;
-
-  @JsonKey(name: r'User')
-  final UserCreateNestedOneWithoutDevicesInput? user;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceCreateWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUncheckedCreateWithoutFirmwaresInput
-    implements _i1.JsonSerializable {
-  const DeviceUncheckedCreateWithoutFirmwaresInput({
-    this.id,
-    required this.title,
-    required this.description,
-    this.createdAt,
-    this.userId,
-    this.tags,
-  });
-
-  factory DeviceUncheckedCreateWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUncheckedCreateWithoutFirmwaresInputFromJson(json);
-
-  final int? id;
-
-  final String title;
-
-  final String description;
-
-  final DateTime? createdAt;
-
-  final int? userId;
-
-  final DeviceTagUncheckedCreateNestedManyWithoutDeviceInput? tags;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUncheckedCreateWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceCreateOrConnectWithoutFirmwaresInput
-    implements _i1.JsonSerializable {
-  const DeviceCreateOrConnectWithoutFirmwaresInput({
+  const DeviceUpdateWithWhereUniqueWithoutFirmwareInput({
     required this.where,
-    required this.create,
+    required this.data,
   });
 
-  factory DeviceCreateOrConnectWithoutFirmwaresInput.fromJson(
+  factory DeviceUpdateWithWhereUniqueWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceCreateOrConnectWithoutFirmwaresInputFromJson(json);
+      _$DeviceUpdateWithWhereUniqueWithoutFirmwareInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
 
-  final DeviceCreateWithoutFirmwaresInput create;
+  final DeviceUpdateWithoutFirmwareInput data;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceCreateOrConnectWithoutFirmwaresInputToJson(this);
+      _$DeviceUpdateWithWhereUniqueWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
-class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
-  const FirmwareCreateWithoutDevicesInput({
-    required this.title,
-    required this.description,
-    required this.object,
-    required this.version,
-    this.createdAt,
-    this.user,
-  });
-
-  factory FirmwareCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareCreateWithoutDevicesInputFromJson(json);
-
-  final String title;
-
-  final String description;
-
-  final String object;
-
-  final String version;
-
-  final DateTime? createdAt;
-
-  @JsonKey(name: r'User')
-  final UserCreateNestedOneWithoutFirmwaresInput? user;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareCreateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareUncheckedCreateWithoutDevicesInput
+class DeviceUpdateManyWithWhereWithoutFirmwareInput
     implements _i1.JsonSerializable {
-  const FirmwareUncheckedCreateWithoutDevicesInput({
-    this.id,
-    required this.title,
-    required this.description,
-    required this.object,
-    required this.version,
-    this.createdAt,
-    this.userId,
-  });
-
-  factory FirmwareUncheckedCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareUncheckedCreateWithoutDevicesInputFromJson(json);
-
-  final int? id;
-
-  final String title;
-
-  final String description;
-
-  final String object;
-
-  final String version;
-
-  final DateTime? createdAt;
-
-  final int? userId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareUncheckedCreateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareCreateOrConnectWithoutDevicesInput
-    implements _i1.JsonSerializable {
-  const FirmwareCreateOrConnectWithoutDevicesInput({
+  const DeviceUpdateManyWithWhereWithoutFirmwareInput({
     required this.where,
-    required this.create,
+    required this.data,
   });
 
-  factory FirmwareCreateOrConnectWithoutDevicesInput.fromJson(
+  factory DeviceUpdateManyWithWhereWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$FirmwareCreateOrConnectWithoutDevicesInputFromJson(json);
+      _$DeviceUpdateManyWithWhereWithoutFirmwareInputFromJson(json);
 
-  final FirmwareWhereUniqueInput where;
+  final DeviceScalarWhereInput where;
 
-  final FirmwareCreateWithoutDevicesInput create;
+  final DeviceUpdateManyMutationInput data;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$FirmwareCreateOrConnectWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUpsertWithoutFirmwaresInput implements _i1.JsonSerializable {
-  const DeviceUpsertWithoutFirmwaresInput({
-    required this.update,
-    required this.create,
-  });
-
-  factory DeviceUpsertWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUpsertWithoutFirmwaresInputFromJson(json);
-
-  final DeviceUpdateWithoutFirmwaresInput update;
-
-  final DeviceCreateWithoutFirmwaresInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUpsertWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
-  const DeviceUpdateWithoutFirmwaresInput({
-    this.title,
-    this.description,
-    this.createdAt,
-    this.tags,
-    this.user,
-  });
-
-  factory DeviceUpdateWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUpdateWithoutFirmwaresInputFromJson(json);
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final StringFieldUpdateOperationsInput? description;
-
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final DeviceTagUpdateManyWithoutDeviceNestedInput? tags;
-
-  @JsonKey(name: r'User')
-  final UserUpdateOneWithoutDevicesNestedInput? user;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUpdateWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceUncheckedUpdateWithoutFirmwaresInput
-    implements _i1.JsonSerializable {
-  const DeviceUncheckedUpdateWithoutFirmwaresInput({
-    this.id,
-    this.title,
-    this.description,
-    this.createdAt,
-    this.userId,
-    this.tags,
-  });
-
-  factory DeviceUncheckedUpdateWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceUncheckedUpdateWithoutFirmwaresInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final StringFieldUpdateOperationsInput? description;
-
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final NullableIntFieldUpdateOperationsInput? userId;
-
-  final DeviceTagUncheckedUpdateManyWithoutDeviceNestedInput? tags;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceUncheckedUpdateWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareUpsertWithoutDevicesInput implements _i1.JsonSerializable {
-  const FirmwareUpsertWithoutDevicesInput({
-    required this.update,
-    required this.create,
-  });
-
-  factory FirmwareUpsertWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareUpsertWithoutDevicesInputFromJson(json);
-
-  final FirmwareUpdateWithoutDevicesInput update;
-
-  final FirmwareCreateWithoutDevicesInput create;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareUpsertWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareUpdateWithoutDevicesInput implements _i1.JsonSerializable {
-  const FirmwareUpdateWithoutDevicesInput({
-    this.title,
-    this.description,
-    this.object,
-    this.version,
-    this.createdAt,
-    this.user,
-  });
-
-  factory FirmwareUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareUpdateWithoutDevicesInputFromJson(json);
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final StringFieldUpdateOperationsInput? description;
-
-  final StringFieldUpdateOperationsInput? object;
-
-  final StringFieldUpdateOperationsInput? version;
-
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  @JsonKey(name: r'User')
-  final UserUpdateOneWithoutFirmwaresNestedInput? user;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareUpdateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class FirmwareUncheckedUpdateWithoutDevicesInput
-    implements _i1.JsonSerializable {
-  const FirmwareUncheckedUpdateWithoutDevicesInput({
-    this.id,
-    this.title,
-    this.description,
-    this.object,
-    this.version,
-    this.createdAt,
-    this.userId,
-  });
-
-  factory FirmwareUncheckedUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$FirmwareUncheckedUpdateWithoutDevicesInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final StringFieldUpdateOperationsInput? title;
-
-  final StringFieldUpdateOperationsInput? description;
-
-  final StringFieldUpdateOperationsInput? object;
-
-  final StringFieldUpdateOperationsInput? version;
-
-  final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final NullableIntFieldUpdateOperationsInput? userId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$FirmwareUncheckedUpdateWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateManyDeviceInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateManyDeviceInput({
-    this.id,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareCreateManyDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateManyDeviceInputFromJson(json);
-
-  final int? id;
-
-  final int? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateManyDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagCreateManyDeviceInput implements _i1.JsonSerializable {
-  const DeviceTagCreateManyDeviceInput({
-    this.id,
-    this.taxonomyId,
-  });
-
-  factory DeviceTagCreateManyDeviceInput.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagCreateManyDeviceInputFromJson(json);
-
-  final int? id;
-
-  final int? taxonomyId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagCreateManyDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateWithoutDeviceInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateWithoutDeviceInput({this.firmware});
-
-  factory DeviceFirmwareUpdateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateWithoutDeviceInputFromJson(json);
-
-  @JsonKey(name: r'Firmware')
-  final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateWithoutDeviceInput({
-    this.id,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateWithoutDeviceInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateManyWithoutFirmwaresInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateManyWithoutFirmwaresInput({
-    this.id,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateManyWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutFirmwaresInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutFirmwaresInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUpdateWithoutDeviceInput implements _i1.JsonSerializable {
-  const DeviceTagUpdateWithoutDeviceInput({this.taxonomy});
-
-  factory DeviceTagUpdateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateWithoutDeviceInputFromJson(json);
-
-  @JsonKey(name: r'Taxonomy')
-  final TaxonomyUpdateOneWithoutDevicesNestedInput? taxonomy;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateWithoutDeviceInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateWithoutDeviceInput({
-    this.id,
-    this.taxonomyId,
-  });
-
-  factory DeviceTagUncheckedUpdateWithoutDeviceInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateWithoutDeviceInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? taxonomyId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateWithoutDeviceInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateManyWithoutTagsInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateManyWithoutTagsInput({
-    this.id,
-    this.taxonomyId,
-  });
-
-  factory DeviceTagUncheckedUpdateManyWithoutTagsInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateManyWithoutTagsInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? taxonomyId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateManyWithoutTagsInputToJson(this);
+      _$DeviceUpdateManyWithWhereWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -7687,6 +4992,9 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
+    required this.sn,
+    this.firmwareId,
+    this.publish,
     this.createdAt,
   });
 
@@ -7698,6 +5006,12 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
   final String title;
 
   final String description;
+
+  final String sn;
+
+  final int? firmwareId;
+
+  final Publish? publish;
 
   final DateTime? createdAt;
 
@@ -7711,8 +5025,9 @@ class FirmwareCreateManyUserInput implements _i1.JsonSerializable {
     this.id,
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
+    this.publish,
     this.createdAt,
   });
 
@@ -7725,9 +5040,11 @@ class FirmwareCreateManyUserInput implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
+
+  final Publish? publish;
 
   final DateTime? createdAt;
 
@@ -7740,9 +5057,10 @@ class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceUpdateWithoutUserInput({
     this.title,
     this.description,
+    this.sn,
+    this.publish,
     this.createdAt,
-    this.firmwares,
-    this.tags,
+    this.firmware,
   });
 
   factory DeviceUpdateWithoutUserInput.fromJson(Map<String, dynamic> json) =>
@@ -7752,11 +5070,14 @@ class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
+  final StringFieldUpdateOperationsInput? sn;
+
+  final Publish? publish;
+
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
-  final DeviceFirmwareUpdateManyWithoutDeviceNestedInput? firmwares;
-
-  final DeviceTagUpdateManyWithoutDeviceNestedInput? tags;
+  @JsonKey(name: r'Firmware')
+  final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceUpdateWithoutUserInputToJson(this);
@@ -7768,9 +5089,10 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
+    this.sn,
+    this.firmwareId,
+    this.publish,
     this.createdAt,
-    this.firmwares,
-    this.tags,
   });
 
   factory DeviceUncheckedUpdateWithoutUserInput.fromJson(
@@ -7783,11 +5105,13 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
+  final StringFieldUpdateOperationsInput? sn;
+
+  final NullableIntFieldUpdateOperationsInput? firmwareId;
+
+  final Publish? publish;
+
   final DateTimeFieldUpdateOperationsInput? createdAt;
-
-  final DeviceFirmwareUncheckedUpdateManyWithoutDeviceNestedInput? firmwares;
-
-  final DeviceTagUncheckedUpdateManyWithoutDeviceNestedInput? tags;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -7801,6 +5125,9 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
     this.id,
     this.title,
     this.description,
+    this.sn,
+    this.firmwareId,
+    this.publish,
     this.createdAt,
   });
 
@@ -7814,6 +5141,12 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
 
   final StringFieldUpdateOperationsInput? description;
 
+  final StringFieldUpdateOperationsInput? sn;
+
+  final NullableIntFieldUpdateOperationsInput? firmwareId;
+
+  final Publish? publish;
+
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
@@ -7826,8 +5159,9 @@ class FirmwareUpdateWithoutUserInput implements _i1.JsonSerializable {
   const FirmwareUpdateWithoutUserInput({
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
+    this.publish,
     this.createdAt,
     this.devices,
   });
@@ -7839,13 +5173,15 @@ class FirmwareUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
 
+  final Publish? publish;
+
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
-  final DeviceFirmwareUpdateManyWithoutFirmwareNestedInput? devices;
+  final DeviceUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareUpdateWithoutUserInputToJson(this);
@@ -7857,8 +5193,9 @@ class FirmwareUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
+    this.publish,
     this.createdAt,
     this.devices,
   });
@@ -7873,13 +5210,15 @@ class FirmwareUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
 
+  final Publish? publish;
+
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
-  final DeviceFirmwareUncheckedUpdateManyWithoutFirmwareNestedInput? devices;
+  final DeviceUncheckedUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -7893,8 +5232,9 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
+    this.publish,
     this.createdAt,
   });
 
@@ -7908,9 +5248,11 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
 
   final StringFieldUpdateOperationsInput? description;
 
-  final StringFieldUpdateOperationsInput? object;
+  final StringFieldUpdateOperationsInput? objectUrl;
 
   final StringFieldUpdateOperationsInput? version;
+
+  final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
@@ -7920,159 +5262,105 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
 }
 
 @_i1.jsonSerializable
-class DeviceTagCreateManyTaxonomyInput implements _i1.JsonSerializable {
-  const DeviceTagCreateManyTaxonomyInput({
+class DeviceCreateManyFirmwareInput implements _i1.JsonSerializable {
+  const DeviceCreateManyFirmwareInput({
     this.id,
-    this.deviceId,
+    required this.title,
+    required this.description,
+    required this.sn,
+    this.userId,
+    this.publish,
+    this.createdAt,
   });
 
-  factory DeviceTagCreateManyTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagCreateManyTaxonomyInputFromJson(json);
+  factory DeviceCreateManyFirmwareInput.fromJson(Map<String, dynamic> json) =>
+      _$DeviceCreateManyFirmwareInputFromJson(json);
 
   final int? id;
 
-  final int? deviceId;
+  final String title;
+
+  final String description;
+
+  final String sn;
+
+  final int? userId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
 
   @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagCreateManyTaxonomyInputToJson(this);
+  Map<String, dynamic> toJson() => _$DeviceCreateManyFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
-class DeviceTagUpdateWithoutTaxonomyInput implements _i1.JsonSerializable {
-  const DeviceTagUpdateWithoutTaxonomyInput({this.device});
-
-  factory DeviceTagUpdateWithoutTaxonomyInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUpdateWithoutTaxonomyInputFromJson(json);
-
-  @JsonKey(name: r'Device')
-  final DeviceUpdateOneWithoutTagsNestedInput? device;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUpdateWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateWithoutTaxonomyInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateWithoutTaxonomyInput({
-    this.id,
-    this.deviceId,
+class DeviceUpdateWithoutFirmwareInput implements _i1.JsonSerializable {
+  const DeviceUpdateWithoutFirmwareInput({
+    this.title,
+    this.description,
+    this.sn,
+    this.publish,
+    this.createdAt,
+    this.user,
   });
 
-  factory DeviceTagUncheckedUpdateWithoutTaxonomyInput.fromJson(
+  factory DeviceUpdateWithoutFirmwareInput.fromJson(
           Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateWithoutTaxonomyInputFromJson(json);
+      _$DeviceUpdateWithoutFirmwareInputFromJson(json);
+
+  final StringFieldUpdateOperationsInput? title;
+
+  final StringFieldUpdateOperationsInput? description;
+
+  final StringFieldUpdateOperationsInput? sn;
+
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  @JsonKey(name: r'User')
+  final UserUpdateOneWithoutDevicesNestedInput? user;
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeviceUpdateWithoutFirmwareInputToJson(this);
+}
+
+@_i1.jsonSerializable
+class DeviceUncheckedUpdateWithoutFirmwareInput
+    implements _i1.JsonSerializable {
+  const DeviceUncheckedUpdateWithoutFirmwareInput({
+    this.id,
+    this.title,
+    this.description,
+    this.sn,
+    this.userId,
+    this.publish,
+    this.createdAt,
+  });
+
+  factory DeviceUncheckedUpdateWithoutFirmwareInput.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeviceUncheckedUpdateWithoutFirmwareInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
 
-  final NullableIntFieldUpdateOperationsInput? deviceId;
+  final StringFieldUpdateOperationsInput? title;
+
+  final StringFieldUpdateOperationsInput? description;
+
+  final StringFieldUpdateOperationsInput? sn;
+
+  final NullableIntFieldUpdateOperationsInput? userId;
+
+  final Publish? publish;
+
+  final DateTimeFieldUpdateOperationsInput? createdAt;
 
   @override
   Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateWithoutTaxonomyInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagUncheckedUpdateManyWithoutDevicesInput
-    implements _i1.JsonSerializable {
-  const DeviceTagUncheckedUpdateManyWithoutDevicesInput({
-    this.id,
-    this.deviceId,
-  });
-
-  factory DeviceTagUncheckedUpdateManyWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceTagUncheckedUpdateManyWithoutDevicesInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceTagUncheckedUpdateManyWithoutDevicesInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareCreateManyFirmwareInput implements _i1.JsonSerializable {
-  const DeviceFirmwareCreateManyFirmwareInput({
-    this.id,
-    this.deviceId,
-  });
-
-  factory DeviceFirmwareCreateManyFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareCreateManyFirmwareInputFromJson(json);
-
-  final int? id;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareCreateManyFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUpdateWithoutFirmwareInput implements _i1.JsonSerializable {
-  const DeviceFirmwareUpdateWithoutFirmwareInput({this.device});
-
-  factory DeviceFirmwareUpdateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUpdateWithoutFirmwareInputFromJson(json);
-
-  @JsonKey(name: r'Device')
-  final DeviceUpdateOneWithoutFirmwaresNestedInput? device;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUpdateWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateWithoutFirmwareInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateWithoutFirmwareInput({
-    this.id,
-    this.deviceId,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateWithoutFirmwareInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateWithoutFirmwareInputToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareUncheckedUpdateManyWithoutDevicesInput
-    implements _i1.JsonSerializable {
-  const DeviceFirmwareUncheckedUpdateManyWithoutDevicesInput({
-    this.id,
-    this.deviceId,
-  });
-
-  factory DeviceFirmwareUncheckedUpdateManyWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutDevicesInputFromJson(json);
-
-  final IntFieldUpdateOperationsInput? id;
-
-  final NullableIntFieldUpdateOperationsInput? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareUncheckedUpdateManyWithoutDevicesInputToJson(this);
+      _$DeviceUncheckedUpdateWithoutFirmwareInputToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -8081,8 +5369,11 @@ class Device implements _i1.JsonSerializable {
     required this.id,
     required this.title,
     required this.description,
-    required this.createdAt,
+    required this.sn,
     this.userId,
+    this.firmwareId,
+    required this.publish,
+    required this.createdAt,
   });
 
   factory Device.fromJson(Map<String, dynamic> json) => _$DeviceFromJson(json);
@@ -8093,9 +5384,15 @@ class Device implements _i1.JsonSerializable {
 
   final String description;
 
-  final DateTime createdAt;
+  final String sn;
 
   final int? userId;
+
+  final int? firmwareId;
+
+  final Publish publish;
+
+  final DateTime createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceToJson(this);
@@ -8108,8 +5405,8 @@ class User implements _i1.JsonSerializable {
     required this.name,
     required this.username,
     required this.password,
-    required this.createdAt,
     required this.role,
+    required this.createdAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -8122,30 +5419,12 @@ class User implements _i1.JsonSerializable {
 
   final String password;
 
-  final DateTime createdAt;
-
   final Role role;
+
+  final DateTime createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
-}
-
-@_i1.jsonSerializable
-class Taxonomy implements _i1.JsonSerializable {
-  const Taxonomy({
-    required this.id,
-    required this.title,
-  });
-
-  factory Taxonomy.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyFromJson(json);
-
-  final int id;
-
-  final String title;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -8154,10 +5433,11 @@ class Firmware implements _i1.JsonSerializable {
     required this.id,
     required this.title,
     required this.description,
-    required this.object,
+    required this.objectUrl,
     required this.version,
-    required this.createdAt,
     this.userId,
+    required this.publish,
+    required this.createdAt,
   });
 
   factory Firmware.fromJson(Map<String, dynamic> json) =>
@@ -8169,58 +5449,18 @@ class Firmware implements _i1.JsonSerializable {
 
   final String description;
 
-  final String object;
+  final String objectUrl;
 
   final String version;
 
-  final DateTime createdAt;
-
   final int? userId;
+
+  final Publish publish;
+
+  final DateTime createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTag implements _i1.JsonSerializable {
-  const DeviceTag({
-    required this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTag.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagFromJson(json);
-
-  final int id;
-
-  final int? taxonomyId;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmware implements _i1.JsonSerializable {
-  const DeviceFirmware({
-    required this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmware.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareFromJson(json);
-
-  final int id;
-
-  final int? deviceId;
-
-  final int? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceFirmwareToJson(this);
 }
 
 class DeviceFluent<T> extends _i1.PrismaFluent<T> {
@@ -8228,108 +5468,6 @@ class DeviceFluent<T> extends _i1.PrismaFluent<T> {
     super.original,
     super.$query,
   );
-
-  Future<Iterable<DeviceFirmware>?> firmwares({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithRelationInput>? orderBy,
-    DeviceFirmwareWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceFirmwareScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwares',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'firmwares',
-    );
-    final fields = DeviceFirmwareScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> firmwares) => firmwares
-        .map((Map firmwares) => DeviceFirmware.fromJson(firmwares.cast()));
-    return query(fields)
-        .then((json) => json is Iterable ? compiler(json.cast()) : null);
-  }
-
-  Future<Iterable<DeviceTag>?> tags({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithRelationInput>? orderBy,
-    DeviceTagWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceTagScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'tags',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'tags',
-    );
-    final fields = DeviceTagScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> tags) =>
-        tags.map((Map tags) => DeviceTag.fromJson(tags.cast()));
-    return query(fields)
-        .then((json) => json is Iterable ? compiler(json.cast()) : null);
-  }
 
   UserFluent<User?> user() {
     final query = _i1.PrismaFluent.queryBuilder(
@@ -8350,17 +5488,24 @@ class DeviceFluent<T> extends _i1.PrismaFluent<T> {
     );
   }
 
-  DeviceCountOutputType $count() {
+  FirmwareFluent<Firmware?> firmware() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'_count',
+          r'Firmware',
           fields: fields,
         )
       ]),
-      key: r'_count',
+      key: r'Firmware',
     );
-    return DeviceCountOutputType(query);
+    final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
+        (json) => json is Map
+            ? Firmware.fromJson(json.cast<String, dynamic>())
+            : null);
+    return FirmwareFluent<Firmware?>(
+      future,
+      query,
+    );
   }
 }
 
@@ -8486,133 +5631,11 @@ class UserFluent<T> extends _i1.PrismaFluent<T> {
   }
 }
 
-class TaxonomyFluent<T> extends _i1.PrismaFluent<T> {
-  const TaxonomyFluent(
-    super.original,
-    super.$query,
-  );
-
-  Future<Iterable<DeviceTag>?> devices({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithRelationInput>? orderBy,
-    DeviceTagWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceTagScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'devices',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'devices',
-    );
-    final fields = DeviceTagScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> devices) =>
-        devices.map((Map devices) => DeviceTag.fromJson(devices.cast()));
-    return query(fields)
-        .then((json) => json is Iterable ? compiler(json.cast()) : null);
-  }
-
-  TaxonomyCountOutputType $count() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_count',
-          fields: fields,
-        )
-      ]),
-      key: r'_count',
-    );
-    return TaxonomyCountOutputType(query);
-  }
-}
-
 class FirmwareFluent<T> extends _i1.PrismaFluent<T> {
   const FirmwareFluent(
     super.original,
     super.$query,
   );
-
-  Future<Iterable<DeviceFirmware>?> devices({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithRelationInput>? orderBy,
-    DeviceFirmwareWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceFirmwareScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'devices',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'devices',
-    );
-    final fields = DeviceFirmwareScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> devices) =>
-        devices.map((Map devices) => DeviceFirmware.fromJson(devices.cast()));
-    return query(fields)
-        .then((json) => json is Iterable ? compiler(json.cast()) : null);
-  }
 
   UserFluent<User?> user() {
     final query = _i1.PrismaFluent.queryBuilder(
@@ -8633,6 +5656,57 @@ class FirmwareFluent<T> extends _i1.PrismaFluent<T> {
     );
   }
 
+  Future<Iterable<Device>?> devices({
+    DeviceWhereInput? where,
+    Iterable<DeviceOrderByWithRelationInput>? orderBy,
+    DeviceWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    Iterable<DeviceScalarFieldEnum>? distinct,
+  }) {
+    final args = [
+      _i2.GraphQLArg(
+        r'where',
+        where,
+      ),
+      _i2.GraphQLArg(
+        r'orderBy',
+        orderBy,
+      ),
+      _i2.GraphQLArg(
+        r'cursor',
+        cursor,
+      ),
+      _i2.GraphQLArg(
+        r'take',
+        take,
+      ),
+      _i2.GraphQLArg(
+        r'skip',
+        skip,
+      ),
+      _i2.GraphQLArg(
+        r'distinct',
+        distinct,
+      ),
+    ];
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'devices',
+          fields: fields,
+          args: args,
+        )
+      ]),
+      key: r'devices',
+    );
+    final fields = DeviceScalarFieldEnum.values.toGraphQLFields();
+    compiler(Iterable<Map> devices) =>
+        devices.map((Map devices) => Device.fromJson(devices.cast()));
+    return query(fields)
+        .then((json) => json is Iterable ? compiler(json.cast()) : null);
+  }
+
   FirmwareCountOutputType $count() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -8644,98 +5718,6 @@ class FirmwareFluent<T> extends _i1.PrismaFluent<T> {
       key: r'_count',
     );
     return FirmwareCountOutputType(query);
-  }
-}
-
-class DeviceTagFluent<T> extends _i1.PrismaFluent<T> {
-  const DeviceTagFluent(
-    super.original,
-    super.$query,
-  );
-
-  TaxonomyFluent<Taxonomy?> taxonomy() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'Taxonomy',
-          fields: fields,
-        )
-      ]),
-      key: r'Taxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : null);
-    return TaxonomyFluent<Taxonomy?>(
-      future,
-      query,
-    );
-  }
-
-  DeviceFluent<Device?> device() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'Device',
-          fields: fields,
-        )
-      ]),
-      key: r'Device',
-    );
-    final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) =>
-            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null);
-    return DeviceFluent<Device?>(
-      future,
-      query,
-    );
-  }
-}
-
-class DeviceFirmwareFluent<T> extends _i1.PrismaFluent<T> {
-  const DeviceFirmwareFluent(
-    super.original,
-    super.$query,
-  );
-
-  DeviceFluent<Device?> device() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'Device',
-          fields: fields,
-        )
-      ]),
-      key: r'Device',
-    );
-    final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) =>
-            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null);
-    return DeviceFluent<Device?>(
-      future,
-      query,
-    );
-  }
-
-  FirmwareFluent<Firmware?> firmware() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'Firmware',
-          fields: fields,
-        )
-      ]),
-      key: r'Firmware',
-    );
-    final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Firmware.fromJson(json.cast<String, dynamic>())
-            : null);
-    return FirmwareFluent<Firmware?>(
-      future,
-      query,
-    );
   }
 }
 
@@ -9793,539 +6775,6 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }
 }
 
-extension TaxonomyModelDelegateExtension on _i1.ModelDelegate<Taxonomy> {
-  TaxonomyFluent<Taxonomy?> findUnique(
-      {required TaxonomyWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findUniqueTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findUniqueTaxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : null);
-    return TaxonomyFluent<Taxonomy?>(
-      future,
-      query,
-    );
-  }
-
-  TaxonomyFluent<Taxonomy> findUniqueOrThrow(
-      {required TaxonomyWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findUniqueTaxonomyOrThrow',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findUniqueTaxonomyOrThrow',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: Taxonomy)'));
-    return TaxonomyFluent<Taxonomy>(
-      future,
-      query,
-    );
-  }
-
-  TaxonomyFluent<Taxonomy?> findFirst({
-    TaxonomyWhereInput? where,
-    Iterable<TaxonomyOrderByWithRelationInput>? orderBy,
-    TaxonomyWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<TaxonomyScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findFirstTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findFirstTaxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : null);
-    return TaxonomyFluent<Taxonomy?>(
-      future,
-      query,
-    );
-  }
-
-  TaxonomyFluent<Taxonomy> findFirstOrThrow({
-    TaxonomyWhereInput? where,
-    Iterable<TaxonomyOrderByWithRelationInput>? orderBy,
-    TaxonomyWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<TaxonomyScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findFirstTaxonomyOrThrow',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findFirstTaxonomyOrThrow',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: Taxonomy)'));
-    return TaxonomyFluent<Taxonomy>(
-      future,
-      query,
-    );
-  }
-
-  Future<Iterable<Taxonomy>> findMany({
-    TaxonomyWhereInput? where,
-    Iterable<TaxonomyOrderByWithRelationInput>? orderBy,
-    TaxonomyWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<TaxonomyScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findManyTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findManyTaxonomy',
-    );
-    final fields = TaxonomyScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> findManyTaxonomy) => findManyTaxonomy.map(
-        (Map findManyTaxonomy) => Taxonomy.fromJson(findManyTaxonomy.cast()));
-    return query(fields).then((json) => json is Iterable
-        ? compiler(json.cast())
-        : throw Exception('Unable to parse response'));
-  }
-
-  TaxonomyFluent<Taxonomy> create({required TaxonomyCreateInput data}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'createOneTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'createOneTaxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: Taxonomy)'));
-    return TaxonomyFluent<Taxonomy>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> createMany({
-    required Iterable<TaxonomyCreateManyInput> data,
-    bool? skipDuplicates,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'skipDuplicates',
-        skipDuplicates,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'createManyTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'createManyTaxonomy',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map createManyTaxonomy) =>
-        AffectedRowsOutput.fromJson(createManyTaxonomy.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  TaxonomyFluent<Taxonomy?> update({
-    required TaxonomyUpdateInput data,
-    required TaxonomyWhereUniqueInput where,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'updateOneTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'updateOneTaxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : null);
-    return TaxonomyFluent<Taxonomy?>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> updateMany({
-    required TaxonomyUpdateManyMutationInput data,
-    TaxonomyWhereInput? where,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'updateManyTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'updateManyTaxonomy',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map updateManyTaxonomy) =>
-        AffectedRowsOutput.fromJson(updateManyTaxonomy.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  TaxonomyFluent<Taxonomy> upsert({
-    required TaxonomyWhereUniqueInput where,
-    required TaxonomyCreateInput create,
-    required TaxonomyUpdateInput update,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'create',
-        create,
-      ),
-      _i2.GraphQLArg(
-        r'update',
-        update,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'upsertOneTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'upsertOneTaxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: Taxonomy)'));
-    return TaxonomyFluent<Taxonomy>(
-      future,
-      query,
-    );
-  }
-
-  TaxonomyFluent<Taxonomy?> delete({required TaxonomyWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'deleteOneTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'deleteOneTaxonomy',
-    );
-    final future = query(TaxonomyScalarFieldEnum.values.toGraphQLFields()).then(
-        (json) => json is Map
-            ? Taxonomy.fromJson(json.cast<String, dynamic>())
-            : null);
-    return TaxonomyFluent<Taxonomy?>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> deleteMany({TaxonomyWhereInput? where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'deleteManyTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'deleteManyTaxonomy',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map deleteManyTaxonomy) =>
-        AffectedRowsOutput.fromJson(deleteManyTaxonomy.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  AggregateTaxonomy aggregate({
-    TaxonomyWhereInput? where,
-    Iterable<TaxonomyOrderByWithRelationInput>? orderBy,
-    TaxonomyWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'aggregateTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'aggregateTaxonomy',
-    );
-    return AggregateTaxonomy(query);
-  }
-
-  Future<Iterable<TaxonomyGroupByOutputType>> groupBy({
-    TaxonomyWhereInput? where,
-    Iterable<TaxonomyOrderByWithAggregationInput>? orderBy,
-    required Iterable<TaxonomyScalarFieldEnum> by,
-    TaxonomyScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'by',
-        by,
-      ),
-      _i2.GraphQLArg(
-        r'having',
-        having,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'groupByTaxonomy',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'groupByTaxonomy',
-    );
-    final fields = by.map((e) => _i2.GraphQLField(e.originalName ?? e.name));
-    compiler(Iterable<Map> groupByTaxonomy) =>
-        groupByTaxonomy.map((Map groupByTaxonomy) =>
-            TaxonomyGroupByOutputType.fromJson(groupByTaxonomy.cast()));
-    return query(fields).then((json) => json is Iterable
-        ? compiler(json.cast())
-        : throw Exception('Unable to parse response'));
-  }
-}
-
 extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   FirmwareFluent<Firmware?> findUnique(
       {required FirmwareWhereUniqueInput where}) {
@@ -10859,1086 +7308,17 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }
 }
 
-extension DeviceTagModelDelegateExtension on _i1.ModelDelegate<DeviceTag> {
-  DeviceTagFluent<DeviceTag?> findUnique(
-      {required DeviceTagWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findUniqueDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findUniqueDeviceTag',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceTagFluent<DeviceTag?>(
-      future,
-      query,
-    );
-  }
-
-  DeviceTagFluent<DeviceTag> findUniqueOrThrow(
-      {required DeviceTagWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findUniqueDeviceTagOrThrow',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findUniqueDeviceTagOrThrow',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceTag)'));
-    return DeviceTagFluent<DeviceTag>(
-      future,
-      query,
-    );
-  }
-
-  DeviceTagFluent<DeviceTag?> findFirst({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithRelationInput>? orderBy,
-    DeviceTagWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceTagScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findFirstDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findFirstDeviceTag',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceTagFluent<DeviceTag?>(
-      future,
-      query,
-    );
-  }
-
-  DeviceTagFluent<DeviceTag> findFirstOrThrow({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithRelationInput>? orderBy,
-    DeviceTagWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceTagScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findFirstDeviceTagOrThrow',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findFirstDeviceTagOrThrow',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceTag)'));
-    return DeviceTagFluent<DeviceTag>(
-      future,
-      query,
-    );
-  }
-
-  Future<Iterable<DeviceTag>> findMany({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithRelationInput>? orderBy,
-    DeviceTagWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceTagScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findManyDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findManyDeviceTag',
-    );
-    final fields = DeviceTagScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> findManyDeviceTag) =>
-        findManyDeviceTag.map((Map findManyDeviceTag) =>
-            DeviceTag.fromJson(findManyDeviceTag.cast()));
-    return query(fields).then((json) => json is Iterable
-        ? compiler(json.cast())
-        : throw Exception('Unable to parse response'));
-  }
-
-  DeviceTagFluent<DeviceTag> create({DeviceTagCreateInput? data}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'createOneDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'createOneDeviceTag',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceTag)'));
-    return DeviceTagFluent<DeviceTag>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> createMany({
-    required Iterable<DeviceTagCreateManyInput> data,
-    bool? skipDuplicates,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'skipDuplicates',
-        skipDuplicates,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'createManyDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'createManyDeviceTag',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map createManyDeviceTag) =>
-        AffectedRowsOutput.fromJson(createManyDeviceTag.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  DeviceTagFluent<DeviceTag?> update({
-    required DeviceTagUpdateInput data,
-    required DeviceTagWhereUniqueInput where,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'updateOneDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'updateOneDeviceTag',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceTagFluent<DeviceTag?>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> updateMany({
-    required DeviceTagUpdateManyMutationInput data,
-    DeviceTagWhereInput? where,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'updateManyDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'updateManyDeviceTag',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map updateManyDeviceTag) =>
-        AffectedRowsOutput.fromJson(updateManyDeviceTag.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  DeviceTagFluent<DeviceTag> upsert({
-    required DeviceTagWhereUniqueInput where,
-    required DeviceTagCreateInput create,
-    required DeviceTagUpdateInput update,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'create',
-        create,
-      ),
-      _i2.GraphQLArg(
-        r'update',
-        update,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'upsertOneDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'upsertOneDeviceTag',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceTag)'));
-    return DeviceTagFluent<DeviceTag>(
-      future,
-      query,
-    );
-  }
-
-  DeviceTagFluent<DeviceTag?> delete(
-      {required DeviceTagWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'deleteOneDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'deleteOneDeviceTag',
-    );
-    final future = query(DeviceTagScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceTag.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceTagFluent<DeviceTag?>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> deleteMany({DeviceTagWhereInput? where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'deleteManyDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'deleteManyDeviceTag',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map deleteManyDeviceTag) =>
-        AffectedRowsOutput.fromJson(deleteManyDeviceTag.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  AggregateDeviceTag aggregate({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithRelationInput>? orderBy,
-    DeviceTagWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'aggregateDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'aggregateDeviceTag',
-    );
-    return AggregateDeviceTag(query);
-  }
-
-  Future<Iterable<DeviceTagGroupByOutputType>> groupBy({
-    DeviceTagWhereInput? where,
-    Iterable<DeviceTagOrderByWithAggregationInput>? orderBy,
-    required Iterable<DeviceTagScalarFieldEnum> by,
-    DeviceTagScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'by',
-        by,
-      ),
-      _i2.GraphQLArg(
-        r'having',
-        having,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'groupByDeviceTag',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'groupByDeviceTag',
-    );
-    final fields = by.map((e) => _i2.GraphQLField(e.originalName ?? e.name));
-    compiler(Iterable<Map> groupByDeviceTag) =>
-        groupByDeviceTag.map((Map groupByDeviceTag) =>
-            DeviceTagGroupByOutputType.fromJson(groupByDeviceTag.cast()));
-    return query(fields).then((json) => json is Iterable
-        ? compiler(json.cast())
-        : throw Exception('Unable to parse response'));
-  }
-}
-
-extension DeviceFirmwareModelDelegateExtension
-    on _i1.ModelDelegate<DeviceFirmware> {
-  DeviceFirmwareFluent<DeviceFirmware?> findUnique(
-      {required DeviceFirmwareWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findUniqueDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findUniqueDeviceFirmware',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceFirmwareFluent<DeviceFirmware?>(
-      future,
-      query,
-    );
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware> findUniqueOrThrow(
-      {required DeviceFirmwareWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findUniqueDeviceFirmwareOrThrow',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findUniqueDeviceFirmwareOrThrow',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceFirmware)'));
-    return DeviceFirmwareFluent<DeviceFirmware>(
-      future,
-      query,
-    );
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware?> findFirst({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithRelationInput>? orderBy,
-    DeviceFirmwareWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceFirmwareScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findFirstDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findFirstDeviceFirmware',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceFirmwareFluent<DeviceFirmware?>(
-      future,
-      query,
-    );
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware> findFirstOrThrow({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithRelationInput>? orderBy,
-    DeviceFirmwareWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceFirmwareScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findFirstDeviceFirmwareOrThrow',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findFirstDeviceFirmwareOrThrow',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceFirmware)'));
-    return DeviceFirmwareFluent<DeviceFirmware>(
-      future,
-      query,
-    );
-  }
-
-  Future<Iterable<DeviceFirmware>> findMany({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithRelationInput>? orderBy,
-    DeviceFirmwareWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-    Iterable<DeviceFirmwareScalarFieldEnum>? distinct,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-      _i2.GraphQLArg(
-        r'distinct',
-        distinct,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'findManyDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'findManyDeviceFirmware',
-    );
-    final fields = DeviceFirmwareScalarFieldEnum.values.toGraphQLFields();
-    compiler(Iterable<Map> findManyDeviceFirmware) =>
-        findManyDeviceFirmware.map((Map findManyDeviceFirmware) =>
-            DeviceFirmware.fromJson(findManyDeviceFirmware.cast()));
-    return query(fields).then((json) => json is Iterable
-        ? compiler(json.cast())
-        : throw Exception('Unable to parse response'));
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware> create(
-      {DeviceFirmwareCreateInput? data}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'createOneDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'createOneDeviceFirmware',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceFirmware)'));
-    return DeviceFirmwareFluent<DeviceFirmware>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> createMany({
-    required Iterable<DeviceFirmwareCreateManyInput> data,
-    bool? skipDuplicates,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'skipDuplicates',
-        skipDuplicates,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'createManyDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'createManyDeviceFirmware',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map createManyDeviceFirmware) =>
-        AffectedRowsOutput.fromJson(createManyDeviceFirmware.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware?> update({
-    required DeviceFirmwareUpdateInput data,
-    required DeviceFirmwareWhereUniqueInput where,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'updateOneDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'updateOneDeviceFirmware',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceFirmwareFluent<DeviceFirmware?>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> updateMany({
-    required DeviceFirmwareUpdateManyMutationInput data,
-    DeviceFirmwareWhereInput? where,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'data',
-        data,
-      ),
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'updateManyDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'updateManyDeviceFirmware',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map updateManyDeviceFirmware) =>
-        AffectedRowsOutput.fromJson(updateManyDeviceFirmware.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware> upsert({
-    required DeviceFirmwareWhereUniqueInput where,
-    required DeviceFirmwareCreateInput create,
-    required DeviceFirmwareUpdateInput update,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'create',
-        create,
-      ),
-      _i2.GraphQLArg(
-        r'update',
-        update,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'upsertOneDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'upsertOneDeviceFirmware',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : throw Exception(
-                'Not found OutputTypeRefType.string(value: DeviceFirmware)'));
-    return DeviceFirmwareFluent<DeviceFirmware>(
-      future,
-      query,
-    );
-  }
-
-  DeviceFirmwareFluent<DeviceFirmware?> delete(
-      {required DeviceFirmwareWhereUniqueInput where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'deleteOneDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'deleteOneDeviceFirmware',
-    );
-    final future = query(DeviceFirmwareScalarFieldEnum.values.toGraphQLFields())
-        .then((json) => json is Map
-            ? DeviceFirmware.fromJson(json.cast<String, dynamic>())
-            : null);
-    return DeviceFirmwareFluent<DeviceFirmware?>(
-      future,
-      query,
-    );
-  }
-
-  Future<AffectedRowsOutput> deleteMany({DeviceFirmwareWhereInput? where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $mutation([
-        _i2.GraphQLField(
-          r'deleteManyDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'deleteManyDeviceFirmware',
-    );
-    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
-    compiler(Map deleteManyDeviceFirmware) =>
-        AffectedRowsOutput.fromJson(deleteManyDeviceFirmware.cast());
-    return query(fields).then((json) => json is Map
-        ? compiler(json)
-        : throw Exception('Unable to parse response'));
-  }
-
-  AggregateDeviceFirmware aggregate({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithRelationInput>? orderBy,
-    DeviceFirmwareWhereUniqueInput? cursor,
-    int? take,
-    int? skip,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'cursor',
-        cursor,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'aggregateDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'aggregateDeviceFirmware',
-    );
-    return AggregateDeviceFirmware(query);
-  }
-
-  Future<Iterable<DeviceFirmwareGroupByOutputType>> groupBy({
-    DeviceFirmwareWhereInput? where,
-    Iterable<DeviceFirmwareOrderByWithAggregationInput>? orderBy,
-    required Iterable<DeviceFirmwareScalarFieldEnum> by,
-    DeviceFirmwareScalarWhereWithAggregatesInput? having,
-    int? take,
-    int? skip,
-  }) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      ),
-      _i2.GraphQLArg(
-        r'orderBy',
-        orderBy,
-      ),
-      _i2.GraphQLArg(
-        r'by',
-        by,
-      ),
-      _i2.GraphQLArg(
-        r'having',
-        having,
-      ),
-      _i2.GraphQLArg(
-        r'take',
-        take,
-      ),
-      _i2.GraphQLArg(
-        r'skip',
-        skip,
-      ),
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'groupByDeviceFirmware',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'groupByDeviceFirmware',
-    );
-    final fields = by.map((e) => _i2.GraphQLField(e.originalName ?? e.name));
-    compiler(Iterable<Map> groupByDeviceFirmware) => groupByDeviceFirmware.map(
-        (Map groupByDeviceFirmware) => DeviceFirmwareGroupByOutputType.fromJson(
-            groupByDeviceFirmware.cast()));
-    return query(fields).then((json) => json is Iterable
-        ? compiler(json.cast())
-        : throw Exception('Unable to parse response'));
-  }
-}
-
 @_i1.jsonSerializable
 class DeviceGroupByOutputType implements _i1.JsonSerializable {
   const DeviceGroupByOutputType({
     this.id,
     this.title,
     this.description,
-    this.createdAt,
+    this.sn,
     this.userId,
+    this.firmwareId,
+    this.publish,
+    this.createdAt,
   });
 
   factory DeviceGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -11950,9 +7330,15 @@ class DeviceGroupByOutputType implements _i1.JsonSerializable {
 
   final String? description;
 
-  final DateTime? createdAt;
+  final String? sn;
 
   final int? userId;
+
+  final int? firmwareId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceGroupByOutputTypeToJson(this);
@@ -11965,8 +7351,8 @@ class UserGroupByOutputType implements _i1.JsonSerializable {
     this.name,
     this.username,
     this.password,
-    this.createdAt,
     this.role,
+    this.createdAt,
   });
 
   factory UserGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -11980,30 +7366,12 @@ class UserGroupByOutputType implements _i1.JsonSerializable {
 
   final String? password;
 
-  final DateTime? createdAt;
-
   final Role? role;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserGroupByOutputTypeToJson(this);
-}
-
-@_i1.jsonSerializable
-class TaxonomyGroupByOutputType implements _i1.JsonSerializable {
-  const TaxonomyGroupByOutputType({
-    this.id,
-    this.title,
-  });
-
-  factory TaxonomyGroupByOutputType.fromJson(Map<String, dynamic> json) =>
-      _$TaxonomyGroupByOutputTypeFromJson(json);
-
-  final int? id;
-
-  final String? title;
-
-  @override
-  Map<String, dynamic> toJson() => _$TaxonomyGroupByOutputTypeToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -12012,10 +7380,11 @@ class FirmwareGroupByOutputType implements _i1.JsonSerializable {
     this.id,
     this.title,
     this.description,
-    this.object,
+    this.objectUrl,
     this.version,
-    this.createdAt,
     this.userId,
+    this.publish,
+    this.createdAt,
   });
 
   factory FirmwareGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -12027,59 +7396,18 @@ class FirmwareGroupByOutputType implements _i1.JsonSerializable {
 
   final String? description;
 
-  final String? object;
+  final String? objectUrl;
 
   final String? version;
 
-  final DateTime? createdAt;
-
   final int? userId;
+
+  final Publish? publish;
+
+  final DateTime? createdAt;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareGroupByOutputTypeToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceTagGroupByOutputType implements _i1.JsonSerializable {
-  const DeviceTagGroupByOutputType({
-    this.id,
-    this.taxonomyId,
-    this.deviceId,
-  });
-
-  factory DeviceTagGroupByOutputType.fromJson(Map<String, dynamic> json) =>
-      _$DeviceTagGroupByOutputTypeFromJson(json);
-
-  final int? id;
-
-  final int? taxonomyId;
-
-  final int? deviceId;
-
-  @override
-  Map<String, dynamic> toJson() => _$DeviceTagGroupByOutputTypeToJson(this);
-}
-
-@_i1.jsonSerializable
-class DeviceFirmwareGroupByOutputType implements _i1.JsonSerializable {
-  const DeviceFirmwareGroupByOutputType({
-    this.id,
-    this.deviceId,
-    this.firmwareId,
-  });
-
-  factory DeviceFirmwareGroupByOutputType.fromJson(Map<String, dynamic> json) =>
-      _$DeviceFirmwareGroupByOutputTypeFromJson(json);
-
-  final int? id;
-
-  final int? deviceId;
-
-  final int? firmwareId;
-
-  @override
-  Map<String, dynamic> toJson() =>
-      _$DeviceFirmwareGroupByOutputTypeToJson(this);
 }
 
 @_i1.jsonSerializable
@@ -12237,77 +7565,6 @@ class AggregateUser {
   }
 }
 
-class AggregateTaxonomy {
-  const AggregateTaxonomy(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  TaxonomyCountAggregateOutputType $count() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_count',
-          fields: fields,
-        )
-      ]),
-      key: r'_count',
-    );
-    return TaxonomyCountAggregateOutputType(query);
-  }
-
-  TaxonomyAvgAggregateOutputType $avg() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_avg',
-          fields: fields,
-        )
-      ]),
-      key: r'_avg',
-    );
-    return TaxonomyAvgAggregateOutputType(query);
-  }
-
-  TaxonomySumAggregateOutputType $sum() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_sum',
-          fields: fields,
-        )
-      ]),
-      key: r'_sum',
-    );
-    return TaxonomySumAggregateOutputType(query);
-  }
-
-  TaxonomyMinAggregateOutputType $min() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_min',
-          fields: fields,
-        )
-      ]),
-      key: r'_min',
-    );
-    return TaxonomyMinAggregateOutputType(query);
-  }
-
-  TaxonomyMaxAggregateOutputType $max() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_max',
-          fields: fields,
-        )
-      ]),
-      key: r'_max',
-    );
-    return TaxonomyMaxAggregateOutputType(query);
-  }
-}
-
 class AggregateFirmware {
   const AggregateFirmware(this.$query);
 
@@ -12379,194 +7636,6 @@ class AggregateFirmware {
   }
 }
 
-class AggregateDeviceTag {
-  const AggregateDeviceTag(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  DeviceTagCountAggregateOutputType $count() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_count',
-          fields: fields,
-        )
-      ]),
-      key: r'_count',
-    );
-    return DeviceTagCountAggregateOutputType(query);
-  }
-
-  DeviceTagAvgAggregateOutputType $avg() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_avg',
-          fields: fields,
-        )
-      ]),
-      key: r'_avg',
-    );
-    return DeviceTagAvgAggregateOutputType(query);
-  }
-
-  DeviceTagSumAggregateOutputType $sum() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_sum',
-          fields: fields,
-        )
-      ]),
-      key: r'_sum',
-    );
-    return DeviceTagSumAggregateOutputType(query);
-  }
-
-  DeviceTagMinAggregateOutputType $min() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_min',
-          fields: fields,
-        )
-      ]),
-      key: r'_min',
-    );
-    return DeviceTagMinAggregateOutputType(query);
-  }
-
-  DeviceTagMaxAggregateOutputType $max() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_max',
-          fields: fields,
-        )
-      ]),
-      key: r'_max',
-    );
-    return DeviceTagMaxAggregateOutputType(query);
-  }
-}
-
-class AggregateDeviceFirmware {
-  const AggregateDeviceFirmware(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  DeviceFirmwareCountAggregateOutputType $count() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_count',
-          fields: fields,
-        )
-      ]),
-      key: r'_count',
-    );
-    return DeviceFirmwareCountAggregateOutputType(query);
-  }
-
-  DeviceFirmwareAvgAggregateOutputType $avg() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_avg',
-          fields: fields,
-        )
-      ]),
-      key: r'_avg',
-    );
-    return DeviceFirmwareAvgAggregateOutputType(query);
-  }
-
-  DeviceFirmwareSumAggregateOutputType $sum() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_sum',
-          fields: fields,
-        )
-      ]),
-      key: r'_sum',
-    );
-    return DeviceFirmwareSumAggregateOutputType(query);
-  }
-
-  DeviceFirmwareMinAggregateOutputType $min() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_min',
-          fields: fields,
-        )
-      ]),
-      key: r'_min',
-    );
-    return DeviceFirmwareMinAggregateOutputType(query);
-  }
-
-  DeviceFirmwareMaxAggregateOutputType $max() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_max',
-          fields: fields,
-        )
-      ]),
-      key: r'_max',
-    );
-    return DeviceFirmwareMaxAggregateOutputType(query);
-  }
-}
-
-class DeviceCountOutputType {
-  const DeviceCountOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int> firmwares({DeviceFirmwareWhereInput? where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwares',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'firmwares',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> tags({DeviceTagWhereInput? where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'tags',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'tags',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-}
-
 class DeviceCountAggregateOutputType {
   const DeviceCountAggregateOutputType(this.$query);
 
@@ -12611,15 +7680,15 @@ class DeviceCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
-  Future<int> createdAt() {
+  Future<int> sn() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'createdAt',
+          r'sn',
           fields: fields,
         )
       ]),
-      key: r'createdAt',
+      key: r'sn',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -12633,6 +7702,45 @@ class DeviceCountAggregateOutputType {
         )
       ]),
       key: r'userId',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> firmwareId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'firmwareId',
+          fields: fields,
+        )
+      ]),
+      key: r'firmwareId',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> publish() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'publish',
+          fields: fields,
+        )
+      ]),
+      key: r'publish',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> createdAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'createdAt',
+          fields: fields,
+        )
+      ]),
+      key: r'createdAt',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -12681,6 +7789,19 @@ class DeviceAvgAggregateOutputType {
     );
     return query(const []).then((value) => (value as double?));
   }
+
+  Future<double?> firmwareId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'firmwareId',
+          fields: fields,
+        )
+      ]),
+      key: r'firmwareId',
+    );
+    return query(const []).then((value) => (value as double?));
+  }
 }
 
 class DeviceSumAggregateOutputType {
@@ -12710,6 +7831,19 @@ class DeviceSumAggregateOutputType {
         )
       ]),
       key: r'userId',
+    );
+    return query(const []).then((value) => (value as int?));
+  }
+
+  Future<int?> firmwareId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'firmwareId',
+          fields: fields,
+        )
+      ]),
+      key: r'firmwareId',
     );
     return query(const []).then((value) => (value as int?));
   }
@@ -12759,18 +7893,17 @@ class DeviceMinAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<DateTime?> createdAt() {
+  Future<String?> sn() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'createdAt',
+          r'sn',
           fields: fields,
         )
       ]),
-      key: r'createdAt',
+      key: r'sn',
     );
-    return query(const [])
-        .then((value) => value is String ? DateTime.parse(value) : null);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<int?> userId() {
@@ -12784,6 +7917,49 @@ class DeviceMinAggregateOutputType {
       key: r'userId',
     );
     return query(const []).then((value) => (value as int?));
+  }
+
+  Future<int?> firmwareId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'firmwareId',
+          fields: fields,
+        )
+      ]),
+      key: r'firmwareId',
+    );
+    return query(const []).then((value) => (value as int?));
+  }
+
+  Future<Publish?> publish() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'publish',
+          fields: fields,
+        )
+      ]),
+      key: r'publish',
+    );
+    return query(const []).then((value) => $enumDecodeNullable(
+          _$PublishEnumMap,
+          value,
+        ));
+  }
+
+  Future<DateTime?> createdAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'createdAt',
+          fields: fields,
+        )
+      ]),
+      key: r'createdAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
   }
 }
 
@@ -12831,18 +8007,17 @@ class DeviceMaxAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<DateTime?> createdAt() {
+  Future<String?> sn() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'createdAt',
+          r'sn',
           fields: fields,
         )
       ]),
-      key: r'createdAt',
+      key: r'sn',
     );
-    return query(const [])
-        .then((value) => value is String ? DateTime.parse(value) : null);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<int?> userId() {
@@ -12856,6 +8031,49 @@ class DeviceMaxAggregateOutputType {
       key: r'userId',
     );
     return query(const []).then((value) => (value as int?));
+  }
+
+  Future<int?> firmwareId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'firmwareId',
+          fields: fields,
+        )
+      ]),
+      key: r'firmwareId',
+    );
+    return query(const []).then((value) => (value as int?));
+  }
+
+  Future<Publish?> publish() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'publish',
+          fields: fields,
+        )
+      ]),
+      key: r'publish',
+    );
+    return query(const []).then((value) => $enumDecodeNullable(
+          _$PublishEnumMap,
+          value,
+        ));
+  }
+
+  Future<DateTime?> createdAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'createdAt',
+          fields: fields,
+        )
+      ]),
+      key: r'createdAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
   }
 }
 
@@ -12962,19 +8180,6 @@ class UserCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
-  Future<int> createdAt() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'createdAt',
-          fields: fields,
-        )
-      ]),
-      key: r'createdAt',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
   Future<int> role() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -12984,6 +8189,19 @@ class UserCountAggregateOutputType {
         )
       ]),
       key: r'role',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> createdAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'createdAt',
+          fields: fields,
+        )
+      ]),
+      key: r'createdAt',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -13097,20 +8315,6 @@ class UserMinAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<DateTime?> createdAt() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'createdAt',
-          fields: fields,
-        )
-      ]),
-      key: r'createdAt',
-    );
-    return query(const [])
-        .then((value) => value is String ? DateTime.parse(value) : null);
-  }
-
   Future<Role?> role() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -13125,6 +8329,20 @@ class UserMinAggregateOutputType {
           _$RoleEnumMap,
           value,
         ));
+  }
+
+  Future<DateTime?> createdAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'createdAt',
+          fields: fields,
+        )
+      ]),
+      key: r'createdAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
   }
 }
 
@@ -13185,20 +8403,6 @@ class UserMaxAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<DateTime?> createdAt() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'createdAt',
-          fields: fields,
-        )
-      ]),
-      key: r'createdAt',
-    );
-    return query(const [])
-        .then((value) => value is String ? DateTime.parse(value) : null);
-  }
-
   Future<Role?> role() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -13214,178 +8418,19 @@ class UserMaxAggregateOutputType {
           value,
         ));
   }
-}
 
-class TaxonomyCountOutputType {
-  const TaxonomyCountOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int> devices({DeviceTagWhereInput? where}) {
-    final args = [
-      _i2.GraphQLArg(
-        r'where',
-        where,
-      )
-    ];
+  Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'devices',
-          fields: fields,
-          args: args,
-        )
-      ]),
-      key: r'devices',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-}
-
-class TaxonomyCountAggregateOutputType {
-  const TaxonomyCountAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
+          r'createdAt',
           fields: fields,
         )
       ]),
-      key: r'id',
+      key: r'createdAt',
     );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> title() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'title',
-          fields: fields,
-        )
-      ]),
-      key: r'title',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> $all() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_all',
-          fields: fields,
-        )
-      ]),
-      key: r'_all',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-}
-
-class TaxonomyAvgAggregateOutputType {
-  const TaxonomyAvgAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<double?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-}
-
-class TaxonomySumAggregateOutputType {
-  const TaxonomySumAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-}
-
-class TaxonomyMinAggregateOutputType {
-  const TaxonomyMinAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<String?> title() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'title',
-          fields: fields,
-        )
-      ]),
-      key: r'title',
-    );
-    return query(const []).then((value) => (value as String?));
-  }
-}
-
-class TaxonomyMaxAggregateOutputType {
-  const TaxonomyMaxAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<String?> title() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'title',
-          fields: fields,
-        )
-      ]),
-      key: r'title',
-    );
-    return query(const []).then((value) => (value as String?));
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
   }
 }
 
@@ -13394,7 +8439,7 @@ class FirmwareCountOutputType {
 
   final _i1.PrismaFluentQuery $query;
 
-  Future<int> devices({DeviceFirmwareWhereInput? where}) {
+  Future<int> devices({DeviceWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
         r'where',
@@ -13459,15 +8504,15 @@ class FirmwareCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
-  Future<int> object() {
+  Future<int> objectUrl() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'object',
+          r'objectUrl',
           fields: fields,
         )
       ]),
-      key: r'object',
+      key: r'objectUrl',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -13485,19 +8530,6 @@ class FirmwareCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
-  Future<int> createdAt() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'createdAt',
-          fields: fields,
-        )
-      ]),
-      key: r'createdAt',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
   Future<int> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -13507,6 +8539,32 @@ class FirmwareCountAggregateOutputType {
         )
       ]),
       key: r'userId',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> publish() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'publish',
+          fields: fields,
+        )
+      ]),
+      key: r'publish',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> createdAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'createdAt',
+          fields: fields,
+        )
+      ]),
+      key: r'createdAt',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -13633,15 +8691,15 @@ class FirmwareMinAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<String?> object() {
+  Future<String?> objectUrl() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'object',
+          r'objectUrl',
           fields: fields,
         )
       ]),
-      key: r'object',
+      key: r'objectUrl',
     );
     return query(const []).then((value) => (value as String?));
   }
@@ -13659,6 +8717,35 @@ class FirmwareMinAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
+  Future<int?> userId() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'userId',
+          fields: fields,
+        )
+      ]),
+      key: r'userId',
+    );
+    return query(const []).then((value) => (value as int?));
+  }
+
+  Future<Publish?> publish() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'publish',
+          fields: fields,
+        )
+      ]),
+      key: r'publish',
+    );
+    return query(const []).then((value) => $enumDecodeNullable(
+          _$PublishEnumMap,
+          value,
+        ));
+  }
+
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -13671,19 +8758,6 @@ class FirmwareMinAggregateOutputType {
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
-  }
-
-  Future<int?> userId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'userId',
-          fields: fields,
-        )
-      ]),
-      key: r'userId',
-    );
-    return query(const []).then((value) => (value as int?));
   }
 }
 
@@ -13731,15 +8805,15 @@ class FirmwareMaxAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<String?> object() {
+  Future<String?> objectUrl() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'object',
+          r'objectUrl',
           fields: fields,
         )
       ]),
-      key: r'object',
+      key: r'objectUrl',
     );
     return query(const []).then((value) => (value as String?));
   }
@@ -13757,20 +8831,6 @@ class FirmwareMaxAggregateOutputType {
     return query(const []).then((value) => (value as String?));
   }
 
-  Future<DateTime?> createdAt() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'createdAt',
-          fields: fields,
-        )
-      ]),
-      key: r'createdAt',
-    );
-    return query(const [])
-        .then((value) => value is String ? DateTime.parse(value) : null);
-  }
-
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -13783,481 +8843,35 @@ class FirmwareMaxAggregateOutputType {
     );
     return query(const []).then((value) => (value as int?));
   }
-}
 
-class DeviceTagCountAggregateOutputType {
-  const DeviceTagCountAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int> id() {
+  Future<Publish?> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'id',
+          r'publish',
           fields: fields,
         )
       ]),
-      key: r'id',
+      key: r'publish',
     );
-    return query(const []).then((value) => (value as int));
+    return query(const []).then((value) => $enumDecodeNullable(
+          _$PublishEnumMap,
+          value,
+        ));
   }
 
-  Future<int> taxonomyId() {
+  Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          r'taxonomyId',
+          r'createdAt',
           fields: fields,
         )
       ]),
-      key: r'taxonomyId',
+      key: r'createdAt',
     );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> $all() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_all',
-          fields: fields,
-        )
-      ]),
-      key: r'_all',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-}
-
-class DeviceTagAvgAggregateOutputType {
-  const DeviceTagAvgAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<double?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-
-  Future<double?> taxonomyId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'taxonomyId',
-          fields: fields,
-        )
-      ]),
-      key: r'taxonomyId',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-
-  Future<double?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-}
-
-class DeviceTagSumAggregateOutputType {
-  const DeviceTagSumAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> taxonomyId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'taxonomyId',
-          fields: fields,
-        )
-      ]),
-      key: r'taxonomyId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-}
-
-class DeviceTagMinAggregateOutputType {
-  const DeviceTagMinAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> taxonomyId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'taxonomyId',
-          fields: fields,
-        )
-      ]),
-      key: r'taxonomyId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-}
-
-class DeviceTagMaxAggregateOutputType {
-  const DeviceTagMaxAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> taxonomyId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'taxonomyId',
-          fields: fields,
-        )
-      ]),
-      key: r'taxonomyId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-}
-
-class DeviceFirmwareCountAggregateOutputType {
-  const DeviceFirmwareCountAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> firmwareId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwareId',
-          fields: fields,
-        )
-      ]),
-      key: r'firmwareId',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-
-  Future<int> $all() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'_all',
-          fields: fields,
-        )
-      ]),
-      key: r'_all',
-    );
-    return query(const []).then((value) => (value as int));
-  }
-}
-
-class DeviceFirmwareAvgAggregateOutputType {
-  const DeviceFirmwareAvgAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<double?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-
-  Future<double?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-
-  Future<double?> firmwareId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwareId',
-          fields: fields,
-        )
-      ]),
-      key: r'firmwareId',
-    );
-    return query(const []).then((value) => (value as double?));
-  }
-}
-
-class DeviceFirmwareSumAggregateOutputType {
-  const DeviceFirmwareSumAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> firmwareId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwareId',
-          fields: fields,
-        )
-      ]),
-      key: r'firmwareId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-}
-
-class DeviceFirmwareMinAggregateOutputType {
-  const DeviceFirmwareMinAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> firmwareId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwareId',
-          fields: fields,
-        )
-      ]),
-      key: r'firmwareId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-}
-
-class DeviceFirmwareMaxAggregateOutputType {
-  const DeviceFirmwareMaxAggregateOutputType(this.$query);
-
-  final _i1.PrismaFluentQuery $query;
-
-  Future<int?> id() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'id',
-          fields: fields,
-        )
-      ]),
-      key: r'id',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> deviceId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'deviceId',
-          fields: fields,
-        )
-      ]),
-      key: r'deviceId',
-    );
-    return query(const []).then((value) => (value as int?));
-  }
-
-  Future<int?> firmwareId() {
-    final query = _i1.PrismaFluent.queryBuilder(
-      query: (fields) => $query([
-        _i2.GraphQLField(
-          r'firmwareId',
-          fields: fields,
-        )
-      ]),
-      key: r'firmwareId',
-    );
-    return query(const []).then((value) => (value as int?));
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
   }
 }
 
@@ -14301,7 +8915,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
     final engine = _i5.BinaryEngine(
       logger: logger,
       schema:
-          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIHRpdGxlICAgICAgIFN0cmluZw0KICBkZXNjcmlwdGlvbiBTdHJpbmcNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgICAgICAgICBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KCkNCiAgZmlybXdhcmVzICAgRGV2aWNlRmlybXdhcmVbXQ0KICB0YWdzICAgICAgICBEZXZpY2VUYWdbXQ0KICBVc2VyICAgICAgICBVc2VyPyAgICAgICAgICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQoNCiAgQEBtYXAoImRldmljZSIpDQp9DQoNCm1vZGVsIFVzZXIgew0KICBpZCAgICAgICAgSW50ICAgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICBuYW1lICAgICAgU3RyaW5nICAgICBAdW5pcXVlIEBkYi5WYXJDaGFyKDQ1KQ0KICB1c2VybmFtZSAgU3RyaW5nICAgICBAdW5pcXVlIEBkYi5WYXJDaGFyKDQ1KQ0KICBwYXNzd29yZCAgU3RyaW5nICAgICBAZGIuVmFyQ2hhcig2NCkNCiAgY3JlYXRlZEF0IERhdGVUaW1lICAgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eigpDQogIGRldmljZXMgICBEZXZpY2VbXQ0KICBmaXJtd2FyZXMgRmlybXdhcmVbXQ0KICByb2xlICAgICAgUm9sZSAgICAgICBAZGVmYXVsdChVU0VSKQ0KDQogIEBAbWFwKCJ1c2VyIikNCn0NCg0KbW9kZWwgVGF4b25vbXkgew0KICBpZCAgICAgIEludCAgICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIHRpdGxlICAgU3RyaW5nICAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcigyNTUpDQogIGRldmljZXMgRGV2aWNlVGFnW10NCg0KICBAQG1hcCgidGF4b25vbXkiKQ0KfQ0KDQptb2RlbCBGaXJtd2FyZSB7DQogIGlkICAgICAgICAgIEludCAgICAgICAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgICAgICAgICBAdW5pcXVlIEBkYi5WYXJDaGFyKDI1NSkNCiAgZGVzY3JpcHRpb24gU3RyaW5nICAgICAgICAgICBAdW5pcXVlDQogIG9iamVjdCAgICAgIFN0cmluZyAgICAgICAgICAgQHVuaXF1ZQ0KICB2ZXJzaW9uICAgICBTdHJpbmcgICAgICAgICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGNyZWF0ZWRBdCAgIERhdGVUaW1lICAgICAgICAgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eigpDQogIGRldmljZXMgICAgIERldmljZUZpcm13YXJlW10NCiAgVXNlciAgICAgICAgVXNlcj8gICAgICAgICAgICBAcmVsYXRpb24oZmllbGRzOiBbdXNlcklkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgdXNlcklkICAgICAgSW50Pw0KDQogIEBAbWFwKCJmaXJtd2FyZSIpDQp9DQoNCm1vZGVsIERldmljZVRhZyB7DQogIGlkICAgICAgICAgSW50ICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpDQogIFRheG9ub215ICAgVGF4b25vbXk/IEByZWxhdGlvbihmaWVsZHM6IFt0YXhvbm9teUlkXSwgcmVmZXJlbmNlczogW2lkXSkNCiAgdGF4b25vbXlJZCBJbnQ/DQogIERldmljZSAgICAgRGV2aWNlPyAgIEByZWxhdGlvbihmaWVsZHM6IFtkZXZpY2VJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGRldmljZUlkICAgSW50Pw0KDQogIEBAbWFwKCJkZXZpY2VfdGFnIikNCn0NCg0KbW9kZWwgRGV2aWNlRmlybXdhcmUgew0KICBpZCAgICAgICAgIEludCAgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICBEZXZpY2UgICAgIERldmljZT8gICBAcmVsYXRpb24oZmllbGRzOiBbZGV2aWNlSWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICBkZXZpY2VJZCAgIEludD8NCiAgRmlybXdhcmUgICBGaXJtd2FyZT8gQHJlbGF0aW9uKGZpZWxkczogW2Zpcm13YXJlSWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICBmaXJtd2FyZUlkIEludD8NCg0KICBAQG1hcCgiZGV2aWNlX2Zpcm13YXJlIikNCn0NCg0KZW51bSBSb2xlIHsNCiAgQURNSU4gLy8vIGFsbG93ZWQgdG8gZG8gZXZlcnl0aGluZw0KICBVU0VSDQp9DQo=',
+          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBzbiAgICAgICAgICBTdHJpbmcgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIEZpcm13YXJlICAgIEZpcm13YXJlPyBAcmVsYXRpb24oZmllbGRzOiBbZmlybXdhcmVJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGZpcm13YXJlSWQgIEludD8NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgIEBkZWZhdWx0KG5vdygpKSBAZGIuVGltZXN0YW1wdHooKQ0KDQogIEBAbWFwKCJkZXZpY2UiKQ0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgIEludCAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgbmFtZSAgICAgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgdXNlcm5hbWUgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgcGFzc3dvcmQgIFN0cmluZyAgICAgQGRiLlZhckNoYXIoNjQpDQogIGRldmljZXMgICBEZXZpY2VbXQ0KICBmaXJtd2FyZXMgRmlybXdhcmVbXQ0KICByb2xlICAgICAgUm9sZSAgICAgICBAZGVmYXVsdChVU0VSKQ0KICBjcmVhdGVkQXQgRGF0ZVRpbWUgICBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KCkNCg0KICBAQG1hcCgidXNlciIpDQp9DQoNCm1vZGVsIEZpcm13YXJlIHsNCiAgaWQgICAgICAgICAgSW50ICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBvYmplY3RVcmwgICBTdHJpbmcNCiAgdmVyc2lvbiAgICAgU3RyaW5nICAgQGRiLlZhckNoYXIoNDUpDQogIFVzZXIgICAgICAgIFVzZXI/ICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIGRldmljZXMgICAgIERldmljZVtdDQogIHB1Ymxpc2ggICAgIFB1Ymxpc2ggIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eigpDQoNCiAgQEBtYXAoImZpcm13YXJlIikNCn0NCg0KZW51bSBSb2xlIHsNCiAgQURNSU4gLy8vIGFsbG93ZWQgdG8gZG8gZXZlcnl0aGluZw0KICBVU0VSDQp9DQoNCmVudW0gUHVibGlzaCB7DQogIEVOQUJMRQ0KICBESVNBQkxFDQp9DQo=',
       datasources: datasources?.toJson().cast() ?? const {},
       executable:
           r'D:\Projects\IoTProject\leap_oss\server\node_modules\prisma\query-engine-windows.exe',
@@ -14338,26 +8952,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
         transaction: _transaction,
       );
 
-  _i1.ModelDelegate<Taxonomy> get taxonomy => _i1.ModelDelegate<Taxonomy>(
-        _engine,
-        headers: _headers,
-        transaction: _transaction,
-      );
-
   _i1.ModelDelegate<Firmware> get firmware => _i1.ModelDelegate<Firmware>(
-        _engine,
-        headers: _headers,
-        transaction: _transaction,
-      );
-
-  _i1.ModelDelegate<DeviceTag> get deviceTag => _i1.ModelDelegate<DeviceTag>(
-        _engine,
-        headers: _headers,
-        transaction: _transaction,
-      );
-
-  _i1.ModelDelegate<DeviceFirmware> get deviceFirmware =>
-      _i1.ModelDelegate<DeviceFirmware>(
         _engine,
         headers: _headers,
         transaction: _transaction,

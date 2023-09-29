@@ -15,5 +15,6 @@ Handler middleware(Handler handler) {
               userRepository.fetchFromToken(token),
         ),
       )
-      .use(provider<DeviceRepository>((_) => deviceRepository));
+      .use(provider<DeviceRepository>((_) => deviceRepository))
+      .use(provider<UserRepository>((_) => userRepository));
 }

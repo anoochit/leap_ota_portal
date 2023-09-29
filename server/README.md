@@ -16,3 +16,4 @@ You can use a [client.rest](/server/client.rest) to test API.
 - `/devices` - device data
 - `/firmware` - firmware data
 - `/user` - user data
+- /ota/[sn] - firmware url

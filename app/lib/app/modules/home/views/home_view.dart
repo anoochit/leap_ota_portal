@@ -28,6 +28,7 @@ class HomeView extends GetView<HomeController> {
           ProfileButtonView(),
         ],
       ),
+      // FIXME : make a view for each device type
       body: (deviceType == DeviceScreenType.mobile)
           ? const BodyView()
           : Row(

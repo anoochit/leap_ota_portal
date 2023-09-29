@@ -30,6 +30,7 @@ services:
 
   minio:
     image: minio/minio
+    restart: always
     ports:
       - "9000:9000"
       - "9001:9001"

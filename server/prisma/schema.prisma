@@ -13,14 +13,16 @@ generator dbml {
 }
 
 model Device {
-  id          Int              @id @default(autoincrement())
-  title       String
+  id          Int       @id @default(autoincrement())
+  title       String    @unique @db.VarChar(45)
   description String
-  createdAt   DateTime         @default(now()) @db.Timestamptz()
-  firmwares   DeviceFirmware[]
-  tags        DeviceTag[]
-  User        User?            @relation(fields: [userId], references: [id])
+  sn          String    @unique @db.VarChar(45)
+  User        User?     @relation(fields: [userId], references: [id])
   userId      Int?
+  Firmware    Firmware? @relation(fields: [firmwareId], references: [id])
+  firmwareId  Int?
+  publish     Publish   @default(ENABLE)
+  createdAt   DateTime  @default(now()) @db.Timestamptz()
 
   @@map("device")
 }
@@ -30,57 +32,35 @@ model User {
   name      String     @unique @db.VarChar(45)
   username  String     @unique @db.VarChar(45)
   password  String     @db.VarChar(64)
-  createdAt DateTime   @default(now()) @db.Timestamptz()
   devices   Device[]
   firmwares Firmware[]
   role      Role       @default(USER)
+  createdAt DateTime   @default(now()) @db.Timestamptz()
 
   @@map("user")
 }
 
-model Taxonomy {
-  id      Int         @id @default(autoincrement())
-  title   String      @unique @db.VarChar(255)
-  devices DeviceTag[]
-
-  @@map("taxonomy")
-}
-
 model Firmware {
-  id          Int              @id @default(autoincrement())
-  title       String           @unique @db.VarChar(255)
-  description String           @unique
-  object      String           @unique
-  version     String           @unique @db.VarChar(45)
-  createdAt   DateTime         @default(now()) @db.Timestamptz()
-  devices     DeviceFirmware[]
-  User        User?            @relation(fields: [userId], references: [id])
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(45)
+  description String
+  objectUrl   String
+  version     String   @db.VarChar(45)
+  User        User?    @relation(fields: [userId], references: [id])
   userId      Int?
+  devices     Device[]
+  publish     Publish  @default(ENABLE)
+  createdAt   DateTime @default(now()) @db.Timestamptz()
 
   @@map("firmware")
-}
-
-model DeviceTag {
-  id         Int       @id @default(autoincrement())
-  Taxonomy   Taxonomy? @relation(fields: [taxonomyId], references: [id])
-  taxonomyId Int?
-  Device     Device?   @relation(fields: [deviceId], references: [id])
-  deviceId   Int?
-
-  @@map("device_tag")
-}
-
-model DeviceFirmware {
-  id         Int       @id @default(autoincrement())
-  Device     Device?   @relation(fields: [deviceId], references: [id])
-  deviceId   Int?
-  Firmware   Firmware? @relation(fields: [firmwareId], references: [id])
-  firmwareId Int?
-
-  @@map("device_firmware")
 }
 
 enum Role {
   ADMIN /// allowed to do everything
   USER
+}
+
+enum Publish {
+  ENABLE
+  DISABLE
 }
