@@ -12,7 +12,7 @@ class DeviceResponseProvider extends GetConnect {
     final token = await appController.getToken();
 
     final response = await get('${ConstUtils.resAPIHost}/devices',
-        headers: {"Authorization": "Bearer ${token}"});
+        headers: {"Authorization": "Bearer $token"});
 
     log('${response.bodyString}');
 

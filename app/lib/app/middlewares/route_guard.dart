@@ -11,7 +11,7 @@ class RouteGuard extends GetMiddleware {
     if (appController.isSignIn()) {
       return null;
     } else {
-      return RouteSettings(name: Routes.SIGNIN);
+      return const RouteSettings(name: Routes.SIGNIN);
     }
   }
 }

@@ -51,7 +51,7 @@ class FirmwareView extends GetView<FirmwareController> {
                   fixedWidth: 80,
                 ),
                 DataColumn2(
-                  label: Text('Actions'),
+                  label: Text('Assign'),
                   fixedWidth: 48,
                 ),
               ],

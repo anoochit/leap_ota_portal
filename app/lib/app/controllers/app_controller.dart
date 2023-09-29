@@ -35,22 +35,28 @@ class AppController extends GetxController {
       Get.snackbar(
         'Cannot sign in',
         'Please check your username and password.',
+        maxWidth: 360,
+        snackStyle: SnackStyle.FLOATING,
       );
     }
 
+    // goto home
     Get.offAllNamed(Routes.HOME);
   }
 
+  // get email
   Future<String?> getUsername() async {
-    return await SharePreferenceUtils().getSharePreference(key: 'EMAIL');
+    return SharePreferenceUtils().getSharePreference(key: 'EMAIL');
   }
 
+  // get name
   Future<String?> getName() async {
-    return await SharePreferenceUtils().getSharePreference(key: 'NAME');
+    return SharePreferenceUtils().getSharePreference(key: 'NAME');
   }
 
+  // get token
   Future<String?> getToken() async {
-    return await SharePreferenceUtils().getSharePreference(key: 'TOKEN');
+    return SharePreferenceUtils().getSharePreference(key: 'TOKEN');
   }
 
   // check signin status
@@ -63,6 +69,7 @@ class AppController extends GetxController {
     }
   }
 
+  // signout
   signOut() async {
     await SharePreferenceUtils().sharedPref.clear();
     Get.offAllNamed(Routes.SIGNIN);

@@ -26,7 +26,7 @@ class DeviceView extends GetView<DeviceController> {
               showCheckboxColumn: false,
               headingRowColor: MaterialStatePropertyAll(
                   Theme.of(context).colorScheme.surfaceTint.withOpacity(0.2)),
-              headingTextStyle: TextStyle(fontWeight: FontWeight.bold),
+              headingTextStyle: const TextStyle(fontWeight: FontWeight.bold),
               columns: const [
                 DataColumn2(
                   label: Text('S/N'),
@@ -48,7 +48,7 @@ class DeviceView extends GetView<DeviceController> {
                   fixedWidth: 80,
                 ),
                 DataColumn2(
-                  label: Text('Actions'),
+                  label: Text('Assign'),
                   fixedWidth: 48,
                 ),
               ],
@@ -76,7 +76,7 @@ class DeviceView extends GetView<DeviceController> {
                               // TODO : assign firmware to devices
                             },
                             icon: const Icon(
-                              Icons.assignment_add,
+                              Icons.assignment_return,
                             ),
                           ),
                         )

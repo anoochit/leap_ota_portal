@@ -12,7 +12,7 @@ class FirmwareResponseProvider extends GetConnect {
     final token = await appController.getToken();
 
     final response = await get('${ConstUtils.resAPIHost}/firmwares',
-        headers: {"Authorization": "Bearer ${token}"});
+        headers: {"Authorization": "Bearer $token"});
 
     log('${response.bodyString}');
 
