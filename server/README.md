@@ -22,6 +22,12 @@ Run database and storage service with docker-compose
 
 `docker-compose up -d`
 
+Use prisma CLI to migrate database
+
+`npm install`
+
+`npx prisma migrate dev`
+
 Run server
 
 `dart_frog dev`
@@ -34,4 +40,4 @@ You can use a [client.rest](/server/client.rest) to test API.
 - `/devices` - device data
 - `/firmware` - firmware data
 - `/user` - user data
-- /ota/[sn] - firmware url
+- `/ota/[sn]` - firmware url
