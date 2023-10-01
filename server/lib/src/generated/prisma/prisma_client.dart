@@ -62,7 +62,7 @@ enum SortOrder implements _i1.PrismaEnum {
 
 enum QueryMode implements _i1.PrismaEnum {
   @JsonValue('default')
-  $default('default'),
+  $default(r'default'),
   insensitive;
 
   const QueryMode([this.originalName]);
@@ -81,9 +81,9 @@ enum NullsOrder implements _i1.PrismaEnum {
 
 enum Publish implements _i1.PrismaEnum {
   @JsonValue('ENABLE')
-  enable('ENABLE'),
+  enable(r'ENABLE'),
   @JsonValue('DISABLE')
-  disable('DISABLE');
+  disable(r'DISABLE');
 
   const Publish([this.originalName]);
 
@@ -93,9 +93,9 @@ enum Publish implements _i1.PrismaEnum {
 
 enum Role implements _i1.PrismaEnum {
   @JsonValue('ADMIN')
-  admin('ADMIN'),
+  admin(r'ADMIN'),
   @JsonValue('USER')
-  user('USER');
+  user(r'USER');
 
   const Role([this.originalName]);
 
@@ -149,10 +149,10 @@ class DeviceWhereInput implements _i1.JsonSerializable {
 
   final DateTimeFilter? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserRelationFilter? user;
 
-  @JsonKey(name: 'Firmware')
+  @JsonKey(name: r'Firmware')
   final FirmwareRelationFilter? firmware;
 
   @override
@@ -196,10 +196,10 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
 
   final SortOrder? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserOrderByWithRelationInput? user;
 
-  @JsonKey(name: 'Firmware')
+  @JsonKey(name: r'Firmware')
   final FirmwareOrderByWithRelationInput? firmware;
 
   @override
@@ -247,7 +247,7 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
   });
 
   factory DeviceOrderByWithAggregationInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceOrderByWithAggregationInputFromJson(json);
 
   final SortOrder? id;
@@ -268,19 +268,19 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? updatedAt;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final DeviceCountOrderByAggregateInput? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final DeviceAvgOrderByAggregateInput? $avg;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final DeviceMaxOrderByAggregateInput? $max;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final DeviceMinOrderByAggregateInput? $min;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final DeviceSumOrderByAggregateInput? $sum;
 
   @override
@@ -306,7 +306,7 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
   });
 
   factory DeviceScalarWhereWithAggregatesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceScalarWhereWithAggregatesInputFromJson(json);
 
   final Iterable<DeviceScalarWhereWithAggregatesInput>? AND;
@@ -480,19 +480,19 @@ class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? updatedAt;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final UserCountOrderByAggregateInput? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final UserAvgOrderByAggregateInput? $avg;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final UserMaxOrderByAggregateInput? $max;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final UserMinOrderByAggregateInput? $min;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final UserSumOrderByAggregateInput? $sum;
 
   @override
@@ -516,7 +516,7 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
   });
 
   factory UserScalarWhereWithAggregatesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserScalarWhereWithAggregatesInputFromJson(json);
 
   final Iterable<UserScalarWhereWithAggregatesInput>? AND;
@@ -590,7 +590,7 @@ class FirmwareWhereInput implements _i1.JsonSerializable {
 
   final DateTimeFilter? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserRelationFilter? user;
 
   final DeviceListRelationFilter? devices;
@@ -616,7 +616,7 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareOrderByWithRelationInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareOrderByWithRelationInputFromJson(json);
 
   final SortOrder? id;
@@ -637,7 +637,7 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
 
   final SortOrder? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserOrderByWithRelationInput? user;
 
   final DeviceOrderByRelationAggregateInput? devices;
@@ -680,7 +680,7 @@ class FirmwareOrderByWithAggregationInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareOrderByWithAggregationInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareOrderByWithAggregationInputFromJson(json);
 
   final SortOrder? id;
@@ -701,19 +701,19 @@ class FirmwareOrderByWithAggregationInput implements _i1.JsonSerializable {
 
   final SortOrder? updatedAt;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final FirmwareCountOrderByAggregateInput? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final FirmwareAvgOrderByAggregateInput? $avg;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final FirmwareMaxOrderByAggregateInput? $max;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final FirmwareMinOrderByAggregateInput? $min;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final FirmwareSumOrderByAggregateInput? $sum;
 
   @override
@@ -739,7 +739,7 @@ class FirmwareScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareScalarWhereWithAggregatesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareScalarWhereWithAggregatesInputFromJson(json);
 
   final Iterable<FirmwareScalarWhereWithAggregatesInput>? AND;
@@ -799,10 +799,10 @@ class DeviceCreateInput implements _i1.JsonSerializable {
 
   final DateTime? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutDevicesInput? user;
 
-  @JsonKey(name: 'Firmware')
+  @JsonKey(name: r'Firmware')
   final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
 
   @override
@@ -812,7 +812,10 @@ class DeviceCreateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
   const DeviceUncheckedCreateInput({
-    required this.title, required this.description, required this.sn, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
     this.userId,
     this.firmwareId,
     this.publish,
@@ -873,10 +876,10 @@ class DeviceUpdateInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserUpdateOneWithoutDevicesNestedInput? user;
 
-  @JsonKey(name: 'Firmware')
+  @JsonKey(name: r'Firmware')
   final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
 
   @override
@@ -925,7 +928,10 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class DeviceCreateManyInput implements _i1.JsonSerializable {
   const DeviceCreateManyInput({
-    required this.title, required this.description, required this.sn, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
     this.userId,
     this.firmwareId,
     this.publish,
@@ -1066,7 +1072,10 @@ class UserCreateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserUncheckedCreateInput implements _i1.JsonSerializable {
   const UserUncheckedCreateInput({
-    required this.name, required this.username, required this.password, this.id,
+    this.id,
+    required this.name,
+    required this.username,
+    required this.password,
     this.role,
     this.createdAt,
     this.updatedAt,
@@ -1177,7 +1186,10 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserCreateManyInput implements _i1.JsonSerializable {
   const UserCreateManyInput({
-    required this.name, required this.username, required this.password, this.id,
+    this.id,
+    required this.name,
+    required this.username,
+    required this.password,
     this.role,
     this.createdAt,
     this.updatedAt,
@@ -1298,7 +1310,7 @@ class FirmwareCreateInput implements _i1.JsonSerializable {
 
   final DateTime? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutFirmwaresInput? user;
 
   final DeviceCreateNestedManyWithoutFirmwareInput? devices;
@@ -1310,7 +1322,11 @@ class FirmwareCreateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class FirmwareUncheckedCreateInput implements _i1.JsonSerializable {
   const FirmwareUncheckedCreateInput({
-    required this.title, required this.description, required this.objectUrl, required this.version, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
     this.userId,
     this.publish,
     this.createdAt,
@@ -1376,7 +1392,7 @@ class FirmwareUpdateInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserUpdateOneWithoutFirmwaresNestedInput? user;
 
   final DeviceUpdateManyWithoutFirmwareNestedInput? devices;
@@ -1430,7 +1446,11 @@ class FirmwareUncheckedUpdateInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class FirmwareCreateManyInput implements _i1.JsonSerializable {
   const FirmwareCreateManyInput({
-    required this.title, required this.description, required this.objectUrl, required this.version, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
     this.userId,
     this.publish,
     this.createdAt,
@@ -1511,7 +1531,7 @@ class FirmwareUncheckedUpdateManyInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareUncheckedUpdateManyInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedUpdateManyInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -1555,7 +1575,7 @@ class IntFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -1596,7 +1616,7 @@ class StringFilter implements _i1.JsonSerializable {
 
   final String? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<String>? $in;
 
   final Iterable<String>? notIn;
@@ -1641,7 +1661,7 @@ class IntNullableFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -1674,7 +1694,7 @@ class EnumPublishFilter implements _i1.JsonSerializable {
 
   final Publish? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Publish>? $in;
 
   final Iterable<Publish>? notIn;
@@ -1703,7 +1723,7 @@ class DateTimeFilter implements _i1.JsonSerializable {
 
   final DateTime? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<DateTime>? $in;
 
   final Iterable<DateTime>? notIn;
@@ -1732,7 +1752,7 @@ class UserRelationFilter implements _i1.JsonSerializable {
   factory UserRelationFilter.fromJson(Map<String, dynamic> json) =>
       _$UserRelationFilterFromJson(json);
 
-  @JsonKey(name: 'is')
+  @JsonKey(name: r'is')
   final UserWhereInput? $is;
 
   final UserWhereInput? isNot;
@@ -1751,7 +1771,7 @@ class FirmwareRelationFilter implements _i1.JsonSerializable {
   factory FirmwareRelationFilter.fromJson(Map<String, dynamic> json) =>
       _$FirmwareRelationFilterFromJson(json);
 
-  @JsonKey(name: 'is')
+  @JsonKey(name: r'is')
   final FirmwareWhereInput? $is;
 
   final FirmwareWhereInput? isNot;
@@ -1793,7 +1813,7 @@ class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
   });
 
   factory DeviceCountOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCountOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
@@ -1962,7 +1982,7 @@ class IntWithAggregatesFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -1977,19 +1997,19 @@ class IntWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedIntWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final NestedFloatFilter? $avg;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final NestedIntFilter? $sum;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedIntFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedIntFilter? $max;
 
   @override
@@ -2021,7 +2041,7 @@ class StringWithAggregatesFilter implements _i1.JsonSerializable {
 
   final String? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<String>? $in;
 
   final Iterable<String>? notIn;
@@ -2044,13 +2064,13 @@ class StringWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedStringWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedStringFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedStringFilter? $max;
 
   @override
@@ -2080,7 +2100,7 @@ class IntNullableWithAggregatesFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -2095,19 +2115,19 @@ class IntNullableWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedIntNullableWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntNullableFilter? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final NestedFloatNullableFilter? $avg;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final NestedIntNullableFilter? $sum;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedIntNullableFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedIntNullableFilter? $max;
 
   @override
@@ -2132,20 +2152,20 @@ class EnumPublishWithAggregatesFilter implements _i1.JsonSerializable {
 
   final Publish? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Publish>? $in;
 
   final Iterable<Publish>? notIn;
 
   final Publish? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedEnumPublishFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedEnumPublishFilter? $max;
 
   @override
@@ -2174,7 +2194,7 @@ class DateTimeWithAggregatesFilter implements _i1.JsonSerializable {
 
   final DateTime? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<DateTime>? $in;
 
   final Iterable<DateTime>? notIn;
@@ -2189,13 +2209,13 @@ class DateTimeWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedDateTimeWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedDateTimeFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedDateTimeFilter? $max;
 
   @override
@@ -2216,7 +2236,7 @@ class EnumRoleFilter implements _i1.JsonSerializable {
 
   final Role? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Role>? $in;
 
   final Iterable<Role>? notIn;
@@ -2274,10 +2294,10 @@ class DeviceOrderByRelationAggregateInput implements _i1.JsonSerializable {
   const DeviceOrderByRelationAggregateInput({this.$count});
 
   factory DeviceOrderByRelationAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceOrderByRelationAggregateInputFromJson(json);
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final SortOrder? $count;
 
   @override
@@ -2290,10 +2310,10 @@ class FirmwareOrderByRelationAggregateInput implements _i1.JsonSerializable {
   const FirmwareOrderByRelationAggregateInput({this.$count});
 
   factory FirmwareOrderByRelationAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareOrderByRelationAggregateInputFromJson(json);
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final SortOrder? $count;
 
   @override
@@ -2443,20 +2463,20 @@ class EnumRoleWithAggregatesFilter implements _i1.JsonSerializable {
 
   final Role? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Role>? $in;
 
   final Iterable<Role>? notIn;
 
   final Role? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedEnumRoleFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedEnumRoleFilter? $max;
 
   @override
@@ -2478,7 +2498,7 @@ class FirmwareCountOrderByAggregateInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareCountOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCountOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
@@ -2512,7 +2532,7 @@ class FirmwareAvgOrderByAggregateInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareAvgOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareAvgOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
@@ -2539,7 +2559,7 @@ class FirmwareMaxOrderByAggregateInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareMaxOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareMaxOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
@@ -2580,7 +2600,7 @@ class FirmwareMinOrderByAggregateInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareMinOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareMinOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
@@ -2614,7 +2634,7 @@ class FirmwareSumOrderByAggregateInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareSumOrderByAggregateInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareSumOrderByAggregateInputFromJson(json);
 
   final SortOrder? id;
@@ -2635,7 +2655,7 @@ class UserCreateNestedOneWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory UserCreateNestedOneWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserCreateNestedOneWithoutDevicesInputFromJson(json);
 
   final UserCreateWithoutDevicesInput? create;
@@ -2659,7 +2679,7 @@ class FirmwareCreateNestedOneWithoutDevicesInput
   });
 
   factory FirmwareCreateNestedOneWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCreateNestedOneWithoutDevicesInputFromJson(json);
 
   final FirmwareCreateWithoutDevicesInput? create;
@@ -2678,7 +2698,7 @@ class StringFieldUpdateOperationsInput implements _i1.JsonSerializable {
   const StringFieldUpdateOperationsInput({this.set});
 
   factory StringFieldUpdateOperationsInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$StringFieldUpdateOperationsInputFromJson(json);
 
   final String? set;
@@ -2693,7 +2713,7 @@ class EnumPublishFieldUpdateOperationsInput implements _i1.JsonSerializable {
   const EnumPublishFieldUpdateOperationsInput({this.set});
 
   factory EnumPublishFieldUpdateOperationsInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$EnumPublishFieldUpdateOperationsInputFromJson(json);
 
   final Publish? set;
@@ -2708,7 +2728,7 @@ class DateTimeFieldUpdateOperationsInput implements _i1.JsonSerializable {
   const DateTimeFieldUpdateOperationsInput({this.set});
 
   factory DateTimeFieldUpdateOperationsInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DateTimeFieldUpdateOperationsInputFromJson(json);
 
   final DateTime? set;
@@ -2731,7 +2751,7 @@ class UserUpdateOneWithoutDevicesNestedInput implements _i1.JsonSerializable {
   });
 
   factory UserUpdateOneWithoutDevicesNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserUpdateOneWithoutDevicesNestedInputFromJson(json);
 
   final UserCreateWithoutDevicesInput? create;
@@ -2767,7 +2787,7 @@ class FirmwareUpdateOneWithoutDevicesNestedInput
   });
 
   factory FirmwareUpdateOneWithoutDevicesNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpdateOneWithoutDevicesNestedInputFromJson(json);
 
   final FirmwareCreateWithoutDevicesInput? create;
@@ -2827,7 +2847,7 @@ class NullableIntFieldUpdateOperationsInput implements _i1.JsonSerializable {
   });
 
   factory NullableIntFieldUpdateOperationsInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$NullableIntFieldUpdateOperationsInputFromJson(json);
 
   final int? set;
@@ -2855,7 +2875,7 @@ class DeviceCreateNestedManyWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory DeviceCreateNestedManyWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateNestedManyWithoutUserInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutUserInput>? create;
@@ -2881,7 +2901,7 @@ class FirmwareCreateNestedManyWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareCreateNestedManyWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCreateNestedManyWithoutUserInputFromJson(json);
 
   final Iterable<FirmwareCreateWithoutUserInput>? create;
@@ -2908,7 +2928,7 @@ class DeviceUncheckedCreateNestedManyWithoutUserInput
   });
 
   factory DeviceUncheckedCreateNestedManyWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedCreateNestedManyWithoutUserInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutUserInput>? create;
@@ -2935,7 +2955,7 @@ class FirmwareUncheckedCreateNestedManyWithoutUserInput
   });
 
   factory FirmwareUncheckedCreateNestedManyWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedCreateNestedManyWithoutUserInputFromJson(json);
 
   final Iterable<FirmwareCreateWithoutUserInput>? create;
@@ -2956,7 +2976,7 @@ class EnumRoleFieldUpdateOperationsInput implements _i1.JsonSerializable {
   const EnumRoleFieldUpdateOperationsInput({this.set});
 
   factory EnumRoleFieldUpdateOperationsInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$EnumRoleFieldUpdateOperationsInputFromJson(json);
 
   final Role? set;
@@ -2983,7 +3003,7 @@ class DeviceUpdateManyWithoutUserNestedInput implements _i1.JsonSerializable {
   });
 
   factory DeviceUpdateManyWithoutUserNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateManyWithoutUserNestedInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutUserInput>? create;
@@ -3030,7 +3050,7 @@ class FirmwareUpdateManyWithoutUserNestedInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareUpdateManyWithoutUserNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpdateManyWithoutUserNestedInputFromJson(json);
 
   final Iterable<FirmwareCreateWithoutUserInput>? create;
@@ -3078,7 +3098,7 @@ class DeviceUncheckedUpdateManyWithoutUserNestedInput
   });
 
   factory DeviceUncheckedUpdateManyWithoutUserNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedUpdateManyWithoutUserNestedInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutUserInput>? create;
@@ -3126,7 +3146,7 @@ class FirmwareUncheckedUpdateManyWithoutUserNestedInput
   });
 
   factory FirmwareUncheckedUpdateManyWithoutUserNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedUpdateManyWithoutUserNestedInputFromJson(json);
 
   final Iterable<FirmwareCreateWithoutUserInput>? create;
@@ -3165,7 +3185,7 @@ class UserCreateNestedOneWithoutFirmwaresInput implements _i1.JsonSerializable {
   });
 
   factory UserCreateNestedOneWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserCreateNestedOneWithoutFirmwaresInputFromJson(json);
 
   final UserCreateWithoutFirmwaresInput? create;
@@ -3190,7 +3210,7 @@ class DeviceCreateNestedManyWithoutFirmwareInput
   });
 
   factory DeviceCreateNestedManyWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateNestedManyWithoutFirmwareInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutFirmwareInput>? create;
@@ -3217,7 +3237,7 @@ class DeviceUncheckedCreateNestedManyWithoutFirmwareInput
   });
 
   factory DeviceUncheckedCreateNestedManyWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedCreateNestedManyWithoutFirmwareInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutFirmwareInput>? create;
@@ -3246,7 +3266,7 @@ class UserUpdateOneWithoutFirmwaresNestedInput implements _i1.JsonSerializable {
   });
 
   factory UserUpdateOneWithoutFirmwaresNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserUpdateOneWithoutFirmwaresNestedInputFromJson(json);
 
   final UserCreateWithoutFirmwaresInput? create;
@@ -3286,7 +3306,7 @@ class DeviceUpdateManyWithoutFirmwareNestedInput
   });
 
   factory DeviceUpdateManyWithoutFirmwareNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateManyWithoutFirmwareNestedInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutFirmwareInput>? create;
@@ -3334,7 +3354,7 @@ class DeviceUncheckedUpdateManyWithoutFirmwareNestedInput
   });
 
   factory DeviceUncheckedUpdateManyWithoutFirmwareNestedInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedUpdateManyWithoutFirmwareNestedInputFromJson(json);
 
   final Iterable<DeviceCreateWithoutFirmwareInput>? create;
@@ -3382,7 +3402,7 @@ class NestedIntFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -3422,7 +3442,7 @@ class NestedStringFilter implements _i1.JsonSerializable {
 
   final String? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<String>? $in;
 
   final Iterable<String>? notIn;
@@ -3465,7 +3485,7 @@ class NestedIntNullableFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -3498,7 +3518,7 @@ class NestedEnumPublishFilter implements _i1.JsonSerializable {
 
   final Publish? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Publish>? $in;
 
   final Iterable<Publish>? notIn;
@@ -3527,7 +3547,7 @@ class NestedDateTimeFilter implements _i1.JsonSerializable {
 
   final DateTime? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<DateTime>? $in;
 
   final Iterable<DateTime>? notIn;
@@ -3569,7 +3589,7 @@ class NestedIntWithAggregatesFilter implements _i1.JsonSerializable {
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -3584,19 +3604,19 @@ class NestedIntWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedIntWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final NestedFloatFilter? $avg;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final NestedIntFilter? $sum;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedIntFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedIntFilter? $max;
 
   @override
@@ -3621,7 +3641,7 @@ class NestedFloatFilter implements _i1.JsonSerializable {
 
   final double? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<double>? $in;
 
   final Iterable<double>? notIn;
@@ -3660,12 +3680,12 @@ class NestedStringWithAggregatesFilter implements _i1.JsonSerializable {
   });
 
   factory NestedStringWithAggregatesFilter.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$NestedStringWithAggregatesFilterFromJson(json);
 
   final String? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<String>? $in;
 
   final Iterable<String>? notIn;
@@ -3686,13 +3706,13 @@ class NestedStringWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedStringWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedStringFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedStringFilter? $max;
 
   @override
@@ -3719,12 +3739,12 @@ class NestedIntNullableWithAggregatesFilter implements _i1.JsonSerializable {
   });
 
   factory NestedIntNullableWithAggregatesFilter.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$NestedIntNullableWithAggregatesFilterFromJson(json);
 
   final int? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<int>? $in;
 
   final Iterable<int>? notIn;
@@ -3739,19 +3759,19 @@ class NestedIntNullableWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedIntNullableWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntNullableFilter? $count;
 
-  @JsonKey(name: '_avg')
+  @JsonKey(name: r'_avg')
   final NestedFloatNullableFilter? $avg;
 
-  @JsonKey(name: '_sum')
+  @JsonKey(name: r'_sum')
   final NestedIntNullableFilter? $sum;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedIntNullableFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedIntNullableFilter? $max;
 
   @override
@@ -3777,7 +3797,7 @@ class NestedFloatNullableFilter implements _i1.JsonSerializable {
 
   final double? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<double>? $in;
 
   final Iterable<double>? notIn;
@@ -3809,25 +3829,25 @@ class NestedEnumPublishWithAggregatesFilter implements _i1.JsonSerializable {
   });
 
   factory NestedEnumPublishWithAggregatesFilter.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$NestedEnumPublishWithAggregatesFilterFromJson(json);
 
   final Publish? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Publish>? $in;
 
   final Iterable<Publish>? notIn;
 
   final Publish? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedEnumPublishFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedEnumPublishFilter? $max;
 
   @override
@@ -3852,12 +3872,12 @@ class NestedDateTimeWithAggregatesFilter implements _i1.JsonSerializable {
   });
 
   factory NestedDateTimeWithAggregatesFilter.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$NestedDateTimeWithAggregatesFilterFromJson(json);
 
   final DateTime? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<DateTime>? $in;
 
   final Iterable<DateTime>? notIn;
@@ -3872,13 +3892,13 @@ class NestedDateTimeWithAggregatesFilter implements _i1.JsonSerializable {
 
   final NestedDateTimeWithAggregatesFilter? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedDateTimeFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedDateTimeFilter? $max;
 
   @override
@@ -3900,7 +3920,7 @@ class NestedEnumRoleFilter implements _i1.JsonSerializable {
 
   final Role? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Role>? $in;
 
   final Iterable<Role>? notIn;
@@ -3924,25 +3944,25 @@ class NestedEnumRoleWithAggregatesFilter implements _i1.JsonSerializable {
   });
 
   factory NestedEnumRoleWithAggregatesFilter.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$NestedEnumRoleWithAggregatesFilterFromJson(json);
 
   final Role? equals;
 
-  @JsonKey(name: 'in')
+  @JsonKey(name: r'in')
   final Iterable<Role>? $in;
 
   final Iterable<Role>? notIn;
 
   final Role? not;
 
-  @JsonKey(name: '_count')
+  @JsonKey(name: r'_count')
   final NestedIntFilter? $count;
 
-  @JsonKey(name: '_min')
+  @JsonKey(name: r'_min')
   final NestedEnumRoleFilter? $min;
 
-  @JsonKey(name: '_max')
+  @JsonKey(name: r'_max')
   final NestedEnumRoleFilter? $max;
 
   @override
@@ -3986,7 +4006,10 @@ class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
   const UserUncheckedCreateWithoutDevicesInput({
-    required this.name, required this.username, required this.password, this.id,
+    this.id,
+    required this.name,
+    required this.username,
+    required this.password,
     this.role,
     this.createdAt,
     this.updatedAt,
@@ -3994,7 +4017,7 @@ class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory UserUncheckedCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserUncheckedCreateWithoutDevicesInputFromJson(json);
 
   final int? id;
@@ -4026,7 +4049,7 @@ class UserCreateOrConnectWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory UserCreateOrConnectWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserCreateOrConnectWithoutDevicesInputFromJson(json);
 
   final UserWhereUniqueInput where;
@@ -4052,7 +4075,7 @@ class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCreateWithoutDevicesInputFromJson(json);
 
   final String title;
@@ -4069,7 +4092,7 @@ class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final DateTime? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutFirmwaresInput? user;
 
   @override
@@ -4081,7 +4104,11 @@ class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
 class FirmwareUncheckedCreateWithoutDevicesInput
     implements _i1.JsonSerializable {
   const FirmwareUncheckedCreateWithoutDevicesInput({
-    required this.title, required this.description, required this.objectUrl, required this.version, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
     this.userId,
     this.publish,
     this.createdAt,
@@ -4089,7 +4116,7 @@ class FirmwareUncheckedCreateWithoutDevicesInput
   });
 
   factory FirmwareUncheckedCreateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedCreateWithoutDevicesInputFromJson(json);
 
   final int? id;
@@ -4124,7 +4151,7 @@ class FirmwareCreateOrConnectWithoutDevicesInput
   });
 
   factory FirmwareCreateOrConnectWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCreateOrConnectWithoutDevicesInputFromJson(json);
 
   final FirmwareWhereUniqueInput where;
@@ -4201,7 +4228,7 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory UserUncheckedUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserUncheckedUpdateWithoutDevicesInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -4233,7 +4260,7 @@ class FirmwareUpsertWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareUpsertWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpsertWithoutDevicesInputFromJson(json);
 
   final FirmwareUpdateWithoutDevicesInput update;
@@ -4259,7 +4286,7 @@ class FirmwareUpdateWithoutDevicesInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpdateWithoutDevicesInputFromJson(json);
 
   final StringFieldUpdateOperationsInput? title;
@@ -4276,7 +4303,7 @@ class FirmwareUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserUpdateOneWithoutFirmwaresNestedInput? user;
 
   @override
@@ -4300,7 +4327,7 @@ class FirmwareUncheckedUpdateWithoutDevicesInput
   });
 
   factory FirmwareUncheckedUpdateWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedUpdateWithoutDevicesInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -4353,7 +4380,7 @@ class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final DateTime? updatedAt;
 
-  @JsonKey(name: 'Firmware')
+  @JsonKey(name: r'Firmware')
   final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
 
   @override
@@ -4363,7 +4390,10 @@ class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   const DeviceUncheckedCreateWithoutUserInput({
-    required this.title, required this.description, required this.sn, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
     this.firmwareId,
     this.publish,
     this.createdAt,
@@ -4371,7 +4401,7 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory DeviceUncheckedCreateWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedCreateWithoutUserInputFromJson(json);
 
   final int? id;
@@ -4403,7 +4433,7 @@ class DeviceCreateOrConnectWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory DeviceCreateOrConnectWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateOrConnectWithoutUserInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
@@ -4423,7 +4453,7 @@ class DeviceCreateManyUserInputEnvelope implements _i1.JsonSerializable {
   });
 
   factory DeviceCreateManyUserInputEnvelope.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateManyUserInputEnvelopeFromJson(json);
 
   final Iterable<DeviceCreateManyUserInput> data;
@@ -4474,7 +4504,11 @@ class FirmwareCreateWithoutUserInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class FirmwareUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   const FirmwareUncheckedCreateWithoutUserInput({
-    required this.title, required this.description, required this.objectUrl, required this.version, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
     this.publish,
     this.createdAt,
     this.updatedAt,
@@ -4482,7 +4516,7 @@ class FirmwareUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareUncheckedCreateWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedCreateWithoutUserInputFromJson(json);
 
   final int? id;
@@ -4516,7 +4550,7 @@ class FirmwareCreateOrConnectWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareCreateOrConnectWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCreateOrConnectWithoutUserInputFromJson(json);
 
   final FirmwareWhereUniqueInput where;
@@ -4536,7 +4570,7 @@ class FirmwareCreateManyUserInputEnvelope implements _i1.JsonSerializable {
   });
 
   factory FirmwareCreateManyUserInputEnvelope.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareCreateManyUserInputEnvelopeFromJson(json);
 
   final Iterable<FirmwareCreateManyUserInput> data;
@@ -4558,7 +4592,7 @@ class DeviceUpsertWithWhereUniqueWithoutUserInput
   });
 
   factory DeviceUpsertWithWhereUniqueWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpsertWithWhereUniqueWithoutUserInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
@@ -4581,7 +4615,7 @@ class DeviceUpdateWithWhereUniqueWithoutUserInput
   });
 
   factory DeviceUpdateWithWhereUniqueWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateWithWhereUniqueWithoutUserInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
@@ -4602,7 +4636,7 @@ class DeviceUpdateManyWithWhereWithoutUserInput
   });
 
   factory DeviceUpdateManyWithWhereWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateManyWithWhereWithoutUserInputFromJson(json);
 
   final DeviceScalarWhereInput where;
@@ -4672,7 +4706,7 @@ class FirmwareUpsertWithWhereUniqueWithoutUserInput
   });
 
   factory FirmwareUpsertWithWhereUniqueWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpsertWithWhereUniqueWithoutUserInputFromJson(json);
 
   final FirmwareWhereUniqueInput where;
@@ -4695,7 +4729,7 @@ class FirmwareUpdateWithWhereUniqueWithoutUserInput
   });
 
   factory FirmwareUpdateWithWhereUniqueWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpdateWithWhereUniqueWithoutUserInputFromJson(json);
 
   final FirmwareWhereUniqueInput where;
@@ -4716,7 +4750,7 @@ class FirmwareUpdateManyWithWhereWithoutUserInput
   });
 
   factory FirmwareUpdateManyWithWhereWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUpdateManyWithWhereWithoutUserInputFromJson(json);
 
   final FirmwareScalarWhereInput where;
@@ -4813,7 +4847,10 @@ class UserCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class UserUncheckedCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
   const UserUncheckedCreateWithoutFirmwaresInput({
-    required this.name, required this.username, required this.password, this.id,
+    this.id,
+    required this.name,
+    required this.username,
+    required this.password,
     this.role,
     this.createdAt,
     this.updatedAt,
@@ -4821,7 +4858,7 @@ class UserUncheckedCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
   });
 
   factory UserUncheckedCreateWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserUncheckedCreateWithoutFirmwaresInputFromJson(json);
 
   final int? id;
@@ -4853,7 +4890,7 @@ class UserCreateOrConnectWithoutFirmwaresInput implements _i1.JsonSerializable {
   });
 
   factory UserCreateOrConnectWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserCreateOrConnectWithoutFirmwaresInputFromJson(json);
 
   final UserWhereUniqueInput where;
@@ -4878,7 +4915,7 @@ class DeviceCreateWithoutFirmwareInput implements _i1.JsonSerializable {
   });
 
   factory DeviceCreateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateWithoutFirmwareInputFromJson(json);
 
   final String title;
@@ -4893,7 +4930,7 @@ class DeviceCreateWithoutFirmwareInput implements _i1.JsonSerializable {
 
   final DateTime? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutDevicesInput? user;
 
   @override
@@ -4905,7 +4942,10 @@ class DeviceCreateWithoutFirmwareInput implements _i1.JsonSerializable {
 class DeviceUncheckedCreateWithoutFirmwareInput
     implements _i1.JsonSerializable {
   const DeviceUncheckedCreateWithoutFirmwareInput({
-    required this.title, required this.description, required this.sn, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
     this.userId,
     this.publish,
     this.createdAt,
@@ -4913,7 +4953,7 @@ class DeviceUncheckedCreateWithoutFirmwareInput
   });
 
   factory DeviceUncheckedCreateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedCreateWithoutFirmwareInputFromJson(json);
 
   final int? id;
@@ -4946,7 +4986,7 @@ class DeviceCreateOrConnectWithoutFirmwareInput
   });
 
   factory DeviceCreateOrConnectWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateOrConnectWithoutFirmwareInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
@@ -4966,7 +5006,7 @@ class DeviceCreateManyFirmwareInputEnvelope implements _i1.JsonSerializable {
   });
 
   factory DeviceCreateManyFirmwareInputEnvelope.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceCreateManyFirmwareInputEnvelopeFromJson(json);
 
   final Iterable<DeviceCreateManyFirmwareInput> data;
@@ -5045,7 +5085,7 @@ class UserUncheckedUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
   });
 
   factory UserUncheckedUpdateWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$UserUncheckedUpdateWithoutFirmwaresInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -5079,7 +5119,7 @@ class DeviceUpsertWithWhereUniqueWithoutFirmwareInput
   });
 
   factory DeviceUpsertWithWhereUniqueWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpsertWithWhereUniqueWithoutFirmwareInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
@@ -5102,7 +5142,7 @@ class DeviceUpdateWithWhereUniqueWithoutFirmwareInput
   });
 
   factory DeviceUpdateWithWhereUniqueWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateWithWhereUniqueWithoutFirmwareInputFromJson(json);
 
   final DeviceWhereUniqueInput where;
@@ -5123,7 +5163,7 @@ class DeviceUpdateManyWithWhereWithoutFirmwareInput
   });
 
   factory DeviceUpdateManyWithWhereWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateManyWithWhereWithoutFirmwareInputFromJson(json);
 
   final DeviceScalarWhereInput where;
@@ -5138,7 +5178,10 @@ class DeviceUpdateManyWithWhereWithoutFirmwareInput
 @_i1.jsonSerializable
 class DeviceCreateManyUserInput implements _i1.JsonSerializable {
   const DeviceCreateManyUserInput({
-    required this.title, required this.description, required this.sn, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
     this.firmwareId,
     this.publish,
     this.createdAt,
@@ -5171,7 +5214,11 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
 @_i1.jsonSerializable
 class FirmwareCreateManyUserInput implements _i1.JsonSerializable {
   const FirmwareCreateManyUserInput({
-    required this.title, required this.description, required this.objectUrl, required this.version, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.objectUrl,
+    required this.version,
     this.publish,
     this.createdAt,
     this.updatedAt,
@@ -5227,7 +5274,7 @@ class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? updatedAt;
 
-  @JsonKey(name: 'Firmware')
+  @JsonKey(name: r'Firmware')
   final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
 
   @override
@@ -5248,7 +5295,7 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory DeviceUncheckedUpdateWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedUpdateWithoutUserInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -5287,7 +5334,7 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
   });
 
   factory DeviceUncheckedUpdateManyWithoutDevicesInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedUpdateManyWithoutDevicesInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -5362,7 +5409,7 @@ class FirmwareUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
   });
 
   factory FirmwareUncheckedUpdateWithoutUserInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedUpdateWithoutUserInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -5403,7 +5450,7 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
   });
 
   factory FirmwareUncheckedUpdateManyWithoutFirmwaresInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$FirmwareUncheckedUpdateManyWithoutFirmwaresInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -5430,7 +5477,10 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
 @_i1.jsonSerializable
 class DeviceCreateManyFirmwareInput implements _i1.JsonSerializable {
   const DeviceCreateManyFirmwareInput({
-    required this.title, required this.description, required this.sn, this.id,
+    this.id,
+    required this.title,
+    required this.description,
+    required this.sn,
     this.userId,
     this.publish,
     this.createdAt,
@@ -5473,7 +5523,7 @@ class DeviceUpdateWithoutFirmwareInput implements _i1.JsonSerializable {
   });
 
   factory DeviceUpdateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUpdateWithoutFirmwareInputFromJson(json);
 
   final StringFieldUpdateOperationsInput? title;
@@ -5488,7 +5538,7 @@ class DeviceUpdateWithoutFirmwareInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? updatedAt;
 
-  @JsonKey(name: 'User')
+  @JsonKey(name: r'User')
   final UserUpdateOneWithoutDevicesNestedInput? user;
 
   @override
@@ -5511,7 +5561,7 @@ class DeviceUncheckedUpdateWithoutFirmwareInput
   });
 
   factory DeviceUncheckedUpdateWithoutFirmwareInput.fromJson(
-          Map<String, dynamic> json,) =>
+          Map<String, dynamic> json) =>
       _$DeviceUncheckedUpdateWithoutFirmwareInputFromJson(json);
 
   final IntFieldUpdateOperationsInput? id;
@@ -5542,8 +5592,11 @@ class Device implements _i1.JsonSerializable {
     required this.title,
     required this.description,
     required this.sn,
-    required this.publish, required this.createdAt, required this.updatedAt, this.userId,
+    this.userId,
     this.firmwareId,
+    required this.publish,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Device.fromJson(Map<String, dynamic> json) => _$DeviceFromJson(json);
@@ -5610,7 +5663,10 @@ class Firmware implements _i1.JsonSerializable {
     required this.description,
     required this.objectUrl,
     required this.version,
-    required this.publish, required this.createdAt, required this.updatedAt, this.userId,
+    this.userId,
+    required this.publish,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Firmware.fromJson(Map<String, dynamic> json) =>
@@ -5648,15 +5704,15 @@ class DeviceFluent<T> extends _i1.PrismaFluent<T> {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'User',
+          r'User',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'User',
+      key: r'User',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null);
     return UserFluent<User?>(
       future,
       query,
@@ -5667,16 +5723,16 @@ class DeviceFluent<T> extends _i1.PrismaFluent<T> {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'Firmware',
+          r'Firmware',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'Firmware',
+      key: r'Firmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
-            : null,);
+            : null);
     return FirmwareFluent<Firmware?>(
       future,
       query,
@@ -5700,42 +5756,42 @@ class UserFluent<T> extends _i1.PrismaFluent<T> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'devices',
+          r'devices',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'devices',
+      key: r'devices',
     );
     final fields = DeviceScalarFieldEnum.values.toGraphQLFields();
-    Iterable<Device> compiler(Iterable<Map> devices) =>
+    compiler(Iterable<Map> devices) =>
         devices.map((Map devices) => Device.fromJson(devices.cast()));
     return query(fields)
         .then((json) => json is Iterable ? compiler(json.cast()) : null);
@@ -5751,42 +5807,42 @@ class UserFluent<T> extends _i1.PrismaFluent<T> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwares',
+          r'firmwares',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'firmwares',
+      key: r'firmwares',
     );
     final fields = FirmwareScalarFieldEnum.values.toGraphQLFields();
-    Iterable<Firmware> compiler(Iterable<Map> firmwares) =>
+    compiler(Iterable<Map> firmwares) =>
         firmwares.map((Map firmwares) => Firmware.fromJson(firmwares.cast()));
     return query(fields)
         .then((json) => json is Iterable ? compiler(json.cast()) : null);
@@ -5796,11 +5852,11 @@ class UserFluent<T> extends _i1.PrismaFluent<T> {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_count',
+          r'_count',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_count',
+      key: r'_count',
     );
     return UserCountOutputType(query);
   }
@@ -5816,15 +5872,15 @@ class FirmwareFluent<T> extends _i1.PrismaFluent<T> {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'User',
+          r'User',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'User',
+      key: r'User',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null);
     return UserFluent<User?>(
       future,
       query,
@@ -5841,42 +5897,42 @@ class FirmwareFluent<T> extends _i1.PrismaFluent<T> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'devices',
+          r'devices',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'devices',
+      key: r'devices',
     );
     final fields = DeviceScalarFieldEnum.values.toGraphQLFields();
-    Iterable<Device> compiler(Iterable<Map> devices) =>
+    compiler(Iterable<Map> devices) =>
         devices.map((Map devices) => Device.fromJson(devices.cast()));
     return query(fields)
         .then((json) => json is Iterable ? compiler(json.cast()) : null);
@@ -5886,11 +5942,11 @@ class FirmwareFluent<T> extends _i1.PrismaFluent<T> {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_count',
+          r'_count',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_count',
+      key: r'_count',
     );
     return FirmwareCountOutputType(query);
   }
@@ -5900,23 +5956,23 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   DeviceFluent<Device?> findUnique({required DeviceWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findUniqueDevice',
+          r'findUniqueDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findUniqueDevice',
+      key: r'findUniqueDevice',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null);
     return DeviceFluent<Device?>(
       future,
       query,
@@ -5924,28 +5980,28 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }
 
   DeviceFluent<Device> findUniqueOrThrow(
-      {required DeviceWhereUniqueInput where,}) {
+      {required DeviceWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findUniqueDeviceOrThrow',
+          r'findUniqueDeviceOrThrow',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findUniqueDeviceOrThrow',
+      key: r'findUniqueDeviceOrThrow',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Device.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Device)',),);
+                'Not found OutputTypeRefType.string(value: Device)'));
     return DeviceFluent<Device>(
       future,
       query,
@@ -5962,43 +6018,43 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findFirstDevice',
+          r'findFirstDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findFirstDevice',
+      key: r'findFirstDevice',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null);
     return DeviceFluent<Device?>(
       future,
       query,
@@ -6015,45 +6071,45 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findFirstDeviceOrThrow',
+          r'findFirstDeviceOrThrow',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findFirstDeviceOrThrow',
+      key: r'findFirstDeviceOrThrow',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Device.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Device)',),);
+                'Not found OutputTypeRefType.string(value: Device)'));
     return DeviceFluent<Device>(
       future,
       query,
@@ -6070,70 +6126,70 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findManyDevice',
+          r'findManyDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findManyDevice',
+      key: r'findManyDevice',
     );
     final fields = DeviceScalarFieldEnum.values.toGraphQLFields();
-    Iterable<Device> compiler(Iterable<Map> findManyDevice) => findManyDevice
+    compiler(Iterable<Map> findManyDevice) => findManyDevice
         .map((Map findManyDevice) => Device.fromJson(findManyDevice.cast()));
     return query(fields).then((json) => json is Iterable
         ? compiler(json.cast())
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   DeviceFluent<Device> create({required DeviceCreateInput data}) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'createOneDevice',
+          r'createOneDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'createOneDevice',
+      key: r'createOneDevice',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Device.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Device)',),);
+                'Not found OutputTypeRefType.string(value: Device)'));
     return DeviceFluent<Device>(
       future,
       query,
@@ -6146,30 +6202,30 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'skipDuplicates',
+        r'skipDuplicates',
         skipDuplicates,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'createManyDevice',
+          r'createManyDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'createManyDevice',
+      key: r'createManyDevice',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map createManyDevice) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map createManyDevice) =>
         AffectedRowsOutput.fromJson(createManyDevice.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   DeviceFluent<Device?> update({
@@ -6178,27 +6234,27 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'updateOneDevice',
+          r'updateOneDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'updateOneDevice',
+      key: r'updateOneDevice',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null);
     return DeviceFluent<Device?>(
       future,
       query,
@@ -6211,30 +6267,30 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'updateManyDevice',
+          r'updateManyDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'updateManyDevice',
+      key: r'updateManyDevice',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map updateManyDevice) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map updateManyDevice) =>
         AffectedRowsOutput.fromJson(updateManyDevice.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   DeviceFluent<Device> upsert({
@@ -6244,33 +6300,33 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'create',
+        r'create',
         create,
       ),
       _i2.GraphQLArg(
-        'update',
+        r'update',
         update,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'upsertOneDevice',
+          r'upsertOneDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'upsertOneDevice',
+      key: r'upsertOneDevice',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Device.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Device)',),);
+                'Not found OutputTypeRefType.string(value: Device)'));
     return DeviceFluent<Device>(
       future,
       query,
@@ -6280,23 +6336,23 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   DeviceFluent<Device?> delete({required DeviceWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'deleteOneDevice',
+          r'deleteOneDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'deleteOneDevice',
+      key: r'deleteOneDevice',
     );
     final future = query(DeviceScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? Device.fromJson(json.cast<String, dynamic>()) : null);
     return DeviceFluent<Device?>(
       future,
       query,
@@ -6306,26 +6362,26 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   Future<AffectedRowsOutput> deleteMany({DeviceWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'deleteManyDevice',
+          r'deleteManyDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'deleteManyDevice',
+      key: r'deleteManyDevice',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map deleteManyDevice) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map deleteManyDevice) =>
         AffectedRowsOutput.fromJson(deleteManyDevice.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   AggregateDevice aggregate({
@@ -6337,89 +6393,90 @@ extension DeviceModelDelegateExtension on _i1.ModelDelegate<Device> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'aggregateDevice',
+          r'aggregateDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'aggregateDevice',
+      key: r'aggregateDevice',
     );
     return AggregateDevice(query);
   }
 
   Future<Iterable<DeviceGroupByOutputType>> groupBy({
-    required Iterable<DeviceScalarFieldEnum> by, DeviceWhereInput? where,
+    DeviceWhereInput? where,
     Iterable<DeviceOrderByWithAggregationInput>? orderBy,
+    required Iterable<DeviceScalarFieldEnum> by,
     DeviceScalarWhereWithAggregatesInput? having,
     int? take,
     int? skip,
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'by',
+        r'by',
         by,
       ),
       _i2.GraphQLArg(
-        'having',
+        r'having',
         having,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'groupByDevice',
+          r'groupByDevice',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'groupByDevice',
+      key: r'groupByDevice',
     );
     final fields = by.map((e) => _i2.GraphQLField(e.originalName ?? e.name));
-    Iterable<DeviceGroupByOutputType> compiler(Iterable<Map> groupByDevice) =>
+    compiler(Iterable<Map> groupByDevice) =>
         groupByDevice.map((Map groupByDevice) =>
-            DeviceGroupByOutputType.fromJson(groupByDevice.cast()),);
+            DeviceGroupByOutputType.fromJson(groupByDevice.cast()));
     return query(fields).then((json) => json is Iterable
         ? compiler(json.cast())
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 }
 
@@ -6427,23 +6484,23 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   UserFluent<User?> findUnique({required UserWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findUniqueUser',
+          r'findUniqueUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findUniqueUser',
+      key: r'findUniqueUser',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null);
     return UserFluent<User?>(
       future,
       query,
@@ -6453,25 +6510,25 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   UserFluent<User> findUniqueOrThrow({required UserWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findUniqueUserOrThrow',
+          r'findUniqueUserOrThrow',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findUniqueUserOrThrow',
+      key: r'findUniqueUserOrThrow',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? User.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: User)',),);
+                'Not found OutputTypeRefType.string(value: User)'));
     return UserFluent<User>(
       future,
       query,
@@ -6488,43 +6545,43 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findFirstUser',
+          r'findFirstUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findFirstUser',
+      key: r'findFirstUser',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null);
     return UserFluent<User?>(
       future,
       query,
@@ -6541,45 +6598,45 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findFirstUserOrThrow',
+          r'findFirstUserOrThrow',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findFirstUserOrThrow',
+      key: r'findFirstUserOrThrow',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? User.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: User)',),);
+                'Not found OutputTypeRefType.string(value: User)'));
     return UserFluent<User>(
       future,
       query,
@@ -6596,70 +6653,70 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findManyUser',
+          r'findManyUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findManyUser',
+      key: r'findManyUser',
     );
     final fields = UserScalarFieldEnum.values.toGraphQLFields();
-    Iterable<User> compiler(Iterable<Map> findManyUser) => findManyUser
+    compiler(Iterable<Map> findManyUser) => findManyUser
         .map((Map findManyUser) => User.fromJson(findManyUser.cast()));
     return query(fields).then((json) => json is Iterable
         ? compiler(json.cast())
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   UserFluent<User> create({required UserCreateInput data}) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'createOneUser',
+          r'createOneUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'createOneUser',
+      key: r'createOneUser',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? User.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: User)',),);
+                'Not found OutputTypeRefType.string(value: User)'));
     return UserFluent<User>(
       future,
       query,
@@ -6672,30 +6729,30 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'skipDuplicates',
+        r'skipDuplicates',
         skipDuplicates,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'createManyUser',
+          r'createManyUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'createManyUser',
+      key: r'createManyUser',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map createManyUser) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map createManyUser) =>
         AffectedRowsOutput.fromJson(createManyUser.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   UserFluent<User?> update({
@@ -6704,27 +6761,27 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'updateOneUser',
+          r'updateOneUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'updateOneUser',
+      key: r'updateOneUser',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null);
     return UserFluent<User?>(
       future,
       query,
@@ -6737,30 +6794,30 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'updateManyUser',
+          r'updateManyUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'updateManyUser',
+      key: r'updateManyUser',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map updateManyUser) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map updateManyUser) =>
         AffectedRowsOutput.fromJson(updateManyUser.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   UserFluent<User> upsert({
@@ -6770,33 +6827,33 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'create',
+        r'create',
         create,
       ),
       _i2.GraphQLArg(
-        'update',
+        r'update',
         update,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'upsertOneUser',
+          r'upsertOneUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'upsertOneUser',
+      key: r'upsertOneUser',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? User.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: User)',),);
+                'Not found OutputTypeRefType.string(value: User)'));
     return UserFluent<User>(
       future,
       query,
@@ -6806,23 +6863,23 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   UserFluent<User?> delete({required UserWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'deleteOneUser',
+          r'deleteOneUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'deleteOneUser',
+      key: r'deleteOneUser',
     );
     final future = query(UserScalarFieldEnum.values.toGraphQLFields()).then(
         (json) =>
-            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null,);
+            json is Map ? User.fromJson(json.cast<String, dynamic>()) : null);
     return UserFluent<User?>(
       future,
       query,
@@ -6832,26 +6889,26 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   Future<AffectedRowsOutput> deleteMany({UserWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'deleteManyUser',
+          r'deleteManyUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'deleteManyUser',
+      key: r'deleteManyUser',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map deleteManyUser) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map deleteManyUser) =>
         AffectedRowsOutput.fromJson(deleteManyUser.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   AggregateUser aggregate({
@@ -6863,114 +6920,115 @@ extension UserModelDelegateExtension on _i1.ModelDelegate<User> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'aggregateUser',
+          r'aggregateUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'aggregateUser',
+      key: r'aggregateUser',
     );
     return AggregateUser(query);
   }
 
   Future<Iterable<UserGroupByOutputType>> groupBy({
-    required Iterable<UserScalarFieldEnum> by, UserWhereInput? where,
+    UserWhereInput? where,
     Iterable<UserOrderByWithAggregationInput>? orderBy,
+    required Iterable<UserScalarFieldEnum> by,
     UserScalarWhereWithAggregatesInput? having,
     int? take,
     int? skip,
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'by',
+        r'by',
         by,
       ),
       _i2.GraphQLArg(
-        'having',
+        r'having',
         having,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'groupByUser',
+          r'groupByUser',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'groupByUser',
+      key: r'groupByUser',
     );
     final fields = by.map((e) => _i2.GraphQLField(e.originalName ?? e.name));
-    Iterable<UserGroupByOutputType> compiler(Iterable<Map> groupByUser) => groupByUser.map((Map groupByUser) =>
-        UserGroupByOutputType.fromJson(groupByUser.cast()),);
+    compiler(Iterable<Map> groupByUser) => groupByUser.map((Map groupByUser) =>
+        UserGroupByOutputType.fromJson(groupByUser.cast()));
     return query(fields).then((json) => json is Iterable
         ? compiler(json.cast())
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 }
 
 extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   FirmwareFluent<Firmware?> findUnique(
-      {required FirmwareWhereUniqueInput where,}) {
+      {required FirmwareWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findUniqueFirmware',
+          r'findUniqueFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findUniqueFirmware',
+      key: r'findUniqueFirmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
-            : null,);
+            : null);
     return FirmwareFluent<Firmware?>(
       future,
       query,
@@ -6978,28 +7036,28 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }
 
   FirmwareFluent<Firmware> findUniqueOrThrow(
-      {required FirmwareWhereUniqueInput where,}) {
+      {required FirmwareWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findUniqueFirmwareOrThrow',
+          r'findUniqueFirmwareOrThrow',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findUniqueFirmwareOrThrow',
+      key: r'findUniqueFirmwareOrThrow',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Firmware)',),);
+                'Not found OutputTypeRefType.string(value: Firmware)'));
     return FirmwareFluent<Firmware>(
       future,
       query,
@@ -7016,44 +7074,44 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findFirstFirmware',
+          r'findFirstFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findFirstFirmware',
+      key: r'findFirstFirmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
-            : null,);
+            : null);
     return FirmwareFluent<Firmware?>(
       future,
       query,
@@ -7070,45 +7128,45 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findFirstFirmwareOrThrow',
+          r'findFirstFirmwareOrThrow',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findFirstFirmwareOrThrow',
+      key: r'findFirstFirmwareOrThrow',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Firmware)',),);
+                'Not found OutputTypeRefType.string(value: Firmware)'));
     return FirmwareFluent<Firmware>(
       future,
       query,
@@ -7125,70 +7183,70 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
       _i2.GraphQLArg(
-        'distinct',
+        r'distinct',
         distinct,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'findManyFirmware',
+          r'findManyFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'findManyFirmware',
+      key: r'findManyFirmware',
     );
     final fields = FirmwareScalarFieldEnum.values.toGraphQLFields();
-    Iterable<Firmware> compiler(Iterable<Map> findManyFirmware) => findManyFirmware.map(
-        (Map findManyFirmware) => Firmware.fromJson(findManyFirmware.cast()),);
+    compiler(Iterable<Map> findManyFirmware) => findManyFirmware.map(
+        (Map findManyFirmware) => Firmware.fromJson(findManyFirmware.cast()));
     return query(fields).then((json) => json is Iterable
         ? compiler(json.cast())
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   FirmwareFluent<Firmware> create({required FirmwareCreateInput data}) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'createOneFirmware',
+          r'createOneFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'createOneFirmware',
+      key: r'createOneFirmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Firmware)',),);
+                'Not found OutputTypeRefType.string(value: Firmware)'));
     return FirmwareFluent<Firmware>(
       future,
       query,
@@ -7201,30 +7259,30 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'skipDuplicates',
+        r'skipDuplicates',
         skipDuplicates,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'createManyFirmware',
+          r'createManyFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'createManyFirmware',
+      key: r'createManyFirmware',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map createManyFirmware) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map createManyFirmware) =>
         AffectedRowsOutput.fromJson(createManyFirmware.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   FirmwareFluent<Firmware?> update({
@@ -7233,28 +7291,28 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'updateOneFirmware',
+          r'updateOneFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'updateOneFirmware',
+      key: r'updateOneFirmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
-            : null,);
+            : null);
     return FirmwareFluent<Firmware?>(
       future,
       query,
@@ -7267,30 +7325,30 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'data',
+        r'data',
         data,
       ),
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'updateManyFirmware',
+          r'updateManyFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'updateManyFirmware',
+      key: r'updateManyFirmware',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map updateManyFirmware) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map updateManyFirmware) =>
         AffectedRowsOutput.fromJson(updateManyFirmware.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   FirmwareFluent<Firmware> upsert({
@@ -7300,33 +7358,33 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'create',
+        r'create',
         create,
       ),
       _i2.GraphQLArg(
-        'update',
+        r'update',
         update,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'upsertOneFirmware',
+          r'upsertOneFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'upsertOneFirmware',
+      key: r'upsertOneFirmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
             : throw Exception(
-                'Not found OutputTypeRefType.string(value: Firmware)',),);
+                'Not found OutputTypeRefType.string(value: Firmware)'));
     return FirmwareFluent<Firmware>(
       future,
       query,
@@ -7336,24 +7394,24 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   FirmwareFluent<Firmware?> delete({required FirmwareWhereUniqueInput where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'deleteOneFirmware',
+          r'deleteOneFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'deleteOneFirmware',
+      key: r'deleteOneFirmware',
     );
     final future = query(FirmwareScalarFieldEnum.values.toGraphQLFields()).then(
         (json) => json is Map
             ? Firmware.fromJson(json.cast<String, dynamic>())
-            : null,);
+            : null);
     return FirmwareFluent<Firmware?>(
       future,
       query,
@@ -7363,26 +7421,26 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   Future<AffectedRowsOutput> deleteMany({FirmwareWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $mutation([
         _i2.GraphQLField(
-          'deleteManyFirmware',
+          r'deleteManyFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'deleteManyFirmware',
+      key: r'deleteManyFirmware',
     );
-    final fields = const ['count'].map(_i2.GraphQLField.new);
-    AffectedRowsOutput compiler(Map deleteManyFirmware) =>
+    final fields = const ['count'].map((e) => _i2.GraphQLField(e));
+    compiler(Map deleteManyFirmware) =>
         AffectedRowsOutput.fromJson(deleteManyFirmware.cast());
     return query(fields).then((json) => json is Map
         ? compiler(json)
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 
   AggregateFirmware aggregate({
@@ -7394,89 +7452,90 @@ extension FirmwareModelDelegateExtension on _i1.ModelDelegate<Firmware> {
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'cursor',
+        r'cursor',
         cursor,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'aggregateFirmware',
+          r'aggregateFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'aggregateFirmware',
+      key: r'aggregateFirmware',
     );
     return AggregateFirmware(query);
   }
 
   Future<Iterable<FirmwareGroupByOutputType>> groupBy({
-    required Iterable<FirmwareScalarFieldEnum> by, FirmwareWhereInput? where,
+    FirmwareWhereInput? where,
     Iterable<FirmwareOrderByWithAggregationInput>? orderBy,
+    required Iterable<FirmwareScalarFieldEnum> by,
     FirmwareScalarWhereWithAggregatesInput? having,
     int? take,
     int? skip,
   }) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
       ),
       _i2.GraphQLArg(
-        'orderBy',
+        r'orderBy',
         orderBy,
       ),
       _i2.GraphQLArg(
-        'by',
+        r'by',
         by,
       ),
       _i2.GraphQLArg(
-        'having',
+        r'having',
         having,
       ),
       _i2.GraphQLArg(
-        'take',
+        r'take',
         take,
       ),
       _i2.GraphQLArg(
-        'skip',
+        r'skip',
         skip,
       ),
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'groupByFirmware',
+          r'groupByFirmware',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'groupByFirmware',
+      key: r'groupByFirmware',
     );
     final fields = by.map((e) => _i2.GraphQLField(e.originalName ?? e.name));
-    Iterable<FirmwareGroupByOutputType> compiler(Iterable<Map> groupByFirmware) =>
+    compiler(Iterable<Map> groupByFirmware) =>
         groupByFirmware.map((Map groupByFirmware) =>
-            FirmwareGroupByOutputType.fromJson(groupByFirmware.cast()),);
+            FirmwareGroupByOutputType.fromJson(groupByFirmware.cast()));
     return query(fields).then((json) => json is Iterable
         ? compiler(json.cast())
-        : throw Exception('Unable to parse response'),);
+        : throw Exception('Unable to parse response'));
   }
 }
 
@@ -7613,11 +7672,11 @@ class AggregateDevice {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_count',
+          r'_count',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_count',
+      key: r'_count',
     );
     return DeviceCountAggregateOutputType(query);
   }
@@ -7626,11 +7685,11 @@ class AggregateDevice {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_avg',
+          r'_avg',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_avg',
+      key: r'_avg',
     );
     return DeviceAvgAggregateOutputType(query);
   }
@@ -7639,11 +7698,11 @@ class AggregateDevice {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_sum',
+          r'_sum',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_sum',
+      key: r'_sum',
     );
     return DeviceSumAggregateOutputType(query);
   }
@@ -7652,11 +7711,11 @@ class AggregateDevice {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_min',
+          r'_min',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_min',
+      key: r'_min',
     );
     return DeviceMinAggregateOutputType(query);
   }
@@ -7665,11 +7724,11 @@ class AggregateDevice {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_max',
+          r'_max',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_max',
+      key: r'_max',
     );
     return DeviceMaxAggregateOutputType(query);
   }
@@ -7684,11 +7743,11 @@ class AggregateUser {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_count',
+          r'_count',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_count',
+      key: r'_count',
     );
     return UserCountAggregateOutputType(query);
   }
@@ -7697,11 +7756,11 @@ class AggregateUser {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_avg',
+          r'_avg',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_avg',
+      key: r'_avg',
     );
     return UserAvgAggregateOutputType(query);
   }
@@ -7710,11 +7769,11 @@ class AggregateUser {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_sum',
+          r'_sum',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_sum',
+      key: r'_sum',
     );
     return UserSumAggregateOutputType(query);
   }
@@ -7723,11 +7782,11 @@ class AggregateUser {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_min',
+          r'_min',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_min',
+      key: r'_min',
     );
     return UserMinAggregateOutputType(query);
   }
@@ -7736,11 +7795,11 @@ class AggregateUser {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_max',
+          r'_max',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_max',
+      key: r'_max',
     );
     return UserMaxAggregateOutputType(query);
   }
@@ -7755,11 +7814,11 @@ class AggregateFirmware {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_count',
+          r'_count',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_count',
+      key: r'_count',
     );
     return FirmwareCountAggregateOutputType(query);
   }
@@ -7768,11 +7827,11 @@ class AggregateFirmware {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_avg',
+          r'_avg',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_avg',
+      key: r'_avg',
     );
     return FirmwareAvgAggregateOutputType(query);
   }
@@ -7781,11 +7840,11 @@ class AggregateFirmware {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_sum',
+          r'_sum',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_sum',
+      key: r'_sum',
     );
     return FirmwareSumAggregateOutputType(query);
   }
@@ -7794,11 +7853,11 @@ class AggregateFirmware {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_min',
+          r'_min',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_min',
+      key: r'_min',
     );
     return FirmwareMinAggregateOutputType(query);
   }
@@ -7807,11 +7866,11 @@ class AggregateFirmware {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_max',
+          r'_max',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_max',
+      key: r'_max',
     );
     return FirmwareMaxAggregateOutputType(query);
   }
@@ -7826,130 +7885,130 @@ class DeviceCountAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'title',
+          r'title',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'title',
+      key: r'title',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'description',
+          r'description',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'description',
+      key: r'description',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> sn() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'sn',
+          r'sn',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'sn',
+      key: r'sn',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> firmwareId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwareId',
+          r'firmwareId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'firmwareId',
+      key: r'firmwareId',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'publish',
+          r'publish',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'publish',
+      key: r'publish',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> updatedAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> $all() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_all',
+          r'_all',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_all',
+      key: r'_all',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 }
 
@@ -7962,39 +8021,39 @@ class DeviceAvgAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as double?);
+    return query(const []).then((value) => (value as double?));
   }
 
   Future<double?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as double?);
+    return query(const []).then((value) => (value as double?));
   }
 
   Future<double?> firmwareId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwareId',
+          r'firmwareId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'firmwareId',
+      key: r'firmwareId',
     );
-    return query(const []).then((value) => value as double?);
+    return query(const []).then((value) => (value as double?));
   }
 }
 
@@ -8007,39 +8066,39 @@ class DeviceSumAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<int?> firmwareId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwareId',
+          r'firmwareId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'firmwareId',
+      key: r'firmwareId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 }
 
@@ -8052,105 +8111,105 @@ class DeviceMinAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<String?> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'title',
+          r'title',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'title',
+      key: r'title',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'description',
+          r'description',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'description',
+      key: r'description',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> sn() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'sn',
+          r'sn',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'sn',
+      key: r'sn',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<int?> firmwareId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwareId',
+          r'firmwareId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'firmwareId',
+      key: r'firmwareId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<Publish?> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'publish',
+          r'publish',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'publish',
+      key: r'publish',
     );
     return query(const []).then((value) => $enumDecodeNullable(
           _$PublishEnumMap,
           value,
-        ),);
+        ));
   }
 
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8160,11 +8219,11 @@ class DeviceMinAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8180,105 +8239,105 @@ class DeviceMaxAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<String?> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'title',
+          r'title',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'title',
+      key: r'title',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'description',
+          r'description',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'description',
+      key: r'description',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> sn() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'sn',
+          r'sn',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'sn',
+      key: r'sn',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<int?> firmwareId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwareId',
+          r'firmwareId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'firmwareId',
+      key: r'firmwareId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<Publish?> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'publish',
+          r'publish',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'publish',
+      key: r'publish',
     );
     return query(const []).then((value) => $enumDecodeNullable(
           _$PublishEnumMap,
           value,
-        ),);
+        ));
   }
 
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8288,11 +8347,11 @@ class DeviceMaxAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8307,41 +8366,41 @@ class UserCountOutputType {
   Future<int> devices({DeviceWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'devices',
+          r'devices',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'devices',
+      key: r'devices',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> firmwares({FirmwareWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'firmwares',
+          r'firmwares',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'firmwares',
+      key: r'firmwares',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 }
 
@@ -8354,104 +8413,104 @@ class UserCountAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> name() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'name',
+          r'name',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'name',
+      key: r'name',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> username() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'username',
+          r'username',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'username',
+      key: r'username',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> password() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'password',
+          r'password',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'password',
+      key: r'password',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> role() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'role',
+          r'role',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'role',
+      key: r'role',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> updatedAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> $all() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_all',
+          r'_all',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_all',
+      key: r'_all',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 }
 
@@ -8464,13 +8523,13 @@ class UserAvgAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as double?);
+    return query(const []).then((value) => (value as double?));
   }
 }
 
@@ -8483,13 +8542,13 @@ class UserSumAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 }
 
@@ -8502,79 +8561,79 @@ class UserMinAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<String?> name() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'name',
+          r'name',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'name',
+      key: r'name',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> username() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'username',
+          r'username',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'username',
+      key: r'username',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> password() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'password',
+          r'password',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'password',
+      key: r'password',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<Role?> role() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'role',
+          r'role',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'role',
+      key: r'role',
     );
     return query(const []).then((value) => $enumDecodeNullable(
           _$RoleEnumMap,
           value,
-        ),);
+        ));
   }
 
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8584,11 +8643,11 @@ class UserMinAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8604,79 +8663,79 @@ class UserMaxAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<String?> name() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'name',
+          r'name',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'name',
+      key: r'name',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> username() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'username',
+          r'username',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'username',
+      key: r'username',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> password() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'password',
+          r'password',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'password',
+      key: r'password',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<Role?> role() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'role',
+          r'role',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'role',
+      key: r'role',
     );
     return query(const []).then((value) => $enumDecodeNullable(
           _$RoleEnumMap,
           value,
-        ),);
+        ));
   }
 
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8686,11 +8745,11 @@ class UserMaxAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8705,21 +8764,21 @@ class FirmwareCountOutputType {
   Future<int> devices({DeviceWhereInput? where}) {
     final args = [
       _i2.GraphQLArg(
-        'where',
+        r'where',
         where,
-      ),
+      )
     ];
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'devices',
+          r'devices',
           fields: fields,
           args: args,
-        ),
+        )
       ]),
-      key: 'devices',
+      key: r'devices',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 }
 
@@ -8732,130 +8791,130 @@ class FirmwareCountAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'title',
+          r'title',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'title',
+      key: r'title',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'description',
+          r'description',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'description',
+      key: r'description',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> objectUrl() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'objectUrl',
+          r'objectUrl',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'objectUrl',
+      key: r'objectUrl',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> version() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'version',
+          r'version',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'version',
+      key: r'version',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'publish',
+          r'publish',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'publish',
+      key: r'publish',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> updatedAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 
   Future<int> $all() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          '_all',
+          r'_all',
           fields: fields,
-        ),
+        )
       ]),
-      key: '_all',
+      key: r'_all',
     );
-    return query(const []).then((value) => value! as int);
+    return query(const []).then((value) => (value as int));
   }
 }
 
@@ -8868,26 +8927,26 @@ class FirmwareAvgAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as double?);
+    return query(const []).then((value) => (value as double?));
   }
 
   Future<double?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as double?);
+    return query(const []).then((value) => (value as double?));
   }
 }
 
@@ -8900,26 +8959,26 @@ class FirmwareSumAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 }
 
@@ -8932,105 +8991,105 @@ class FirmwareMinAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<String?> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'title',
+          r'title',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'title',
+      key: r'title',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'description',
+          r'description',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'description',
+      key: r'description',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> objectUrl() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'objectUrl',
+          r'objectUrl',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'objectUrl',
+      key: r'objectUrl',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> version() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'version',
+          r'version',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'version',
+      key: r'version',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<Publish?> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'publish',
+          r'publish',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'publish',
+      key: r'publish',
     );
     return query(const []).then((value) => $enumDecodeNullable(
           _$PublishEnumMap,
           value,
-        ),);
+        ));
   }
 
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -9040,11 +9099,11 @@ class FirmwareMinAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -9060,105 +9119,105 @@ class FirmwareMaxAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'id',
+          r'id',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'id',
+      key: r'id',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<String?> title() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'title',
+          r'title',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'title',
+      key: r'title',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> description() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'description',
+          r'description',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'description',
+      key: r'description',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> objectUrl() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'objectUrl',
+          r'objectUrl',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'objectUrl',
+      key: r'objectUrl',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<String?> version() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'version',
+          r'version',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'version',
+      key: r'version',
     );
-    return query(const []).then((value) => value as String?);
+    return query(const []).then((value) => (value as String?));
   }
 
   Future<int?> userId() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'userId',
+          r'userId',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'userId',
+      key: r'userId',
     );
-    return query(const []).then((value) => value as int?);
+    return query(const []).then((value) => (value as int?));
   }
 
   Future<Publish?> publish() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'publish',
+          r'publish',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'publish',
+      key: r'publish',
     );
     return query(const []).then((value) => $enumDecodeNullable(
           _$PublishEnumMap,
           value,
-        ),);
+        ));
   }
 
   Future<DateTime?> createdAt() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'createdAt',
+          r'createdAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'createdAt',
+      key: r'createdAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -9168,11 +9227,11 @@ class FirmwareMaxAggregateOutputType {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
         _i2.GraphQLField(
-          'updatedAt',
+          r'updatedAt',
           fields: fields,
-        ),
+        )
       ]),
-      key: 'updatedAt',
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -9194,6 +9253,18 @@ class Datasources implements _i1.JsonSerializable {
 }
 
 class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
+  PrismaClient._internal(
+    _i3.Engine engine, {
+    _i3.QueryEngineRequestHeaders? headers,
+    _i3.TransactionInfo? transaction,
+  })  : _engine = engine,
+        _headers = headers,
+        _transaction = transaction,
+        super(
+          engine,
+          headers: headers,
+          transaction: transaction,
+        );
 
   factory PrismaClient({
     Datasources? datasources,
@@ -9207,20 +9278,13 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
     final engine = _i5.BinaryEngine(
       logger: logger,
       schema:
-          'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBzbiAgICAgICAgICBTdHJpbmcgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIEZpcm13YXJlICAgIEZpcm13YXJlPyBAcmVsYXRpb24oZmllbGRzOiBbZmlybXdhcmVJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGZpcm13YXJlSWQgIEludD8NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVkQXQgICBEYXRlVGltZSAgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJkZXZpY2UiKQ0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgIEludCAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgbmFtZSAgICAgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgdXNlcm5hbWUgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgcGFzc3dvcmQgIFN0cmluZyAgICAgQGRiLlZhckNoYXIoNjQpDQogIGRldmljZXMgICBEZXZpY2VbXQ0KICBmaXJtd2FyZXMgRmlybXdhcmVbXQ0KICByb2xlICAgICAgUm9sZSAgICAgICBAZGVmYXVsdChVU0VSKQ0KICBjcmVhdGVkQXQgRGF0ZVRpbWUgICBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lICAgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJ1c2VyIikNCn0NCg0KbW9kZWwgRmlybXdhcmUgew0KICBpZCAgICAgICAgICBJbnQgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICB0aXRsZSAgICAgICBTdHJpbmcgICBAZGIuVmFyQ2hhcig0NSkNCiAgZGVzY3JpcHRpb24gU3RyaW5nDQogIG9iamVjdFVybCAgIFN0cmluZw0KICB2ZXJzaW9uICAgICBTdHJpbmcgICBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgQHJlbGF0aW9uKGZpZWxkczogW3VzZXJJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIHVzZXJJZCAgICAgIEludD8NCiAgZGV2aWNlcyAgICAgRGV2aWNlW10NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgQGRlZmF1bHQoRU5BQkxFKQ0KICBjcmVhdGVkQXQgICBEYXRlVGltZSBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KCkNCiAgdXBkYXRlZEF0ICAgRGF0ZVRpbWUgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJmaXJtd2FyZSIpDQp9DQoNCmVudW0gUm9sZSB7DQogIEFETUlOIC8vLyBhbGxvd2VkIHRvIGRvIGV2ZXJ5dGhpbmcNCiAgVVNFUg0KfQ0KDQplbnVtIFB1Ymxpc2ggew0KICBFTkFCTEUNCiAgRElTQUJMRQ0KfQ0K',
+          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBzbiAgICAgICAgICBTdHJpbmcgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIEZpcm13YXJlICAgIEZpcm13YXJlPyBAcmVsYXRpb24oZmllbGRzOiBbZmlybXdhcmVJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGZpcm13YXJlSWQgIEludD8NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVkQXQgICBEYXRlVGltZSAgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJkZXZpY2UiKQ0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgIEludCAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgbmFtZSAgICAgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgdXNlcm5hbWUgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgcGFzc3dvcmQgIFN0cmluZyAgICAgQGRiLlZhckNoYXIoNjQpDQogIGRldmljZXMgICBEZXZpY2VbXQ0KICBmaXJtd2FyZXMgRmlybXdhcmVbXQ0KICByb2xlICAgICAgUm9sZSAgICAgICBAZGVmYXVsdChVU0VSKQ0KICBjcmVhdGVkQXQgRGF0ZVRpbWUgICBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lICAgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJ1c2VyIikNCn0NCg0KbW9kZWwgRmlybXdhcmUgew0KICBpZCAgICAgICAgICBJbnQgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICB0aXRsZSAgICAgICBTdHJpbmcgICBAZGIuVmFyQ2hhcig0NSkNCiAgZGVzY3JpcHRpb24gU3RyaW5nDQogIG9iamVjdFVybCAgIFN0cmluZw0KICB2ZXJzaW9uICAgICBTdHJpbmcgICBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgQHJlbGF0aW9uKGZpZWxkczogW3VzZXJJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIHVzZXJJZCAgICAgIEludD8NCiAgZGV2aWNlcyAgICAgRGV2aWNlW10NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgQGRlZmF1bHQoRU5BQkxFKQ0KICBjcmVhdGVkQXQgICBEYXRlVGltZSBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KCkNCiAgdXBkYXRlZEF0ICAgRGF0ZVRpbWUgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJmaXJtd2FyZSIpDQp9DQoNCmVudW0gUm9sZSB7DQogIEFETUlOIC8vLyBhbGxvd2VkIHRvIGRvIGV2ZXJ5dGhpbmcNCiAgVVNFUg0KfQ0KDQplbnVtIFB1Ymxpc2ggew0KICBFTkFCTEUNCiAgRElTQUJMRQ0KfQ0K',
       datasources: datasources?.toJson().cast() ?? const {},
       executable:
           r'D:\Projects\IoTProject\leap_oss\server\node_modules\prisma\query-engine-windows.exe',
     );
     return PrismaClient._internal(engine);
   }
-  PrismaClient._internal(
-    super.engine, {
-    super.headers,
-    super.transaction,
-  })  : _engine = engine,
-        _headers = headers,
-        _transaction = transaction;
 
   final _i3.Engine _engine;
 
