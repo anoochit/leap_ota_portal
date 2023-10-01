@@ -18,9 +18,13 @@ OR
 
 `$env:DATABASE_URL="postgresql://postgres:postgrespassword@localhost:5432/leap?schema=public`
 
-Run service with docker-compose
+Run database and storage service with docker-compose
 
 `docker-compose up -d`
+
+Run server
+
+`dart_frog dev`
 
 You can use a [client.rest](/server/client.rest) to test API.
 
