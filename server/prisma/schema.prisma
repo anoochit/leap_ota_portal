@@ -22,7 +22,8 @@ model Device {
   Firmware    Firmware? @relation(fields: [firmwareId], references: [id])
   firmwareId  Int?
   publish     Publish   @default(ENABLE)
-  createdAt   DateTime  @default(now()) @db.Timestamptz()
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@map("device")
 }
@@ -35,7 +36,8 @@ model User {
   devices   Device[]
   firmwares Firmware[]
   role      Role       @default(USER)
-  createdAt DateTime   @default(now()) @db.Timestamptz()
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   @@map("user")
 }
@@ -51,6 +53,7 @@ model Firmware {
   devices     Device[]
   publish     Publish  @default(ENABLE)
   createdAt   DateTime @default(now()) @db.Timestamptz()
+  updatedAt   DateTime @updatedAt
 
   @@map("firmware")
 }

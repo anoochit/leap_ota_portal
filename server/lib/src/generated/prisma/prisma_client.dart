@@ -17,7 +17,8 @@ enum DeviceScalarFieldEnum implements _i1.PrismaEnum {
   userId,
   firmwareId,
   publish,
-  createdAt;
+  createdAt,
+  updatedAt;
 
   @override
   String? get originalName => null;
@@ -29,7 +30,8 @@ enum UserScalarFieldEnum implements _i1.PrismaEnum {
   username,
   password,
   role,
-  createdAt;
+  createdAt,
+  updatedAt;
 
   @override
   String? get originalName => null;
@@ -43,7 +45,8 @@ enum FirmwareScalarFieldEnum implements _i1.PrismaEnum {
   version,
   userId,
   publish,
-  createdAt;
+  createdAt,
+  updatedAt;
 
   @override
   String? get originalName => null;
@@ -114,6 +117,7 @@ class DeviceWhereInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.firmware,
   });
@@ -143,6 +147,8 @@ class DeviceWhereInput implements _i1.JsonSerializable {
 
   final DateTimeFilter? createdAt;
 
+  final DateTimeFilter? updatedAt;
+
   @JsonKey(name: r'User')
   final UserRelationFilter? user;
 
@@ -164,6 +170,7 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.firmware,
   });
@@ -186,6 +193,8 @@ class DeviceOrderByWithRelationInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @JsonKey(name: r'User')
   final UserOrderByWithRelationInput? user;
@@ -229,6 +238,7 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.$count,
     this.$avg,
     this.$max,
@@ -255,6 +265,8 @@ class DeviceOrderByWithAggregationInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @JsonKey(name: r'_count')
   final DeviceCountOrderByAggregateInput? $count;
@@ -290,6 +302,7 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceScalarWhereWithAggregatesInput.fromJson(
@@ -318,6 +331,8 @@ class DeviceScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final DateTimeWithAggregatesFilter? createdAt;
 
+  final DateTimeWithAggregatesFilter? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$DeviceScalarWhereWithAggregatesInputToJson(this);
@@ -335,6 +350,7 @@ class UserWhereInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
     this.firmwares,
   });
@@ -360,6 +376,8 @@ class UserWhereInput implements _i1.JsonSerializable {
 
   final DateTimeFilter? createdAt;
 
+  final DateTimeFilter? updatedAt;
+
   final DeviceListRelationFilter? devices;
 
   final FirmwareListRelationFilter? firmwares;
@@ -377,6 +395,7 @@ class UserOrderByWithRelationInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
     this.firmwares,
   });
@@ -395,6 +414,8 @@ class UserOrderByWithRelationInput implements _i1.JsonSerializable {
   final SortOrder? role;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   final DeviceOrderByRelationAggregateInput? devices;
 
@@ -434,6 +455,7 @@ class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.$count,
     this.$avg,
     this.$max,
@@ -455,6 +477,8 @@ class UserOrderByWithAggregationInput implements _i1.JsonSerializable {
   final SortOrder? role;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @JsonKey(name: r'_count')
   final UserCountOrderByAggregateInput? $count;
@@ -488,6 +512,7 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserScalarWhereWithAggregatesInput.fromJson(
@@ -512,6 +537,8 @@ class UserScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final DateTimeWithAggregatesFilter? createdAt;
 
+  final DateTimeWithAggregatesFilter? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$UserScalarWhereWithAggregatesInputToJson(this);
@@ -531,6 +558,7 @@ class FirmwareWhereInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.devices,
   });
@@ -560,6 +588,8 @@ class FirmwareWhereInput implements _i1.JsonSerializable {
 
   final DateTimeFilter? createdAt;
 
+  final DateTimeFilter? updatedAt;
+
   @JsonKey(name: r'User')
   final UserRelationFilter? user;
 
@@ -580,6 +610,7 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.devices,
   });
@@ -603,6 +634,8 @@ class FirmwareOrderByWithRelationInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @JsonKey(name: r'User')
   final UserOrderByWithRelationInput? user;
@@ -638,6 +671,7 @@ class FirmwareOrderByWithAggregationInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.$count,
     this.$avg,
     this.$max,
@@ -664,6 +698,8 @@ class FirmwareOrderByWithAggregationInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @JsonKey(name: r'_count')
   final FirmwareCountOrderByAggregateInput? $count;
@@ -699,6 +735,7 @@ class FirmwareScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareScalarWhereWithAggregatesInput.fromJson(
@@ -727,6 +764,8 @@ class FirmwareScalarWhereWithAggregatesInput implements _i1.JsonSerializable {
 
   final DateTimeWithAggregatesFilter? createdAt;
 
+  final DateTimeWithAggregatesFilter? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$FirmwareScalarWhereWithAggregatesInputToJson(this);
@@ -740,6 +779,7 @@ class DeviceCreateInput implements _i1.JsonSerializable {
     required this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.firmware,
   });
@@ -756,6 +796,8 @@ class DeviceCreateInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutDevicesInput? user;
@@ -778,6 +820,7 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedCreateInput.fromJson(Map<String, dynamic> json) =>
@@ -799,6 +842,8 @@ class DeviceUncheckedCreateInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceUncheckedCreateInputToJson(this);
 }
@@ -811,6 +856,7 @@ class DeviceUpdateInput implements _i1.JsonSerializable {
     this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.firmware,
   });
@@ -827,6 +873,8 @@ class DeviceUpdateInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @JsonKey(name: r'User')
   final UserUpdateOneWithoutDevicesNestedInput? user;
@@ -849,6 +897,7 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedUpdateInput.fromJson(Map<String, dynamic> json) =>
@@ -870,6 +919,8 @@ class DeviceUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceUncheckedUpdateInputToJson(this);
 }
@@ -885,6 +936,7 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -906,6 +958,8 @@ class DeviceCreateManyInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceCreateManyInputToJson(this);
 }
@@ -918,6 +972,7 @@ class DeviceUpdateManyMutationInput implements _i1.JsonSerializable {
     this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUpdateManyMutationInput.fromJson(Map<String, dynamic> json) =>
@@ -932,6 +987,8 @@ class DeviceUpdateManyMutationInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceUpdateManyMutationInputToJson(this);
@@ -948,6 +1005,7 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedUpdateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -969,6 +1027,8 @@ class DeviceUncheckedUpdateManyInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceUncheckedUpdateManyInputToJson(this);
 }
@@ -981,6 +1041,7 @@ class UserCreateInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
     this.firmwares,
   });
@@ -997,6 +1058,8 @@ class UserCreateInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   final DeviceCreateNestedManyWithoutUserInput? devices;
 
@@ -1015,6 +1078,7 @@ class UserUncheckedCreateInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
     this.firmwares,
   });
@@ -1034,6 +1098,8 @@ class UserUncheckedCreateInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   final DeviceUncheckedCreateNestedManyWithoutUserInput? devices;
 
   final FirmwareUncheckedCreateNestedManyWithoutUserInput? firmwares;
@@ -1050,6 +1116,7 @@ class UserUpdateInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
     this.firmwares,
   });
@@ -1066,6 +1133,8 @@ class UserUpdateInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   final DeviceUpdateManyWithoutUserNestedInput? devices;
 
@@ -1084,6 +1153,7 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
     this.firmwares,
   });
@@ -1103,6 +1173,8 @@ class UserUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   final DeviceUncheckedUpdateManyWithoutUserNestedInput? devices;
 
   final FirmwareUncheckedUpdateManyWithoutUserNestedInput? firmwares;
@@ -1120,6 +1192,7 @@ class UserCreateManyInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1137,6 +1210,8 @@ class UserCreateManyInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$UserCreateManyInputToJson(this);
 }
@@ -1149,6 +1224,7 @@ class UserUpdateManyMutationInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserUpdateManyMutationInput.fromJson(Map<String, dynamic> json) =>
@@ -1164,6 +1240,8 @@ class UserUpdateManyMutationInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$UserUpdateManyMutationInputToJson(this);
 }
@@ -1177,6 +1255,7 @@ class UserUncheckedUpdateManyInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserUncheckedUpdateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1194,6 +1273,8 @@ class UserUncheckedUpdateManyInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$UserUncheckedUpdateManyInputToJson(this);
 }
@@ -1207,6 +1288,7 @@ class FirmwareCreateInput implements _i1.JsonSerializable {
     required this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.devices,
   });
@@ -1225,6 +1307,8 @@ class FirmwareCreateInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutFirmwaresInput? user;
@@ -1246,6 +1330,7 @@ class FirmwareUncheckedCreateInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -1268,6 +1353,8 @@ class FirmwareUncheckedCreateInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   final DeviceUncheckedCreateNestedManyWithoutFirmwareInput? devices;
 
   @override
@@ -1283,6 +1370,7 @@ class FirmwareUpdateInput implements _i1.JsonSerializable {
     this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
     this.devices,
   });
@@ -1301,6 +1389,8 @@ class FirmwareUpdateInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @JsonKey(name: r'User')
   final UserUpdateOneWithoutFirmwaresNestedInput? user;
@@ -1322,6 +1412,7 @@ class FirmwareUncheckedUpdateInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -1344,6 +1435,8 @@ class FirmwareUncheckedUpdateInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   final DeviceUncheckedUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
@@ -1361,6 +1454,7 @@ class FirmwareCreateManyInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareCreateManyInput.fromJson(Map<String, dynamic> json) =>
@@ -1382,6 +1476,8 @@ class FirmwareCreateManyInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$FirmwareCreateManyInputToJson(this);
 }
@@ -1395,6 +1491,7 @@ class FirmwareUpdateManyMutationInput implements _i1.JsonSerializable {
     this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareUpdateManyMutationInput.fromJson(Map<String, dynamic> json) =>
@@ -1412,6 +1509,8 @@ class FirmwareUpdateManyMutationInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$FirmwareUpdateManyMutationInputToJson(this);
@@ -1428,6 +1527,7 @@ class FirmwareUncheckedUpdateManyInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareUncheckedUpdateManyInput.fromJson(
@@ -1449,6 +1549,8 @@ class FirmwareUncheckedUpdateManyInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -1707,6 +1809,7 @@ class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceCountOrderByAggregateInput.fromJson(
@@ -1728,6 +1831,8 @@ class DeviceCountOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -1766,6 +1871,7 @@ class DeviceMaxOrderByAggregateInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceMaxOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -1787,6 +1893,8 @@ class DeviceMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? createdAt;
 
+  final SortOrder? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceMaxOrderByAggregateInputToJson(this);
 }
@@ -1802,6 +1910,7 @@ class DeviceMinOrderByAggregateInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceMinOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -1822,6 +1931,8 @@ class DeviceMinOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceMinOrderByAggregateInputToJson(this);
@@ -2219,6 +2330,7 @@ class UserCountOrderByAggregateInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserCountOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2235,6 +2347,8 @@ class UserCountOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? role;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserCountOrderByAggregateInputToJson(this);
@@ -2262,6 +2376,7 @@ class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserMaxOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2279,6 +2394,8 @@ class UserMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? createdAt;
 
+  final SortOrder? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$UserMaxOrderByAggregateInputToJson(this);
 }
@@ -2292,6 +2409,7 @@ class UserMinOrderByAggregateInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserMinOrderByAggregateInput.fromJson(Map<String, dynamic> json) =>
@@ -2308,6 +2426,8 @@ class UserMinOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? role;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$UserMinOrderByAggregateInputToJson(this);
@@ -2374,6 +2494,7 @@ class FirmwareCountOrderByAggregateInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareCountOrderByAggregateInput.fromJson(
@@ -2395,6 +2516,8 @@ class FirmwareCountOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -2432,6 +2555,7 @@ class FirmwareMaxOrderByAggregateInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareMaxOrderByAggregateInput.fromJson(
@@ -2454,6 +2578,8 @@ class FirmwareMaxOrderByAggregateInput implements _i1.JsonSerializable {
 
   final SortOrder? createdAt;
 
+  final SortOrder? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$FirmwareMaxOrderByAggregateInputToJson(this);
@@ -2470,6 +2596,7 @@ class FirmwareMinOrderByAggregateInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareMinOrderByAggregateInput.fromJson(
@@ -2491,6 +2618,8 @@ class FirmwareMinOrderByAggregateInput implements _i1.JsonSerializable {
   final SortOrder? publish;
 
   final SortOrder? createdAt;
+
+  final SortOrder? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -3849,6 +3978,7 @@ class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.firmwares,
   });
 
@@ -3865,6 +3995,8 @@ class UserCreateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   final FirmwareCreateNestedManyWithoutUserInput? firmwares;
 
   @override
@@ -3880,6 +4012,7 @@ class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.firmwares,
   });
 
@@ -3898,6 +4031,8 @@ class UserUncheckedCreateWithoutDevicesInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   final FirmwareUncheckedCreateNestedManyWithoutUserInput? firmwares;
 
@@ -3935,6 +4070,7 @@ class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
     required this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
   });
 
@@ -3953,6 +4089,8 @@ class FirmwareCreateWithoutDevicesInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutFirmwaresInput? user;
@@ -3974,6 +4112,7 @@ class FirmwareUncheckedCreateWithoutDevicesInput
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareUncheckedCreateWithoutDevicesInput.fromJson(
@@ -3995,6 +4134,8 @@ class FirmwareUncheckedCreateWithoutDevicesInput
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -4048,6 +4189,7 @@ class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.firmwares,
   });
 
@@ -4064,6 +4206,8 @@ class UserUpdateWithoutDevicesInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   final FirmwareUpdateManyWithoutUserNestedInput? firmwares;
 
   @override
@@ -4079,6 +4223,7 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.firmwares,
   });
 
@@ -4097,6 +4242,8 @@ class UserUncheckedUpdateWithoutDevicesInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   final FirmwareUncheckedUpdateManyWithoutUserNestedInput? firmwares;
 
@@ -4134,6 +4281,7 @@ class FirmwareUpdateWithoutDevicesInput implements _i1.JsonSerializable {
     this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
   });
 
@@ -4152,6 +4300,8 @@ class FirmwareUpdateWithoutDevicesInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @JsonKey(name: r'User')
   final UserUpdateOneWithoutFirmwaresNestedInput? user;
@@ -4173,6 +4323,7 @@ class FirmwareUncheckedUpdateWithoutDevicesInput
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareUncheckedUpdateWithoutDevicesInput.fromJson(
@@ -4195,6 +4346,8 @@ class FirmwareUncheckedUpdateWithoutDevicesInput
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$FirmwareUncheckedUpdateWithoutDevicesInputToJson(this);
@@ -4208,6 +4361,7 @@ class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
     required this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.firmware,
   });
 
@@ -4223,6 +4377,8 @@ class DeviceCreateWithoutUserInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @JsonKey(name: r'Firmware')
   final FirmwareCreateNestedOneWithoutDevicesInput? firmware;
@@ -4241,6 +4397,7 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedCreateWithoutUserInput.fromJson(
@@ -4260,6 +4417,8 @@ class DeviceUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -4315,6 +4474,7 @@ class FirmwareCreateWithoutUserInput implements _i1.JsonSerializable {
     required this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -4333,6 +4493,8 @@ class FirmwareCreateWithoutUserInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   final DeviceCreateNestedManyWithoutFirmwareInput? devices;
 
   @override
@@ -4349,6 +4511,7 @@ class FirmwareUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
     required this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -4369,6 +4532,8 @@ class FirmwareUncheckedCreateWithoutUserInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   final DeviceUncheckedCreateNestedManyWithoutFirmwareInput? devices;
 
@@ -4497,6 +4662,7 @@ class DeviceScalarWhereInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceScalarWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -4523,6 +4689,8 @@ class DeviceScalarWhereInput implements _i1.JsonSerializable {
   final EnumPublishFilter? publish;
 
   final DateTimeFilter? createdAt;
+
+  final DateTimeFilter? updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$DeviceScalarWhereInputToJson(this);
@@ -4608,6 +4776,7 @@ class FirmwareScalarWhereInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareScalarWhereInput.fromJson(Map<String, dynamic> json) =>
@@ -4635,6 +4804,8 @@ class FirmwareScalarWhereInput implements _i1.JsonSerializable {
 
   final DateTimeFilter? createdAt;
 
+  final DateTimeFilter? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$FirmwareScalarWhereInputToJson(this);
 }
@@ -4647,6 +4818,7 @@ class UserCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -4662,6 +4834,8 @@ class UserCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   final DeviceCreateNestedManyWithoutUserInput? devices;
 
@@ -4679,6 +4853,7 @@ class UserUncheckedCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
     required this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -4697,6 +4872,8 @@ class UserUncheckedCreateWithoutFirmwaresInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   final DeviceUncheckedCreateNestedManyWithoutUserInput? devices;
 
@@ -4733,6 +4910,7 @@ class DeviceCreateWithoutFirmwareInput implements _i1.JsonSerializable {
     required this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
   });
 
@@ -4749,6 +4927,8 @@ class DeviceCreateWithoutFirmwareInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @JsonKey(name: r'User')
   final UserCreateNestedOneWithoutDevicesInput? user;
@@ -4769,6 +4949,7 @@ class DeviceUncheckedCreateWithoutFirmwareInput
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedCreateWithoutFirmwareInput.fromJson(
@@ -4788,6 +4969,8 @@ class DeviceUncheckedCreateWithoutFirmwareInput
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @override
   Map<String, dynamic> toJson() =>
@@ -4862,6 +5045,7 @@ class UserUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -4877,6 +5061,8 @@ class UserUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   final DeviceUpdateManyWithoutUserNestedInput? devices;
 
@@ -4894,6 +5080,7 @@ class UserUncheckedUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -4912,6 +5099,8 @@ class UserUncheckedUpdateWithoutFirmwaresInput implements _i1.JsonSerializable {
   final Role? role;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   final DeviceUncheckedUpdateManyWithoutUserNestedInput? devices;
 
@@ -4996,6 +5185,7 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceCreateManyUserInput.fromJson(Map<String, dynamic> json) =>
@@ -5015,6 +5205,8 @@ class DeviceCreateManyUserInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceCreateManyUserInputToJson(this);
 }
@@ -5029,6 +5221,7 @@ class FirmwareCreateManyUserInput implements _i1.JsonSerializable {
     required this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareCreateManyUserInput.fromJson(Map<String, dynamic> json) =>
@@ -5048,6 +5241,8 @@ class FirmwareCreateManyUserInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$FirmwareCreateManyUserInputToJson(this);
 }
@@ -5060,6 +5255,7 @@ class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
     this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.firmware,
   });
 
@@ -5075,6 +5271,8 @@ class DeviceUpdateWithoutUserInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @JsonKey(name: r'Firmware')
   final FirmwareUpdateOneWithoutDevicesNestedInput? firmware;
@@ -5093,6 +5291,7 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedUpdateWithoutUserInput.fromJson(
@@ -5113,6 +5312,8 @@ class DeviceUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$DeviceUncheckedUpdateWithoutUserInputToJson(this);
@@ -5129,6 +5330,7 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedUpdateManyWithoutDevicesInput.fromJson(
@@ -5149,6 +5351,8 @@ class DeviceUncheckedUpdateManyWithoutDevicesInput
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$DeviceUncheckedUpdateManyWithoutDevicesInputToJson(this);
@@ -5163,6 +5367,7 @@ class FirmwareUpdateWithoutUserInput implements _i1.JsonSerializable {
     this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -5181,6 +5386,8 @@ class FirmwareUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   final DeviceUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
@@ -5197,6 +5404,7 @@ class FirmwareUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
     this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.devices,
   });
 
@@ -5218,6 +5426,8 @@ class FirmwareUncheckedUpdateWithoutUserInput implements _i1.JsonSerializable {
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   final DeviceUncheckedUpdateManyWithoutFirmwareNestedInput? devices;
 
   @override
@@ -5236,6 +5446,7 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
     this.version,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareUncheckedUpdateManyWithoutFirmwaresInput.fromJson(
@@ -5256,6 +5467,8 @@ class FirmwareUncheckedUpdateManyWithoutFirmwaresInput
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$FirmwareUncheckedUpdateManyWithoutFirmwaresInputToJson(this);
@@ -5271,6 +5484,7 @@ class DeviceCreateManyFirmwareInput implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceCreateManyFirmwareInput.fromJson(Map<String, dynamic> json) =>
@@ -5290,6 +5504,8 @@ class DeviceCreateManyFirmwareInput implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceCreateManyFirmwareInputToJson(this);
 }
@@ -5302,6 +5518,7 @@ class DeviceUpdateWithoutFirmwareInput implements _i1.JsonSerializable {
     this.sn,
     this.publish,
     this.createdAt,
+    this.updatedAt,
     this.user,
   });
 
@@ -5318,6 +5535,8 @@ class DeviceUpdateWithoutFirmwareInput implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
+
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
 
   @JsonKey(name: r'User')
   final UserUpdateOneWithoutDevicesNestedInput? user;
@@ -5338,6 +5557,7 @@ class DeviceUncheckedUpdateWithoutFirmwareInput
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceUncheckedUpdateWithoutFirmwareInput.fromJson(
@@ -5358,6 +5578,8 @@ class DeviceUncheckedUpdateWithoutFirmwareInput
 
   final DateTimeFieldUpdateOperationsInput? createdAt;
 
+  final DateTimeFieldUpdateOperationsInput? updatedAt;
+
   @override
   Map<String, dynamic> toJson() =>
       _$DeviceUncheckedUpdateWithoutFirmwareInputToJson(this);
@@ -5374,6 +5596,7 @@ class Device implements _i1.JsonSerializable {
     this.firmwareId,
     required this.publish,
     required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Device.fromJson(Map<String, dynamic> json) => _$DeviceFromJson(json);
@@ -5394,6 +5617,8 @@ class Device implements _i1.JsonSerializable {
 
   final DateTime createdAt;
 
+  final DateTime updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceToJson(this);
 }
@@ -5407,6 +5632,7 @@ class User implements _i1.JsonSerializable {
     required this.password,
     required this.role,
     required this.createdAt,
+    required this.updatedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -5423,6 +5649,8 @@ class User implements _i1.JsonSerializable {
 
   final DateTime createdAt;
 
+  final DateTime updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
@@ -5438,6 +5666,7 @@ class Firmware implements _i1.JsonSerializable {
     this.userId,
     required this.publish,
     required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Firmware.fromJson(Map<String, dynamic> json) =>
@@ -5458,6 +5687,8 @@ class Firmware implements _i1.JsonSerializable {
   final Publish publish;
 
   final DateTime createdAt;
+
+  final DateTime updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareToJson(this);
@@ -7319,6 +7550,7 @@ class DeviceGroupByOutputType implements _i1.JsonSerializable {
     this.firmwareId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory DeviceGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -7340,6 +7572,8 @@ class DeviceGroupByOutputType implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$DeviceGroupByOutputTypeToJson(this);
 }
@@ -7353,6 +7587,7 @@ class UserGroupByOutputType implements _i1.JsonSerializable {
     this.password,
     this.role,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -7370,6 +7605,8 @@ class UserGroupByOutputType implements _i1.JsonSerializable {
 
   final DateTime? createdAt;
 
+  final DateTime? updatedAt;
+
   @override
   Map<String, dynamic> toJson() => _$UserGroupByOutputTypeToJson(this);
 }
@@ -7385,6 +7622,7 @@ class FirmwareGroupByOutputType implements _i1.JsonSerializable {
     this.userId,
     this.publish,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory FirmwareGroupByOutputType.fromJson(Map<String, dynamic> json) =>
@@ -7405,6 +7643,8 @@ class FirmwareGroupByOutputType implements _i1.JsonSerializable {
   final Publish? publish;
 
   final DateTime? createdAt;
+
+  final DateTime? updatedAt;
 
   @override
   Map<String, dynamic> toJson() => _$FirmwareGroupByOutputTypeToJson(this);
@@ -7745,6 +7985,19 @@ class DeviceCountAggregateOutputType {
     return query(const []).then((value) => (value as int));
   }
 
+  Future<int> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
   Future<int> $all() {
     final query = _i1.PrismaFluent.queryBuilder(
       query: (fields) => $query([
@@ -7961,6 +8214,20 @@ class DeviceMinAggregateOutputType {
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
   }
+
+  Future<DateTime?> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
+  }
 }
 
 class DeviceMaxAggregateOutputType {
@@ -8071,6 +8338,20 @@ class DeviceMaxAggregateOutputType {
         )
       ]),
       key: r'createdAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
+  }
+
+  Future<DateTime?> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8202,6 +8483,19 @@ class UserCountAggregateOutputType {
         )
       ]),
       key: r'createdAt',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -8344,6 +8638,20 @@ class UserMinAggregateOutputType {
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
   }
+
+  Future<DateTime?> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
+  }
 }
 
 class UserMaxAggregateOutputType {
@@ -8428,6 +8736,20 @@ class UserMaxAggregateOutputType {
         )
       ]),
       key: r'createdAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
+  }
+
+  Future<DateTime?> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
     );
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
@@ -8565,6 +8887,19 @@ class FirmwareCountAggregateOutputType {
         )
       ]),
       key: r'createdAt',
+    );
+    return query(const []).then((value) => (value as int));
+  }
+
+  Future<int> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
     );
     return query(const []).then((value) => (value as int));
   }
@@ -8759,6 +9094,20 @@ class FirmwareMinAggregateOutputType {
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
   }
+
+  Future<DateTime?> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
+  }
 }
 
 class FirmwareMaxAggregateOutputType {
@@ -8873,6 +9222,20 @@ class FirmwareMaxAggregateOutputType {
     return query(const [])
         .then((value) => value is String ? DateTime.parse(value) : null);
   }
+
+  Future<DateTime?> updatedAt() {
+    final query = _i1.PrismaFluent.queryBuilder(
+      query: (fields) => $query([
+        _i2.GraphQLField(
+          r'updatedAt',
+          fields: fields,
+        )
+      ]),
+      key: r'updatedAt',
+    );
+    return query(const [])
+        .then((value) => value is String ? DateTime.parse(value) : null);
+  }
 }
 
 @JsonSerializable(
@@ -8915,7 +9278,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
     final engine = _i5.BinaryEngine(
       logger: logger,
       schema:
-          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBzbiAgICAgICAgICBTdHJpbmcgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIEZpcm13YXJlICAgIEZpcm13YXJlPyBAcmVsYXRpb24oZmllbGRzOiBbZmlybXdhcmVJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGZpcm13YXJlSWQgIEludD8NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgIEBkZWZhdWx0KG5vdygpKSBAZGIuVGltZXN0YW1wdHooKQ0KDQogIEBAbWFwKCJkZXZpY2UiKQ0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgIEludCAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgbmFtZSAgICAgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgdXNlcm5hbWUgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgcGFzc3dvcmQgIFN0cmluZyAgICAgQGRiLlZhckNoYXIoNjQpDQogIGRldmljZXMgICBEZXZpY2VbXQ0KICBmaXJtd2FyZXMgRmlybXdhcmVbXQ0KICByb2xlICAgICAgUm9sZSAgICAgICBAZGVmYXVsdChVU0VSKQ0KICBjcmVhdGVkQXQgRGF0ZVRpbWUgICBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KCkNCg0KICBAQG1hcCgidXNlciIpDQp9DQoNCm1vZGVsIEZpcm13YXJlIHsNCiAgaWQgICAgICAgICAgSW50ICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBvYmplY3RVcmwgICBTdHJpbmcNCiAgdmVyc2lvbiAgICAgU3RyaW5nICAgQGRiLlZhckNoYXIoNDUpDQogIFVzZXIgICAgICAgIFVzZXI/ICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIGRldmljZXMgICAgIERldmljZVtdDQogIHB1Ymxpc2ggICAgIFB1Ymxpc2ggIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpIEBkYi5UaW1lc3RhbXB0eigpDQoNCiAgQEBtYXAoImZpcm13YXJlIikNCn0NCg0KZW51bSBSb2xlIHsNCiAgQURNSU4gLy8vIGFsbG93ZWQgdG8gZG8gZXZlcnl0aGluZw0KICBVU0VSDQp9DQoNCmVudW0gUHVibGlzaCB7DQogIEVOQUJMRQ0KICBESVNBQkxFDQp9DQo=',
+          r'Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyICAgICAgPSAiZGFydCBydW4gb3JtIg0KICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiXQ0KfQ0KDQpkYXRhc291cmNlIGRiIHsNCiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCINCiAgdXJsICAgICAgPSBlbnYoIkRBVEFCQVNFX1VSTCIpDQp9DQoNCmdlbmVyYXRvciBkYm1sIHsNCiAgcHJvdmlkZXIgPSAicHJpc21hLWRibWwtZ2VuZXJhdG9yIg0KfQ0KDQptb2RlbCBEZXZpY2Ugew0KICBpZCAgICAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgdGl0bGUgICAgICAgU3RyaW5nICAgIEB1bmlxdWUgQGRiLlZhckNoYXIoNDUpDQogIGRlc2NyaXB0aW9uIFN0cmluZw0KICBzbiAgICAgICAgICBTdHJpbmcgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgIEByZWxhdGlvbihmaWVsZHM6IFt1c2VySWRdLCByZWZlcmVuY2VzOiBbaWRdKQ0KICB1c2VySWQgICAgICBJbnQ/DQogIEZpcm13YXJlICAgIEZpcm13YXJlPyBAcmVsYXRpb24oZmllbGRzOiBbZmlybXdhcmVJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIGZpcm13YXJlSWQgIEludD8NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgIEBkZWZhdWx0KEVOQUJMRSkNCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVkQXQgICBEYXRlVGltZSAgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJkZXZpY2UiKQ0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgIEludCAgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkNCiAgbmFtZSAgICAgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgdXNlcm5hbWUgIFN0cmluZyAgICAgQHVuaXF1ZSBAZGIuVmFyQ2hhcig0NSkNCiAgcGFzc3dvcmQgIFN0cmluZyAgICAgQGRiLlZhckNoYXIoNjQpDQogIGRldmljZXMgICBEZXZpY2VbXQ0KICBmaXJtd2FyZXMgRmlybXdhcmVbXQ0KICByb2xlICAgICAgUm9sZSAgICAgICBAZGVmYXVsdChVU0VSKQ0KICBjcmVhdGVkQXQgRGF0ZVRpbWUgICBAZGVmYXVsdChub3coKSkNCiAgdXBkYXRlZEF0IERhdGVUaW1lICAgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJ1c2VyIikNCn0NCg0KbW9kZWwgRmlybXdhcmUgew0KICBpZCAgICAgICAgICBJbnQgICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQ0KICB0aXRsZSAgICAgICBTdHJpbmcgICBAZGIuVmFyQ2hhcig0NSkNCiAgZGVzY3JpcHRpb24gU3RyaW5nDQogIG9iamVjdFVybCAgIFN0cmluZw0KICB2ZXJzaW9uICAgICBTdHJpbmcgICBAZGIuVmFyQ2hhcig0NSkNCiAgVXNlciAgICAgICAgVXNlcj8gICAgQHJlbGF0aW9uKGZpZWxkczogW3VzZXJJZF0sIHJlZmVyZW5jZXM6IFtpZF0pDQogIHVzZXJJZCAgICAgIEludD8NCiAgZGV2aWNlcyAgICAgRGV2aWNlW10NCiAgcHVibGlzaCAgICAgUHVibGlzaCAgQGRlZmF1bHQoRU5BQkxFKQ0KICBjcmVhdGVkQXQgICBEYXRlVGltZSBAZGVmYXVsdChub3coKSkgQGRiLlRpbWVzdGFtcHR6KCkNCiAgdXBkYXRlZEF0ICAgRGF0ZVRpbWUgQHVwZGF0ZWRBdA0KDQogIEBAbWFwKCJmaXJtd2FyZSIpDQp9DQoNCmVudW0gUm9sZSB7DQogIEFETUlOIC8vLyBhbGxvd2VkIHRvIGRvIGV2ZXJ5dGhpbmcNCiAgVVNFUg0KfQ0KDQplbnVtIFB1Ymxpc2ggew0KICBFTkFCTEUNCiAgRElTQUJMRQ0KfQ0K',
       datasources: datasources?.toJson().cast() ?? const {},
       executable:
           r'D:\Projects\IoTProject\leap_oss\server\node_modules\prisma\query-engine-windows.exe',
