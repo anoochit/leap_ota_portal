@@ -8,6 +8,20 @@ See data model in [schema.prisma](/server/prisma/schema.prisma) and [DBML](/serv
 
 ## Routes
 
+## Run Server
+
+Export env variable for database url see .env file
+
+`export DATABASE_URL="postgresql://postgres:postgrespassword@localhost:5432/leap?schema=public"`
+
+OR
+
+`$env:DATABASE_URL="postgresql://postgres:postgrespassword@localhost:5432/leap?schema=public`
+
+Run service with docker-compose
+
+`docker-compose up -d`
+
 You can use a [client.rest](/server/client.rest) to test API.
 
 - `/auth` - signin

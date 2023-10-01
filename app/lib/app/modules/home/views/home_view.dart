@@ -18,15 +18,6 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor:
           Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
-      // appBar: AppBar(
-      //   leading: buildBrandIcon(deviceType),
-      //   title: const Text('Firmware Portal'),
-      //   centerTitle: (deviceType == DeviceScreenType.mobile) ? true : false,
-      //   actions: const [
-      //     // profile button
-      //     ProfileButtonView(),
-      //   ],
-      // ),
       body: Column(
         children: [
           // appbar
