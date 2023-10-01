@@ -6,8 +6,6 @@ Edit data model [schema.prisma](/server/prisma/schema.prisma) as you need then e
 
 See data model in [schema.prisma](/server/prisma/schema.prisma) and [DBML](/server/prisma/dbml/schema.dbml).
 
-## Routes
-
 ## Run Server
 
 Export env variable for database url see .env file
@@ -31,6 +29,8 @@ Use prisma CLI to migrate database
 Run server
 
 `dart_frog dev`
+
+## Routes
 
 You can use a [client.rest](/server/client.rest) to test API.
 
