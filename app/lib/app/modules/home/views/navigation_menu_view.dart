@@ -13,18 +13,29 @@ class NavigationMenuView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => NavigationRail(
-        labelType: (deviceType == DeviceScreenType.tablet)
-            ? NavigationRailLabelType.selected
-            : null,
-        extended: (deviceType == DeviceScreenType.tablet) ? false : true,
-        onDestinationSelected: (value) => controller.navIndex.value = value,
-        destinations: menuItems
-            .map((item) => NavigationRailDestination(
-                icon: Icon(item.icon), label: Text(item.title)))
-            .toList(),
-        selectedIndex: controller.navIndex.value,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Obx(
+          () => NavigationRail(
+            backgroundColor: Colors.white,
+            labelType: (deviceType == DeviceScreenType.tablet)
+                ? NavigationRailLabelType.selected
+                : null,
+            extended: (deviceType == DeviceScreenType.tablet) ? false : true,
+            onDestinationSelected: (value) => controller.navIndex.value = value,
+            destinations: menuItems
+                .map((item) => NavigationRailDestination(
+                    icon: Icon(item.icon), label: Text(item.title)))
+                .toList(),
+            selectedIndex: controller.navIndex.value,
+          ),
+        ),
       ),
     );
   }

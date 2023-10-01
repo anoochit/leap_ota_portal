@@ -15,7 +15,9 @@ class ProfileView extends GetView<ProfileController> {
               CircleAvatar(
                 radius: 60,
                 child: Text(
-                  controller.name.value.substring(0, 1).toUpperCase(),
+                  (controller.name.value.isNotEmpty)
+                      ? controller.name.value.substring(0, 1).toUpperCase()
+                      : '',
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),

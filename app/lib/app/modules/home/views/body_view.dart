@@ -10,22 +10,31 @@ class BodyView extends GetView<HomeController> {
   const BodyView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => IndexedStack(
-        index: controller.navIndex.value,
-        children: const [
-          // device
-          DeviceView(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Obx(
+          () => IndexedStack(
+            index: controller.navIndex.value,
+            children: const [
+              // device
+              DeviceView(),
 
-          // firmware
-          FirmwareView(),
+              // firmware
+              FirmwareView(),
 
-          // user
-          // UserView(),
+              // user
+              // UserView(),
 
-          // profile
-          ProfileView(),
-        ],
+              // profile
+              ProfileView(),
+            ],
+          ),
+        ),
       ),
     );
   }

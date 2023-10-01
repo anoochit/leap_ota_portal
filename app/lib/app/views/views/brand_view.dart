@@ -15,7 +15,9 @@ class BrandView extends GetView {
           )
         : const Padding(
             padding: EdgeInsets.all(8.0),
-            child: FlutterLogo(),
+            child: FlutterLogo(
+              size: 32.0,
+            ),
           );
   }
 }

@@ -23,6 +23,7 @@ class NavigationMenuMobileView extends GetView<HomeController> {
           Obx(
             () => Expanded(
               child: NavigationRail(
+                backgroundColor: Colors.white,
                 extended:
                     (deviceType == DeviceScreenType.tablet) ? false : true,
                 onDestinationSelected: (value) {

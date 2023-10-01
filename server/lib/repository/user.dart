@@ -11,7 +11,7 @@ class UserRepository {
   Future<(String?, User?)> signUp(
       {required String name,
       required String username,
-      required String password}) async {
+      required String password,}) async {
     final hashPassword = textEncode(plain: password);
 
     // add to mack user list

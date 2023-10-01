@@ -16,26 +16,61 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final deviceType = getDeviceType(MediaQuery.of(context).size);
     return Scaffold(
-      appBar: AppBar(
-        leading: buildBrandIcon(deviceType),
-        title: const Text('Firmware Portal'),
-        centerTitle: (deviceType == DeviceScreenType.mobile) ? true : false,
-        elevation: 5.0,
-        actions: const [
-          // profile button
-          ProfileButtonView(),
+      backgroundColor:
+          Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
+      // appBar: AppBar(
+      //   leading: buildBrandIcon(deviceType),
+      //   title: const Text('Firmware Portal'),
+      //   centerTitle: (deviceType == DeviceScreenType.mobile) ? true : false,
+      //   actions: const [
+      //     // profile button
+      //     ProfileButtonView(),
+      //   ],
+      // ),
+      body: Column(
+        children: [
+          // appbar
+          buildAppBar(deviceType, context),
+          // body
+          Expanded(child: buildBody(deviceType)),
         ],
       ),
-      body: buildBody(deviceType),
       drawer: buildDrawer(deviceType),
     );
   }
 
-  BrandView? buildBrandIcon(DeviceScreenType deviceType) {
-    return ((deviceType == DeviceScreenType.desktop) ||
-            (deviceType == DeviceScreenType.tablet))
-        ? const BrandView()
-        : null;
+  Widget buildAppBar(DeviceScreenType deviceType, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
+        child: Row(
+          children: [
+            buildBrandIcon(deviceType, context),
+            const Spacer(),
+            const Spacer(),
+            const ProfileButtonView()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBrandIcon(DeviceScreenType deviceType, BuildContext context) {
+    return Builder(
+      builder: (context) {
+        return ((deviceType == DeviceScreenType.desktop) ||
+                (deviceType == DeviceScreenType.tablet))
+            ? const BrandView()
+            : IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: const Icon(
+                  Icons.menu,
+                ),
+              );
+      },
+    );
   }
 
   NavigationMenuMobileView? buildDrawer(DeviceScreenType deviceType) {
@@ -52,9 +87,7 @@ class HomeView extends GetView<HomeController> {
             children: [
               // nav
               NavigationMenuView(deviceType: deviceType),
-              const VerticalDivider(
-                width: 2,
-              ),
+
               // body
               const Expanded(child: BodyView()),
             ],

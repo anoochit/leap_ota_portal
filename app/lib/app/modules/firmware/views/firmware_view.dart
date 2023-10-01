@@ -17,18 +17,15 @@ class FirmwareView extends GetView<FirmwareController> {
           // datatable
           Expanded(
             child: DataTable2(
-              dividerThickness: 2,
+              dividerThickness: 0,
               columnSpacing: 4,
               horizontalMargin: 12,
               bottomMargin: 20,
               minWidth: 1000,
               showBottomBorder: true,
               showCheckboxColumn: false,
-              headingRowColor: MaterialStatePropertyAll(
-                Theme.of(context).colorScheme.surfaceTint.withOpacity(0.2),
-              ),
               headingTextStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
               ),
               columns: const [
                 DataColumn2(
