@@ -1,3 +1,4 @@
+import 'package:app/app/controllers/app_controller.dart';
 import 'package:app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../controllers/signup_controller.dart';
 
-class SignupView extends GetView<SignupController> {
+class SignupView extends GetView<AppController> {
   SignupView({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
@@ -104,10 +105,11 @@ class SignupView extends GetView<SignupController> {
                       child: SizedBox(
                         width: double.infinity,
                         child: FilledButton(
-                          onPressed: () {
-                            // TODO : implement signup
-                            //Get.offAllNamed(Routes.HOME);
-                          },
+                          onPressed: () async => await controller.signUp(
+                            name: textDisplayNameController.text,
+                            username: textUsernameController.text,
+                            password: textPasswordController.text,
+                          ),
                           child: const Text('Sign Up'),
                         ),
                       ),
