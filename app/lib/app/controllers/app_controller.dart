@@ -1,4 +1,5 @@
 import 'package:app/app/data/models/singin_response_model.dart';
+import 'package:app/app/data/providers/signup_provider.dart';
 import 'package:app/app/data/providers/singin_provider.dart';
 import 'package:app/app/routes/app_pages.dart';
 import 'package:app/app/utils/sharedpreference.dart';
@@ -43,6 +44,46 @@ class AppController extends GetxController {
     // goto home
     Get.offAllNamed(Routes.HOME);
   }
+
+// signup
+  Future<void> signUp(
+      {required String name, required String username, required String password}) async {
+    final signUpResponse =
+        await SignUpProvider().signUp(name:name, username: username, password: password);
+
+    if (signUpResponse != null) {
+      // save preference
+      final user = SingInResponse.fromJson(signUpResponse);
+
+      // save token
+      SharePreferenceUtils()
+          .setSharePreference(key: 'TOKEN', value: user.token);
+
+      // save uid
+      SharePreferenceUtils()
+          .setSharePreference(key: 'UID', value: '${user.user!.id}');
+
+      // save name
+      SharePreferenceUtils()
+          .setSharePreference(key: 'NAME', value: user.user!.name);
+
+      // save email
+      SharePreferenceUtils()
+          .setSharePreference(key: 'EMAIL', value: user.user!.username);
+    } else {
+      // show dialog
+      Get.snackbar(
+        'Cannot sign up',
+        'Please check your name, username and password.',
+        maxWidth: 360,
+        snackStyle: SnackStyle.FLOATING,
+      );
+    }
+
+    // goto home
+    Get.offAllNamed(Routes.HOME);
+  }
+
 
   // get email
   Future<String?> getUsername() async {
