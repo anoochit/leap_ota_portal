@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/signup_controller.dart';
-
 class SignupView extends GetView<AppController> {
   SignupView({Key? key}) : super(key: key);
 

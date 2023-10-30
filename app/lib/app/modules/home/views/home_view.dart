@@ -46,13 +46,13 @@ class HomeView extends GetView<HomeController> {
                         Icons.menu,
                       ),
                     ),
-                    Spacer(),
-                    BrandView(small: true),
-                    Spacer(),
-                    ProfileButtonView()
+                    const Spacer(),
+                    const BrandView(small: true),
+                    const Spacer(),
+                    const ProfileButtonView()
                   ],
                 )
-              : Row(
+              : const Row(
                   children: [
                     BrandView(small: true),
                     Spacer(),
@@ -63,23 +63,6 @@ class HomeView extends GetView<HomeController> {
       );
     });
   }
-
-  // // show brand logo or menu
-  // Widget buildBrandIcon(DeviceScreenType deviceType, BuildContext context) {
-  //   return Builder(
-  //     builder: (context) {
-  //       return ((deviceType == DeviceScreenType.desktop) ||
-  //               (deviceType == DeviceScreenType.tablet))
-  //           ? const BrandView()
-  //           : IconButton(
-  //               onPressed: () => Scaffold.of(context).openDrawer(),
-  //               icon: const Icon(
-  //                 Icons.menu,
-  //               ),
-  //             );
-  //     },
-  //   );
-  // }
 
   NavigationMenuMobileView? buildDrawer(DeviceScreenType deviceType) {
     return (deviceType == DeviceScreenType.mobile)
