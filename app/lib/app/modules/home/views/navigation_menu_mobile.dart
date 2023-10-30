@@ -19,7 +19,9 @@ class NavigationMenuMobileView extends GetView<HomeController> {
     return Drawer(
       child: Column(
         children: [
-          const BrandView(),
+          const BrandView(
+            small: false,
+          ),
           Obx(
             () => Expanded(
               child: NavigationRail(

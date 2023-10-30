@@ -21,7 +21,7 @@ class HomeView extends GetView<HomeController> {
       body: Column(
         children: [
           // appbar
-          buildAppBar(deviceType, context),
+          buildAppBar(deviceType),
           // body
           Expanded(child: buildBody(deviceType)),
         ],
@@ -30,39 +30,56 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget buildAppBar(DeviceScreenType deviceType, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
-        child: Row(
-          children: [
-            buildBrandIcon(deviceType, context),
-            const Spacer(),
-            const Spacer(),
-            const ProfileButtonView()
-          ],
+  Widget buildAppBar(DeviceScreenType deviceType) {
+    return Builder(builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
+          child: (deviceType == DeviceScreenType.mobile)
+              ? Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                      icon: const Icon(
+                        Icons.menu,
+                      ),
+                    ),
+                    Spacer(),
+                    BrandView(small: true),
+                    Spacer(),
+                    ProfileButtonView()
+                  ],
+                )
+              : Row(
+                  children: [
+                    BrandView(small: true),
+                    Spacer(),
+                    ProfileButtonView(),
+                  ],
+                ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget buildBrandIcon(DeviceScreenType deviceType, BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return ((deviceType == DeviceScreenType.desktop) ||
-                (deviceType == DeviceScreenType.tablet))
-            ? const BrandView()
-            : IconButton(
-                onPressed: () => Scaffold.of(context).openDrawer(),
-                icon: const Icon(
-                  Icons.menu,
-                ),
-              );
-      },
-    );
-  }
+  // // show brand logo or menu
+  // Widget buildBrandIcon(DeviceScreenType deviceType, BuildContext context) {
+  //   return Builder(
+  //     builder: (context) {
+  //       return ((deviceType == DeviceScreenType.desktop) ||
+  //               (deviceType == DeviceScreenType.tablet))
+  //           ? const BrandView()
+  //           : IconButton(
+  //               onPressed: () => Scaffold.of(context).openDrawer(),
+  //               icon: const Icon(
+  //                 Icons.menu,
+  //               ),
+  //             );
+  //     },
+  //   );
+  // }
 
   NavigationMenuMobileView? buildDrawer(DeviceScreenType deviceType) {
     return (deviceType == DeviceScreenType.mobile)

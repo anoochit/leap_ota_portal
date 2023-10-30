@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class BrandView extends GetView {
-  const BrandView({Key? key}) : super(key: key);
+  const BrandView({Key? key, required this.small}) : super(key: key);
+
+  final bool small;
+
   @override
   Widget build(BuildContext context) {
-    final deviceType = getDeviceType(MediaQuery.of(context).size);
-    return (deviceType == DeviceScreenType.mobile)
+    return (small == false)
         ? const Padding(
             padding: EdgeInsets.all(8.0),
             child: FlutterLogo(size: 120.0),
