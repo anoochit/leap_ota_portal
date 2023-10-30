@@ -14,7 +14,7 @@ Export env variable for database url see .env file
 
 OR
 
-`$env:DATABASE_URL="postgresql://postgres:postgrespassword@localhost:5432/leap?schema=public`
+`$env:DATABASE_URL="postgresql://postgres:postgrespassword@localhost:5432/leap?schema=public"`
 
 Run database and storage service with docker-compose
 
