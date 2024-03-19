@@ -2,13 +2,12 @@
 
 import 'dart:io';
 
-import 'package:api/src/generated/prisma/prisma_client.dart';
+import 'package:api/models/user_extension.dart';
+import 'package:api/src/generated/prisma/model.dart';
 import 'package:dart_frog/dart_frog.dart';
 
 Response onRequest(RequestContext context) {
-  // get method
   final method = context.request.method;
-  // get user from context
   final user = context.read<User>();
 
   // show user data

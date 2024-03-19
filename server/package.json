@@ -1,8 +1,8 @@
 {
-  "dependencies": {
-    "prisma": "^4.16.2"
-  },
-  "devDependencies": {
-    "prisma-dbml-generator": "^0.10.0"
-  }
+	"dependencies": {
+		"prisma": "^5.11.0"
+	},
+	"devDependencies": {
+		"prisma-dbml-generator": "^0.12.0"
+	}
 }

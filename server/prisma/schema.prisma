@@ -1,6 +1,16 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
-  provider      = "dart run orm"
-  binaryTargets = ["native"]
+  provider = "dart run orm"
+  output   = "../lib/src/generated/prisma"
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
 }
 
 datasource db {
@@ -8,54 +18,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-generator dbml {
-  provider = "prisma-dbml-generator"
-}
-
 model Device {
   id          Int       @id @default(autoincrement())
-  title       String    @unique @db.VarChar(45)
-  description String
-  sn          String    @unique @db.VarChar(45)
-  User        User?     @relation(fields: [userId], references: [id])
-  userId      Int?
-  Firmware    Firmware? @relation(fields: [firmwareId], references: [id])
-  firmwareId  Int?
+  title       String    @db.VarChar(45)
+  description String?
+  sn          String?   @unique @db.VarChar(45)
   publish     Publish   @default(ENABLE)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  @@map("device")
+  createdAt   DateTime? @default(now())
+  User        User      @relation(fields: [userId], references: [id])
+  userId      Int
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique @db.VarChar(45)
-  username  String     @unique @db.VarChar(45)
-  password  String     @db.VarChar(64)
-  devices   Device[]
-  firmwares Firmware[]
-  role      Role       @default(USER)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-
-  @@map("user")
+  id         Int         @id @default(autoincrement())
+  name       String      @db.VarChar(45)
+  email      String      @unique @db.VarChar(45)
+  password   String      @db.VarChar(64)
+  role       Role        @default(USER)
+  devices    Device[]
+  dashboards Dashboard[]
+  widgets    Widget[]
+  createdAt  DateTime?   @default(now())
 }
 
-model Firmware {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(45)
+model Dashboard {
+  id          Int       @id @default(autoincrement())
+  title       String
   description String
-  objectUrl   String
-  version     String   @db.VarChar(45)
-  User        User?    @relation(fields: [userId], references: [id])
+  createdAt   DateTime? @default(now())
+  User        User?     @relation(fields: [userId], references: [id])
   userId      Int?
-  devices     Device[]
-  publish     Publish  @default(ENABLE)
-  createdAt   DateTime @default(now()) @db.Timestamptz()
-  updatedAt   DateTime @updatedAt
+  widgets     Widget[]
+}
 
-  @@map("firmware")
+model Widget {
+  id          Int        @id @default(autoincrement())
+  title       String
+  datasource  String
+  value       String
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      Int?
+  Dashboard   Dashboard? @relation(fields: [dashboardId], references: [id])
+  dashboardId Int?
 }
 
 enum Role {

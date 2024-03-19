@@ -1,40 +1,36 @@
 ### get root
-
 GET http://localhost:8080
 
-### signin
-
-POST http://localhost:8080/auth  
-Content-Type: application/json
-
-{
-    "username":"bob@example.com",
-    "password":"password"
-}
 
 ### signup
-
 POST http://localhost:8080/signup
 Content-Type: application/json
 
 {
     "name" : "bob",
-    "username":"bob@example.com",
+    "email":"bob@example.com",
     "password":"password" 
 }
 
-### show profile
+### signin
+POST http://localhost:8080/auth  
+Content-Type: application/json
 
+{
+    "email":"bob@example.com",
+    "password":"password"
+}
+
+
+### show profile
 GET http://localhost:8080/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JAZXhhbXBsZS5jb20iLCJpYXQiOjE2OTcyNzk4NDksImV4cCI6MTY5Nzg4NDY0OX0.p-4qvdWgl6FGTMoeCiNqT-_tsG2XTAAdpNES01LMuek
 
 ### get user devices
-
 GET http://localhost:8080/devices
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JAZXhhbXBsZS5jb20iLCJpYXQiOjE2OTcyNzk4NDksImV4cCI6MTY5Nzg4NDY0OX0.p-4qvdWgl6FGTMoeCiNqT-_tsG2XTAAdpNES01LMuek
 
 ### get user firmware
-
 GET http://localhost:8080/firmwares
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJib2JAZXhhbXBsZS5jb20iLCJpYXQiOjE2OTcyNzk4NDksImV4cCI6MTY5Nzg4NDY0OX0.p-4qvdWgl6FGTMoeCiNqT-_tsG2XTAAdpNES01LMuek
   

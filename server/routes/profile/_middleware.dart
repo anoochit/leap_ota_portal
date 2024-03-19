@@ -1,5 +1,5 @@
 import 'package:api/repository/user.dart';
-import 'package:api/src/generated/prisma/prisma_client.dart';
+import 'package:api/src/generated/prisma/model.dart';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:dart_frog_auth/dart_frog_auth.dart';
 

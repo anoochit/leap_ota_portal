@@ -2,44 +2,48 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Table device {
+Table Device {
   id Int [pk, increment]
-  title String [unique, not null]
-  description String [not null]
-  sn String [unique, not null]
-  User user
-  userId Int
-  Firmware firmware
-  firmwareId Int
+  title String [not null]
+  description String
+  sn String [unique]
   publish Publish [not null, default: 'ENABLE']
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
+  createdAt DateTime [default: `now()`]
+  User User [not null]
+  userId Int [not null]
 }
 
-Table user {
+Table User {
   id Int [pk, increment]
-  name String [unique, not null]
-  username String [unique, not null]
+  name String [not null]
+  email String [unique, not null]
   password String [not null]
-  devices device [not null]
-  firmwares firmware [not null]
   role Role [not null, default: 'USER']
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
+  devices Device [not null]
+  dashboards Dashboard [not null]
+  widgets Widget [not null]
+  createdAt DateTime [default: `now()`]
 }
 
-Table firmware {
+Table Dashboard {
   id Int [pk, increment]
   title String [not null]
   description String [not null]
-  objectUrl String [not null]
-  version String [not null]
-  User user
+  createdAt DateTime [default: `now()`]
+  User User
   userId Int
-  devices device [not null]
-  publish Publish [not null, default: 'ENABLE']
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
+  widgets Widget [not null]
+}
+
+Table Widget {
+  id Int [pk, increment]
+  title String [not null]
+  datasource String [not null]
+  value String [not null]
+  User User
+  userId Int
+  Dashboard Dashboard
+  dashboardId Int
 }
 
 Enum Role {
@@ -52,8 +56,10 @@ Enum Publish {
   DISABLE
 }
 
-Ref: device.userId > user.id
+Ref: Device.userId > User.id
 
-Ref: device.firmwareId > firmware.id
+Ref: Dashboard.userId > User.id
 
-Ref: firmware.userId > user.id
+Ref: Widget.userId > User.id
+
+Ref: Widget.dashboardId > Dashboard.id

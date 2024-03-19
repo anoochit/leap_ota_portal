@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_dynamic_calls, cascade_invocations
+
 import 'dart:io';
 
-import 'package:api/repository/user.dart';
+import 'package:api/api.dart';
+import 'package:api/models/user_extension.dart';
 import 'package:dart_frog/dart_frog.dart';
 
 Future<Response> onRequest(RequestContext context) async {
@@ -13,7 +16,7 @@ Future<Response> onRequest(RequestContext context) async {
 
       final (token, user) = await userRepository.signUp(
         name: '${payload["name"]}',
-        username: '${payload["username"]}',
+        email: '${payload["email"]}',
         password: '${payload["password"]}',
       );
 

@@ -1,6 +1,7 @@
 // ignore_for_file: cascade_invocations, avoid_dynamic_calls
 
 import 'dart:io';
+import 'package:api/models/user_extension.dart';
 import 'package:api/repository/user.dart';
 import 'package:dart_frog/dart_frog.dart';
 
@@ -14,7 +15,7 @@ Future<Response> onRequest(RequestContext context) async {
 
     try {
       final (token, user) = await userRepository.signIn(
-        username: payload['username'] as String,
+        email: payload['email'] as String,
         password: payload['password'] as String,
       );
 
@@ -23,7 +24,7 @@ Future<Response> onRequest(RequestContext context) async {
 
       return Response.json(body: {'token': token, 'user': result});
     } catch (e) {
-      return Response(statusCode: HttpStatus.forbidden);
+      return Response(statusCode: HttpStatus.forbidden, body: '$e');
     }
   }
 
