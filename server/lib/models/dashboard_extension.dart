@@ -9,8 +9,7 @@ extension DashboardExtension on Dashboard {
         'id': id,
         'title': title,
         'description': description,
-        'createdAt':
-            createdAt?.toIso8601String(), // Use ISO 8601 format for consistency
+        'createdAt': createdAt?.toIso8601String(),
         'userId': userId,
         'user': user?.toJson(),
         'widgets':

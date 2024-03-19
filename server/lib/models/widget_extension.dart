@@ -9,7 +9,6 @@ extension WidgetExtension on Widget {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
         'user': user?.toJson(),

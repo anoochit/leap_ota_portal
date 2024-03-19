@@ -11,6 +11,7 @@ Table Device {
   createdAt DateTime [default: `now()`]
   User User [not null]
   userId Int [not null]
+  widgets Widget [not null]
 }
 
 Table User {
@@ -39,11 +40,12 @@ Table Widget {
   id Int [pk, increment]
   title String [not null]
   datasource String [not null]
-  value String [not null]
   User User
   userId Int
   Dashboard Dashboard
   dashboardId Int
+  Device Device
+  deviceId Int
 }
 
 Enum Role {
@@ -63,3 +65,5 @@ Ref: Dashboard.userId > User.id
 Ref: Widget.userId > User.id
 
 Ref: Widget.dashboardId > Dashboard.id
+
+Ref: Widget.deviceId > Device.id

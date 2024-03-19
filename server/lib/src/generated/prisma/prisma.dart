@@ -36,6 +36,15 @@ class UserCountOutputType {
   final int? widgets;
 }
 
+class DeviceCountOutputType {
+  const DeviceCountOutputType({this.widgets});
+
+  factory DeviceCountOutputType.fromJson(Map json) =>
+      DeviceCountOutputType(widgets: json['widgets']);
+
+  final int? widgets;
+}
+
 class NestedIntFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NestedIntFilter({
     this.equals,
@@ -719,6 +728,24 @@ class DashboardNullableRelationFilter
       };
 }
 
+class DeviceNullableRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceNullableRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i1.PrismaUnion<_i2.DeviceWhereInput, _i1.PrismaNull>? $is;
+
+  final _i1.PrismaUnion<_i2.DeviceWhereInput, _i1.PrismaNull>? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
 class WidgetWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetWhereInput({
     this.AND,
@@ -727,11 +754,12 @@ class WidgetWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final _i1.PrismaUnion<_i2.WidgetWhereInput, Iterable<_i2.WidgetWhereInput>>?
@@ -748,8 +776,6 @@ class WidgetWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? datasource;
 
-  final _i1.PrismaUnion<_i2.StringFilter, String>? value;
-
   final _i1
       .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
       userId;
@@ -758,11 +784,18 @@ class WidgetWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
       dashboardId;
 
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      deviceId;
+
   final _i1.PrismaUnion<_i2.UserNullableRelationFilter,
       _i1.PrismaUnion<_i2.UserWhereInput, _i1.PrismaNull>>? user;
 
   final _i1.PrismaUnion<_i2.DashboardNullableRelationFilter,
       _i1.PrismaUnion<_i2.DashboardWhereInput, _i1.PrismaNull>>? dashboard;
+
+  final _i1.PrismaUnion<_i2.DeviceNullableRelationFilter,
+      _i1.PrismaUnion<_i2.DeviceWhereInput, _i1.PrismaNull>>? device;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -772,11 +805,12 @@ class WidgetWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -969,6 +1003,7 @@ class DeviceWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.createdAt,
     this.userId,
     this.user,
+    this.widgets,
   });
 
   final _i1.PrismaUnion<_i2.DeviceWhereInput, Iterable<_i2.DeviceWhereInput>>?
@@ -998,6 +1033,8 @@ class DeviceWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.UserRelationFilter, _i2.UserWhereInput>? user;
 
+  final _i2.WidgetListRelationFilter? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -1011,6 +1048,7 @@ class DeviceWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'createdAt': createdAt,
         'userId': userId,
         'User': user,
+        'widgets': widgets,
       };
 }
 
@@ -1028,6 +1066,7 @@ class DeviceWhereUniqueInput
     this.createdAt,
     this.userId,
     this.user,
+    this.widgets,
   });
 
   final int? id;
@@ -1056,6 +1095,8 @@ class DeviceWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.UserRelationFilter, _i2.UserWhereInput>? user;
 
+  final _i2.WidgetListRelationFilter? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -1069,6 +1110,7 @@ class DeviceWhereUniqueInput
         'createdAt': createdAt,
         'userId': userId,
         'User': user,
+        'widgets': widgets,
       };
 }
 
@@ -1196,6 +1238,7 @@ class DeviceOrderByWithRelationInput
     this.createdAt,
     this.userId,
     this.user,
+    this.widgets,
   });
 
   final _i2.SortOrder? id;
@@ -1214,6 +1257,8 @@ class DeviceOrderByWithRelationInput
 
   final _i2.UserOrderByWithRelationInput? user;
 
+  final _i2.WidgetOrderByRelationAggregateInput? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -1224,6 +1269,7 @@ class DeviceOrderByWithRelationInput
         'createdAt': createdAt,
         'userId': userId,
         'User': user,
+        'widgets': widgets,
       };
 }
 
@@ -1353,20 +1399,45 @@ class WidgetDashboardArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
+class WidgetDeviceArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetDeviceArgs({
+    this.where,
+    this.select,
+    this.include,
+  });
+
+  final _i2.DeviceWhereInput? where;
+
+  final _i2.DeviceSelect? select;
+
+  final _i2.DeviceInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'select': select,
+        'include': include,
+      };
+}
+
 class WidgetInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetInclude({
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final _i1.PrismaUnion<bool, _i2.WidgetUserArgs>? user;
 
   final _i1.PrismaUnion<bool, _i2.WidgetDashboardArgs>? dashboard;
 
+  final _i1.PrismaUnion<bool, _i2.WidgetDeviceArgs>? device;
+
   @override
   Map<String, dynamic> toJson() => {
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -1414,11 +1485,12 @@ class WidgetOrderByWithRelationInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final _i2.SortOrder? id;
@@ -1427,26 +1499,29 @@ class WidgetOrderByWithRelationInput
 
   final _i2.SortOrder? datasource;
 
-  final _i2.SortOrder? value;
-
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? userId;
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? dashboardId;
 
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? deviceId;
+
   final _i2.UserOrderByWithRelationInput? user;
 
   final _i2.DashboardOrderByWithRelationInput? dashboard;
+
+  final _i2.DeviceOrderByWithRelationInput? device;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -1459,11 +1534,12 @@ class WidgetWhereUniqueInput
     this.NOT,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final int? id;
@@ -1480,8 +1556,6 @@ class WidgetWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? datasource;
 
-  final _i1.PrismaUnion<_i2.StringFilter, String>? value;
-
   final _i1
       .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
       userId;
@@ -1490,11 +1564,18 @@ class WidgetWhereUniqueInput
       .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
       dashboardId;
 
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      deviceId;
+
   final _i1.PrismaUnion<_i2.UserNullableRelationFilter,
       _i1.PrismaUnion<_i2.UserWhereInput, _i1.PrismaNull>>? user;
 
   final _i1.PrismaUnion<_i2.DashboardNullableRelationFilter,
       _i1.PrismaUnion<_i2.DashboardWhereInput, _i1.PrismaNull>>? dashboard;
+
+  final _i1.PrismaUnion<_i2.DeviceNullableRelationFilter,
+      _i1.PrismaUnion<_i2.DeviceWhereInput, _i1.PrismaNull>>? device;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -1504,11 +1585,12 @@ class WidgetWhereUniqueInput
         'NOT': NOT,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -1516,9 +1598,9 @@ enum WidgetScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   id<int>('id', 'Widget'),
   title<String>('title', 'Widget'),
   datasource<String>('datasource', 'Widget'),
-  value<String>('value', 'Widget'),
   userId<int>('userId', 'Widget'),
-  dashboardId<int>('dashboardId', 'Widget');
+  dashboardId<int>('dashboardId', 'Widget'),
+  deviceId<int>('deviceId', 'Widget');
 
   const WidgetScalar(
     this.name,
@@ -1620,11 +1702,12 @@ class WidgetSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final bool? id;
@@ -1633,26 +1716,29 @@ class WidgetSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? datasource;
 
-  final bool? value;
-
   final bool? userId;
 
   final bool? dashboardId;
 
+  final bool? deviceId;
+
   final _i1.PrismaUnion<bool, _i2.WidgetUserArgs>? user;
 
   final _i1.PrismaUnion<bool, _i2.WidgetDashboardArgs>? dashboard;
+
+  final _i1.PrismaUnion<bool, _i2.WidgetDeviceArgs>? device;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -1932,13 +2018,86 @@ class DeviceUserArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
+class DeviceWidgetsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceWidgetsArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.WidgetWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.WidgetOrderByWithRelationInput>,
+      _i2.WidgetOrderByWithRelationInput>? orderBy;
+
+  final _i2.WidgetWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.WidgetScalar, Iterable<_i2.WidgetScalar>>? distinct;
+
+  final _i2.WidgetSelect? select;
+
+  final _i2.WidgetInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class DeviceCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceCountOutputTypeSelect({this.widgets});
+
+  final bool? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {'widgets': widgets};
+}
+
+class DeviceCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceCountArgs({this.select});
+
+  final _i2.DeviceCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
 class DeviceInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceInclude({this.user});
+  const DeviceInclude({
+    this.user,
+    this.widgets,
+    this.$count,
+  });
 
   final _i1.PrismaUnion<bool, _i2.DeviceUserArgs>? user;
 
+  final _i1.PrismaUnion<bool, _i2.DeviceWidgetsArgs>? widgets;
+
+  final _i1.PrismaUnion<bool, _i2.DeviceCountArgs>? $count;
+
   @override
-  Map<String, dynamic> toJson() => {'User': user};
+  Map<String, dynamic> toJson() => {
+        'User': user,
+        'widgets': widgets,
+        '_count': $count,
+      };
 }
 
 class UserSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
@@ -2000,6 +2159,8 @@ class DeviceSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.createdAt,
     this.userId,
     this.user,
+    this.widgets,
+    this.$count,
   });
 
   final bool? id;
@@ -2018,6 +2179,10 @@ class DeviceSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<bool, _i2.DeviceUserArgs>? user;
 
+  final _i1.PrismaUnion<bool, _i2.DeviceWidgetsArgs>? widgets;
+
+  final _i1.PrismaUnion<bool, _i2.DeviceCountArgs>? $count;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -2028,17 +2193,20 @@ class DeviceSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'createdAt': createdAt,
         'userId': userId,
         'User': user,
+        'widgets': widgets,
+        '_count': $count,
       };
 }
 
-class DeviceCreateWithoutUserInput
+class DeviceCreateWithoutWidgetsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceCreateWithoutUserInput({
+  const DeviceCreateWithoutWidgetsInput({
     required this.title,
     this.description,
     this.sn,
     this.publish,
     this.createdAt,
+    required this.user,
   });
 
   final String title;
@@ -2051,6 +2219,8 @@ class DeviceCreateWithoutUserInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
 
+  final _i2.UserCreateNestedOneWithoutDevicesInput user;
+
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -2058,18 +2228,20 @@ class DeviceCreateWithoutUserInput
         'sn': sn,
         'publish': publish,
         'createdAt': createdAt,
+        'User': user,
       };
 }
 
-class DeviceUncheckedCreateWithoutUserInput
+class DeviceUncheckedCreateWithoutWidgetsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceUncheckedCreateWithoutUserInput({
+  const DeviceUncheckedCreateWithoutWidgetsInput({
     this.id,
     required this.title,
     this.description,
     this.sn,
     this.publish,
     this.createdAt,
+    required this.userId,
   });
 
   final int? id;
@@ -2084,6 +2256,8 @@ class DeviceUncheckedCreateWithoutUserInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
 
+  final int userId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -2092,6 +2266,413 @@ class DeviceUncheckedCreateWithoutUserInput
         'sn': sn,
         'publish': publish,
         'createdAt': createdAt,
+        'userId': userId,
+      };
+}
+
+class DeviceCreateOrConnectWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceCreateOrConnectWithoutWidgetsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.DeviceWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.DeviceCreateWithoutWidgetsInput,
+      _i2.DeviceUncheckedCreateWithoutWidgetsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class DeviceCreateNestedOneWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceCreateNestedOneWithoutWidgetsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.DeviceCreateWithoutWidgetsInput,
+      _i2.DeviceUncheckedCreateWithoutWidgetsInput>? create;
+
+  final _i2.DeviceCreateOrConnectWithoutWidgetsInput? connectOrCreate;
+
+  final _i2.DeviceWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class WidgetCreateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateWithoutUserInput({
+    required this.title,
+    required this.datasource,
+    this.dashboard,
+    this.device,
+  });
+
+  final String title;
+
+  final String datasource;
+
+  final _i2.DashboardCreateNestedOneWithoutWidgetsInput? dashboard;
+
+  final _i2.DeviceCreateNestedOneWithoutWidgetsInput? device;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'datasource': datasource,
+        'Dashboard': dashboard,
+        'Device': device,
+      };
+}
+
+class WidgetUncheckedCreateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedCreateWithoutUserInput({
+    this.id,
+    required this.title,
+    required this.datasource,
+    this.dashboardId,
+    this.deviceId,
+  });
+
+  final int? id;
+
+  final String title;
+
+  final String datasource;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? deviceId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'dashboardId': dashboardId,
+        'deviceId': deviceId,
+      };
+}
+
+class WidgetCreateOrConnectWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateOrConnectWithoutUserInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.WidgetWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateWithoutUserInput,
+      _i2.WidgetUncheckedCreateWithoutUserInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class WidgetCreateManyUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateManyUserInput({
+    this.id,
+    required this.title,
+    required this.datasource,
+    this.dashboardId,
+    this.deviceId,
+  });
+
+  final int? id;
+
+  final String title;
+
+  final String datasource;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? deviceId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'dashboardId': dashboardId,
+        'deviceId': deviceId,
+      };
+}
+
+class WidgetCreateManyUserInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateManyUserInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.WidgetCreateManyUserInput,
+      Iterable<_i2.WidgetCreateManyUserInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class WidgetCreateNestedManyWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateNestedManyWithoutUserInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutUserInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutUserInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
+
+  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class UserCreateWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserCreateWithoutDashboardsInput({
+    required this.name,
+    required this.email,
+    required this.password,
+    this.role,
+    this.createdAt,
+    this.devices,
+    this.widgets,
+  });
+
+  final String name;
+
+  final String email;
+
+  final String password;
+
+  final _i3.Role? role;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
+
+  final _i2.DeviceCreateNestedManyWithoutUserInput? devices;
+
+  final _i2.WidgetCreateNestedManyWithoutUserInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'email': email,
+        'password': password,
+        'role': role,
+        'createdAt': createdAt,
+        'devices': devices,
+        'widgets': widgets,
+      };
+}
+
+class WidgetUncheckedCreateWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedCreateWithoutDeviceInput({
+    this.id,
+    required this.title,
+    required this.datasource,
+    this.userId,
+    this.dashboardId,
+  });
+
+  final int? id;
+
+  final String title;
+
+  final String datasource;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'userId': userId,
+        'dashboardId': dashboardId,
+      };
+}
+
+class WidgetCreateOrConnectWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateOrConnectWithoutDeviceInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.WidgetWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateWithoutDeviceInput,
+      _i2.WidgetUncheckedCreateWithoutDeviceInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class WidgetCreateManyDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateManyDeviceInput({
+    this.id,
+    required this.title,
+    required this.datasource,
+    this.userId,
+    this.dashboardId,
+  });
+
+  final int? id;
+
+  final String title;
+
+  final String datasource;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'userId': userId,
+        'dashboardId': dashboardId,
+      };
+}
+
+class WidgetCreateManyDeviceInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateManyDeviceInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.WidgetCreateManyDeviceInput,
+      Iterable<_i2.WidgetCreateManyDeviceInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class WidgetUncheckedCreateNestedManyWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedCreateNestedManyWithoutDeviceInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutDeviceInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutDeviceInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutDeviceInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutDeviceInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutDeviceInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutDeviceInput>>? connectOrCreate;
+
+  final _i2.WidgetCreateManyDeviceInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class DeviceUncheckedCreateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUncheckedCreateWithoutUserInput({
+    this.id,
+    required this.title,
+    this.description,
+    this.sn,
+    this.publish,
+    this.createdAt,
+    this.widgets,
+  });
+
+  final int? id;
+
+  final String title;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? description;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? sn;
+
+  final _i3.Publish? publish;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
+
+  final _i2.WidgetUncheckedCreateNestedManyWithoutDeviceInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'description': description,
+        'sn': sn,
+        'publish': publish,
+        'createdAt': createdAt,
+        'widgets': widgets,
       };
 }
 
@@ -2167,6 +2748,406 @@ class DeviceCreateManyUserInputEnvelope
       };
 }
 
+class DeviceUncheckedCreateNestedManyWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUncheckedCreateNestedManyWithoutUserInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.DeviceCreateWithoutUserInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.DeviceCreateWithoutUserInput>,
+          _i1.PrismaUnion<_i2.DeviceUncheckedCreateWithoutUserInput,
+              Iterable<_i2.DeviceUncheckedCreateWithoutUserInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.DeviceCreateOrConnectWithoutUserInput,
+      Iterable<_i2.DeviceCreateOrConnectWithoutUserInput>>? connectOrCreate;
+
+  final _i2.DeviceCreateManyUserInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
+      Iterable<_i2.DeviceWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class WidgetUncheckedCreateNestedManyWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedCreateNestedManyWithoutUserInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutUserInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutUserInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
+
+  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class UserUncheckedCreateWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserUncheckedCreateWithoutDashboardsInput({
+    this.id,
+    required this.name,
+    required this.email,
+    required this.password,
+    this.role,
+    this.createdAt,
+    this.devices,
+    this.widgets,
+  });
+
+  final int? id;
+
+  final String name;
+
+  final String email;
+
+  final String password;
+
+  final _i3.Role? role;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
+
+  final _i2.DeviceUncheckedCreateNestedManyWithoutUserInput? devices;
+
+  final _i2.WidgetUncheckedCreateNestedManyWithoutUserInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'password': password,
+        'role': role,
+        'createdAt': createdAt,
+        'devices': devices,
+        'widgets': widgets,
+      };
+}
+
+class UserWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserWhereUniqueInput({
+    this.id,
+    this.email,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.name,
+    this.password,
+    this.role,
+    this.createdAt,
+    this.devices,
+    this.dashboards,
+    this.widgets,
+  });
+
+  final int? id;
+
+  final String? email;
+
+  final _i1.PrismaUnion<_i2.UserWhereInput, Iterable<_i2.UserWhereInput>>? AND;
+
+  final Iterable<_i2.UserWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.UserWhereInput, Iterable<_i2.UserWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
+
+  final _i1.PrismaUnion<_i2.EnumRoleFilter, _i3.Role>? role;
+
+  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
+      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? createdAt;
+
+  final _i2.DeviceListRelationFilter? devices;
+
+  final _i2.DashboardListRelationFilter? dashboards;
+
+  final _i2.WidgetListRelationFilter? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'name': name,
+        'password': password,
+        'role': role,
+        'createdAt': createdAt,
+        'devices': devices,
+        'dashboards': dashboards,
+        'widgets': widgets,
+      };
+}
+
+class UserCreateOrConnectWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserCreateOrConnectWithoutDashboardsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.UserWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
+      _i2.UserUncheckedCreateWithoutDashboardsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class UserCreateNestedOneWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserCreateNestedOneWithoutDashboardsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
+      _i2.UserUncheckedCreateWithoutDashboardsInput>? create;
+
+  final _i2.UserCreateOrConnectWithoutDashboardsInput? connectOrCreate;
+
+  final _i2.UserWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class DashboardCreateWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardCreateWithoutWidgetsInput({
+    required this.title,
+    required this.description,
+    this.createdAt,
+    this.user,
+  });
+
+  final String title;
+
+  final String description;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
+
+  final _i2.UserCreateNestedOneWithoutDashboardsInput? user;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+        'createdAt': createdAt,
+        'User': user,
+      };
+}
+
+class DashboardUncheckedCreateWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardUncheckedCreateWithoutWidgetsInput({
+    this.id,
+    required this.title,
+    required this.description,
+    this.createdAt,
+    this.userId,
+  });
+
+  final int? id;
+
+  final String title;
+
+  final String description;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'description': description,
+        'createdAt': createdAt,
+        'userId': userId,
+      };
+}
+
+class DashboardCreateOrConnectWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardCreateOrConnectWithoutWidgetsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.DashboardWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
+      _i2.DashboardUncheckedCreateWithoutWidgetsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class DashboardCreateNestedOneWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardCreateNestedOneWithoutWidgetsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
+      _i2.DashboardUncheckedCreateWithoutWidgetsInput>? create;
+
+  final _i2.DashboardCreateOrConnectWithoutWidgetsInput? connectOrCreate;
+
+  final _i2.DashboardWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class WidgetCreateWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateWithoutDeviceInput({
+    required this.title,
+    required this.datasource,
+    this.user,
+    this.dashboard,
+  });
+
+  final String title;
+
+  final String datasource;
+
+  final _i2.UserCreateNestedOneWithoutWidgetsInput? user;
+
+  final _i2.DashboardCreateNestedOneWithoutWidgetsInput? dashboard;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'datasource': datasource,
+        'User': user,
+        'Dashboard': dashboard,
+      };
+}
+
+class WidgetCreateNestedManyWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetCreateNestedManyWithoutDeviceInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutDeviceInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutDeviceInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutDeviceInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutDeviceInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutDeviceInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutDeviceInput>>? connectOrCreate;
+
+  final _i2.WidgetCreateManyDeviceInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class DeviceCreateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceCreateWithoutUserInput({
+    required this.title,
+    this.description,
+    this.sn,
+    this.publish,
+    this.createdAt,
+    this.widgets,
+  });
+
+  final String title;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? description;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? sn;
+
+  final _i3.Publish? publish;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
+
+  final _i2.WidgetCreateNestedManyWithoutDeviceInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+        'sn': sn,
+        'publish': publish,
+        'createdAt': createdAt,
+        'widgets': widgets,
+      };
+}
+
 class DeviceCreateNestedManyWithoutUserInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const DeviceCreateNestedManyWithoutUserInput({
@@ -2238,47 +3219,14 @@ class UserCreateWithoutWidgetsInput
       };
 }
 
-class DeviceUncheckedCreateNestedManyWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceUncheckedCreateNestedManyWithoutUserInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.DeviceCreateWithoutUserInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.DeviceCreateWithoutUserInput>,
-          _i1.PrismaUnion<_i2.DeviceUncheckedCreateWithoutUserInput,
-              Iterable<_i2.DeviceUncheckedCreateWithoutUserInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.DeviceCreateOrConnectWithoutUserInput,
-      Iterable<_i2.DeviceCreateOrConnectWithoutUserInput>>? connectOrCreate;
-
-  final _i2.DeviceCreateManyUserInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
-      Iterable<_i2.DeviceWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
 class WidgetUncheckedCreateWithoutDashboardInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetUncheckedCreateWithoutDashboardInput({
     this.id,
     required this.title,
     required this.datasource,
-    required this.value,
     this.userId,
+    this.deviceId,
   });
 
   final int? id;
@@ -2287,17 +3235,17 @@ class WidgetUncheckedCreateWithoutDashboardInput
 
   final String datasource;
 
-  final String value;
-
   final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
+        'deviceId': deviceId,
       };
 }
 
@@ -2326,8 +3274,8 @@ class WidgetCreateManyDashboardInput
     this.id,
     required this.title,
     required this.datasource,
-    required this.value,
     this.userId,
+    this.deviceId,
   });
 
   final int? id;
@@ -2336,17 +3284,17 @@ class WidgetCreateManyDashboardInput
 
   final String datasource;
 
-  final String value;
-
   final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
+        'deviceId': deviceId,
       };
 }
 
@@ -2573,65 +3521,6 @@ class UserUncheckedCreateWithoutWidgetsInput
       };
 }
 
-class UserWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserWhereUniqueInput({
-    this.id,
-    this.email,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.name,
-    this.password,
-    this.role,
-    this.createdAt,
-    this.devices,
-    this.dashboards,
-    this.widgets,
-  });
-
-  final int? id;
-
-  final String? email;
-
-  final _i1.PrismaUnion<_i2.UserWhereInput, Iterable<_i2.UserWhereInput>>? AND;
-
-  final Iterable<_i2.UserWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.UserWhereInput, Iterable<_i2.UserWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
-
-  final _i1.PrismaUnion<_i2.EnumRoleFilter, _i3.Role>? role;
-
-  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
-      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? createdAt;
-
-  final _i2.DeviceListRelationFilter? devices;
-
-  final _i2.DashboardListRelationFilter? dashboards;
-
-  final _i2.WidgetListRelationFilter? widgets;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'email': email,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'name': name,
-        'password': password,
-        'role': role,
-        'createdAt': createdAt,
-        'devices': devices,
-        'dashboards': dashboards,
-        'widgets': widgets,
-      };
-}
-
 class UserCreateOrConnectWithoutWidgetsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UserCreateOrConnectWithoutWidgetsInput({
@@ -2679,24 +3568,24 @@ class WidgetCreateWithoutDashboardInput
   const WidgetCreateWithoutDashboardInput({
     required this.title,
     required this.datasource,
-    required this.value,
     this.user,
+    this.device,
   });
 
   final String title;
 
   final String datasource;
 
-  final String value;
-
   final _i2.UserCreateNestedOneWithoutWidgetsInput? user;
+
+  final _i2.DeviceCreateNestedOneWithoutWidgetsInput? device;
 
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
         'datasource': datasource,
-        'value': value,
         'User': user,
+        'Device': device,
       };
 }
 
@@ -2784,416 +3673,6 @@ class DashboardCreateNestedManyWithoutUserInput
 
   final _i1.PrismaUnion<_i2.DashboardWhereUniqueInput,
       Iterable<_i2.DashboardWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class UserCreateWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserCreateWithoutDashboardsInput({
-    required this.name,
-    required this.email,
-    required this.password,
-    this.role,
-    this.createdAt,
-    this.devices,
-    this.widgets,
-  });
-
-  final String name;
-
-  final String email;
-
-  final String password;
-
-  final _i3.Role? role;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
-
-  final _i2.DeviceCreateNestedManyWithoutUserInput? devices;
-
-  final _i2.WidgetCreateNestedManyWithoutUserInput? widgets;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'password': password,
-        'role': role,
-        'createdAt': createdAt,
-        'devices': devices,
-        'widgets': widgets,
-      };
-}
-
-class WidgetUncheckedCreateWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUncheckedCreateWithoutUserInput({
-    this.id,
-    required this.title,
-    required this.datasource,
-    required this.value,
-    this.dashboardId,
-  });
-
-  final int? id;
-
-  final String title;
-
-  final String datasource;
-
-  final String value;
-
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'dashboardId': dashboardId,
-      };
-}
-
-class WidgetCreateOrConnectWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetCreateOrConnectWithoutUserInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.WidgetWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.WidgetCreateWithoutUserInput,
-      _i2.WidgetUncheckedCreateWithoutUserInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class WidgetCreateManyUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetCreateManyUserInput({
-    this.id,
-    required this.title,
-    required this.datasource,
-    required this.value,
-    this.dashboardId,
-  });
-
-  final int? id;
-
-  final String title;
-
-  final String datasource;
-
-  final String value;
-
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'dashboardId': dashboardId,
-      };
-}
-
-class WidgetCreateManyUserInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetCreateManyUserInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.WidgetCreateManyUserInput,
-      Iterable<_i2.WidgetCreateManyUserInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class WidgetUncheckedCreateNestedManyWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUncheckedCreateNestedManyWithoutUserInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.WidgetCreateWithoutUserInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.WidgetCreateWithoutUserInput>,
-          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
-              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
-      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
-
-  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class UserUncheckedCreateWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserUncheckedCreateWithoutDashboardsInput({
-    this.id,
-    required this.name,
-    required this.email,
-    required this.password,
-    this.role,
-    this.createdAt,
-    this.devices,
-    this.widgets,
-  });
-
-  final int? id;
-
-  final String name;
-
-  final String email;
-
-  final String password;
-
-  final _i3.Role? role;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
-
-  final _i2.DeviceUncheckedCreateNestedManyWithoutUserInput? devices;
-
-  final _i2.WidgetUncheckedCreateNestedManyWithoutUserInput? widgets;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'password': password,
-        'role': role,
-        'createdAt': createdAt,
-        'devices': devices,
-        'widgets': widgets,
-      };
-}
-
-class UserCreateOrConnectWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserCreateOrConnectWithoutDashboardsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.UserWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
-      _i2.UserUncheckedCreateWithoutDashboardsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class UserCreateNestedOneWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserCreateNestedOneWithoutDashboardsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
-      _i2.UserUncheckedCreateWithoutDashboardsInput>? create;
-
-  final _i2.UserCreateOrConnectWithoutDashboardsInput? connectOrCreate;
-
-  final _i2.UserWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class DashboardCreateWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardCreateWithoutWidgetsInput({
-    required this.title,
-    required this.description,
-    this.createdAt,
-    this.user,
-  });
-
-  final String title;
-
-  final String description;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
-
-  final _i2.UserCreateNestedOneWithoutDashboardsInput? user;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'description': description,
-        'createdAt': createdAt,
-        'User': user,
-      };
-}
-
-class DashboardUncheckedCreateWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardUncheckedCreateWithoutWidgetsInput({
-    this.id,
-    required this.title,
-    required this.description,
-    this.createdAt,
-    this.userId,
-  });
-
-  final int? id;
-
-  final String title;
-
-  final String description;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? createdAt;
-
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'description': description,
-        'createdAt': createdAt,
-        'userId': userId,
-      };
-}
-
-class DashboardCreateOrConnectWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardCreateOrConnectWithoutWidgetsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.DashboardWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
-      _i2.DashboardUncheckedCreateWithoutWidgetsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class DashboardCreateNestedOneWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardCreateNestedOneWithoutWidgetsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
-      _i2.DashboardUncheckedCreateWithoutWidgetsInput>? create;
-
-  final _i2.DashboardCreateOrConnectWithoutWidgetsInput? connectOrCreate;
-
-  final _i2.DashboardWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class WidgetCreateWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetCreateWithoutUserInput({
-    required this.title,
-    required this.datasource,
-    required this.value,
-    this.dashboard,
-  });
-
-  final String title;
-
-  final String datasource;
-
-  final String value;
-
-  final _i2.DashboardCreateNestedOneWithoutWidgetsInput? dashboard;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'Dashboard': dashboard,
-      };
-}
-
-class WidgetCreateNestedManyWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetCreateNestedManyWithoutUserInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.WidgetCreateWithoutUserInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.WidgetCreateWithoutUserInput>,
-          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
-              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
-      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
-
-  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -3334,6 +3813,7 @@ class DeviceCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.publish,
     this.createdAt,
     required this.user,
+    this.widgets,
   });
 
   final String title;
@@ -3348,6 +3828,8 @@ class DeviceCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.UserCreateNestedOneWithoutDevicesInput user;
 
+  final _i2.WidgetCreateNestedManyWithoutDeviceInput? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -3356,6 +3838,7 @@ class DeviceCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'publish': publish,
         'createdAt': createdAt,
         'User': user,
+        'widgets': widgets,
       };
 }
 
@@ -3369,6 +3852,7 @@ class DeviceUncheckedCreateInput
     this.publish,
     this.createdAt,
     required this.userId,
+    this.widgets,
   });
 
   final int? id;
@@ -3385,6 +3869,8 @@ class DeviceUncheckedCreateInput
 
   final int userId;
 
+  final _i2.WidgetUncheckedCreateNestedManyWithoutDeviceInput? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -3394,6 +3880,7 @@ class DeviceUncheckedCreateInput
         'publish': publish,
         'createdAt': createdAt,
         'userId': userId,
+        'widgets': widgets,
       };
 }
 
@@ -3494,14 +3981,15 @@ class EnumRoleFieldUpdateOperationsInput
   Map<String, dynamic> toJson() => {'set': set};
 }
 
-class DeviceUpdateWithoutUserInput
+class DeviceUpdateWithoutWidgetsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceUpdateWithoutUserInput({
+  const DeviceUpdateWithoutWidgetsInput({
     this.title,
     this.description,
     this.sn,
     this.publish,
     this.createdAt,
+    this.user,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
@@ -3524,6 +4012,8 @@ class DeviceUpdateWithoutUserInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? createdAt;
 
+  final _i2.UserUpdateOneRequiredWithoutDevicesNestedInput? user;
+
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -3531,6 +4021,7 @@ class DeviceUpdateWithoutUserInput
         'sn': sn,
         'publish': publish,
         'createdAt': createdAt,
+        'User': user,
       };
 }
 
@@ -3564,15 +4055,16 @@ class IntFieldUpdateOperationsInput
       };
 }
 
-class DeviceUncheckedUpdateWithoutUserInput
+class DeviceUncheckedUpdateWithoutWidgetsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceUncheckedUpdateWithoutUserInput({
+  const DeviceUncheckedUpdateWithoutWidgetsInput({
     this.id,
     this.title,
     this.description,
     this.sn,
     this.publish,
     this.createdAt,
+    this.userId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
@@ -3597,6 +4089,8 @@ class DeviceUncheckedUpdateWithoutUserInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? createdAt;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -3605,30 +4099,695 @@ class DeviceUncheckedUpdateWithoutUserInput
         'sn': sn,
         'publish': publish,
         'createdAt': createdAt,
+        'userId': userId,
       };
 }
 
-class DeviceUpsertWithWhereUniqueWithoutUserInput
+class DeviceUpsertWithoutWidgetsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceUpsertWithWhereUniqueWithoutUserInput({
+  const DeviceUpsertWithoutWidgetsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.DeviceUpdateWithoutWidgetsInput,
+      _i2.DeviceUncheckedUpdateWithoutWidgetsInput> update;
+
+  final _i1.PrismaUnion<_i2.DeviceCreateWithoutWidgetsInput,
+      _i2.DeviceUncheckedCreateWithoutWidgetsInput> create;
+
+  final _i2.DeviceWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class DeviceUpdateToOneWithWhereWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUpdateToOneWithWhereWithoutWidgetsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.DeviceWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.DeviceUpdateWithoutWidgetsInput,
+      _i2.DeviceUncheckedUpdateWithoutWidgetsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class DeviceUpdateOneWithoutWidgetsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUpdateOneWithoutWidgetsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.DeviceCreateWithoutWidgetsInput,
+      _i2.DeviceUncheckedCreateWithoutWidgetsInput>? create;
+
+  final _i2.DeviceCreateOrConnectWithoutWidgetsInput? connectOrCreate;
+
+  final _i2.DeviceUpsertWithoutWidgetsInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.DeviceWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.DeviceWhereInput>? delete;
+
+  final _i2.DeviceWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.DeviceUpdateToOneWithWhereWithoutWidgetsInput,
+      _i1.PrismaUnion<_i2.DeviceUpdateWithoutWidgetsInput,
+          _i2.DeviceUncheckedUpdateWithoutWidgetsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class WidgetUpdateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateWithoutUserInput({
+    this.title,
+    this.datasource,
+    this.dashboard,
+    this.device,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  final _i2.DashboardUpdateOneWithoutWidgetsNestedInput? dashboard;
+
+  final _i2.DeviceUpdateOneWithoutWidgetsNestedInput? device;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'datasource': datasource,
+        'Dashboard': dashboard,
+        'Device': device,
+      };
+}
+
+class NullableIntFieldUpdateOperationsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NullableIntFieldUpdateOperationsInput({
+    this.set,
+    this.increment,
+    this.decrement,
+    this.multiply,
+    this.divide,
+  });
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? set;
+
+  final int? increment;
+
+  final int? decrement;
+
+  final int? multiply;
+
+  final int? divide;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'set': set,
+        'increment': increment,
+        'decrement': decrement,
+        'multiply': multiply,
+        'divide': divide,
+      };
+}
+
+class WidgetUncheckedUpdateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedUpdateWithoutUserInput({
+    this.id,
+    this.title,
+    this.datasource,
+    this.dashboardId,
+    this.deviceId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? dashboardId;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? deviceId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'dashboardId': dashboardId,
+        'deviceId': deviceId,
+      };
+}
+
+class WidgetUpsertWithWhereUniqueWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpsertWithWhereUniqueWithoutUserInput({
     required this.where,
     required this.update,
     required this.create,
   });
 
-  final _i2.DeviceWhereUniqueInput where;
+  final _i2.WidgetWhereUniqueInput where;
 
-  final _i1.PrismaUnion<_i2.DeviceUpdateWithoutUserInput,
-      _i2.DeviceUncheckedUpdateWithoutUserInput> update;
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithoutUserInput,
+      _i2.WidgetUncheckedUpdateWithoutUserInput> update;
 
-  final _i1.PrismaUnion<_i2.DeviceCreateWithoutUserInput,
-      _i2.DeviceUncheckedCreateWithoutUserInput> create;
+  final _i1.PrismaUnion<_i2.WidgetCreateWithoutUserInput,
+      _i2.WidgetUncheckedCreateWithoutUserInput> create;
 
   @override
   Map<String, dynamic> toJson() => {
         'where': where,
         'update': update,
         'create': create,
+      };
+}
+
+class WidgetUpdateWithWhereUniqueWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateWithWhereUniqueWithoutUserInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.WidgetWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithoutUserInput,
+      _i2.WidgetUncheckedUpdateWithoutUserInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class WidgetScalarWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.id,
+    this.title,
+    this.datasource,
+    this.userId,
+    this.dashboardId,
+    this.deviceId,
+  });
+
+  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
+      Iterable<_i2.WidgetScalarWhereInput>>? AND;
+
+  final Iterable<_i2.WidgetScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
+      Iterable<_i2.WidgetScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? id;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? title;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? datasource;
+
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      userId;
+
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      dashboardId;
+
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      deviceId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'userId': userId,
+        'dashboardId': dashboardId,
+        'deviceId': deviceId,
+      };
+}
+
+class WidgetUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateManyMutationInput({
+    this.title,
+    this.datasource,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'datasource': datasource,
+      };
+}
+
+class WidgetUncheckedUpdateManyWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedUpdateManyWithoutUserInput({
+    this.id,
+    this.title,
+    this.datasource,
+    this.dashboardId,
+    this.deviceId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? dashboardId;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? deviceId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'dashboardId': dashboardId,
+        'deviceId': deviceId,
+      };
+}
+
+class WidgetUpdateManyWithWhereWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateManyWithWhereWithoutUserInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.WidgetScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateManyMutationInput,
+      _i2.WidgetUncheckedUpdateManyWithoutUserInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class WidgetUpdateManyWithoutUserNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateManyWithoutUserNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutUserInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutUserInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput,
+      Iterable<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput>>? upsert;
+
+  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput,
+      Iterable<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput>>? update;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateManyWithWhereWithoutUserInput,
+      Iterable<_i2.WidgetUpdateManyWithWhereWithoutUserInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
+      Iterable<_i2.WidgetScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class UserUpdateWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserUpdateWithoutDashboardsInput({
+    this.name,
+    this.email,
+    this.password,
+    this.role,
+    this.createdAt,
+    this.devices,
+    this.widgets,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<_i3.Role, _i2.EnumRoleFieldUpdateOperationsInput>? role;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? createdAt;
+
+  final _i2.DeviceUpdateManyWithoutUserNestedInput? devices;
+
+  final _i2.WidgetUpdateManyWithoutUserNestedInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'email': email,
+        'password': password,
+        'role': role,
+        'createdAt': createdAt,
+        'devices': devices,
+        'widgets': widgets,
+      };
+}
+
+class WidgetUncheckedUpdateWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedUpdateWithoutDeviceInput({
+    this.id,
+    this.title,
+    this.datasource,
+    this.userId,
+    this.dashboardId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? userId;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? dashboardId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'userId': userId,
+        'dashboardId': dashboardId,
+      };
+}
+
+class WidgetUpdateWithWhereUniqueWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateWithWhereUniqueWithoutDeviceInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.WidgetWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithoutDeviceInput,
+      _i2.WidgetUncheckedUpdateWithoutDeviceInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class WidgetUncheckedUpdateManyWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedUpdateManyWithoutDeviceInput({
+    this.id,
+    this.title,
+    this.datasource,
+    this.userId,
+    this.dashboardId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? userId;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? dashboardId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'datasource': datasource,
+        'userId': userId,
+        'dashboardId': dashboardId,
+      };
+}
+
+class WidgetUpdateManyWithWhereWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateManyWithWhereWithoutDeviceInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.WidgetScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateManyMutationInput,
+      _i2.WidgetUncheckedUpdateManyWithoutDeviceInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class WidgetUncheckedUpdateManyWithoutDeviceNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedUpdateManyWithoutDeviceNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutDeviceInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutDeviceInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutDeviceInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutDeviceInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutDeviceInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutDeviceInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.WidgetUpsertWithWhereUniqueWithoutDeviceInput,
+      Iterable<_i2.WidgetUpsertWithWhereUniqueWithoutDeviceInput>>? upsert;
+
+  final _i2.WidgetCreateManyDeviceInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithWhereUniqueWithoutDeviceInput,
+      Iterable<_i2.WidgetUpdateWithWhereUniqueWithoutDeviceInput>>? update;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateManyWithWhereWithoutDeviceInput,
+      Iterable<_i2.WidgetUpdateManyWithWhereWithoutDeviceInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
+      Iterable<_i2.WidgetScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class DeviceUncheckedUpdateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUncheckedUpdateWithoutUserInput({
+    this.id,
+    this.title,
+    this.description,
+    this.sn,
+    this.publish,
+    this.createdAt,
+    this.widgets,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? description;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? sn;
+
+  final _i1.PrismaUnion<_i3.Publish, _i2.EnumPublishFieldUpdateOperationsInput>?
+      publish;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? createdAt;
+
+  final _i2.WidgetUncheckedUpdateManyWithoutDeviceNestedInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'description': description,
+        'sn': sn,
+        'publish': publish,
+        'createdAt': createdAt,
+        'widgets': widgets,
       };
 }
 
@@ -3809,6 +4968,611 @@ class DeviceUpdateManyWithWhereWithoutUserInput
       };
 }
 
+class DeviceUncheckedUpdateManyWithoutUserNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUncheckedUpdateManyWithoutUserNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.DeviceCreateWithoutUserInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.DeviceCreateWithoutUserInput>,
+          _i1.PrismaUnion<_i2.DeviceUncheckedCreateWithoutUserInput,
+              Iterable<_i2.DeviceUncheckedCreateWithoutUserInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.DeviceCreateOrConnectWithoutUserInput,
+      Iterable<_i2.DeviceCreateOrConnectWithoutUserInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.DeviceUpsertWithWhereUniqueWithoutUserInput,
+      Iterable<_i2.DeviceUpsertWithWhereUniqueWithoutUserInput>>? upsert;
+
+  final _i2.DeviceCreateManyUserInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
+      Iterable<_i2.DeviceWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
+      Iterable<_i2.DeviceWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
+      Iterable<_i2.DeviceWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
+      Iterable<_i2.DeviceWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.DeviceUpdateWithWhereUniqueWithoutUserInput,
+      Iterable<_i2.DeviceUpdateWithWhereUniqueWithoutUserInput>>? update;
+
+  final _i1.PrismaUnion<_i2.DeviceUpdateManyWithWhereWithoutUserInput,
+      Iterable<_i2.DeviceUpdateManyWithWhereWithoutUserInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.DeviceScalarWhereInput,
+      Iterable<_i2.DeviceScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class WidgetUncheckedUpdateManyWithoutUserNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUncheckedUpdateManyWithoutUserNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutUserInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutUserInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput,
+      Iterable<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput>>? upsert;
+
+  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput,
+      Iterable<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput>>? update;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateManyWithWhereWithoutUserInput,
+      Iterable<_i2.WidgetUpdateManyWithWhereWithoutUserInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
+      Iterable<_i2.WidgetScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class UserUncheckedUpdateWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserUncheckedUpdateWithoutDashboardsInput({
+    this.id,
+    this.name,
+    this.email,
+    this.password,
+    this.role,
+    this.createdAt,
+    this.devices,
+    this.widgets,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<_i3.Role, _i2.EnumRoleFieldUpdateOperationsInput>? role;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? createdAt;
+
+  final _i2.DeviceUncheckedUpdateManyWithoutUserNestedInput? devices;
+
+  final _i2.WidgetUncheckedUpdateManyWithoutUserNestedInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'password': password,
+        'role': role,
+        'createdAt': createdAt,
+        'devices': devices,
+        'widgets': widgets,
+      };
+}
+
+class UserUpsertWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserUpsertWithoutDashboardsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.UserUpdateWithoutDashboardsInput,
+      _i2.UserUncheckedUpdateWithoutDashboardsInput> update;
+
+  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
+      _i2.UserUncheckedCreateWithoutDashboardsInput> create;
+
+  final _i2.UserWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class UserUpdateToOneWithWhereWithoutDashboardsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserUpdateToOneWithWhereWithoutDashboardsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.UserWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.UserUpdateWithoutDashboardsInput,
+      _i2.UserUncheckedUpdateWithoutDashboardsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UserUpdateOneWithoutDashboardsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserUpdateOneWithoutDashboardsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
+      _i2.UserUncheckedCreateWithoutDashboardsInput>? create;
+
+  final _i2.UserCreateOrConnectWithoutDashboardsInput? connectOrCreate;
+
+  final _i2.UserUpsertWithoutDashboardsInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.UserWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.UserWhereInput>? delete;
+
+  final _i2.UserWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.UserUpdateToOneWithWhereWithoutDashboardsInput,
+      _i1.PrismaUnion<_i2.UserUpdateWithoutDashboardsInput,
+          _i2.UserUncheckedUpdateWithoutDashboardsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class DashboardUpdateWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardUpdateWithoutWidgetsInput({
+    this.title,
+    this.description,
+    this.createdAt,
+    this.user,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? createdAt;
+
+  final _i2.UserUpdateOneWithoutDashboardsNestedInput? user;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+        'createdAt': createdAt,
+        'User': user,
+      };
+}
+
+class DashboardUncheckedUpdateWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardUncheckedUpdateWithoutWidgetsInput({
+    this.id,
+    this.title,
+    this.description,
+    this.createdAt,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? createdAt;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'description': description,
+        'createdAt': createdAt,
+        'userId': userId,
+      };
+}
+
+class DashboardUpsertWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardUpsertWithoutWidgetsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.DashboardUpdateWithoutWidgetsInput,
+      _i2.DashboardUncheckedUpdateWithoutWidgetsInput> update;
+
+  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
+      _i2.DashboardUncheckedCreateWithoutWidgetsInput> create;
+
+  final _i2.DashboardWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class DashboardUpdateToOneWithWhereWithoutWidgetsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardUpdateToOneWithWhereWithoutWidgetsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.DashboardWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.DashboardUpdateWithoutWidgetsInput,
+      _i2.DashboardUncheckedUpdateWithoutWidgetsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class DashboardUpdateOneWithoutWidgetsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DashboardUpdateOneWithoutWidgetsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
+      _i2.DashboardUncheckedCreateWithoutWidgetsInput>? create;
+
+  final _i2.DashboardCreateOrConnectWithoutWidgetsInput? connectOrCreate;
+
+  final _i2.DashboardUpsertWithoutWidgetsInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.DashboardWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.DashboardWhereInput>? delete;
+
+  final _i2.DashboardWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.DashboardUpdateToOneWithWhereWithoutWidgetsInput,
+      _i1.PrismaUnion<_i2.DashboardUpdateWithoutWidgetsInput,
+          _i2.DashboardUncheckedUpdateWithoutWidgetsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class WidgetUpdateWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateWithoutDeviceInput({
+    this.title,
+    this.datasource,
+    this.user,
+    this.dashboard,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      datasource;
+
+  final _i2.UserUpdateOneWithoutWidgetsNestedInput? user;
+
+  final _i2.DashboardUpdateOneWithoutWidgetsNestedInput? dashboard;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'datasource': datasource,
+        'User': user,
+        'Dashboard': dashboard,
+      };
+}
+
+class WidgetUpsertWithWhereUniqueWithoutDeviceInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpsertWithWhereUniqueWithoutDeviceInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.WidgetWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithoutDeviceInput,
+      _i2.WidgetUncheckedUpdateWithoutDeviceInput> update;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateWithoutDeviceInput,
+      _i2.WidgetUncheckedCreateWithoutDeviceInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class WidgetUpdateManyWithoutDeviceNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const WidgetUpdateManyWithoutDeviceNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.WidgetCreateWithoutDeviceInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.WidgetCreateWithoutDeviceInput>,
+          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutDeviceInput,
+              Iterable<_i2.WidgetUncheckedCreateWithoutDeviceInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutDeviceInput,
+      Iterable<_i2.WidgetCreateOrConnectWithoutDeviceInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.WidgetUpsertWithWhereUniqueWithoutDeviceInput,
+      Iterable<_i2.WidgetUpsertWithWhereUniqueWithoutDeviceInput>>? upsert;
+
+  final _i2.WidgetCreateManyDeviceInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
+      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateWithWhereUniqueWithoutDeviceInput,
+      Iterable<_i2.WidgetUpdateWithWhereUniqueWithoutDeviceInput>>? update;
+
+  final _i1.PrismaUnion<_i2.WidgetUpdateManyWithWhereWithoutDeviceInput,
+      Iterable<_i2.WidgetUpdateManyWithWhereWithoutDeviceInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
+      Iterable<_i2.WidgetScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class DeviceUpdateWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUpdateWithoutUserInput({
+    this.title,
+    this.description,
+    this.sn,
+    this.publish,
+    this.createdAt,
+    this.widgets,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? description;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? sn;
+
+  final _i1.PrismaUnion<_i3.Publish, _i2.EnumPublishFieldUpdateOperationsInput>?
+      publish;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? createdAt;
+
+  final _i2.WidgetUpdateManyWithoutDeviceNestedInput? widgets;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+        'sn': sn,
+        'publish': publish,
+        'createdAt': createdAt,
+        'widgets': widgets,
+      };
+}
+
+class DeviceUpsertWithWhereUniqueWithoutUserInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DeviceUpsertWithWhereUniqueWithoutUserInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.DeviceWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.DeviceUpdateWithoutUserInput,
+      _i2.DeviceUncheckedUpdateWithoutUserInput> update;
+
+  final _i1.PrismaUnion<_i2.DeviceCreateWithoutUserInput,
+      _i2.DeviceUncheckedCreateWithoutUserInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
 class DeviceUpdateManyWithoutUserNestedInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const DeviceUpdateManyWithoutUserNestedInput({
@@ -3918,112 +5682,14 @@ class UserUpdateWithoutWidgetsInput
       };
 }
 
-class DeviceUncheckedUpdateManyWithoutUserNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DeviceUncheckedUpdateManyWithoutUserNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.DeviceCreateWithoutUserInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.DeviceCreateWithoutUserInput>,
-          _i1.PrismaUnion<_i2.DeviceUncheckedCreateWithoutUserInput,
-              Iterable<_i2.DeviceUncheckedCreateWithoutUserInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.DeviceCreateOrConnectWithoutUserInput,
-      Iterable<_i2.DeviceCreateOrConnectWithoutUserInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.DeviceUpsertWithWhereUniqueWithoutUserInput,
-      Iterable<_i2.DeviceUpsertWithWhereUniqueWithoutUserInput>>? upsert;
-
-  final _i2.DeviceCreateManyUserInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
-      Iterable<_i2.DeviceWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
-      Iterable<_i2.DeviceWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
-      Iterable<_i2.DeviceWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.DeviceWhereUniqueInput,
-      Iterable<_i2.DeviceWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.DeviceUpdateWithWhereUniqueWithoutUserInput,
-      Iterable<_i2.DeviceUpdateWithWhereUniqueWithoutUserInput>>? update;
-
-  final _i1.PrismaUnion<_i2.DeviceUpdateManyWithWhereWithoutUserInput,
-      Iterable<_i2.DeviceUpdateManyWithWhereWithoutUserInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.DeviceScalarWhereInput,
-      Iterable<_i2.DeviceScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class NullableIntFieldUpdateOperationsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NullableIntFieldUpdateOperationsInput({
-    this.set,
-    this.increment,
-    this.decrement,
-    this.multiply,
-    this.divide,
-  });
-
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? set;
-
-  final int? increment;
-
-  final int? decrement;
-
-  final int? multiply;
-
-  final int? divide;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'set': set,
-        'increment': increment,
-        'decrement': decrement,
-        'multiply': multiply,
-        'divide': divide,
-      };
-}
-
 class WidgetUncheckedUpdateWithoutDashboardInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetUncheckedUpdateWithoutDashboardInput({
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
+    this.deviceId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
@@ -4033,20 +5699,23 @@ class WidgetUncheckedUpdateWithoutDashboardInput
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       datasource;
 
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
   final _i1.PrismaUnion<
       int,
       _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
           _i1.PrismaNull>>? userId;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
+        'deviceId': deviceId,
       };
 }
 
@@ -4069,89 +5738,14 @@ class WidgetUpdateWithWhereUniqueWithoutDashboardInput
       };
 }
 
-class WidgetScalarWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.id,
-    this.title,
-    this.datasource,
-    this.value,
-    this.userId,
-    this.dashboardId,
-  });
-
-  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
-      Iterable<_i2.WidgetScalarWhereInput>>? AND;
-
-  final Iterable<_i2.WidgetScalarWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
-      Iterable<_i2.WidgetScalarWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? id;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? title;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? datasource;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? value;
-
-  final _i1
-      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
-      userId;
-
-  final _i1
-      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
-      dashboardId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'id': id,
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'userId': userId,
-        'dashboardId': dashboardId,
-      };
-}
-
-class WidgetUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUpdateManyMutationInput({
-    this.title,
-    this.datasource,
-    this.value,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      datasource;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-      };
-}
-
 class WidgetUncheckedUpdateManyWithoutDashboardInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetUncheckedUpdateManyWithoutDashboardInput({
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
+    this.deviceId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
@@ -4161,20 +5755,23 @@ class WidgetUncheckedUpdateManyWithoutDashboardInput
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       datasource;
 
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
   final _i1.PrismaUnion<
       int,
       _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
           _i1.PrismaNull>>? userId;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
+        'deviceId': deviceId,
       };
 }
 
@@ -4645,8 +6242,8 @@ class WidgetUpdateWithoutDashboardInput
   const WidgetUpdateWithoutDashboardInput({
     this.title,
     this.datasource,
-    this.value,
     this.user,
+    this.device,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
@@ -4654,16 +6251,16 @@ class WidgetUpdateWithoutDashboardInput
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       datasource;
 
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
   final _i2.UserUpdateOneWithoutWidgetsNestedInput? user;
+
+  final _i2.DeviceUpdateOneWithoutWidgetsNestedInput? device;
 
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
         'datasource': datasource,
-        'value': value,
         'User': user,
+        'Device': device,
       };
 }
 
@@ -4883,622 +6480,6 @@ class DashboardUpdateManyWithoutUserNestedInput
       };
 }
 
-class UserUpdateWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserUpdateWithoutDashboardsInput({
-    this.name,
-    this.email,
-    this.password,
-    this.role,
-    this.createdAt,
-    this.devices,
-    this.widgets,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
-
-  final _i1.PrismaUnion<_i3.Role, _i2.EnumRoleFieldUpdateOperationsInput>? role;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? createdAt;
-
-  final _i2.DeviceUpdateManyWithoutUserNestedInput? devices;
-
-  final _i2.WidgetUpdateManyWithoutUserNestedInput? widgets;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'email': email,
-        'password': password,
-        'role': role,
-        'createdAt': createdAt,
-        'devices': devices,
-        'widgets': widgets,
-      };
-}
-
-class WidgetUncheckedUpdateWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUncheckedUpdateWithoutUserInput({
-    this.id,
-    this.title,
-    this.datasource,
-    this.value,
-    this.dashboardId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      datasource;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? dashboardId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'dashboardId': dashboardId,
-      };
-}
-
-class WidgetUpdateWithWhereUniqueWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUpdateWithWhereUniqueWithoutUserInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.WidgetWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateWithoutUserInput,
-      _i2.WidgetUncheckedUpdateWithoutUserInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class WidgetUncheckedUpdateManyWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUncheckedUpdateManyWithoutUserInput({
-    this.id,
-    this.title,
-    this.datasource,
-    this.value,
-    this.dashboardId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      datasource;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? dashboardId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'dashboardId': dashboardId,
-      };
-}
-
-class WidgetUpdateManyWithWhereWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUpdateManyWithWhereWithoutUserInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.WidgetScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateManyMutationInput,
-      _i2.WidgetUncheckedUpdateManyWithoutUserInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class WidgetUncheckedUpdateManyWithoutUserNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUncheckedUpdateManyWithoutUserNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.WidgetCreateWithoutUserInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.WidgetCreateWithoutUserInput>,
-          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
-              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
-      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput,
-      Iterable<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput>>? upsert;
-
-  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput,
-      Iterable<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput>>? update;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateManyWithWhereWithoutUserInput,
-      Iterable<_i2.WidgetUpdateManyWithWhereWithoutUserInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
-      Iterable<_i2.WidgetScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class UserUncheckedUpdateWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserUncheckedUpdateWithoutDashboardsInput({
-    this.id,
-    this.name,
-    this.email,
-    this.password,
-    this.role,
-    this.createdAt,
-    this.devices,
-    this.widgets,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
-
-  final _i1.PrismaUnion<_i3.Role, _i2.EnumRoleFieldUpdateOperationsInput>? role;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? createdAt;
-
-  final _i2.DeviceUncheckedUpdateManyWithoutUserNestedInput? devices;
-
-  final _i2.WidgetUncheckedUpdateManyWithoutUserNestedInput? widgets;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'password': password,
-        'role': role,
-        'createdAt': createdAt,
-        'devices': devices,
-        'widgets': widgets,
-      };
-}
-
-class UserUpsertWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserUpsertWithoutDashboardsInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.UserUpdateWithoutDashboardsInput,
-      _i2.UserUncheckedUpdateWithoutDashboardsInput> update;
-
-  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
-      _i2.UserUncheckedCreateWithoutDashboardsInput> create;
-
-  final _i2.UserWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class UserUpdateToOneWithWhereWithoutDashboardsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserUpdateToOneWithWhereWithoutDashboardsInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.UserWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.UserUpdateWithoutDashboardsInput,
-      _i2.UserUncheckedUpdateWithoutDashboardsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class UserUpdateOneWithoutDashboardsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UserUpdateOneWithoutDashboardsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.UserCreateWithoutDashboardsInput,
-      _i2.UserUncheckedCreateWithoutDashboardsInput>? create;
-
-  final _i2.UserCreateOrConnectWithoutDashboardsInput? connectOrCreate;
-
-  final _i2.UserUpsertWithoutDashboardsInput? upsert;
-
-  final _i1.PrismaUnion<bool, _i2.UserWhereInput>? disconnect;
-
-  final _i1.PrismaUnion<bool, _i2.UserWhereInput>? delete;
-
-  final _i2.UserWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.UserUpdateToOneWithWhereWithoutDashboardsInput,
-      _i1.PrismaUnion<_i2.UserUpdateWithoutDashboardsInput,
-          _i2.UserUncheckedUpdateWithoutDashboardsInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class DashboardUpdateWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardUpdateWithoutWidgetsInput({
-    this.title,
-    this.description,
-    this.createdAt,
-    this.user,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? createdAt;
-
-  final _i2.UserUpdateOneWithoutDashboardsNestedInput? user;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'description': description,
-        'createdAt': createdAt,
-        'User': user,
-      };
-}
-
-class DashboardUncheckedUpdateWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardUncheckedUpdateWithoutWidgetsInput({
-    this.id,
-    this.title,
-    this.description,
-    this.createdAt,
-    this.userId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? createdAt;
-
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'description': description,
-        'createdAt': createdAt,
-        'userId': userId,
-      };
-}
-
-class DashboardUpsertWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardUpsertWithoutWidgetsInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.DashboardUpdateWithoutWidgetsInput,
-      _i2.DashboardUncheckedUpdateWithoutWidgetsInput> update;
-
-  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
-      _i2.DashboardUncheckedCreateWithoutWidgetsInput> create;
-
-  final _i2.DashboardWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class DashboardUpdateToOneWithWhereWithoutWidgetsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardUpdateToOneWithWhereWithoutWidgetsInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.DashboardWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.DashboardUpdateWithoutWidgetsInput,
-      _i2.DashboardUncheckedUpdateWithoutWidgetsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class DashboardUpdateOneWithoutWidgetsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DashboardUpdateOneWithoutWidgetsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.DashboardCreateWithoutWidgetsInput,
-      _i2.DashboardUncheckedCreateWithoutWidgetsInput>? create;
-
-  final _i2.DashboardCreateOrConnectWithoutWidgetsInput? connectOrCreate;
-
-  final _i2.DashboardUpsertWithoutWidgetsInput? upsert;
-
-  final _i1.PrismaUnion<bool, _i2.DashboardWhereInput>? disconnect;
-
-  final _i1.PrismaUnion<bool, _i2.DashboardWhereInput>? delete;
-
-  final _i2.DashboardWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.DashboardUpdateToOneWithWhereWithoutWidgetsInput,
-      _i1.PrismaUnion<_i2.DashboardUpdateWithoutWidgetsInput,
-          _i2.DashboardUncheckedUpdateWithoutWidgetsInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class WidgetUpdateWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUpdateWithoutUserInput({
-    this.title,
-    this.datasource,
-    this.value,
-    this.dashboard,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      datasource;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
-  final _i2.DashboardUpdateOneWithoutWidgetsNestedInput? dashboard;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'datasource': datasource,
-        'value': value,
-        'Dashboard': dashboard,
-      };
-}
-
-class WidgetUpsertWithWhereUniqueWithoutUserInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUpsertWithWhereUniqueWithoutUserInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.WidgetWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateWithoutUserInput,
-      _i2.WidgetUncheckedUpdateWithoutUserInput> update;
-
-  final _i1.PrismaUnion<_i2.WidgetCreateWithoutUserInput,
-      _i2.WidgetUncheckedCreateWithoutUserInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class WidgetUpdateManyWithoutUserNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const WidgetUpdateManyWithoutUserNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.WidgetCreateWithoutUserInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.WidgetCreateWithoutUserInput>,
-          _i1.PrismaUnion<_i2.WidgetUncheckedCreateWithoutUserInput,
-              Iterable<_i2.WidgetUncheckedCreateWithoutUserInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.WidgetCreateOrConnectWithoutUserInput,
-      Iterable<_i2.WidgetCreateOrConnectWithoutUserInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput,
-      Iterable<_i2.WidgetUpsertWithWhereUniqueWithoutUserInput>>? upsert;
-
-  final _i2.WidgetCreateManyUserInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.WidgetWhereUniqueInput,
-      Iterable<_i2.WidgetWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput,
-      Iterable<_i2.WidgetUpdateWithWhereUniqueWithoutUserInput>>? update;
-
-  final _i1.PrismaUnion<_i2.WidgetUpdateManyWithWhereWithoutUserInput,
-      Iterable<_i2.WidgetUpdateManyWithWhereWithoutUserInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.WidgetScalarWhereInput,
-      Iterable<_i2.WidgetScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
 class UserUpdateWithoutDevicesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UserUpdateWithoutDevicesInput({
@@ -5670,6 +6651,7 @@ class DeviceUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.publish,
     this.createdAt,
     this.user,
+    this.widgets,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
@@ -5694,6 +6676,8 @@ class DeviceUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.UserUpdateOneRequiredWithoutDevicesNestedInput? user;
 
+  final _i2.WidgetUpdateManyWithoutDeviceNestedInput? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
@@ -5702,6 +6686,7 @@ class DeviceUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'publish': publish,
         'createdAt': createdAt,
         'User': user,
+        'widgets': widgets,
       };
 }
 
@@ -5715,6 +6700,7 @@ class DeviceUncheckedUpdateInput
     this.publish,
     this.createdAt,
     this.userId,
+    this.widgets,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
@@ -5741,6 +6727,8 @@ class DeviceUncheckedUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
+  final _i2.WidgetUncheckedUpdateManyWithoutDeviceNestedInput? widgets;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -5750,6 +6738,7 @@ class DeviceUncheckedUpdateInput
         'publish': publish,
         'createdAt': createdAt,
         'userId': userId,
+        'widgets': widgets,
       };
 }
 
@@ -9618,28 +10607,28 @@ class WidgetCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetCreateInput({
     required this.title,
     required this.datasource,
-    required this.value,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final String title;
 
   final String datasource;
 
-  final String value;
-
   final _i2.UserCreateNestedOneWithoutWidgetsInput? user;
 
   final _i2.DashboardCreateNestedOneWithoutWidgetsInput? dashboard;
+
+  final _i2.DeviceCreateNestedOneWithoutWidgetsInput? device;
 
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
         'datasource': datasource,
-        'value': value,
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -9649,9 +10638,9 @@ class WidgetUncheckedCreateInput
     this.id,
     required this.title,
     required this.datasource,
-    required this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final int? id;
@@ -9660,20 +10649,20 @@ class WidgetUncheckedCreateInput
 
   final String datasource;
 
-  final String value;
-
   final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
 
   final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -9683,9 +10672,9 @@ class WidgetCreateManyInput
     this.id,
     required this.title,
     required this.datasource,
-    required this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final int? id;
@@ -9694,20 +10683,20 @@ class WidgetCreateManyInput
 
   final String datasource;
 
-  final String value;
-
   final _i1.PrismaUnion<int, _i1.PrismaNull>? userId;
 
   final _i1.PrismaUnion<int, _i1.PrismaNull>? dashboardId;
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -9715,9 +10704,9 @@ class WidgetUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const WidgetUpdateInput({
     this.title,
     this.datasource,
-    this.value,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? title;
@@ -9725,19 +10714,19 @@ class WidgetUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       datasource;
 
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
-
   final _i2.UserUpdateOneWithoutWidgetsNestedInput? user;
 
   final _i2.DashboardUpdateOneWithoutWidgetsNestedInput? dashboard;
+
+  final _i2.DeviceUpdateOneWithoutWidgetsNestedInput? device;
 
   @override
   Map<String, dynamic> toJson() => {
         'title': title,
         'datasource': datasource,
-        'value': value,
         'User': user,
         'Dashboard': dashboard,
+        'Device': device,
       };
 }
 
@@ -9747,9 +10736,9 @@ class WidgetUncheckedUpdateInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
@@ -9758,8 +10747,6 @@ class WidgetUncheckedUpdateInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       datasource;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
 
   final _i1.PrismaUnion<
       int,
@@ -9771,14 +10758,19 @@ class WidgetUncheckedUpdateInput
       _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
           _i1.PrismaNull>>? dashboardId;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? deviceId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -9788,9 +10780,9 @@ class WidgetUncheckedUpdateManyInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? id;
@@ -9799,8 +10791,6 @@ class WidgetUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       datasource;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? value;
 
   final _i1.PrismaUnion<
       int,
@@ -9812,14 +10802,19 @@ class WidgetUncheckedUpdateManyInput
       _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
           _i1.PrismaNull>>? dashboardId;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? deviceId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -9828,9 +10823,9 @@ class WidgetCountAggregateOutputType {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.$all,
   });
 
@@ -9839,9 +10834,9 @@ class WidgetCountAggregateOutputType {
         id: json['id'],
         title: json['title'],
         datasource: json['datasource'],
-        value: json['value'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
         $all: json['_all'],
       );
 
@@ -9851,11 +10846,11 @@ class WidgetCountAggregateOutputType {
 
   final int? datasource;
 
-  final int? value;
-
   final int? userId;
 
   final int? dashboardId;
+
+  final int? deviceId;
 
   final int? $all;
 }
@@ -9865,6 +10860,7 @@ class WidgetAvgAggregateOutputType {
     this.id,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   factory WidgetAvgAggregateOutputType.fromJson(Map json) =>
@@ -9872,6 +10868,7 @@ class WidgetAvgAggregateOutputType {
         id: json['id'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
       );
 
   final double? id;
@@ -9879,6 +10876,8 @@ class WidgetAvgAggregateOutputType {
   final double? userId;
 
   final double? dashboardId;
+
+  final double? deviceId;
 }
 
 class WidgetSumAggregateOutputType {
@@ -9886,6 +10885,7 @@ class WidgetSumAggregateOutputType {
     this.id,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   factory WidgetSumAggregateOutputType.fromJson(Map json) =>
@@ -9893,6 +10893,7 @@ class WidgetSumAggregateOutputType {
         id: json['id'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
       );
 
   final int? id;
@@ -9900,6 +10901,8 @@ class WidgetSumAggregateOutputType {
   final int? userId;
 
   final int? dashboardId;
+
+  final int? deviceId;
 }
 
 class WidgetMinAggregateOutputType {
@@ -9907,9 +10910,9 @@ class WidgetMinAggregateOutputType {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   factory WidgetMinAggregateOutputType.fromJson(Map json) =>
@@ -9917,9 +10920,9 @@ class WidgetMinAggregateOutputType {
         id: json['id'],
         title: json['title'],
         datasource: json['datasource'],
-        value: json['value'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
       );
 
   final int? id;
@@ -9928,11 +10931,11 @@ class WidgetMinAggregateOutputType {
 
   final String? datasource;
 
-  final String? value;
-
   final int? userId;
 
   final int? dashboardId;
+
+  final int? deviceId;
 }
 
 class WidgetMaxAggregateOutputType {
@@ -9940,9 +10943,9 @@ class WidgetMaxAggregateOutputType {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   factory WidgetMaxAggregateOutputType.fromJson(Map json) =>
@@ -9950,9 +10953,9 @@ class WidgetMaxAggregateOutputType {
         id: json['id'],
         title: json['title'],
         datasource: json['datasource'],
-        value: json['value'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
       );
 
   final int? id;
@@ -9961,11 +10964,11 @@ class WidgetMaxAggregateOutputType {
 
   final String? datasource;
 
-  final String? value;
-
   final int? userId;
 
   final int? dashboardId;
+
+  final int? deviceId;
 }
 
 class WidgetGroupByOutputType {
@@ -9973,9 +10976,9 @@ class WidgetGroupByOutputType {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -9987,9 +10990,9 @@ class WidgetGroupByOutputType {
         id: json['id'],
         title: json['title'],
         datasource: json['datasource'],
-        value: json['value'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
         $count: json['_count'] is Map
             ? _i2.WidgetCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -10013,11 +11016,11 @@ class WidgetGroupByOutputType {
 
   final String? datasource;
 
-  final String? value;
-
   final int? userId;
 
   final int? dashboardId;
+
+  final int? deviceId;
 
   final _i2.WidgetCountAggregateOutputType? $count;
 
@@ -10036,9 +11039,9 @@ class WidgetCountOrderByAggregateInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i2.SortOrder? id;
@@ -10047,20 +11050,20 @@ class WidgetCountOrderByAggregateInput
 
   final _i2.SortOrder? datasource;
 
-  final _i2.SortOrder? value;
-
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? dashboardId;
+
+  final _i2.SortOrder? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10070,6 +11073,7 @@ class WidgetAvgOrderByAggregateInput
     this.id,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i2.SortOrder? id;
@@ -10078,11 +11082,14 @@ class WidgetAvgOrderByAggregateInput
 
   final _i2.SortOrder? dashboardId;
 
+  final _i2.SortOrder? deviceId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10092,9 +11099,9 @@ class WidgetMaxOrderByAggregateInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i2.SortOrder? id;
@@ -10103,20 +11110,20 @@ class WidgetMaxOrderByAggregateInput
 
   final _i2.SortOrder? datasource;
 
-  final _i2.SortOrder? value;
-
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? dashboardId;
+
+  final _i2.SortOrder? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10126,9 +11133,9 @@ class WidgetMinOrderByAggregateInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i2.SortOrder? id;
@@ -10137,20 +11144,20 @@ class WidgetMinOrderByAggregateInput
 
   final _i2.SortOrder? datasource;
 
-  final _i2.SortOrder? value;
-
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? dashboardId;
+
+  final _i2.SortOrder? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10160,6 +11167,7 @@ class WidgetSumOrderByAggregateInput
     this.id,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i2.SortOrder? id;
@@ -10168,11 +11176,14 @@ class WidgetSumOrderByAggregateInput
 
   final _i2.SortOrder? dashboardId;
 
+  final _i2.SortOrder? deviceId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10182,9 +11193,9 @@ class WidgetOrderByWithAggregationInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.$count,
     this.$avg,
     this.$max,
@@ -10198,11 +11209,11 @@ class WidgetOrderByWithAggregationInput
 
   final _i2.SortOrder? datasource;
 
-  final _i2.SortOrder? value;
-
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? userId;
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? dashboardId;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? deviceId;
 
   final _i2.WidgetCountOrderByAggregateInput? $count;
 
@@ -10219,9 +11230,9 @@ class WidgetOrderByWithAggregationInput
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
@@ -10239,9 +11250,9 @@ class WidgetScalarWhereWithAggregatesInput
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final _i1.PrismaUnion<_i2.WidgetScalarWhereWithAggregatesInput,
@@ -10258,13 +11269,14 @@ class WidgetScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? datasource;
 
-  final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? value;
-
   final _i1.PrismaUnion<_i2.IntNullableWithAggregatesFilter,
       _i1.PrismaUnion<int, _i1.PrismaNull>>? userId;
 
   final _i1.PrismaUnion<_i2.IntNullableWithAggregatesFilter,
       _i1.PrismaUnion<int, _i1.PrismaNull>>? dashboardId;
+
+  final _i1.PrismaUnion<_i2.IntNullableWithAggregatesFilter,
+      _i1.PrismaUnion<int, _i1.PrismaNull>>? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -10274,9 +11286,9 @@ class WidgetScalarWhereWithAggregatesInput
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10286,9 +11298,9 @@ class WidgetCountAggregateOutputTypeSelect
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.$all,
   });
 
@@ -10298,11 +11310,11 @@ class WidgetCountAggregateOutputTypeSelect
 
   final bool? datasource;
 
-  final bool? value;
-
   final bool? userId;
 
   final bool? dashboardId;
+
+  final bool? deviceId;
 
   final bool? $all;
 
@@ -10311,9 +11323,9 @@ class WidgetCountAggregateOutputTypeSelect
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         '_all': $all,
       };
 }
@@ -10334,6 +11346,7 @@ class WidgetAvgAggregateOutputTypeSelect
     this.id,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final bool? id;
@@ -10342,11 +11355,14 @@ class WidgetAvgAggregateOutputTypeSelect
 
   final bool? dashboardId;
 
+  final bool? deviceId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10366,6 +11382,7 @@ class WidgetSumAggregateOutputTypeSelect
     this.id,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final bool? id;
@@ -10374,11 +11391,14 @@ class WidgetSumAggregateOutputTypeSelect
 
   final bool? dashboardId;
 
+  final bool? deviceId;
+
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10398,9 +11418,9 @@ class WidgetMinAggregateOutputTypeSelect
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final bool? id;
@@ -10409,20 +11429,20 @@ class WidgetMinAggregateOutputTypeSelect
 
   final bool? datasource;
 
-  final bool? value;
-
   final bool? userId;
 
   final bool? dashboardId;
+
+  final bool? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10442,9 +11462,9 @@ class WidgetMaxAggregateOutputTypeSelect
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
   });
 
   final bool? id;
@@ -10453,20 +11473,20 @@ class WidgetMaxAggregateOutputTypeSelect
 
   final bool? datasource;
 
-  final bool? value;
-
   final bool? userId;
 
   final bool? dashboardId;
+
+  final bool? deviceId;
 
   @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
       };
 }
 
@@ -10486,9 +11506,9 @@ class WidgetGroupByOutputTypeSelect
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -10502,11 +11522,11 @@ class WidgetGroupByOutputTypeSelect
 
   final bool? datasource;
 
-  final bool? value;
-
   final bool? userId;
 
   final bool? dashboardId;
+
+  final bool? deviceId;
 
   final _i1.PrismaUnion<bool, _i2.WidgetGroupByOutputTypeCountArgs>? $count;
 
@@ -10523,9 +11543,9 @@ class WidgetGroupByOutputTypeSelect
         'id': id,
         'title': title,
         'datasource': datasource,
-        'value': value,
         'userId': userId,
         'dashboardId': dashboardId,
+        'deviceId': deviceId,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,

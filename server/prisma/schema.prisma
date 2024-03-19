@@ -27,6 +27,7 @@ model Device {
   createdAt   DateTime? @default(now())
   User        User      @relation(fields: [userId], references: [id])
   userId      Int
+  widgets     Widget[]
 }
 
 model User {
@@ -55,11 +56,12 @@ model Widget {
   id          Int        @id @default(autoincrement())
   title       String
   datasource  String
-  value       String
   User        User?      @relation(fields: [userId], references: [id])
   userId      Int?
   Dashboard   Dashboard? @relation(fields: [dashboardId], references: [id])
   dashboardId Int?
+  Device      Device?    @relation(fields: [deviceId], references: [id])
+  deviceId    Int?
 }
 
 enum Role {

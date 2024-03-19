@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:api/models/user_extension.dart';
+import 'package:api/models/widget_extension.dart';
 import 'package:api/src/generated/prisma/model.dart';
 
 extension DeviceExtension on Device {
@@ -9,10 +10,11 @@ extension DeviceExtension on Device {
         'title': title,
         'description': description,
         'sn': sn,
-        'publish': publish?.name, // Extract the name from publish
-        'createdAt':
-            createdAt?.toIso8601String(), // Use ISO 8601 format for consistency
+        'publish': publish?.name,
+        'createdAt': createdAt?.toIso8601String(),
         'userId': userId,
-        'user': user?.toJson(), // Handle null user
+        'user': user?.toJson(),
+        'widgets':
+            widgets?.map((widget) => widget.toJson()).toList() ?? const [],
       };
 }

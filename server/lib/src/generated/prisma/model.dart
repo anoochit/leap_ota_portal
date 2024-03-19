@@ -30,24 +30,27 @@ class Widget {
     this.id,
     this.title,
     this.datasource,
-    this.value,
     this.userId,
     this.dashboardId,
+    this.deviceId,
     this.user,
     this.dashboard,
+    this.device,
   });
 
   factory Widget.fromJson(Map json) => Widget(
         id: json['id'],
         title: json['title'],
         datasource: json['datasource'],
-        value: json['value'],
         userId: json['userId'],
         dashboardId: json['dashboardId'],
+        deviceId: json['deviceId'],
         user: json['User'] is Map ? _i2.User.fromJson(json['User']) : null,
         dashboard: json['Dashboard'] is Map
             ? _i2.Dashboard.fromJson(json['Dashboard'])
             : null,
+        device:
+            json['Device'] is Map ? _i2.Device.fromJson(json['Device']) : null,
       );
 
   final int? id;
@@ -56,15 +59,17 @@ class Widget {
 
   final String? datasource;
 
-  final String? value;
-
   final int? userId;
 
   final int? dashboardId;
 
+  final int? deviceId;
+
   final _i2.User? user;
 
   final _i2.Dashboard? dashboard;
+
+  final _i2.Device? device;
 }
 
 class Dashboard {
@@ -175,6 +180,8 @@ class Device {
     this.createdAt,
     this.userId,
     this.user,
+    this.widgets,
+    this.$count,
   });
 
   factory Device.fromJson(Map json) => Device(
@@ -188,6 +195,11 @@ class Device {
         createdAt: json['createdAt'],
         userId: json['userId'],
         user: json['User'] is Map ? _i2.User.fromJson(json['User']) : null,
+        widgets: (json['widgets'] as Iterable?)
+            ?.map((json) => _i2.Widget.fromJson(json)),
+        $count: json['_count'] is Map
+            ? _i3.DeviceCountOutputType.fromJson(json['_count'])
+            : null,
       );
 
   final int? id;
@@ -205,4 +217,8 @@ class Device {
   final int? userId;
 
   final _i2.User? user;
+
+  final Iterable<_i2.Widget>? widgets;
+
+  final _i3.DeviceCountOutputType? $count;
 }
