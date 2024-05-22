@@ -1,48 +1,58 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:convert';
 
 import 'package:api/api.dart';
-import 'package:api/src/generated/prisma/prisma_client.dart';
+import 'package:api/src/generated/prisma/model.dart';
+import 'package:api/src/generated/prisma/prisma.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
+import 'package:orm/orm.dart';
 
 /// user repository
 class UserRepository {
   /// signup
-  Future<(String?, User?)> signUp(
-      {required String name,
-      required String username,
-      required String password,}) async {
-    final hashPassword = textEncode(plain: password);
-
-    // add to mack user list
-    final user = await prisma.user.create(
-      data: UserCreateInput(
-        name: name,
-        username: username,
-        password: hashPassword,
-        createdAt: DateTime.now(),
-      ),
-    );
-
-    // generate token
-    final token = generateToken(
-      id: user.id,
-      username: user.username,
-    );
-
-    return (token, user);
+  Future<(String?, User?)> signUp({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final hashPassword = textEncode(plain: password);
+      // add to mack user list
+      final user = await prisma.user.create(
+        data: PrismaUnion.$1(
+          UserCreateInput(
+            name: name,
+            email: email,
+            password: hashPassword,
+          ),
+        ),
+      );
+      // generate token
+      final token = generateToken(
+        id: user.id!,
+        username: user.email!,
+      );
+      // return token and user
+      return (token, user);
+    } catch (e) {
+      rethrow;
+    } finally {
+      await prisma.$disconnect();
+    }
   }
 
   /// generate token
   String generateToken({required int id, required String username}) {
     final jwt = JWT({
       'id': id,
-      'username': username,
+      'email': username,
     });
 
     return jwt.sign(
       SecretKey('verysecretkey'),
-      expiresIn: const Duration(days: 7),
+      expiresIn: const Duration(days: 360),
     );
   }
 
@@ -64,25 +74,38 @@ class UserRepository {
 
   /// signin
   Future<(String?, User?)> signIn({
-    required String username,
+    required String email,
     required String password,
   }) async {
     try {
+      final hashPassword = textEncode(plain: password);
+
       final user = await prisma.user.findFirst(
         where: UserWhereInput(
-          username: StringFilter(equals: username),
-          password: StringFilter(equals: textEncode(plain: password)),
+          email: PrismaUnion.$1(
+            StringFilter(
+              equals: PrismaUnion.$1(email),
+            ),
+          ),
+          password: PrismaUnion.$1(
+            StringFilter(
+              equals: PrismaUnion.$1(
+                hashPassword,
+              ),
+            ),
+          ),
         ),
       );
 
       final token = generateToken(
-        id: user!.id,
-        username: user.username,
+        id: user!.id!,
+        username: user.email!,
       );
-
       return (token, user);
     } catch (e) {
       return (null, null);
+    } finally {
+      await prisma.$disconnect();
     }
   }
 
@@ -93,7 +116,7 @@ class UserRepository {
     return result.toString();
   }
 
-  // get user info by id
+  /// get user info by id
   Future<User?> getUserById({required int id}) async {
     final user =
         await prisma.user.findUnique(where: UserWhereUniqueInput(id: id));
